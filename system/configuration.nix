@@ -13,11 +13,12 @@
     ];
 
   # GRUB/Plymouth
-  boot.kernelPackages = pkgs.linuxPackages_lqx;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.enable = true;
   boot.loader.grub.devices = [ "nodev" ];
   boot.loader.grub.efiSupport = true;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.grub.useOSProber = true;
   boot.plymouth = let pack = 1; theme = "connect"; in { enable = true; themePackages = [ (pkgs.callPackage ./packages/plymouth-theme.nix { inherit pack theme; }) ]; };
 
@@ -31,8 +32,13 @@
   # Overlay Packages
   # nixpkgs.overlays = [ (import ./packages) ];
 
-  # Hostname
-  networking.hostName = "endurance"; # Define your hostname.
+  # Networking
+  networking.hostName = "endurance";
+  networking.networkmanager.enable = true;
+  boot.kernelModules = [ "iwlwifi" ];
+  hardware.enableRedistributableFirmware = true;
+  hardware.enableAllFirmware = true;
+  networking.wireless.enable = false; 
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -50,14 +56,17 @@
   services.xserver.desktopManager.gnome.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.windowManager.bspwm.enable = true;
+  services.xserver = {
+    layout = "us";
+    xkbVariant = "";
+  };
 
   # Intel GPU BS
   services.xserver.videoDrivers = [ "modesetting" ];
-  services.xserver.useGlamor = true;
 
-  hardware.opengl.extraPackages = [
-  intel-compute-runtime
-  ]; 
+  #hardware.opengl.extraPackages = [
+  #intel-compute-runtime
+  #]; 
 
   # Fonts
   fonts = {
@@ -76,17 +85,16 @@
 
 
   # Configure keymap in X11
-  services.xserver.layout = "pl";
   # services.xserver.xkbOptions = {
   #   "caps:escape" # map caps to escape.
   # };
 
   # User
   users.defaultUserShell = pkgs.zsh;
-  users.users.alone = {
+  users.users.crutonjohn = {
     isNormalUser = true;
     home = "/home/crutonjohn";
-    description = "crutonjohn";
+    description = "Curtis Ray John";
     extraGroups = [ "wheel" "networkmanager" ];
   };
 
