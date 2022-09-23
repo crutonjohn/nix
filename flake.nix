@@ -9,6 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+  darwin = {
+    url = "github:lnl7/nix-darwin/master";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 
   outputs = {self, nixpkgs, home-manager, nur, nixos-hardware, ...}:
     let
@@ -45,7 +49,7 @@
             home-manager.users.crutonjohn = homeManagerConfFor ./hosts/framework/home.nix;
           }
         ];
-        specialArgs = { inherit packages };
+        specialArgs = { inherit packages; };
       };
     };
 }
