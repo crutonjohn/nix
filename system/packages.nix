@@ -3,12 +3,12 @@
 {
 
 # Packages
-environment.systemPackages = with pkgs; [ tdesktop slack audacity libsForQt5.kdenlive sublime4 audacity gnome.geary wezterm onlyoffice-bin vim vscodium gimp element-desktop spotify libreoffice-fresh obsidian obs-studio discord marktext gparted krita gimp mpv alacritty aria2 tmate wget rustup go git python310 vte gcc btop ifuse bat exa cmake gnumake fzf yt-dlp tmux hyfetch tilix gzip pfetch figlet virt-manager distrobox nushell libreoffice-fresh codeblocks gnome.geary amberol gcolor3 fragments apostrophe blanket wike gnome-builder flatpak-builder jetbrains.pycharm-community gnome.gnome-terminal gnome.gnome-tweaks papirus-icon-theme neovide xfce.xfce4-settings bitwarden-cli chezmoi kubectl krew 
+environment.systemPackages = with pkgs; [ tdesktop slack audacity libsForQt5.kdenlive sublime4 audacity gnome.geary wezterm onlyoffice-bin vim vscodium gimp element-desktop spotify libreoffice-fresh obsidian obs-studio discord marktext gparted krita gimp mpv alacritty aria2 tmate wget rustup go git python310 vte gcc btop ifuse bat exa cmake gnumake fzf yt-dlp tmux hyfetch tilix gzip pfetch figlet virt-manager distrobox nushell libreoffice-fresh codeblocks gnome.geary amberol gcolor3 fragments apostrophe blanket wike gnome-builder flatpak-builder jetbrains.pycharm-community gnome.gnome-terminal gnome.gnome-tweaks papirus-icon-theme neovide xfce.xfce4-settings bitwarden-cli chezmoi kubectl krew
 ];
 
  # Blueman
- services.blueman.enable = true; 
- 
+ services.blueman.enable = true;
+
 
  # Virt-Manager
  virtualisation.libvirtd.enable = true;
@@ -30,7 +30,7 @@ environment.systemPackages = with pkgs; [ tdesktop slack audacity libsForQt5.kde
  programs.zsh.ohMyZsh.enable = true;
  programs.zsh.autosuggestions.enable = true;
  programs.zsh.syntaxHighlighting.enable = true;
- #programs.zsh.ohMyZsh.plugins = [ git ]
+ programs.zsh.ohMyZsh.plugins = [ git ]
 
  # Usbmuxd
  services.usbmuxd.enable = true;
@@ -48,6 +48,3 @@ environment.systemPackages = with pkgs; [ tdesktop slack audacity libsForQt5.kde
  programs.kdeconnect.enable = true;
 
 }
-
-
-
