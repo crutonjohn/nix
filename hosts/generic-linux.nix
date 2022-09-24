@@ -1,6 +1,6 @@
 { pkgs, ...}:
 {
-  imports = [ ../programs/tmux/tmux.nix ];
+  # imports = [ ../packages/tmux/tmux.nix ];
   programs.home-manager.enable = true;
   services.dunst = {
     enable = true;
@@ -47,22 +47,22 @@
       name = "Adwaita";
     };
   };
-  services.blueman-applet.enable = true;
-  programs.vscode.extensions = [
-    pkgs.vscode-extensions.ms-vsliveshare.vsliveshare
-  ];
 
+  # Blueman
+  services.blueman-applet.enable = true;
 
   home.packages = with pkgs; [
     comma
     feh
     mob
     networkmanager
+    rofi
     polybar
     powertop
     volctl
     zeal
   ];
+  
   programs.firefox = {
     enable = true;
     profiles.default = {
@@ -90,7 +90,8 @@
     ];
   };
 
-  home.file.".xmonad/xmonad.hs".source = ../programs/xmonad.hs;
-  xdg.configFile."polybar/config".source = ../programs/polybar/config;
-  xdg.configFile."polybar/launch.sh".source = ../programs/polybar/launch.sh;
+  home.file.".config/picom.conf".source = ../packages/picom/picom.conf;
+  home.file.".config/rofi/config.rasi".source = ../packages/rofi/config.rasi;
+  home.file.".config/polybar/config".source = ../packages/polybar/config;
+  home.file.".config/polybar/launch.sh".source = ../packages/polybar/launch.sh;
 }

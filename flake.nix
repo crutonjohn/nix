@@ -14,10 +14,10 @@
     };
   };
 
-  outputs = {self, nixpkgs, home-manager, nur, nixos-hardware, ...}:
+  outputs = {self, nixpkgs, darwin, home-manager, nur, nixos-hardware, ...}:
     let
       homeManagerConfFor = config: { ... }: {
-        nixpkgs.overlays = [ nur.overlay ];
+        # nixpkgs.overlays = [ nur.overlay ];
         imports = [ config ];
       };
       darwinSystem = darwin.lib.darwinSystem {
@@ -46,10 +46,11 @@
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            nixpkgs.overlays = [ nur.overlay ];
             home-manager.users.crutonjohn = homeManagerConfFor ./hosts/framework/home.nix;
           }
         ];
-        specialArgs = { inherit packages; };
+        specialArgs = { inherit nixpkgs; };
       };
     };
 }

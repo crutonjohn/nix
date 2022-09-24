@@ -2,12 +2,11 @@
 {
   imports =
     [
-      ../programs/zsh/zsh.nix
-      ../programs/vim/vim.nix
-      ../programs/git.nix
-      ../programs/vscode.nix
+      ../packages/zsh/zsh.nix
+      ../packages/vim/vim.nix
+      ../packages/git.nix
+      ../packages/vscode.nix
     ];
-
   home = {
     stateVersion = "22.05";
     packages = with pkgs; [
@@ -45,6 +44,8 @@
       unzip
       watchexec
       whois
+      obsidian 
+      discord
     ];
   };
 

@@ -3,7 +3,7 @@
   imports = [
     ../generic.nix
     ../generic-linux.nix
-    ../../packages/non-free.nix
+    # ../../packages/non-free.nix
   ];
   home.username = "crutonjohn";
   home.homeDirectory = "/home/crutonjohn";
@@ -16,5 +16,5 @@
     flameshot
   ];
 
-  home.file.".background-image/wall.png".source = ./space.png;
+  home.file.".background-image/wall.png".source = ./space.jpg;
 }

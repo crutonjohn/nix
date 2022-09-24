@@ -5,8 +5,10 @@
     [
       ./hardware-configuration.nix
       ../../packages/cachix/cachix.nix
-      ../../packages/non-free.nix
     ];
+  
+  # Unfree/Tax
+  nixpkgs.config.allowUnfree = true;
 
   # GRUB/Plymouth
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -85,6 +87,32 @@
     description = "Curtis Ray John";
     extraGroups = [ "wheel" "networkmanager" ];
   };
+
+  # Blueman
+  services.blueman.enable = true;
+
+  # Podman
+  virtualisation.podman.enable = true;
+
+  # Usbmuxd
+  services.usbmuxd.enable = true;
+
+  # Java
+  programs.java.enable = true;
+
+  # Starship
+  programs.starship.enable = true;
+
+  # KDE Connect
+  programs.kdeconnect.enable = true;
+  
+  # KVM
+  virtualisation.libvirtd.enable = true;
+  programs.dconf.enable = true;
+
+  # Flatpak
+  services.flatpak.enable = true;
+  xdg.portal.enable = true;
 
   # Programs
   programs.mtr.enable = true;
