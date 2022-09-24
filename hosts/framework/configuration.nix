@@ -101,9 +101,6 @@
   # Java
   programs.java.enable = true;
 
-  # Starship
-  programs.starship.enable = true;
-
   # KDE Connect
   programs.kdeconnect.enable = true;
   

@@ -19,3 +19,99 @@ endfunc
 map <silent><F10> :call NumberToggle()<CR>
 set number
 set relativenumber
+
+" ===========
+" - Globals -
+" ===========
+
+set encoding=utf-8
+
+" ===========
+" - Plugins -
+" ===========
+call plug#begin('~/.vim/plugged')
+
+Plug 'dense-analysis/ale'
+Plug 'voldikss/vim-floaterm'
+Plug 'tpope/vim-fugitive'
+Plug 'itchyny/lightline.vim'
+"Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/vim-easy-align'
+Plug 'vim-airline/vim-airline'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'preservim/nerdcommenter'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
+call plug#end()
+
+" ==============
+" - Decorators -
+" ==============
+
+" --- Vertical Separator ---
+highlight VertSplit cterm=NONE
+set fillchars+=vert:\▏
+
+" --- NerdTree On Startup ---
+let NERDTreeShowHidden=1
+autocmd VimEnter * NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd VimEnter * wincmd w
+
+" --- Floating fzf.vim Pane ---
+let g:fzf_preview_window = 'right:50%'
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6  }  }
+
+" ==================
+" - Autocompletion -
+" ==================
+
+set completeopt=menu,menuone,preview,noselect,noinsert
+
+
+" =====================
+" - Command Shortcuts -
+" =====================
+
+" --- Terminal ---
+noremap <leader>/ :BTerm<cr>
+
+" ALE
+let g:ale_completion_enabled = 1
+let g:ale_linters = { 'python': ['pycodestyle', 'pydocstyle', 'pyls', 'flake8', 'mypy', 'pylint', 'pyright'] }
+
+syntax on
+
+" ===================
+" - Custom Commands -
+" ===================
+
+" --- Terminal ---
+function BTerm()
+  execute "below term++rows=15"
+endfunction
+command! BTerm call BTerm()
+
+
+" ==========================
+" - File Specific Commands -
+" ==========================
+
+" --- Python ---
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix
+
+" ===================
+" - Text Formatting -
+" ===================
+
+" --- Remove Trailing Whitespaces ---
+autocmd BufWritePre * %s/\s\+$//e

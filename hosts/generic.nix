@@ -39,6 +39,7 @@
       ripgrep
       sops
       sqlite
+      starship
       terraform
       tree
       unzip
@@ -60,6 +61,8 @@
     enable = true;
     config.theme = "ansi-dark";
   };
+
+  home.file.".config/starship.toml".source = ../packages/starship.toml;
 
   xdg.configFile."alacritty/alacritty.yml".source = ../packages/alacritty.yml;
   xdg.configFile."oh-my-zsh/plugins/nix-shell".source = pkgs.fetchFromGitHub {
