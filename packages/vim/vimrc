@@ -1,3 +1,7 @@
+" ===========
+" - Globals -
+" ===========
+
 set backspace=indent,eol,start
 
 set encoding=utf-8  " The encoding displayed.¬
@@ -21,15 +25,9 @@ set number
 set relativenumber
 
 " ===========
-" - Globals -
-" ===========
-
-set encoding=utf-8
-
-" ===========
 " - Plugins -
 " ===========
-call plug#begin('~/.vim/plugged')
+-- call plug#begin('~/.vim/plugged')
 
 -- Plug 'dense-analysis/ale'
 -- Plug 'voldikss/vim-floaterm'
@@ -44,7 +42,7 @@ call plug#begin('~/.vim/plugged')
 -- Plug 'preservim/nerdcommenter'
 -- Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
-call plug#end()
+-- call plug#end()
 
 " ==============
 " - Decorators -
