@@ -1,16 +1,15 @@
-{ config, pkgs, ... }:
+{ config, lib, nixpkgs, pkgs, ... }:
 
 {
   imports =
     [
-      # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./packages.nix
-      ./services.nix
-      ./pipewire.nix
-      #./hyprland.nix
-      #./firefox.nix
+      ./vm-hook.nix
+      ../../packages/cachix/cachix.nix
     ];
+  
+  # Unfree/Tax
+  nixpkgs.config.allowUnfree = true;
 
   # GRUB/Plymouth
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -20,7 +19,6 @@
   boot.loader.grub.efiSupport = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.grub.useOSProber = true;
-  boot.plymouth = let pack = 1; theme = "connect"; in { enable = true; themePackages = [ (pkgs.callPackage ./packages/plymouth-theme.nix { inherit pack theme; }) ]; };
 
   # Automatic Garbage Collection
   nix.gc = {
@@ -29,29 +27,21 @@
     options = "--delete-older-than 7d";
   };
 
-  # Overlay Packages
-  # nixpkgs.overlays = [ (import ./packages) ];
-
   # Networking
   networking.hostName = "endurance";
   networking.networkmanager.enable = true;
   boot.kernelModules = [ "iwlwifi" ];
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;
-  networking.wireless.enable = false; 
+  networking.wireless.enable = false;
 
-  # Set your time zone.
+  # Time Zone
   time.timeZone = "America/New_York";
 
-  # Select internationalisation properties.
+  # Internationalization
   i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkbOptions in tty.
-  # };
 
-  # Enable the X11/GNOME
+  # Enable X11/WM
   services.xserver.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
   services.xserver.displayManager.gdm.enable = true;
@@ -63,10 +53,15 @@
 
   # Intel GPU BS
   services.xserver.videoDrivers = [ "modesetting" ];
-
-  #hardware.opengl.extraPackages = [
-  #intel-compute-runtime
-  #]; 
+  boot.blacklistedKernelModules = [ "nouveau" "nvidia" ];
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+  };
 
   # Fonts
   fonts = {
@@ -80,14 +75,10 @@
       noto-fonts-emoji
       open-sans
       ubuntu_font_family
+      iosevka
+      aileron
     ];
   };
-
-
-  # Configure keymap in X11
-  # services.xserver.xkbOptions = {
-  #   "caps:escape" # map caps to escape.
-  # };
 
   # User
   users.defaultUserShell = pkgs.zsh;
@@ -98,14 +89,41 @@
     extraGroups = [ "wheel" "networkmanager" ];
   };
 
+  # Blueman
+  services.blueman.enable = true;
 
-  # SSID
-  # programs.mtr.enable = true;
+  # Podman
+  virtualisation.podman.enable = true;
+
+  # Usbmuxd
+  services.usbmuxd.enable = true;
+
+  # Java
+  programs.java.enable = true;
+
+  # Starship
+  programs.starship.enable = true;
+
+  # KDE Connect
+  programs.kdeconnect.enable = true;
+  
+  # KVM
+  virtualisation.libvirtd.enable = true;
+  programs.dconf.enable = true;
+
+  # Flatpak
+  services.flatpak.enable = true;
+  xdg.portal.enable = true;
+
+  # Programs
+  programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
   };
 
+  # SSH Server
+  services.openssh.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
