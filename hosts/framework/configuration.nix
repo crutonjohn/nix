@@ -4,6 +4,7 @@
   imports =
     [
       ./hardware-configuration.nix
+      ./vm-hook.nix
       ../../packages/cachix/cachix.nix
     ];
   
