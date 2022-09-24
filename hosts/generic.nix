@@ -39,7 +39,6 @@
       ripgrep
       sops
       sqlite
-      starship
       terraform
       tree
       unzip
@@ -61,6 +60,11 @@
     enable = true;
     config.theme = "ansi-dark";
   };
+
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  }
 
   home.file.".config/starship.toml".source = ../packages/starship.toml;
 
