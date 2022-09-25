@@ -16,6 +16,5 @@
       lightline-vim
       vim-floaterm
     ];
-    extraConfig = builtins.readFile ./vimrc;
   };
 }
