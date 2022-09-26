@@ -54,7 +54,6 @@
   home.packages = with pkgs; [
     comma
     feh
-    mob
     networkmanager
     rofi
     polybar
@@ -92,6 +91,12 @@
 
   home.file.".config/picom.conf".source = ../packages/picom/picom.conf;
   home.file.".config/rofi/config.rasi".source = ../packages/rofi/config.rasi;
+  home.file.".config/rofi/".source = 
+    fetchFromGitHub {
+      owner = "catppuccin";
+      repo = "rofi";
+      rev = "5de33131d5904d4d96f4f218b1a54b9c79634965";
+      } + "basic/.local/share/rofi/themes";
   home.file.".config/polybar/config".source = ../packages/polybar/config;
   home.file.".config/polybar/launch.sh".source = ../packages/polybar/launch.sh;
 }
