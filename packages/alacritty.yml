@@ -2,16 +2,16 @@ window:
   opacity: 0.85
 font:
   normal:
-    family: Noto Sans
+    family: Noto Sans Mono
     style: Regular
   bold:
-    family: Noto Sans
+    family: Noto Sans Mono
     style: Bold
   italic:
-    family: Noto Sans
+    family: Noto Sans Mono
     style: Italic
   bold_italic:
-    family: Noto Sans
+    family: Noto Sans Mono
     style: Bold Italic
   size: 15.0
 colors:
