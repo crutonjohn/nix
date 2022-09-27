@@ -2,16 +2,16 @@ window:
   opacity: 0.85
 font:
   normal:
-    family: Aileron
+    family: Noto Sans
     style: Regular
   bold:
-    family: Aileron
+    family: Noto Sans
     style: Bold
   italic:
-    family: Aileron
+    family: Noto Sans
     style: Italic
   bold_italic:
-    family: Aileron
+    family: Noto Sans
     style: Bold Italic
   size: 15.0
 colors:
