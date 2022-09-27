@@ -2,16 +2,16 @@ window:
   opacity: 0.85
 font:
   normal:
-    family: Hack Nerd Font Mono
+    family: Aileron
     style: Regular
   bold:
-    family: Hack Nerd Font Mono
+    family: Aileron
     style: Bold
   italic:
-    family: Hack Nerd Font Mono
+    family: Aileron
     style: Italic
   bold_italic:
-    family: Hack Nerd Font Mono
+    family: Aileron
     style: Bold Italic
   size: 15.0
 colors:
