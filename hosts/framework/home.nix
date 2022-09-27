@@ -13,8 +13,8 @@
     dmenu
     arandr
     picom
-    flameshot
+    scrot
   ];
 
-  home.file.".background-image/wall.png".source = ./space.jpg;
+  home.file.".config/wall".source = ./space.jpg;
 }

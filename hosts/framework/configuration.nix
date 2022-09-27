@@ -45,7 +45,10 @@
   services.xserver.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.windowManager.bspwm.enable = true;
+  services.xserver.windowManager.i3.enable = true;
+    # TODO: migrate to i3-gaps
+    # package = "pkgs.i3-gaps";
+    # TODO: migrate to inline i3 config (maybe)
   services.xserver = {
     layout = "us";
     xkbVariant = "";

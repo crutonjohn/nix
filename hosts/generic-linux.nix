@@ -52,6 +52,8 @@
   services.blueman-applet.enable = true;
 
   home.packages = with pkgs; [
+    i3status-rust
+    i3
     comma
     feh
     networkmanager
@@ -189,7 +191,13 @@
       text-color: @blue;
     }
   '';
-
+  
+  #i3wm
+  home.file.".config/i3/i3.conf".source = ../packages/i3/i3.conf;
+  home.file.".config/i3/load_layout.sh".source = ../packages/i3/load_layout.sh;
+  home.file.".config/i3/ws1.json".source = ../packages/i3/ws1.json;
+  home.file.".config/i3/ws2.json".source = ../packages/i3/ws2.json;
+  home.file.".config/i3/ws3.json".source = ../packages/i3/ws3.json;
   home.file.".config/picom.conf".source = ../packages/picom/picom.conf;
   home.file.".config/rofi/config.rasi".source = ../packages/rofi/config.rasi;
   home.file.".config/polybar/config".source = ../packages/polybar/config;
