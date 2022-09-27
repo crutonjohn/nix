@@ -11,6 +11,7 @@
     stateVersion = "22.05";
     packages = with pkgs; [
       ( python310.withPackages (ps: with ps; [ pip poetry ansible ]) )
+      alacritty
       bitwarden
       bitwarden-cli
       cachix
