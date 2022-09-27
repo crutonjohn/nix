@@ -53,6 +53,7 @@
 
   home.packages = with pkgs; [
     i3status-rust
+    networkmanager_dmenu
     i3
     comma
     feh
@@ -62,6 +63,7 @@
     powertop
     volctl
     zeal
+    xss-lock
   ];
   
   programs.firefox = {

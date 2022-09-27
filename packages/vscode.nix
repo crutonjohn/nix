@@ -6,7 +6,7 @@
     extensions = with pkgs.vscode-extensions; [
     ];
     userSettings = {
-      "editor.fontFamily" = "Iosevka";
+      "editor.fontFamily" = "Noto Sans Mono Regular";
       "editor.fontLigatures" = true;
       "editor.fontSize" = 13;
       "workbench.colorTheme" = "Solarized Dark";

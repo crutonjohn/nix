@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # workspace 1
 i3-msg "workspace admin; append_layout ~/.config/i3/ws1.json"
