@@ -193,7 +193,7 @@
   '';
   
   #i3wm
-  home.file.".config/i3/conf".source = ../packages/i3/i3.conf;
+  home.file.".config/i3/config".source = ../packages/i3/i3.conf;
   home.file.".config/i3/load_layout.sh".source = ../packages/i3/load_layout.sh;
   home.file.".config/i3/ws1.json".source = ../packages/i3/ws1.json;
   home.file.".config/i3/ws2.json".source = ../packages/i3/ws2.json;
