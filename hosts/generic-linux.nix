@@ -200,7 +200,7 @@
   home.file.".config/i3/ws3.json".source = ../packages/i3/ws3.json;
   home.file.".config/i3/lock.sh".source = ../packages/i3/lock.sh;
   home.file.".config/i3/screen_shot.sh".source = ../packages/i3/screen_shot.sh;
-  home.file.".config/i3/lockicon.png".source = ../packages/i3/lockicon.sh;
+  home.file.".config/i3/lockicon.png".source = ../packages/i3/lockicon.png;
   home.file.".config/picom.conf".source = ../packages/picom/picom.conf;
   home.file.".config/rofi/config.rasi".source = ../packages/rofi/config.rasi;
   home.file.".config/polybar/config".source = ../packages/polybar/config;
