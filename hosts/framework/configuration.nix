@@ -53,6 +53,7 @@
     layout = "us";
     xkbVariant = "";
   };
+  services.xserver.libinput.naturalScrolling = true;
 
   # Intel GPU BS
   services.xserver.videoDrivers = [ "modesetting" ];
