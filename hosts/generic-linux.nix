@@ -1,5 +1,9 @@
 { pkgs, ...}:
 {
+
+  imports = [
+    ../scripts-linux.nix
+  ];
   # imports = [ ../packages/tmux/tmux.nix ];
   programs.home-manager.enable = true;
   services.dunst = {
