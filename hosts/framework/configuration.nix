@@ -5,6 +5,7 @@
     [
       ./hardware-configuration.nix
       ./vm-hook.nix
+      ../scripts-linux.nix
       ../../packages/cachix/cachix.nix
     ];
   
