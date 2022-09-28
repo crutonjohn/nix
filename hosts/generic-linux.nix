@@ -2,7 +2,7 @@
 {
 
   imports = [
-    ../scripts-linux.nix
+    ./scripts-linux.nix
   ];
   # imports = [ ../packages/tmux/tmux.nix ];
   programs.home-manager.enable = true;
