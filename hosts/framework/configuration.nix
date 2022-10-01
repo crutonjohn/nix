@@ -68,6 +68,8 @@
     xkbVariant = "";
   };
   services.xserver.libinput.touchpad.naturalScrolling = true;
+  services.xserver.libinput.touchpad.tapping = false;
+  services.xserver.libinput.touchpad.clickMethod = "clickfinger";
 
   # Intel GPU BS
   services.xserver.videoDrivers = [ "modesetting" ];
@@ -105,6 +107,18 @@
     home = "/home/crutonjohn";
     description = "Curtis Ray John";
     extraGroups = [ "wheel" "networkmanager" ];
+  };
+
+  # Sound Pipewire
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
   };
 
   # Blueman

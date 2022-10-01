@@ -19,6 +19,7 @@
       containerd
       cz-cli
       dig
+      exa
       file
       fluxctl
       gawk
