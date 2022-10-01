@@ -208,12 +208,15 @@
   home.file.".config/picom.conf".source = ../packages/picom/picom.conf;
   home.file.".config/rofi/config.rasi".source = ../packages/rofi/config.rasi;
   home.file.".config/polybar/hack" = {
-    source = "../packages/polybar/hack";
+    source = ../packages/polybar/hack;
     recursive = true;
   };
   home.file.".config/polybar/material" = {
-    source = "../packages/polybar/material";
+    source = ../packages/polybar/material;
     recursive = true;
   };
-  home.file.".config/polybar/launch.sh".source = ../packages/polybar/launch.sh;
+  home.file.".config/polybar/launch.sh" = {
+    source = ../packages/polybar/launch.sh;
+    executable = true;
+  };
 }

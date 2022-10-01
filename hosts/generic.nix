@@ -36,7 +36,6 @@
       nixfmt
       openssl
       p7zip
-      pstree
       ripgrep
       sops
       sqlite
