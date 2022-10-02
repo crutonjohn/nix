@@ -92,6 +92,16 @@ function BTerm()
 endfunction
 command! BTerm call BTerm()
 
+" function
+  function! ReSource()    
+      let l:winview = winsaveview()    
+      :source ~/.vimrc<cr>    
+      call winrestview(l:winview)    
+  endfunction    
+  
+  " function call    
+  nnoremap <leader>z :call ReSource()<cr>
+
 
 " ==========================
 " - File Specific Commands -
