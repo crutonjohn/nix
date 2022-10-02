@@ -24,26 +24,6 @@ map <silent><F10> :call NumberToggle()<CR>
 set number
 set relativenumber
 
-" ===========
-" - Plugins -
-" ===========
--- call plug#begin('~/.vim/plugged')
-
--- Plug 'dense-analysis/ale'
--- Plug 'voldikss/vim-floaterm'
--- Plug 'tpope/vim-fugitive'
--- Plug 'itchyny/lightline.vim'
--- "Plug 'airblade/vim-gitgutter'
--- Plug 'junegunn/vim-easy-align'
--- Plug 'vim-airline/vim-airline'
--- Plug 'junegunn/fzf'
--- Plug 'junegunn/fzf.vim'
--- Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
--- Plug 'preservim/nerdcommenter'
--- Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-
--- call plug#end()
-
 " ==============
 " - Decorators -
 " ==============
