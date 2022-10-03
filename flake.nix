@@ -14,7 +14,7 @@
     };
   };
 
-  outputs = {self, nixpkgs, darwin, home-manager, nur, nixos-hardware, ...}:
+  outputs = {self, nixpkgs, darwin, home-manager, nur, nixos-hardware, pkgs, ...}:
     let
       homeManagerConfFor = config: { ... }: {
         # nixpkgs.overlays = [ nur.overlay ];
