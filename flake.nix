@@ -31,10 +31,10 @@
         specialArgs = { inherit nixpkgs; };
       };
       ubuntuSystem = home-manager.lib.homeManagerConfiguration {
-        configuration = homeManagerConfFor ./hosts/ubuntu/home.nix;
+        configuration = homeManagerConfFor ./hosts/xps-ubuntu/home.nix;
         system = "x86_64-linux";
-        homeDirectory = "/home/crutonjohn";
-        username = "crutonjohn";
+        homeDirectory = "/home/bjohn";
+        username = "bjohn";
         stateVersion = "22.05";
       };
     in {
@@ -52,5 +52,7 @@
         ];
         specialArgs = { inherit nixpkgs; };
       };
+      ubuntu = ubuntuSystem.activationPackage;
+      defaultPackage.x86_64-linux = ubuntuSystem.activationPackage;
     };
 }

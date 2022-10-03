@@ -67,6 +67,31 @@
     xss-lock
     psmisc
   ];
+
+  # Unfree/Tax
+  nixpkgs.config.allowUnfree = true;
+
+    # Enable X11/WM
+  services.xserver.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.windowManager.i3.enable = true;
+    # TODO: migrate to i3-gaps
+    # package = "pkgs.i3-gaps";
+    # TODO: migrate to inline i3 config (maybe)
+  services.xserver.displayManager.sessionCommands = ''
+    ${pkgs.xorg.xrdb}/bin/xrdb -merge <${pkgs.writeText "Xresources" ''
+      Xcursor.theme: Adwaita
+      Xcursor.size: 32
+      Xft.dpi: 144
+      Xft.autohint: 0
+      Xft.lcdfilter:  lcddefault
+      Xft.hintstyle:  hintfull
+      Xft.hinting: 1
+      Xft.antialias: 1
+      Xft.rgba: rgb
+    ''}
+  '';
   
   programs.firefox = {
     enable = true;
@@ -88,7 +113,7 @@
       };
     };
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      # onepassword-password-manager
+      onepassword-password-manager
       bitwarden
       ublock-origin
       darkreader
