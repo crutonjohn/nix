@@ -8,9 +8,11 @@
       ../scripts-linux.nix
       ../../packages/cachix/cachix.nix
     ];
-  
+
   # Unfree/Tax
   nixpkgs.config.allowUnfree = true;
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # GRUB/Plymouth
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -135,7 +137,7 @@
 
   # KDE Connect
   programs.kdeconnect.enable = true;
-  
+
   # KVM
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
