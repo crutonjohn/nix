@@ -14,7 +14,7 @@
     };
   };
 
-  outputs = {self, nixpkgs, darwin, home-manager, nur, nixos-hardware, pkgs, ...}:
+  outputs = {self, nixpkgs, darwin, home-manager, nur, nixos-hardware, ...}:
     let
       homeManagerConfFor = config: { ... }: {
         # nixpkgs.overlays = [ nur.overlay ];
@@ -52,7 +52,14 @@
         ];
         specialArgs = { inherit nixpkgs; };
       };
-      ubuntu = ubuntuSystem.activationPackage;
-      defaultPackage.x86_64-linux = ubuntuSystem.activationPackage;
+      # ubuntu = ubuntuSystem.activationPackage;
+      # defaultPackage.x86_64-linux = ubuntuSystem.activationPackage;
+      homeConfigurations.xps = {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/xps-ubuntu/home.nix
+        ];
+        extraSpecialArgs = { inherit nixpkgs nur home-manager; };
+      };
     };
 }
