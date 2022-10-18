@@ -3,6 +3,7 @@
 
   # imports = [ ../packages/tmux/tmux.nix ];
   programs.home-manager.enable = true;
+  
   services.dunst = {
     enable = true;
     settings = {
