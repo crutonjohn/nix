@@ -53,6 +53,7 @@
   services.blueman-applet.enable = true;
 
   home.packages = with pkgs; [
+    screen
     i3status-rust
     networkmanager_dmenu
     i3

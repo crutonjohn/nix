@@ -14,6 +14,7 @@
     arandr
     picom
     scrot
+    bash
   ];
 
   home.file.".config/wall".source = ./space.jpg;
