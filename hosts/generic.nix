@@ -11,6 +11,7 @@
     stateVersion = "22.05";
     packages = with pkgs; [
       ( python310.withPackages (ps: with ps; [ pip poetry ansible ]) )
+      awscli2
       alacritty
       bitwarden
       bitwarden-cli
@@ -21,13 +22,14 @@
       dig
       exa
       file
-      fluxctl
+      fluxcd
       gawk
       htop
       jq
       jsonnet
       k9s
       kubectl
+      kubernetes-helm
       kubecolor
       kubectx
       kustomize
@@ -37,6 +39,7 @@
       nixfmt
       openssl
       p7zip
+      pre-commit
       ripgrep
       sops
       sqlite
@@ -45,7 +48,7 @@
       unzip
       watchexec
       whois
-      obsidian 
+      obsidian
       discord
     ];
   };
