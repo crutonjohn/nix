@@ -61,12 +61,12 @@
           specialArgs = { inherit inputs outputs; };
           modules = [ ./hosts/framework ];
         };
-        # Work
-        hana = nixpkgs.lib.nixosSystem {
-          pkgs = legacyPackages."x86_64-linux";
-          specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/hana ];
-        };
+        # # Work
+        # hana = nixpkgs.lib.nixosSystem {
+        #   pkgs = legacyPackages."x86_64-linux";
+        #   specialArgs = { inherit inputs outputs; };
+        #   modules = [ ./hosts/hana ];
+        # };
       };
 
       homeConfigurations = {
