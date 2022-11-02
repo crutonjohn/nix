@@ -5,7 +5,6 @@
     [
       ./hardware-configuration.nix
       ./vm-hook.nix
-      ../scripts-linux.nix
       ../../packages/cachix/cachix.nix
     ];
 
@@ -93,6 +92,13 @@
       vaapiVdpau
       libvdpau-va-gl
     ];
+  };
+
+  #Power stuff
+  powerManagement.powertop.enable = true;
+  services.logind ={
+    lidSwitch = "suspend";
+    lidSwitchExternalPower = "lock";
   };
 
   # Fonts

@@ -21,27 +21,28 @@
     };
   };
 
-  outputs = {self, nixpkgs, darwin, home-manager, nur, nixos-hardware, ...}:
+  outputs = {self, nixpkgs, darwin, home-manager, nur, nixos-hardware, ...}@inputs:
     let
-      supportedSystems =  [ "x86_64-linux" "aarch64-linux" ];
+      inherit (nixpkgs.lib) filterAttrs traceVal;
+      inherit (builtins) mapAttrs elem;
+      inherit (self) outputs;
+      notBroken = x: !(x.meta.broken or false);
+      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-      pkgsFor = forAllSystems (system:
-        import nixpkgs { inherit system; config.allowUnfree = true; }
-      );
     in
     rec {
 
       legacyPackages = forAllSystems (system:
         import nixpkgs {
           inherit system;
-          overlays = with outputs.overlays; [ additions wallpapers modifications ];
+          # overlays = with outputs.overlays; [ additions wallpapers modifications ];
           config.allowUnfree = true;
         }
       );
 
-      packages = forAllSystems (system:
-        import ./pkgs { pkgs = legacyPackages.${system}; }
-      );
+      # packages = forAllSystems (system:
+      #   import ./pkgs { pkgs = legacyPackages.${system}; }
+      # );
       
       devShells = forAllSystems (system: {
         default = import ./shell.nix { pkgs = legacyPackages.${system}; };
@@ -49,61 +50,49 @@
 
       nixosConfigurations = rec {
         # Desktop
-        drebo = nixpkgs.lib.nixosSystem {
+        galactica = nixpkgs.lib.nixosSystem {
           pkgs = legacyPackages."x86_64-linux";
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/atlas ];
+          modules = [ ./hosts/galactica ];
         };
         # Framework
         endurance = nixpkgs.lib.nixosSystem {
           pkgs = legacyPackages."x86_64-linux";
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/pleione ];
+          modules = [ ./hosts/framework ];
         };
-        # Macbook
-        micky = nixpkgs.lib.nixosSystem {
+        # Work
+        hana = nixpkgs.lib.nixosSystem {
           pkgs = legacyPackages."x86_64-linux";
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/maia ];
+          modules = [ ./hosts/hana ];
         };
       };
 
       homeConfigurations = {
         # Desktop
-        "misterio@atlas" = home-manager.lib.homeManagerConfiguration {
+        "crutonjohn@galactica" = home-manager.lib.homeManagerConfiguration {
           pkgs = legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/misterio/atlas.nix ];
+          modules = [ ./home/crutonjohn/galactica.nix ];
         };
-        # Laptop
-        "misterio@pleione" = home-manager.lib.homeManagerConfiguration {
+        # Framework
+        "crutonjohn@endurance" = home-manager.lib.homeManagerConfiguration {
           pkgs = legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/misterio/pleione.nix ];
+          modules = [ ./home/crutonjohn/endurance.nix ];
         };
-        # Secondary Desktop
-        "misterio@maia" = home-manager.lib.homeManagerConfiguration {
+        # Work
+        "bjohn@hana" = home-manager.lib.homeManagerConfiguration {
           pkgs = legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/misterio/maia.nix ];
-        };
-        # Raspi 4
-        "misterio@merope" = home-manager.lib.homeManagerConfiguration {
-          pkgs = legacyPackages."aarch64-linux";
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/misterio/merope.nix ];
-        };
-        # VPS
-        "misterio@electra" = home-manager.lib.homeManagerConfiguration {
-          pkgs = legacyPackages."x86_64-linux";
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/misterio/electra.nix ];
+          modules = [ ./home/bjohn/hana.nix ];
         };
         # For easy bootstraping from a nixos live usb
         "nixos@nixos" = home-manager.lib.homeManagerConfiguration {
           pkgs = legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/misterio/generic.nix ];
+          modules = [ ./home/crutonjohn/generic.nix ];
         };
       };
 
