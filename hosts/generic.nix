@@ -24,6 +24,7 @@
       file
       fluxcd
       gawk
+      gcc
       htop
       jq
       jsonnet
