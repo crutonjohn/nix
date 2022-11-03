@@ -12,8 +12,8 @@
     "percent": 0.283333333333333,
     "swallows": [
        {
-         "class": "^kitty$",
-         "instance": "^kitty$",
+         "class": "^alacritty$",
+         "instance": "^alacritty$",
        }
     ],
     "type": "con"

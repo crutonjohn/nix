@@ -75,7 +75,7 @@
             home-manager.nixosModules.home-manager {
               # home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.crutonjohn = homeManagerConfFor ./home/crutonjohn/endurance.nix;
+              home-manager.users.crutonjohn = homeManagerConfFor ./home/crutonjohn/endurance;
             }
           ];
         };
@@ -89,7 +89,7 @@
             home-manager.nixosModules.home-manager {
               # home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.crutonjohn = homeManagerConfFor ./home/crutonjohn/endurance.nix;
+              home-manager.users.crutonjohn = homeManagerConfFor ./home/crutonjohn/endurance;
             }
           ];
         };
@@ -100,19 +100,19 @@
         "crutonjohn@galactica" = home-manager.lib.homeManagerConfiguration {
           pkgs = legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/crutonjohn/galactica.nix ];
+          modules = [ ./home/crutonjohn/galactica ];
         };
         # Framework
         "crutonjohn@endurance" = home-manager.lib.homeManagerConfiguration {
           pkgs = legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/crutonjohn/endurance.nix ];
+          modules = [ ./home/crutonjohn/endurance ];
         };
         # Work
         "bjohn@res-lpw733u9" = home-manager.lib.homeManagerConfiguration {
           pkgs = legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/crutonjohn/res-lpw733u9.nix ];
+          modules = [ ./home/crutonjohn/res-lpw733u9 ];
         };
         # For easy bootstraping from a nixos live usb
         "nixos@nixos" = home-manager.lib.homeManagerConfiguration {

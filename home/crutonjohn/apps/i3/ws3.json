@@ -9,36 +9,13 @@
        "x": 863,
        "y": 56
     },
-    "name": "Slack | Ian Pringle | Liberty University Information Services",
-    "percent": 0.333333333333333,
+    "name": "Slack",
+    "percent": 0.5,
     "swallows": [
        {
        // "class": "^Slack$",
        // "instance": "^slack$",
        // "title": "^Slack\\ \\|\\ Ian\\ Pringle\\ \\|\\ Liberty\\ University\\ Information\\ Services$",
-       // "window_role": "^browser\\-window$"
-       }
-    ],
-    "type": "con"
-}
-
-{
-    "border": "none",
-    "current_border_width": 3,
-    "floating": "auto_off",
-    "geometry": {
-       "height": 1415,
-       "width": 1720,
-       "x": 0,
-       "y": 25
-    },
-    "name": "Big Brain Trust | Microsoft Teams",
-    "percent": 0.333333333333333,
-    "swallows": [
-       {
-       // "class": "^Microsoft\\ Teams\\ \\-\\ Preview$",
-       // "instance": "^microsoft\\ teams\\ \\-\\ preview$",
-       // "title": "^Big\\ Brain\\ Trust\\ \\|\\ Microsoft\\ Teams$",
        // "window_role": "^browser\\-window$"
        }
     ],
@@ -56,7 +33,7 @@
        "y": 25
     },
     "name": "Discord",
-    "percent": 0.333333333333333,
+    "percent": 0.5,
     "swallows": [
        {
        // "class": "^discord$",
