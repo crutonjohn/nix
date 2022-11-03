@@ -3,6 +3,9 @@
   imports = [
     ./generic.nix
   ];
+
+  home.username = "crutonjohn";
+  home.homeDirectory = "/home/crutonjohn";
   # monitors = [{
   #   name = "eDP-1";
   #   width = 5120;

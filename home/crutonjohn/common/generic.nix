@@ -25,6 +25,7 @@
       fluxcd
       gawk
       gcc
+      home-manager
       htop
       jq
       jsonnet

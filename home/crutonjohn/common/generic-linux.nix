@@ -10,8 +10,6 @@
   # Blueman
   services.blueman-applet.enable = true;
 
-  home.username = "crutonjohn";
-  home.homeDirectory = "/home/crutonjohn";
   home.packages = with pkgs; [
     i3status-rust
     networkmanager_dmenu

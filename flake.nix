@@ -79,11 +79,19 @@
           ];
         };
         # Work
-        # hana = nixpkgs.lib.nixosSystem {
-        #   pkgs = legacyPackages."x86_64-linux";
-        #   specialArgs = { inherit inputs outputs; };
-        #   modules = [ ./hosts/hana ];
-        # };
+        hana = nixpkgs.lib.nixosSystem {
+          pkgs = legacyPackages."x86_64-linux";
+          specialArgs = { inherit inputs outputs; };
+          modules = [ 
+            ./hosts/framework 
+            nixos-hardware.nixosModules.framework-12th-gen-intel
+            home-manager.nixosModules.home-manager {
+              # home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.crutonjohn = homeManagerConfFor ./home/crutonjohn/endurance.nix;
+            }
+          ];
+        };
       };
 
       homeConfigurations = {

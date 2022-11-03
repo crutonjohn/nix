@@ -1,19 +1,13 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-    ../common/generic.nix
-    ../common/generic-linux.nix
+    ./generic.nix
   ];
   home.username = "bjohn";
   home.homeDirectory = "/home/bjohn";
 
   home.packages = with pkgs; [
-    zlib
-    dmenu
-    arandr
-    picom
-    scrot
+    _1password-gui
   ];
 
-  # home.file.".config/wall".source = ./space.jpg;
 }
