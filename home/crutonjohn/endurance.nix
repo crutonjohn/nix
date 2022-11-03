@@ -1,8 +1,7 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, outputs, ... }:
 {
   imports = [
     ./generic.nix
-    ./apps/firefox
   ];
   # monitors = [{
   #   name = "eDP-1";

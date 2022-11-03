@@ -25,7 +25,7 @@
     rm -f "$tmpbg"
     '')
     
-    (pkgs.writeScriptBin "i3lockscreen" ''
+    (pkgs.writeScriptBin "launchpolybar" ''
     #!/usr/bin/env bash
     POLYBAR_DIR=$HOME/.config/polybar
     $POLYBAR_DIR/hack/launch.sh

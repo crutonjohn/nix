@@ -17,9 +17,7 @@ in
       name = "Default";
       isDefault = true;
       settings = {
-        "app.update.auto" = false;
         "browser.startup.homepage" = "start.duckduckgo.com";
-        "browser.urlbar.placeholderName" = "DuckDuckGo";
         "gfx.webrender.all" = true;
         "gfx.webrender.enabled" = true;
         "media.av1.enabled" = false;

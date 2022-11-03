@@ -72,7 +72,7 @@
             ./hosts/framework 
             nixos-hardware.nixosModules.framework-12th-gen-intel
             home-manager.nixosModules.home-manager {
-              home-manager.useGlobalPkgs = true;
+              # home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.crutonjohn = homeManagerConfFor ./home/crutonjohn/endurance.nix;
             }
