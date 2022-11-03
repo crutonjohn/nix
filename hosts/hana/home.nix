@@ -7,7 +7,6 @@ in {
   imports = [
     ../generic.nix
     ../generic-linux.nix
-    ../../programs/non-free.nix
   ];
 
   services.picom.enable = true;

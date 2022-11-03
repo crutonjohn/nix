@@ -31,6 +31,7 @@
     arandr
     picom
     scrot
+    imagemagick
   ];
   
   services.dunst = {

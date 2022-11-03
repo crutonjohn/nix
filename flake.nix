@@ -78,7 +78,7 @@
             }
           ];
         };
-        # # Work
+        # Work
         # hana = nixpkgs.lib.nixosSystem {
         #   pkgs = legacyPackages."x86_64-linux";
         #   specialArgs = { inherit inputs outputs; };
@@ -109,7 +109,7 @@
         "nixos@nixos" = home-manager.lib.homeManagerConfiguration {
           pkgs = legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/crutonjohn/generic.nix ];
+          modules = [ ./home/crutonjohn/hana.nix ];
         };
       };
 
