@@ -44,6 +44,7 @@
       legacyPackages = forAllSystems (system:
         import nixpkgs {
           inherit system;
+          nixpkgs.overlays = [ nur.overlay ];
           # overlays = with outputs.overlays; [ additions wallpapers modifications ];
           config.allowUnfree = true;
         }
@@ -108,16 +109,16 @@
           modules = [ ./home/crutonjohn/endurance.nix ];
         };
         # Work
-        "bjohn@hana" = home-manager.lib.homeManagerConfiguration {
+        "bjohn@res-lpw733u9" = home-manager.lib.homeManagerConfiguration {
           pkgs = legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/bjohn/hana.nix ];
+          modules = [ ./home/crutonjohn/res-lpw733u9.nix ];
         };
         # For easy bootstraping from a nixos live usb
         "nixos@nixos" = home-manager.lib.homeManagerConfiguration {
           pkgs = legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/crutonjohn/hana.nix ];
+          modules = [ ./home/crutonjohn/generic.nix ];
         };
       };
 
