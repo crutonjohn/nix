@@ -1,7 +1,7 @@
 { pkgs, ...}:
 {
 
-  # imports = [ ../packages/tmux/tmux.nix ];
+  imports = [ ./scripts ];
   programs.home-manager.enable = true;
 
   # Unfree/Tax

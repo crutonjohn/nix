@@ -1,6 +1,6 @@
 {  
   imports = [
-    ../common/generic.nix
-    ../common/generic-linux.nix
+    ./common/generic.nix
+    ./common/generic-linux.nix
   ];
 }

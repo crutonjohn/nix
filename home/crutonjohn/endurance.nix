@@ -1,9 +1,7 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-    ./common/generic.nix
-    ./common/generic-linux.nix
-    ./common/scripts-linux.nix
+    ./generic.nix
     ./apps/firefox
   ];
   monitors = [{
