@@ -12,4 +12,7 @@
   #   height = 1440;
   #   workspace = "1";
   # }];
+
+  # Blueman
+  services.blueman-applet.enable = true;
 }

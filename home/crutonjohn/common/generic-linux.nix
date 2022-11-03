@@ -6,9 +6,6 @@
   # Unfree/Tax
   nixpkgs.config.allowUnfree = true;
 
-  # Blueman
-  services.blueman-applet.enable = true;
-
   home.packages = with pkgs; [
     i3status-rust
     networkmanager_dmenu
@@ -30,7 +27,7 @@
     scrot
     imagemagick
   ];
-  
+
   services.dunst = {
     enable = true;
     settings = {
