@@ -1,4 +1,4 @@
-{ config, lib, nixpkgs, pkgs, ... }:
+{ config, lib, nixpkgs, pkgs, inputs, ... }:
 
 {
   imports =
@@ -55,7 +55,14 @@
 
   # Enable X11/WM
   services.xserver.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.desktopManager = {
+    xterm.enable = false;
+    xfce = {
+      enable = true;
+      noDesktop = true;
+      enableXfwm = false;
+    };
+  };
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.windowManager.i3.enable = true;
     # TODO: migrate to i3-gaps
@@ -95,6 +102,7 @@
   };
 
   #Power stuff
+  services.tlp.enable = true;
   powerManagement.powertop.enable = true;
   services.logind ={
     lidSwitch = "suspend";
@@ -168,6 +176,12 @@
     enable = true;
     enableSSHSupport = true;
   };
+
+  # Fingerprints
+  services.fprintd.enable = true;
+  security.pam.services.login.fprintAuth = true;
+  security.pam.services.xscreensaver.fprintAuth = true;
+
 
   # SSH Server
   services.openssh.enable = true;

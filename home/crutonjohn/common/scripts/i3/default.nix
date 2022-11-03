@@ -4,7 +4,7 @@ let
   in
     stdenv.mkDerivation {
       name = "i3lockscreen";
-      src = ./i3lockscreen.sh
+      src = ./i3lockscreen.sh;
       installPhase = ''
         # Make the output directory
         mkdir -p $out/bin
@@ -19,7 +19,7 @@ let
   in
     stdenv.mkDerivation {
       name = "i3loadlayout";
-      src = ./i3loadlayout.sh
+      src = ./i3loadlayout.sh;
       installPhase = ''
         # Make the output directory
         mkdir -p $out/bin
