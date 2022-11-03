@@ -2,10 +2,10 @@
 {
   imports =
     [
-      ../../packages/zsh/zsh.nix
-      ../../packages/vim/vim.nix
-      ../../packages/git.nix
-      ../../packages/vscode.nix
+      ../apps/zsh/zsh.nix
+      ../apps/vim/vim.nix
+      ../apps/git.nix
+      ../apps/vscode.nix
     ];
   home = {
     stateVersion = "22.05";
@@ -67,9 +67,9 @@
     enableZshIntegration = true;
   };
 
-  home.file.".config/starship.toml".source = ../../packages/starship.toml;
+  home.file.".config/starship.toml".source = ../apps/starship.toml;
 
-  xdg.configFile."alacritty/alacritty.yml".source = ../../packages/alacritty.yml;
+  xdg.configFile."alacritty/alacritty.yml".source = ../apps/alacritty.yml;
   xdg.configFile."oh-my-zsh/plugins/nix-shell".source = pkgs.fetchFromGitHub {
     owner = "chisui";
     repo = "zsh-nix-shell";

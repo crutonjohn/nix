@@ -3,6 +3,35 @@
 
   # imports = [ ../packages/tmux/tmux.nix ];
   programs.home-manager.enable = true;
+
+  # Unfree/Tax
+  nixpkgs.config.allowUnfree = true;
+
+  # Blueman
+  services.blueman-applet.enable = true;
+
+  home.username = "crutonjohn";
+  home.homeDirectory = "/home/crutonjohn";
+  home.packages = with pkgs; [
+    i3status-rust
+    networkmanager_dmenu
+    i3
+    comma
+    feh
+    networkmanager
+    rofi
+    polybar
+    powertop
+    volctl
+    zeal
+    xss-lock
+    psmisc
+    zlib
+    dmenu
+    arandr
+    picom
+    scrot
+  ];
   
   services.dunst = {
     enable = true;
@@ -48,55 +77,6 @@
       package = pkgs.gnome.adwaita-icon-theme;
       name = "Adwaita";
     };
-  };
-
-  # Blueman
-  services.blueman-applet.enable = true;
-
-  home.packages = with pkgs; [
-    i3status-rust
-    networkmanager_dmenu
-    i3
-    comma
-    feh
-    networkmanager
-    rofi
-    polybar
-    powertop
-    volctl
-    zeal
-    xss-lock
-    psmisc
-  ];
-
-  # Unfree/Tax
-  nixpkgs.config.allowUnfree = true;
-
-  programs.firefox = {
-    enable = true;
-    profiles.default = {
-      id = 0;
-      name = "Default";
-      isDefault = true;
-      settings = {
-        "app.update.auto" = false;
-        "browser.startup.homepage" = "about:blank";
-        "browser.urlbar.placeholderName" = "DuckDuckGo";
-        "gfx.webrender.all" = true;
-        "gfx.webrender.enabled" = true;
-        "media.av1.enabled" = false;
-        "media.ffmpeg.vaapi.enabled" = true;
-        "media.hardware-video-decoding.force-enabled" = true;
-        "media.navigator.mediadatadecoder_vpx_enabled" = true;
-        "signon.rememberSignons" = false;
-      };
-    };
-    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      onepassword-password-manager
-      bitwarden
-      ublock-origin
-      darkreader
-    ];
   };
 
   # Rofi
@@ -201,26 +181,28 @@
   '';
 
   #Desktop Experience
-  home.file.".config/i3/config".source = ../../packages/i3/i3.conf;
-  home.file.".config/i3/load_layout.sh".source = ../../packages/i3/load_layout.sh;
-  home.file.".config/i3/ws1.json".source = ../../packages/i3/ws1.json;
-  home.file.".config/i3/ws2.json".source = ../../packages/i3/ws2.json;
-  home.file.".config/i3/ws3.json".source = ../../packages/i3/ws3.json;
-  home.file.".config/i3/lock.sh".source = ../../packages/i3/lock.sh;
-  home.file.".config/i3/screen_shot.sh".source = ../../packages/i3/screen_shot.sh;
-  home.file.".config/i3/lockicon.png".source = ../../packages/i3/lockicon.png;
-  home.file.".config/picom.conf".source = ../../packages/picom/picom.conf;
-  home.file.".config/rofi/config.rasi".source = ../../packages/rofi/config.rasi;
+  home.file.".config/i3/config".source = ../apps/i3/i3.conf;
+  home.file.".config/i3/load_layout.sh".source = ../apps/i3/load_layout.sh;
+  home.file.".config/i3/ws1.json".source = ../apps/i3/ws1.json;
+  home.file.".config/i3/ws2.json".source = ../apps/i3/ws2.json;
+  home.file.".config/i3/ws3.json".source = ../apps/i3/ws3.json;
+  home.file.".config/i3/lock.sh".source = ../apps/i3/lock.sh;
+  home.file.".config/i3/screen_shot.sh".source = ../apps/i3/screen_shot.sh;
+  home.file.".config/i3/lockicon.png".source = ../apps/i3/lockicon.png;
+  home.file.".config/picom.conf".source = ../apps/picom/picom.conf;
+  home.file.".config/rofi/config.rasi".source = ../apps/rofi/config.rasi;
   home.file.".config/polybar/hack" = {
-    source = ../../packages/polybar/hack;
+    source = ../apps/polybar/hack;
     recursive = true;
   };
   home.file.".config/polybar/material" = {
-    source = ../../packages/polybar/material;
+    source = ../apps/polybar/material;
     recursive = true;
   };
   home.file.".config/polybar/launch.sh" = {
-    source = ../../packages/polybar/launch.sh;
+    source = ../apps/polybar/launch.sh;
     executable = true;
   };
+  home.file.".config/wall".source = ./space.jpg;
+
 }

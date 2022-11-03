@@ -19,6 +19,10 @@
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {self, nixpkgs, darwin, home-manager, nur, nixos-hardware, ...}@inputs:
@@ -29,6 +33,11 @@
       notBroken = x: !(x.meta.broken or false);
       supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+
+      homeManagerConfFor = config: { ... }: {
+        nixpkgs.overlays = [ nur.overlay ];
+        imports = [ config ];
+      };
     in
     rec {
 
@@ -59,7 +68,15 @@
         endurance = nixpkgs.lib.nixosSystem {
           pkgs = legacyPackages."x86_64-linux";
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/framework ];
+          modules = [ 
+            ./hosts/framework 
+            nixos-hardware.nixosModules.framework-12th-gen-intel
+            home-manager.nixosModules.home-manager {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.crutonjohn = homeManagerConfFor ./home/crutonjohn/endurance.nix;
+            }
+          ];
         };
         # # Work
         # hana = nixpkgs.lib.nixosSystem {

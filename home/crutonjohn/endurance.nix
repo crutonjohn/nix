@@ -1,19 +1,15 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-    ../common/generic.nix
-    ../common/generic-linux.nix
+    ./common/generic.nix
+    ./common/generic-linux.nix
+    ./common/scripts-linux.nix
+    ./apps/firefox
   ];
-  home.username = "crutonjohn";
-  home.homeDirectory = "/home/crutonjohn";
-
-  home.packages = with pkgs; [
-    zlib
-    dmenu
-    arandr
-    picom
-    scrot
-  ];
-
-  home.file.".config/wall".source = ./space.jpg;
+  monitors = [{
+    name = "eDP-1";
+    width = 5120;
+    height = 1440;
+    workspace = "1";
+  }];
 }
