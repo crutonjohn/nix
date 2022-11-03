@@ -5,7 +5,6 @@
     [
       ./hardware-configuration.nix
       ./vm-hook.nix
-      ../scripts-linux.nix
       ../../packages/cachix/cachix.nix
     ];
 
@@ -41,7 +40,7 @@
   };
 
   # Networking
-  networking.hostName = "endurance";
+  networking.hostName = "galactica";
   networking.networkmanager.enable = true;
   boot.kernelModules = [ "iwlwifi" ];
   hardware.enableRedistributableFirmware = true;
@@ -134,6 +133,13 @@
       vaapiVdpau
       libvdpau-va-gl
     ];
+  };
+
+  #Power stuff
+  powerManagement.powertop.enable = true;
+  services.logind ={
+    lidSwitch = "suspend";
+    lidSwitchExternalPower = "lock";
   };
 
   # Fonts

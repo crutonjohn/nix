@@ -1,9 +1,8 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-    ../generic.nix
-    ../generic-linux.nix
-    # ../../packages/non-free.nix
+    ./common/generic.nix
+    ./common/generic-linux.nix
   ];
   home.username = "crutonjohn";
   home.homeDirectory = "/home/crutonjohn";

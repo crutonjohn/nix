@@ -1,65 +1,121 @@
 {
-  description = "NixOS configuration and home-manager configurations";
+  description = "My NixOS configuration";
+
   inputs = {
+    # Main nix
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # Nix hardware tweaks
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+    # TODO: impermanence
+    # Nix user repository
     nur.url = github:nix-community/nur;
-    nixos-hardware.url = github:nixos/nixos-hardware/master;
+    # Home manager aka dotfiles and packages
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # for macbooks
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = {self, nixpkgs, darwin, home-manager, nur, nixos-hardware, ...}:
+  outputs = {self, nixpkgs, darwin, home-manager, nur, nixos-hardware, ...}@inputs:
     let
+      inherit (nixpkgs.lib) filterAttrs traceVal;
+      inherit (builtins) mapAttrs elem;
+      inherit (self) outputs;
+      notBroken = x: !(x.meta.broken or false);
+      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+
       homeManagerConfFor = config: { ... }: {
-        # nixpkgs.overlays = [ nur.overlay ];
+        nixpkgs.overlays = [ nur.overlay ];
         imports = [ config ];
       };
-      darwinSystem = darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
-          ./hosts/macbook/darwin-configuration.nix
-          home-manager.darwinModules.home-manager {
-            home-manager.users.crutonjohn = homeManagerConfFor ./hosts/macbook/home.nix;
-          }
-        ];
-        specialArgs = { inherit nixpkgs; };
+    in
+    rec {
+
+      legacyPackages = forAllSystems (system:
+        import nixpkgs {
+          inherit system;
+          # overlays = with outputs.overlays; [ additions wallpapers modifications ];
+          config.allowUnfree = true;
+        }
+      );
+
+      # packages = forAllSystems (system:
+      #   import ./pkgs { pkgs = legacyPackages.${system}; }
+      # );
+      
+      devShells = forAllSystems (system: {
+        default = import ./shell.nix { pkgs = legacyPackages.${system}; };
+      });
+
+      nixosConfigurations = rec {
+        # Desktop
+        galactica = nixpkgs.lib.nixosSystem {
+          pkgs = legacyPackages."x86_64-linux";
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/galactica ];
+        };
+        # Framework
+        endurance = nixpkgs.lib.nixosSystem {
+          pkgs = legacyPackages."x86_64-linux";
+          specialArgs = { inherit inputs outputs; };
+          modules = [ 
+            ./hosts/framework 
+            nixos-hardware.nixosModules.framework-12th-gen-intel
+            home-manager.nixosModules.home-manager {
+              # home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.crutonjohn = homeManagerConfFor ./home/crutonjohn/endurance.nix;
+            }
+          ];
+        };
+        # # Work
+        # hana = nixpkgs.lib.nixosSystem {
+        #   pkgs = legacyPackages."x86_64-linux";
+        #   specialArgs = { inherit inputs outputs; };
+        #   modules = [ ./hosts/hana ];
+        # };
       };
-      ubuntuSystem = home-manager.lib.homeManagerConfiguration {
-        configuration = homeManagerConfFor ./hosts/xps-ubuntu/home.nix;
-        system = "x86_64-linux";
-        homeDirectory = "/home/bjohn";
-        username = "bjohn";
-        stateVersion = "22.05";
+
+      homeConfigurations = {
+        # Desktop
+        "crutonjohn@galactica" = home-manager.lib.homeManagerConfiguration {
+          pkgs = legacyPackages."x86_64-linux";
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/crutonjohn/galactica.nix ];
+        };
+        # Framework
+        "crutonjohn@endurance" = home-manager.lib.homeManagerConfiguration {
+          pkgs = legacyPackages."x86_64-linux";
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/crutonjohn/endurance.nix ];
+        };
+        # Work
+        "bjohn@hana" = home-manager.lib.homeManagerConfiguration {
+          pkgs = legacyPackages."x86_64-linux";
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/bjohn/hana.nix ];
+        };
+        # For easy bootstraping from a nixos live usb
+        "nixos@nixos" = home-manager.lib.homeManagerConfiguration {
+          pkgs = legacyPackages."x86_64-linux";
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/crutonjohn/generic.nix ];
+        };
       };
-    in {
-      nixosConfigurations.framework = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/framework/configuration.nix
-          nixos-hardware.nixosModules.framework-12th-gen-intel
-          home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            nixpkgs.overlays = [ nur.overlay ];
-            home-manager.users.crutonjohn = homeManagerConfFor ./hosts/framework/home.nix;
-          }
-        ];
-        specialArgs = { inherit nixpkgs; };
-      };
-      # ubuntu = ubuntuSystem.activationPackage;
-      # defaultPackage.x86_64-linux = ubuntuSystem.activationPackage;
-      homeConfigurations.xps = {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/xps-ubuntu/home.nix
-        ];
-        extraSpecialArgs = { inherit nixpkgs nur home-manager; };
+
+      nixConfig = {
+        extra-substituers = [ "https://cache.m7.rs" ];
+        extra-trusted-public-keys = [ "cache.m7.rs:kszZ/NSwE/TjhOcPPQ16IuUiuRSisdiIwhKZCxguaWg=" ];
       };
     };
 }

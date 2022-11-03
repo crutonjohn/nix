@@ -1,11 +1,11 @@
-{ config, pkgs, nixpkgs, lib, ... }:
+{ config, pkgs, nixpkgs, lib, inputs, ... }:
 {
   imports =
     [
-      ../packages/zsh/zsh.nix
-      ../packages/vim/vim.nix
-      ../packages/git.nix
-      ../packages/vscode.nix
+      ../apps/zsh/zsh.nix
+      ../apps/vim/vim.nix
+      ../apps/git.nix
+      ../apps/vscode.nix
     ];
   home = {
     stateVersion = "22.05";
@@ -54,6 +54,31 @@
     ];
   };
 
+  programs.firefox = {
+    enable = true;
+    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      onepassword-password-manager
+      bitwarden
+      ublock-origin
+      darkreader
+    ];
+    profiles.default = {
+      id = 0;
+      name = "Default";
+      isDefault = true;
+      settings = {
+        "browser.startup.homepage" = "start.duckduckgo.com";
+        "gfx.webrender.all" = true;
+        "gfx.webrender.enabled" = true;
+        "media.av1.enabled" = false;
+        "media.ffmpeg.vaapi.enabled" = true;
+        "media.hardware-video-decoding.force-enabled" = true;
+        "media.navigator.mediadatadecoder_vpx_enabled" = true;
+        "signon.rememberSignons" = false;
+      };
+    };
+  };
+
   programs.direnv = {
     enable = true;
     nix-direnv = {
@@ -71,9 +96,9 @@
     enableZshIntegration = true;
   };
 
-  home.file.".config/starship.toml".source = ../packages/starship.toml;
+  home.file.".config/starship.toml".source = ../apps/starship.toml;
 
-  xdg.configFile."alacritty/alacritty.yml".source = ../packages/alacritty.yml;
+  xdg.configFile."alacritty/alacritty.yml".source = ../apps/alacritty.yml;
   xdg.configFile."oh-my-zsh/plugins/nix-shell".source = pkgs.fetchFromGitHub {
     owner = "chisui";
     repo = "zsh-nix-shell";
