@@ -79,9 +79,6 @@
     };
   };
 
-  # Unfree/Tax
-  nixpkgs.config.allowUnfree = true;
-
   # Rofi
   home.file.".config/rofi/rofi.theme.rasi".text = ''
     * {
