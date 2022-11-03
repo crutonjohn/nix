@@ -42,6 +42,7 @@
       p7zip
       pre-commit
       ripgrep
+      screen
       sops
       sqlite
       terraform
@@ -56,18 +57,14 @@
 
   programs.firefox = {
     enable = true;
-    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      onepassword-password-manager
-      bitwarden
-      ublock-origin
-      darkreader
-    ];
     profiles.default = {
       id = 0;
       name = "Default";
       isDefault = true;
       settings = {
-        "browser.startup.homepage" = "start.duckduckgo.com";
+        "app.update.auto" = false;
+        "browser.startup.homepage" = "about:blank";
+        "browser.urlbar.placeholderName" = "DuckDuckGo";
         "gfx.webrender.all" = true;
         "gfx.webrender.enabled" = true;
         "media.av1.enabled" = false;
@@ -77,6 +74,12 @@
         "signon.rememberSignons" = false;
       };
     };
+    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      onepassword-password-manager
+      bitwarden
+      ublock-origin
+      darkreader
+    ];
   };
 
   programs.direnv = {
