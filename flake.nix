@@ -44,7 +44,7 @@
       legacyPackages = forAllSystems (system:
         import nixpkgs {
           inherit system;
-          nixpkgs.overlays = [ nur.overlay ];
+          overlays = with outputs.overlays; [ nur.overlay ];
           # overlays = with outputs.overlays; [ additions wallpapers modifications ];
           config.allowUnfree = true;
         }
