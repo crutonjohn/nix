@@ -2,7 +2,6 @@
 {
 
   imports = [ ./scripts ];
-  programs.home-manager.enable = true;
 
   # Unfree/Tax
   nixpkgs.config.allowUnfree = true;
