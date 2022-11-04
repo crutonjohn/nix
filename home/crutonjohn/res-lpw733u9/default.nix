@@ -3,6 +3,7 @@
   imports = [
     ../generic.nix
   ];
+  
   home.username = "bjohn";
   home.homeDirectory = "/home/bjohn";
 
@@ -16,7 +17,7 @@
     '';
 
   #Desktop Experience
-  home.file.".config/i3/config".source = ../apps/i3/i3.conf;
+  home.file.".config/i3/config".source = ./i3/i3.conf;
   home.file.".config/i3/ws1.json".source = ../apps/i3/ws1.json;
   home.file.".config/i3/ws2.json".source = ../apps/i3/ws2.json;
   home.file.".config/i3/ws3.json".source = ../apps/i3/ws3.json;

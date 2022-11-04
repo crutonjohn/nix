@@ -15,7 +15,7 @@ format = """\
 format = "apf[$profile( $region)]($style) "
 style = "bold Yellow"
 displayed_items = "region"
-#symbol = "☁️"
+symbol = "☁️"
 
 [aws.region_aliases]
 af-south-1 = "Cape Town"
