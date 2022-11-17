@@ -35,7 +35,9 @@ vterm_printf(){
     fi
 }
 
-# For stuff not suppose to be version controlled
+# For stuff not supposed to be version controlled
 if [ -e ~/.env_custom ]; then
   source ~/.env_custom
 fi
+
+export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive

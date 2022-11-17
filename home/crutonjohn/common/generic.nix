@@ -4,7 +4,6 @@
     [
       ../apps/zsh/zsh.nix
       ../apps/vim/vim.nix
-      ../apps/git.nix
       ../apps/vscode.nix
     ];
   home = {
@@ -18,6 +17,7 @@
       cachix
       chezmoi
       containerd
+      commitizen
       cz-cli
       dig
       exa
