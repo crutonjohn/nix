@@ -42,6 +42,7 @@
       openssl
       p7zip
       pre-commit
+      rclone
       ripgrep
       screen
       sops
