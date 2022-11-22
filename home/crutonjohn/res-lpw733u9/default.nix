@@ -10,6 +10,8 @@
 
 
   home.packages = with pkgs; [
+    _1password
+    _1password-gui
     i3status-rust
     networkmanager_dmenu
     comma
@@ -27,17 +29,26 @@
     picom
     scrot
     imagemagick
+    pywal
+    calc
+    siji
+    material-icons
+    nerdfonts
+    glibc
+    pulseaudio
+    gdk-pixbuf
 
     (pkgs.writeScriptBin "i3loadlayout" ''
     #!/usr/bin/env bash
     # workspace 1
-    i3-msg "workspace admin; append_layout ~/.config/i3/ws1.json"
+    i3-msg "workspace main; append_layout ~/.config/i3/ws1.json"
     (alacritty &)
     i3-msg "workspace code; append_layout ~/.config/i3/ws2.json"
     (vscodium > /dev/null 2>&1 &)
+    i3-msg "workspace web; append_layout ~/.config/i3/ws3.json"
     (firefox > /dev/null 2>&1 &)
-    i3-msg "workspace irc; append_layout ~/.config/i3/ws3.json"
-    (discord > /dev/null 2>&1 &)
+    i3-msg "workspace irc; append_layout ~/.config/i3/ws4.json"
+    (slk && webex && eaa)
     '')
 
     (pkgs.writeScriptBin "i3lockscreen" ''
@@ -62,16 +73,36 @@
     #!/usr/bin/env bash
     /opt/Webex/bin/CiscoCollabHost /opt/Webex/lib/ libWebexAppLoader.so /Start &
     '')
+
+    (pkgs.writeScriptBin "slk" ''
+    #!/usr/bin/env bash
+    /usr/bin/slack > /dev/null 2>&1 &
+    '')
+
+    (pkgs.writeScriptBin "1p" ''
+    #!/usr/bin/env bash
+    /home/bjohn/.nix-profile/bin/1password > /dev/null 2>&1 &
+    '')
+
+    (pkgs.writeScriptBin "eaa" ''
+    #!/usr/bin/env bash
+    /opt/wapp/bin/EAAClient > /dev/null 2>&1 &
+    '')
   ];
 
+  # Locale Fixes
   home.file.".xsessionrc".text = ''
     export PATH=$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$HOME/.local/bin:$PATH
     xset r rate 200 50
+    export LOCALES_ARCHIVE=/usr/lib/locale/locale-archive
+    export LOCALE_ARCHIVE_2_27=/usr/lib/locale/locale-archive
     '';
+
+  # Scaling Fixes
   home.file.".Xresources".text = ''
     Xcursor.theme: Adwaita
-    Xcursor.size: 32
-    Xft.dpi: 144
+    Xcursor.size: 48
+    Xft.dpi: 192
     Xft.autohint: 0
     Xft.lcdfilter:  lcddefault
     Xft.hintstyle:  hintfull
@@ -79,14 +110,22 @@
     Xft.antialias: 1
     Xft.rgba: rgb
     '';
+  home.file.".xinitrc".text = ''
+    xrdb -merge ~/.Xresources
+    xset +fp ~/.fonts/misc/
+    nix run github:guibou/nixGL#nixGLIntel -- picom -b
+    '';
 
+  # (more) Locale Fixes
   home.sessionVariables.LOCALES_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
   home.sessionVariables.LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
+
   #Desktop Experience
   home.file.".config/i3/config".source = ./i3/i3.conf;
   home.file.".config/i3/ws1.json".source = ./i3/layout/ws1.json;
   home.file.".config/i3/ws2.json".source = ./i3/layout/ws2.json;
   home.file.".config/i3/ws3.json".source = ./i3/layout/ws3.json;
+  home.file.".config/i3/ws4.json".source = ./i3/layout/ws4.json;
   home.file.".config/i3/screen_shot.sh".source = ../apps/i3/screen_shot.sh;
   home.file.".config/i3/lockicon.png".source = ../apps/i3/lockicon.png;
   home.file.".config/picom.conf".source = ../apps/picom/picom.conf;
@@ -112,7 +151,7 @@
         grey: #737994;
 
         width: 600;
-        font: "JetBrainsMono Nerd Font 14";
+        font: "Fira Code Retina Nerd Font Complete 14";
     }
 
     element-text, element-icon , mode-switcher {
@@ -215,7 +254,7 @@
         horizontal_padding = 8;
         frame_width = 3;
         line_height = 4;
-        format = "<b>%s</b>\n%b";
+        format = "<b>%s</b>%b";
         show_age_threshold = 60;
         separator_height = 2;
         separator_color = "frame";

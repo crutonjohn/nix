@@ -1,44 +1,21 @@
+// vim:ts=4:sw=4:et
 {
     "border": "pixel",
-    "current_border_width": 3,
+    "current_border_width": 6,
     "floating": "auto_off",
     "geometry": {
-       "height": 1415,
-       "width": 857,
-       "x": 2583,
-       "y": 25
-    },
-    //"name": "● main.yml - config - VSCodium",
-    "percent": 0.5,
-    "swallows": [
-       {
-         "class": "^VSCodium$",
-         "instance": "^vscodium$",
-         //"title": "^\\●\\ main\\.yml\\ \\-\\ config\\ \\-\\ VSCodium$",
-         "window_role": "^browser\\-window$"
-       }
-    ],
-    "type": "con"
-}
-
-{
-    "border": "pixel",
-    "current_border_width": 3,
-    "floating": "auto_off",
-    "geometry": {
-       "height": 1415,
-       "width": 854,
+       "height": 2399,
+       "width": 3839,
        "x": 0,
-       "y": 0
+       "y": 42
     },
-    //"name": "i3 - ArchWiki - Mozilla Firefox",
-    "percent": 0.5,
+    "name": "VSCodium",
+    "percent": 1,
     "swallows": [
        {
-         "class": "^firefox$",
-         "instance": "^Navigator$",
-         //"title": "^i3\\ \\-\\ ArchWiki\\ \\-\\ Mozilla\\ Firefox$",
-         "window_role": "^browser$"
+       // "class": "^VSCodium$",
+       // "instance": "^vscodium$",
+       // "window_role": "^browser\\-window$"
        }
     ],
     "type": "con"

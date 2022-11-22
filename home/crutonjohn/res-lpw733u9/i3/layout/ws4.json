@@ -31,13 +31,12 @@
        "x": 1926,
        "y": 0
     },
-    "name": "proj-nagios-scaling - Linode - Slack",
+    "name": "Slack",
     "percent": 0.5,
     "swallows": [
        {
        // "class": "^Slack$",
        // "instance": "^slack$",
-       // "title": "^proj\\-nagios\\-scaling\\ \\-\\ Linode\\ \\-\\ Slack$",
        // "window_role": "^browser\\-window$"
        }
     ],

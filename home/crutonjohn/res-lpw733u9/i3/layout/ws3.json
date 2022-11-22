@@ -1,21 +1,23 @@
 // vim:ts=4:sw=4:et
 {
     "border": "pixel",
-    "current_border_width": 3,
+    "current_border_width": 6,
     "floating": "auto_off",
     "geometry": {
-       "height": 1384,
-       "width": 854,
-       "x": 863,
-       "y": 56
+       "height": 2296,
+       "width": 3840,
+       "x": 0,
+       "y": 0
     },
-    "name": "Slack",
-    "percent": 0.5,
+    "name": "Mozilla Firefox",
+    "percent": 1,
     "swallows": [
        {
-         "class": "^Slack$",
-         "instance": "^slack$"
+       // "class": "^firefox$",
+       // "instance": "^Navigator$",
+       // "window_role": "^browser$"
        }
     ],
     "type": "con"
 }
+
