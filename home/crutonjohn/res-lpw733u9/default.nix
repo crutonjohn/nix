@@ -12,6 +12,8 @@
   home.packages = with pkgs; [
     _1password
     _1password-gui
+    blueman
+    bundix
     i3status-rust
     networkmanager_dmenu
     comma
@@ -32,11 +34,15 @@
     pywal
     calc
     siji
+    syncthing
+    syncthing-tray
     material-icons
     nerdfonts
     glibc
     pulseaudio
     gdk-pixbuf
+    evolution
+    evolution-ews
 
     (pkgs.writeScriptBin "i3loadlayout" ''
     #!/usr/bin/env bash
@@ -89,6 +95,14 @@
     /opt/wapp/bin/EAAClient > /dev/null 2>&1 &
     '')
   ];
+
+  services.syncthing = {
+    enable = true;
+    tray = {
+      enable = true;
+    };
+  };
+
 
   # Locale Fixes
   home.file.".xsessionrc".text = ''
