@@ -98,13 +98,6 @@
     '')
   ];
 
-  services.syncthing = {
-    enable = true;
-    tray = {
-      enable = true;
-    };
-  };
-
   ## autorandr
   programs.autorandr = {
     enable = true;
@@ -218,6 +211,12 @@
 
   };
 
+  services.syncthing = {
+    enable = true;
+    tray = {
+      enable = true;
+    };
+  };
 
   # Locale Fixes
   home.file.".xsessionrc".text = ''
