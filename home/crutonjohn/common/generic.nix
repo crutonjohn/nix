@@ -22,13 +22,15 @@
       dig
       file
       fluxcd
+      ffmpeg
       gawk
-      gcc
+      go-chromecast
       home-manager
       htop
       jq
       jsonnet
       k9s
+      krew
       kubectl
       kubernetes-helm
       kubecolor
@@ -36,6 +38,7 @@
       kustomize
       kustomize-sops
       lazydocker
+      mlocate
       nix-index
       nixfmt
       openssl
@@ -49,8 +52,10 @@
       terraform
       tree
       unzip
+      vlc
       watchexec
       whois
+      wget
       obsidian
       discord
       minikube
