@@ -6,7 +6,7 @@
     extensions = with pkgs.vscode-extensions; [
     ];
     userSettings = {
-      "editor.fontFamily" = "Noto Sans Mono Regular";
+      "editor.fontFamily" = "FiraCode Nerd Font Mono";
       "editor.fontLigatures" = true;
       "editor.fontSize" = 13;
       "workbench.colorTheme" = "Solarized Dark";
