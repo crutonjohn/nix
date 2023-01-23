@@ -5,6 +5,15 @@
     ./git.nix
   ];
 
+  home.packages = with pkgs; [
+
+    (pkgs.writeScriptBin "stm" ''
+    #!/usr/bin/env bash
+    nix run github:guibou/nixGL#nixGLIntel -- steam > /dev/null 2>&1 &
+    '')
+  ];
+
+
   home.username = "crutonjohn";
   home.homeDirectory = "/home/crutonjohn";
   # monitors = [{
