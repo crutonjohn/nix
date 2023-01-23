@@ -20,7 +20,6 @@
       commitizen
       cz-cli
       dig
-      exa
       file
       fluxcd
       gawk
@@ -54,6 +53,7 @@
       whois
       obsidian
       discord
+      minikube
     ];
   };
 
@@ -91,6 +91,10 @@
     };
   };
   programs.fzf.enable = true;
+  programs.exa = {
+    enable = true;
+    enableAliases = true;
+  };
   programs.bat = {
     enable = true;
     config.theme = "ansi-dark";
