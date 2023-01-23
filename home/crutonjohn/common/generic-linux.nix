@@ -9,13 +9,18 @@
   home.packages = with pkgs; [
     i3status-rust
     networkmanager_dmenu
+    docker
     i3
     comma
     feh
+    nfs-utils
+    nerdfonts
     networkmanager
     rofi
     polybar
     powertop
+    pavucontrol
+    pulsemixer
     volctl
     zeal
     xss-lock
@@ -25,7 +30,11 @@
     arandr
     picom
     scrot
+    steam
     imagemagick
+    xorg.xev
+    libnotify
+    sonixd
   ];
 
   services.dunst = {
@@ -33,23 +42,29 @@
     settings = {
       global = {
         monitor = 0;
-        geometry = "600x50-50+65";
+        width = 300;
+        height = 100;
+        offset = "5x25";
         follow = "keyboard";
         transparency = 10;
-        frame_color = "#E06C75";
-        font = "Iosevka Regular 18";
+        frame_color = "#00bcd4";
+        font = "Noto Sans 9";
         padding = 8;
         horizontal_padding = 8;
-        frame_width = 3;
+        frame_width = 1;
         line_height = 4;
         format = "<b>%s</b>\n%b";
-        show_age_threshold = 60;
+        show_age_threshold = 30;
         separator_height = 2;
         separator_color = "frame";
         markup = "full";
         ignore_newline = "no";
         word_wrap = "yes";
-        alignment = "left";
+        alignment = "right";
+        origin = "bottom-right";
+        gap_size = 1;
+        stack_duplicates = true;
+        corner_radius = 0;
       };
       urgency_low = {
         background = "#282C34";
@@ -71,6 +86,14 @@
     iconTheme = {
       package = pkgs.gnome.adwaita-icon-theme;
       name = "Adwaita";
+    };
+  };
+
+  # Syncthing
+  services.syncthing = {
+    enable = true;
+    tray = {
+      enable = true;
     };
   };
 
