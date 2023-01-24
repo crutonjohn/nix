@@ -8,7 +8,7 @@
  */
 
 configuration {
-	font:							"Terminus 9";
+	font:							"Noto Sans 12";
     show-icons:                     true;
 	icon-theme: 					"Papirus";
     display-drun: 					"";
@@ -26,9 +26,9 @@ window {
     background-color:               @bg;
     text-color:                     @fg;
 	border:							0px;
-	border-color:					@ac;
+	border-color:					@bar;
     border-radius:                  0px;
-	width:							550px;
+	width:							700px;
     location:                       center;
     x-offset:                       0;
     y-offset:                       0;
@@ -36,7 +36,7 @@ window {
 
 prompt {
     enabled: 						true;
-	padding: 						0px 5px 0px -10px;
+	padding: 						0px 5px 0px 0px;
 	background-color: 				@al;
 	text-color: 					@bar;
 	font:							"Material\-Design\-Iconic\-Font 10";
@@ -55,8 +55,8 @@ entry {
 
 inputbar {
 	children: 						[ prompt, entry ];
-    background-color:               @ac;
-    text-color:                     @bar;
+    background-color:               @bga;
+    text-color:                     @al;
     expand:                         false;
 	border:							0px;
     border-radius:                  0px;
@@ -111,9 +111,9 @@ element-text {
 }
 
 element selected {
-    background-color:               @bga;
-    text-color:                     @fg;
-	border:							0px;
+    background-color:               @al;
+    text-color:                     @bar;
+	border:							1px;
     border-radius:                  0px;
     border-color:                  	@bg;
 }

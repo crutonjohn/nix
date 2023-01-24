@@ -1,6 +1,6 @@
 { pkgs, ...}:
-{  
-  home.packages = [ 
+{
+  home.packages = [
     (pkgs.writeScriptBin "i3loadlayout" ''
     #!/usr/bin/env bash
     # workspace 1
@@ -24,11 +24,11 @@
     i3lock -i "$tmpbg"
     rm -f "$tmpbg"
     '')
-    
+
     (pkgs.writeScriptBin "launchpolybar" ''
     #!/usr/bin/env bash
     POLYBAR_DIR=$HOME/.config/polybar
-    $POLYBAR_DIR/hack/launch.sh
+    $POLYBAR_DIR/material/launch.sh
     '')
   ];
 }

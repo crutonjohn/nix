@@ -1,7 +1,8 @@
 { config, lib, pkgs, outputs, ... }:
 {
   imports = [
-    ../generic.nix
+    ../personal.nix
+    ../generic-linux.nix
     ./git.nix
   ];
 
