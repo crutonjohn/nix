@@ -30,7 +30,6 @@
     arandr
     picom
     scrot
-    steam
     imagemagick
     xorg.xev
     libnotify
@@ -198,6 +197,6 @@
     }
   '';
 
-  home.file.".config/wall".source = ./space.jpg;
+  home.file.".config/wall".source = ./bg;
 
 }
