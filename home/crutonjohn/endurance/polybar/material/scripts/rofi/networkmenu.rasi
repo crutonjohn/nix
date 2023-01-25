@@ -24,8 +24,8 @@ window {
     transparency:                   "real";
     background-color:               @bg;
     text-color:                     @fg;
-	border:							0px;
-	border-color:					@ac;
+	border:							1px;
+	border-color:					@bar;
     border-radius:                  0px;
 	width:							400px;
     location:                       center;

@@ -6,7 +6,7 @@
 ## Twitter : @adi1090x
 
 dir="~/.config/polybar/material/scripts/rofi"
-uptime=$(uptime -p | sed -e 's/up //g')
+uptime=$(uptime | sed 's/^.\+up\ \+\([^,]*\).*/\1/g')
 
 rofi_command="rofi -no-config -theme $dir/powermenu.rasi"
 
@@ -58,8 +58,8 @@ case $chosen in
         fi
         ;;
     $lock)
-		if [[ -f /usr/bin/i3lock ]]; then
-			i3lock
+		if [[ -f /etc/profiles/per-user/crutonjohn/bin/i3lockscreen ]]; then
+			i3lockscreen
 		elif [[ -f /usr/bin/betterlockscreen ]]; then
 			betterlockscreen -l
 		fi

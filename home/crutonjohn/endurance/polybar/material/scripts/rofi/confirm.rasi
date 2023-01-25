@@ -3,9 +3,9 @@
 @import "colors.rasi"
 
 * {
-    background-color:       @bg;
-    text-color:             @fg;
-	font:				 	"Noto Sans 10";
+    background-color:       @al;
+    text-color:             @bar;
+	font:				 	"Noto Sans 12";
 }
 
 window {
@@ -13,12 +13,12 @@ window {
     padding:    			25px;
     border:					1px;
     border-radius:          0px;
-    border-color:           @ac;
+    border-color:           @bar;
     location:               center;
     y-offset:               -2em;
 }
 
 entry {
     expand: 				true;
-    text-color:				@ac;
+    text-color:				@bar;
 }
