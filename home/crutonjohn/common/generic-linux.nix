@@ -44,106 +44,52 @@
     };
   };
 
-  # Rofi
-  home.file.".config/rofi/rofi.theme.rasi".text = ''
-    * {
-        bg-col:  #303446;
-        bg-col-light: #303446;
-        border-col: #303446;
-        selected-col: #303446;
-        blue: #8caaee;
-        fg-col: #c6d0f5;
-        fg-col2: #e78284;
-        grey: #737994;
-
-        width: 600;
-        font: "JetBrainsMono Nerd Font 14";
-    }
-
-    element-text, element-icon , mode-switcher {
-        background-color: inherit;
-        text-color:       inherit;
-    }
-
-    window {
-        height: 360px;
-        border: 3px;
-        border-color: @border-col;
-        background-color: @bg-col;
-    }
-
-    mainbox {
-        background-color: @bg-col;
-    }
-
-    inputbar {
-        children: [prompt,entry];
-        background-color: @bg-col;
-        border-radius: 5px;
-        padding: 2px;
-    }
-
-    prompt {
-        background-color: @blue;
-        padding: 6px;
-        text-color: @bg-col;
-        border-radius: 3px;
-        margin: 20px 0px 0px 20px;
-    }
-
-    textbox-prompt-colon {
-        expand: false;
-        str: ":";
-    }
-
-    entry {
-        padding: 6px;
-        margin: 20px 0px 0px 10px;
-        text-color: @fg-col;
-        background-color: @bg-col;
-    }
-
-    listview {
-        border: 0px 0px 0px;
-        padding: 6px 0px 0px;
-        margin: 10px 0px 0px 20px;
-        columns: 2;
-        lines: 5;
-        background-color: @bg-col;
-    }
-
-    element {
-        padding: 5px;
-        background-color: @bg-col;
-        text-color: @fg-col  ;
-    }
-
-    element-icon {
-        size: 25px;
-    }
-
-    element selected {
-        background-color:  @selected-col ;
-        text-color: @fg-col2  ;
-    }
-
-    mode-switcher {
-        spacing: 0;
-      }
-
-    button {
-        padding: 10px;
-        background-color: @bg-col-light;
-        text-color: @grey;
-        vertical-align: 0.5;
-        horizontal-align: 0.5;
-    }
-
-    button selected {
-      background-color: @bg-col;
-      text-color: @blue;
-    }
-  '';
+  services.picom = {
+    enable = true;
+    backend = "glx";
+    fade = true;
+    shadow = false;
+    inactiveOpacity = 0.9;
+    vSync = true;
+    fadeDelta = 10;
+    settings = {
+      animations = true;
+      animation-for-transient-window = "fly-in";
+      animation-for-open-window = "zoom";
+      animation-for-unmap-window = "zoom";
+      animation-dampening = 25;
+      # animation-window-mass = 0.5
+      animation-delta = 10;
+      animation-clamping = false;
+      corner-radius = 0;
+      round-borders = 0;
+      detect-rounded-corners = true;
+      detect-client-opacity = true;
+      use-damage = false;
+      blur = {
+        method = "dual_kawase";
+        strength = 3;
+      };
+      rounded-corners-exclude = [
+          "class_g='Bar'"
+          "class_g='Rofi'"
+          "class_g='dwm'"
+      ];
+      blur-background-exclude = [
+        "name *= 'slop'"
+        "name = 'cpt_frame_window'"
+        "name = 'as_toolbar'"
+        "name = 'zoom_linux_float_video_window'"
+        "name = 'AnnoInputLinux'"
+      ];
+      opacity-rule = [
+        "50:class_g = 'xest-exe'"
+        "100:class_g = 'Alacritty'"
+        "90:class_g = 'st-256color'"
+        "100:name *?= 'vlc'"
+      ];
+    };
+  };
 
   home.file.".config/wall".source = ./bg;
 

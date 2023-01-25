@@ -2,16 +2,28 @@
 {
 
   imports = [
-    ../generic.nix
-
+    ./generic.nix
+    ./generic-linux.nix
+    ./git.nix
   ];
 
   # Unfree/Tax
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
+    
     signal-desktop
     steam
+    discord
+
+    ##################
+    # Custom Scripts #
+    ##################
+    (pkgs.writeScriptBin "glsteam" ''
+    #!/usr/bin/env bash
+    nix run github:guibou/nixGL#nixGLIntel -- steam > /dev/null 2>&1 &
+    '')
+
   ];
 
   services.dunst = {

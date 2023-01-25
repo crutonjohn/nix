@@ -166,6 +166,7 @@
       Xft.rgba: rgb
     ''}
   '';
+
   services.xserver = {
     layout = "us";
     xkbVariant = "";
