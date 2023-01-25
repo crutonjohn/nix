@@ -21,7 +21,7 @@
         monitor = 0;
         width = 300;
         height = 100;
-        offset = "5x25";
+        offset = "5x30";
         follow = "keyboard";
         transparency = 10;
         frame_color = "#6f398f";
