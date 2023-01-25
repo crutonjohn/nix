@@ -4,7 +4,8 @@
   imports = [
     ./generic.nix
     ./generic-linux.nix
-    ./git.nix
+    ./custom-modules/audio/pasystray.nix
+    ./custom-modules/desktop/picom.nix
   ];
 
   # Unfree/Tax
@@ -20,6 +21,7 @@
     comma
     feh
     rofi
+    pasystray
     polybar
     powertop
     zeal
@@ -41,41 +43,7 @@
     glibc
     pulseaudio
     gdk-pixbuf
-    pasystray
     read-edid
-
-    (pkgs.writeScriptBin "i3loadlayout" ''
-    #!/usr/bin/env bash
-    # workspace 1
-    i3-msg "workspace 1; append_layout ~/.config/i3/ws1.json"
-    (nix run github:guibou/nixGL#nixGLIntel -- alacritty)
-    i3-msg "workspace 2; append_layout ~/.config/i3/ws2.json"
-    (vscodium > /dev/null 2>&1 &)
-    i3-msg "workspace 3; append_layout ~/.config/i3/ws3.json"
-    (firefox > /dev/null 2>&1 &)
-    i3-msg "workspace 4; append_layout ~/.config/i3/ws4.json"
-    (slk)
-    i3-msg "workspace 5;
-    (webex && eaa)
-    '')
-
-    (pkgs.writeScriptBin "i3lockscreen" ''
-    #!/usr/bin/env bash
-    icon="$HOME/.config/i3/lockicon.png"
-    tmpbg='/tmp/screen.png'
-    (( $# )) && { icon=$1; }
-    scrot "$tmpbg"
-    convert "$tmpbg" -scale 10% -scale 1000% "$tmpbg"
-    convert "$tmpbg" "$icon" -gravity center -composite -matte "$tmpbg"
-    i3lock -i "$tmpbg"
-    rm -f "$tmpbg"
-    '')
-
-    (pkgs.writeScriptBin "launchpolybar" ''
-    #!/usr/bin/env bash
-    POLYBAR_DIR=$HOME/.config/polybar
-    $POLYBAR_DIR/hack/launch.sh
-    '')
 
     (pkgs.writeScriptBin "webex" ''
     #!/usr/bin/env bash
@@ -98,6 +66,10 @@
     /opt/wapp/bin/EAAClient > /dev/null 2>&1 &
     '')
   ];
+
+  services.pasystray-custom = {
+    enable = true;
+  };
 
   services.dunst = {
     enable = true;

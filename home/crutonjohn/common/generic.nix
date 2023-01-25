@@ -185,7 +185,6 @@
       aws = {
         format = "$symbol[$profile( $region)]($style)";
         style = "bold yellow";
-        displayed_items = "region";
         symbol = "☁️ ";
         disabled = false;
       };
@@ -224,9 +223,6 @@
     };
   };
 
-  # home.file.".config/starship.toml".source = ../apps/starship.toml;
-
-  # xdg.configFile."alacritty/alacritty.yml".source = ../apps/alacritty.yml;
   xdg.configFile."oh-my-zsh/plugins/nix-shell".source = pkgs.fetchFromGitHub {
     owner = "chisui";
     repo = "zsh-nix-shell";

@@ -12,7 +12,7 @@ alias ls="exa -lF"
 source <(kubectl completion zsh)
 alias k=kubecolor
 # make completion work with kubecolor
-compdef kubecolor=kubectl
+# compdef kubecolor=kubectl
 
 export EDITOR="vim"
 export VISUAL=$EDITOR

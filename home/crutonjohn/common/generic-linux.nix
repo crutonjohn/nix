@@ -1,7 +1,9 @@
 { pkgs, inputs, ...}:
 {
 
-  imports = [ ./scripts ];
+  imports = [
+    ./scripts
+  ];
 
   # Unfree/Tax
   nixpkgs.config.allowUnfree = true;
@@ -46,7 +48,7 @@
     };
   };
 
-  services.picom = {
+  services.picom-custom = {
     enable = true;
     backend = "glx";
     fade = true;
@@ -83,6 +85,7 @@
         "name = 'as_toolbar'"
         "name = 'zoom_linux_float_video_window'"
         "name = 'AnnoInputLinux'"
+        "name = 'firefox'"
       ];
       opacity-rule = [
         "50:class_g = 'xest-exe'"
@@ -90,7 +93,7 @@
         "90:class_g = 'st-256color'"
         "100:name *?= 'vlc'"
         "100:name *?= 'polybar'"
-
+        "100:name *?= 'firefox'"
       ];
     };
   };

@@ -8,7 +8,7 @@
  */
 
 configuration {
-	font:							"Terminus 9";
+	font:							"Noto Sans 12";
     show-icons:                     true;
 	icon-theme: 					"Papirus";
     drun-display-format:            "{name}";
@@ -24,8 +24,8 @@ window {
     transparency:                   "real";
     background-color:               @bg;
     text-color:                     @fg;
-	border:							0px;
-	border-color:					@ac;
+	border:							1px;
+	border-color:					@bar;
     border-radius:                  0px;
 	width:							300px;
     location:                       center;
@@ -62,14 +62,14 @@ entry {
 
 inputbar {
 	children: 						[ textbox-prompt-colon, prompt ];
-    background-color:               @ac;
-    text-color:                     @bar;
+    background-color:               @bga;
+    text-color:                     @al;
     expand:                         false;
 	border:							0px;
     border-radius:                  0px;
 	border-color:					@ac;
     margin:                         0px;
-    padding:                        15px 0px 8px 25px;
+    padding:                        10px 0px 8px 25px;
 }
 
 listview {
@@ -118,9 +118,9 @@ element-text {
 }
 
 element selected {
-    background-color:               @bga;
-    text-color:                     @fg;
-	border:							0px;
+    background-color:               @al;
+    text-color:                     @bar;
+	border:							1px;
     border-radius:                  0px;
     border-color:                  	@bg;
 }
