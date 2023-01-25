@@ -31,10 +31,16 @@
     $POLYBAR_DIR/material/launch.sh
     '')
 
-    (pkgs.writeScriptBin "nrb" ''
+    (pkgs.writeScriptBin "nrbu" ''
     #!/usr/bin/env bash
     cd $HOME/Documents/nixos
     sudo nixos-rebuild switch --upgrade --flake '.#endurance'
+    '')
+
+    (pkgs.writeScriptBin "nrb" ''
+    #!/usr/bin/env bash
+    cd $HOME/Documents/nixos
+    sudo nixos-rebuild switch --flake '.#endurance'
     '')
 
   ];

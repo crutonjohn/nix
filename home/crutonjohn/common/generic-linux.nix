@@ -34,6 +34,8 @@
     xorg.xev
     libnotify
     sonixd
+    neofetch
+    catimg
   ];
 
   # Syncthing
@@ -87,6 +89,8 @@
         "100:class_g = 'Alacritty'"
         "90:class_g = 'st-256color'"
         "100:name *?= 'vlc'"
+        "100:name *?= 'polybar'"
+
       ];
     };
   };
