@@ -30,5 +30,12 @@
     POLYBAR_DIR=$HOME/.config/polybar
     $POLYBAR_DIR/material/launch.sh
     '')
+
+    (pkgs.writeScriptBin "nrb" ''
+    #!/usr/bin/env bash
+    cd $HOME/Documents/nixos
+    sudo nixos-rebuild switch --upgrade --flake '.#endurance'
+    '')
+
   ];
 }

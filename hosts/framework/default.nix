@@ -219,6 +219,20 @@
     description = "Curtis Ray John";
     extraGroups = [ "wheel" "networkmanager" "docker" ];
   };
+  ## allow me to run nixos-rebuild without a password
+  security.sudo.extraRules = [
+      { 
+        users = [ 
+          "crutonjohn" 
+        ];
+        commands = [ 
+          { 
+            command = "/run/current-system/sw/bin/nixos-rebuild"; 
+            options = [ "SETENV" "NOPASSWD" ]; 
+          }
+        ];
+      }
+  ];
 
   # Sound Pipewire
   hardware.pulseaudio.enable = true;
