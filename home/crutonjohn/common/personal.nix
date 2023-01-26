@@ -5,13 +5,14 @@
     ./generic.nix
     ./generic-linux.nix
     ./git.nix
+    ./custom-modules/desktop/picom.nix
   ];
 
   # Unfree/Tax
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
-    
+
     signal-desktop
     steam
     discord
