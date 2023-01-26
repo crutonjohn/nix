@@ -1,9 +1,6 @@
-{ pkgs, inputs, ...}:
-{
+{ pkgs, inputs, ... }: {
 
-  imports = [
-    ./scripts
-  ];
+  imports = [ ./scripts ];
 
   # Unfree/Tax
   nixpkgs.config.allowUnfree = true;
@@ -43,9 +40,7 @@
   # Syncthing
   services.syncthing = {
     enable = true;
-    tray = {
-      enable = true;
-    };
+    tray = { enable = true; };
   };
 
   services.picom-custom = {
@@ -74,11 +69,8 @@
         method = "dual_kawase";
         strength = 3;
       };
-      rounded-corners-exclude = [
-          "class_g='Bar'"
-          "class_g='Rofi'"
-          "class_g='dwm'"
-      ];
+      rounded-corners-exclude =
+        [ "class_g='Bar'" "class_g='Rofi'" "class_g='dwm'" ];
       blur-background-exclude = [
         "name *= 'slop'"
         "name = 'cpt_frame_window'"

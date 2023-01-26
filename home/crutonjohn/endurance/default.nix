@@ -1,8 +1,5 @@
-{ config, lib, pkgs, outputs, ... }:
-{
-  imports = [
-    ../common/personal.nix
-  ];
+{ config, lib, pkgs, outputs, ... }: {
+  imports = [ ../common/personal.nix ];
 
   home.username = "crutonjohn";
   home.homeDirectory = "/home/crutonjohn";

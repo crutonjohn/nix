@@ -1,10 +1,8 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
-    extensions = with pkgs.vscode-extensions; [
-    ];
+    extensions = with pkgs.vscode-extensions; [ ];
     userSettings = {
       "editor.fontFamily" = "FiraCode Nerd Font Mono";
       "editor.fontLigatures" = true;
@@ -12,4 +10,4 @@
       "workbench.colorTheme" = "Solarized Dark";
     };
   };
- }
+}

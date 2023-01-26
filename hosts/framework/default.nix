@@ -1,12 +1,11 @@
 { config, lib, nixpkgs, pkgs, inputs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ./vm-hook.nix
-      ../../packages/cachix/cachix.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ./vm-hook.nix
+    ../../packages/cachix/cachix.nix
+  ];
 
   # Unfree/Tax
   nixpkgs.config.allowUnfree = true;
@@ -14,16 +13,16 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # GRUB/Plymouth
-#  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_5_19.override {
-#    argsOverride = rec {
-#      src = pkgs.fetchurl {
-#            url = "mirror://kernel/linux/kernel/v5.x/linux-${version}.tar.xz";
-#            sha256 = "Ts24tZxvbyWNicvyLu3iEOClXAnbiEmI/nBu/i/o8Ug=";
-#      };
-#      version = "5.19.13";
-#      modDirVersion = "5.19.13";
-#      };
-#  });
+  #  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_5_19.override {
+  #    argsOverride = rec {
+  #      src = pkgs.fetchurl {
+  #            url = "mirror://kernel/linux/kernel/v5.x/linux-${version}.tar.xz";
+  #            sha256 = "Ts24tZxvbyWNicvyLu3iEOClXAnbiEmI/nBu/i/o8Ug=";
+  #      };
+  #      version = "5.19.13";
+  #      modDirVersion = "5.19.13";
+  #      };
+  #  });
 
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.enable = true;
@@ -110,14 +109,13 @@
         ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 192.168.135.2/32 -o wlp166s0 -j MASQUERADE
       '';
 
-      peers = [
-        { # peer0
-          publicKey = "t8WbXbH9q5qYmER/L3b7+2HYvR6vXQbj7MsEUue3xgk=";
-          allowedIPs = [ "0.0.0.0/0" ];
-          endpoint = "dyn4.crutonjohn.com:51820";
-        }
-        # More peers can be added here.
-      ];
+      peers = [{ # peer0
+        publicKey = "t8WbXbH9q5qYmER/L3b7+2HYvR6vXQbj7MsEUue3xgk=";
+        allowedIPs = [ "0.0.0.0/0" ];
+        endpoint = "dyn4.crutonjohn.com:51820";
+      }
+      # More peers can be added here.
+        ];
     };
   };
   # Enable NAT
@@ -150,21 +148,23 @@
   };
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.windowManager.i3.enable = true;
-    # TODO: migrate to i3-gaps
-    # package = "pkgs.i3-gaps";
-    # TODO: migrate to inline i3 config (maybe)
+  # TODO: migrate to i3-gaps
+  # package = "pkgs.i3-gaps";
+  # TODO: migrate to inline i3 config (maybe)
   services.xserver.displayManager.sessionCommands = ''
-    ${pkgs.xorg.xrdb}/bin/xrdb -merge <${pkgs.writeText "Xresources" ''
-      Xcursor.theme: Adwaita
-      Xcursor.size: 32
-      Xft.dpi: 144
-      Xft.autohint: 0
-      Xft.lcdfilter:  lcddefault
-      Xft.hintstyle:  hintfull
-      Xft.hinting: 1
-      Xft.antialias: 1
-      Xft.rgba: rgb
-    ''}
+    ${pkgs.xorg.xrdb}/bin/xrdb -merge <${
+      pkgs.writeText "Xresources" ''
+        Xcursor.theme: Adwaita
+        Xcursor.size: 32
+        Xft.dpi: 144
+        Xft.autohint: 0
+        Xft.lcdfilter:  lcddefault
+        Xft.hintstyle:  hintfull
+        Xft.hinting: 1
+        Xft.antialias: 1
+        Xft.rgba: rgb
+      ''
+    }
   '';
 
   services.xserver = {
@@ -180,17 +180,13 @@
   boot.blacklistedKernelModules = [ "nouveau" "nvidia" ];
   hardware.opengl = {
     enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
+    extraPackages = with pkgs; [ intel-media-driver vaapiVdpau libvdpau-va-gl ];
   };
 
   #Power stuff
   services.tlp.enable = true;
   powerManagement.powertop.enable = true;
-  services.logind ={
+  services.logind = {
     lidSwitch = "suspend";
     lidSwitchExternalPower = "lock";
   };
@@ -221,19 +217,13 @@
     extraGroups = [ "wheel" "networkmanager" "docker" ];
   };
   ## allow me to run nixos-rebuild without a password
-  security.sudo.extraRules = [
-      { 
-        users = [ 
-          "crutonjohn" 
-        ];
-        commands = [ 
-          { 
-            command = "/run/current-system/sw/bin/nixos-rebuild"; 
-            options = [ "SETENV" "NOPASSWD" ]; 
-          }
-        ];
-      }
-  ];
+  security.sudo.extraRules = [{
+    users = [ "crutonjohn" ];
+    commands = [{
+      command = "/run/current-system/sw/bin/nixos-rebuild";
+      options = [ "SETENV" "NOPASSWD" ];
+    }];
+  }];
 
   # Sound Pipewire
   hardware.pulseaudio.enable = true;
@@ -287,7 +277,6 @@
   services.fprintd.enable = true;
   security.pam.services.login.fprintAuth = true;
   security.pam.services.xscreensaver.fprintAuth = true;
-
 
   # SSH Server
   services.openssh.enable = true;

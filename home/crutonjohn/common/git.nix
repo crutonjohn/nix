@@ -1,11 +1,11 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   programs.git = {
     enable = true;
     userName = "crutonjohn";
     userEmail = "admin@curtisrayjohn.com";
     aliases = {
-      lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit";
+      lg =
+        "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit";
       st = "status -s";
       s = "status";
       a = "!git add . && git status";
@@ -17,8 +17,10 @@
       dsp = "!git --no-pager diff --staged";
       main = "checkout main";
       master = "checkout master";
-      no-remotes = "!git branch --format '%(refname:short) %(upstream:short)' | awk '{if (!$2) print $1;}'";
-      alias = "!git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort";
+      no-remotes =
+        "!git branch --format '%(refname:short) %(upstream:short)' | awk '{if (!$2) print $1;}'";
+      alias =
+        "!git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\	 => \\2/' | sort";
     };
     extraConfig = {
       init.defaultBranch = "main";
@@ -39,8 +41,8 @@
       push.default = "upstream";
     };
     ignores = [
-      "\#*\#"
-      ".\#*"
+      "#*#"
+      ".#*"
       "*.local"
       "TAGS"
       "tags"

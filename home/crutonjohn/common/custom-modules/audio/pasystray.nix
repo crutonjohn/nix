@@ -4,7 +4,9 @@ with lib;
 
 {
   options = {
-    services.pasystray-custom = { enable = mkEnableOption "PulseAudio system tray"; };
+    services.pasystray-custom = {
+      enable = mkEnableOption "PulseAudio system tray";
+    };
   };
 
   config = mkIf config.services.pasystray-custom.enable {

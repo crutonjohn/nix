@@ -1,12 +1,11 @@
 { config, lib, nixpkgs, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ./vm-hook.nix
-      ../../packages/cachix/cachix.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ./vm-hook.nix
+    ../../packages/cachix/cachix.nix
+  ];
 
   # Unfree/Tax
   nixpkgs.config.allowUnfree = true;
@@ -17,12 +16,12 @@
   boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_5_19.override {
     argsOverride = rec {
       src = pkgs.fetchurl {
-            url = "mirror://kernel/linux/kernel/v5.x/linux-${version}.tar.xz";
-            sha256 = "Ts24tZxvbyWNicvyLu3iEOClXAnbiEmI/nBu/i/o8Ug=";
+        url = "mirror://kernel/linux/kernel/v5.x/linux-${version}.tar.xz";
+        sha256 = "Ts24tZxvbyWNicvyLu3iEOClXAnbiEmI/nBu/i/o8Ug=";
       };
       version = "5.19.13";
       modDirVersion = "5.19.13";
-      };
+    };
   });
 
   boot.loader.efi.canTouchEfiVariables = true;
@@ -49,44 +48,45 @@
 
   # Wireguard
   networking.firewall = {
-      allowedUDPPorts = [ 51820 ]; # Clients and peers can use the same port, see listenport
-    };
-    # Enable WireGuard
-   # networking.wireguard.interfaces = {
-   #   # "wg0" is the network interface name. You can name the interface arbitrarily.
-   #   wg0 = {
-   #     # Determines the IP address and subnet of the client's end of the tunnel interface.
-   #     ips = [ "192.168.129.2/32" ];
-   #     listenPort = 51820; # to match firewall allowedUDPPorts (without this wg uses random port numbers)
+    allowedUDPPorts =
+      [ 51820 ]; # Clients and peers can use the same port, see listenport
+  };
+  # Enable WireGuard
+  # networking.wireguard.interfaces = {
+  #   # "wg0" is the network interface name. You can name the interface arbitrarily.
+  #   wg0 = {
+  #     # Determines the IP address and subnet of the client's end of the tunnel interface.
+  #     ips = [ "192.168.129.2/32" ];
+  #     listenPort = 51820; # to match firewall allowedUDPPorts (without this wg uses random port numbers)
 
-   #     # Path to the private key file.
-   #     #
-   #     # Note: The private key can also be included inline via the privateKey option,
-   #     # but this makes the private key world-readable; thus, using privateKeyFile is
-   #     # recommended.
-   #     privateKeyFile = "/home/crutonjohn/.wg/endurance.key";
+  #     # Path to the private key file.
+  #     #
+  #     # Note: The private key can also be included inline via the privateKey option,
+  #     # but this makes the private key world-readable; thus, using privateKeyFile is
+  #     # recommended.
+  #     privateKeyFile = "/home/crutonjohn/.wg/endurance.key";
 
-   #     peers = [
-   #       # For a client configuration, one peer entry for the server will suffice.
+  #     peers = [
+  #       # For a client configuration, one peer entry for the server will suffice.
 
-   #       {
-   #         # Public key of the server (not a file path).
-   #         publicKey = "rrbpE2zNo8L4TnKh7xeF80q4n0GxAvKZmxaHEVcrzXY=";
+  #       {
+  #         # Public key of the server (not a file path).
+  #         publicKey = "rrbpE2zNo8L4TnKh7xeF80q4n0GxAvKZmxaHEVcrzXY=";
 
-   #         # Forward all the traffic via VPN.
-   #         allowedIPs = [ "0.0.0.0/0" ];
-   #         # Or forward only particular subnets
-   #         #allowedIPs = [ "10.100.0.1" "91.108.12.0/22" ];
+  #         # Forward all the traffic via VPN.
+  #         allowedIPs = [ "0.0.0.0/0" ];
+  #         # Or forward only particular subnets
+  #         #allowedIPs = [ "10.100.0.1" "91.108.12.0/22" ];
 
-   #         # Set this to the server IP and port.
-   #         endpoint = "dyn4.crutonjohn.com:51820";
+  #         # Set this to the server IP and port.
+  #         endpoint = "dyn4.crutonjohn.com:51820";
 
-   #         # Send keepalives every 25 seconds. Important to keep NAT tables alive.
-   #         persistentKeepalive = 25;
-   #       }
-   #     ];
-   #   };
-   # };
+  #         # Send keepalives every 25 seconds. Important to keep NAT tables alive.
+  #         persistentKeepalive = 25;
+  #       }
+  #     ];
+  #   };
+  # };
 
   # Time Zone
   time.timeZone = "America/New_York";
@@ -99,21 +99,23 @@
   services.xserver.desktopManager.gnome.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.windowManager.i3.enable = true;
-    # TODO: migrate to i3-gaps
-    # package = "pkgs.i3-gaps";
-    # TODO: migrate to inline i3 config (maybe)
+  # TODO: migrate to i3-gaps
+  # package = "pkgs.i3-gaps";
+  # TODO: migrate to inline i3 config (maybe)
   services.xserver.displayManager.sessionCommands = ''
-    ${pkgs.xorg.xrdb}/bin/xrdb -merge <${pkgs.writeText "Xresources" ''
-      Xcursor.theme: Adwaita
-      Xcursor.size: 32
-      Xft.dpi: 144
-      Xft.autohint: 0
-      Xft.lcdfilter:  lcddefault
-      Xft.hintstyle:  hintfull
-      Xft.hinting: 1
-      Xft.antialias: 1
-      Xft.rgba: rgb
-    ''}
+    ${pkgs.xorg.xrdb}/bin/xrdb -merge <${
+      pkgs.writeText "Xresources" ''
+        Xcursor.theme: Adwaita
+        Xcursor.size: 32
+        Xft.dpi: 144
+        Xft.autohint: 0
+        Xft.lcdfilter:  lcddefault
+        Xft.hintstyle:  hintfull
+        Xft.hinting: 1
+        Xft.antialias: 1
+        Xft.rgba: rgb
+      ''
+    }
   '';
   services.xserver = {
     layout = "us";
@@ -128,16 +130,12 @@
   boot.blacklistedKernelModules = [ "nouveau" "nvidia" ];
   hardware.opengl = {
     enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
+    extraPackages = with pkgs; [ intel-media-driver vaapiVdpau libvdpau-va-gl ];
   };
 
   #Power stuff
   powerManagement.powertop.enable = true;
-  services.logind ={
+  services.logind = {
     lidSwitch = "suspend";
     lidSwitchExternalPower = "lock";
   };

@@ -8,7 +8,7 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
     # TODO: impermanence
     # Nix user repository
-    nur.url = github:nix-community/nur;
+    nur.url = "github:nix-community/nur";
     # Home manager aka dotfiles and packages
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -25,7 +25,8 @@
     };
   };
 
-  outputs = {self, nixpkgs, darwin, home-manager, nur, nixos-hardware, ...}@inputs:
+  outputs =
+    { self, nixpkgs, darwin, home-manager, nur, nixos-hardware, ... }@inputs:
     let
       inherit (nixpkgs.lib) filterAttrs traceVal;
       inherit (builtins) mapAttrs elem;
@@ -34,12 +35,12 @@
       supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
-      homeManagerConfFor = config: { ... }: {
-        nixpkgs.overlays = [ nur.overlay ];
-        imports = [ config ];
-      };
-    in
-    rec {
+      homeManagerConfFor = config:
+        { ... }: {
+          nixpkgs.overlays = [ nur.overlay ];
+          imports = [ config ];
+        };
+    in rec {
 
       legacyPackages = forAllSystems (system:
         import nixpkgs {
@@ -47,13 +48,12 @@
           overlays = with outputs.overlays; [ nur.overlay ];
           # overlays = with outputs.overlays; [ additions wallpapers modifications ];
           config.allowUnfree = true;
-        }
-      );
+        });
 
       # packages = forAllSystems (system:
       #   import ./pkgs { pkgs = legacyPackages.${system}; }
       # );
-      
+
       devShells = forAllSystems (system: {
         default = import ./shell.nix { pkgs = legacyPackages.${system}; };
       });
@@ -69,13 +69,15 @@
         endurance = nixpkgs.lib.nixosSystem {
           pkgs = legacyPackages."x86_64-linux";
           specialArgs = { inherit inputs outputs; };
-          modules = [ 
-            ./hosts/framework 
+          modules = [
+            ./hosts/framework
             nixos-hardware.nixosModules.framework-12th-gen-intel
-            home-manager.nixosModules.home-manager {
+            home-manager.nixosModules.home-manager
+            {
               # home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.crutonjohn = homeManagerConfFor ./home/crutonjohn/endurance;
+              home-manager.users.crutonjohn =
+                homeManagerConfFor ./home/crutonjohn/endurance;
             }
           ];
         };
@@ -83,13 +85,15 @@
         hana = nixpkgs.lib.nixosSystem {
           pkgs = legacyPackages."x86_64-linux";
           specialArgs = { inherit inputs outputs; };
-          modules = [ 
-            ./hosts/framework 
+          modules = [
+            ./hosts/framework
             nixos-hardware.nixosModules.framework-12th-gen-intel
-            home-manager.nixosModules.home-manager {
+            home-manager.nixosModules.home-manager
+            {
               # home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.crutonjohn = homeManagerConfFor ./home/crutonjohn/endurance;
+              home-manager.users.crutonjohn =
+                homeManagerConfFor ./home/crutonjohn/endurance;
             }
           ];
         };
@@ -124,7 +128,8 @@
 
       nixConfig = {
         extra-substituers = [ "https://cache.m7.rs" ];
-        extra-trusted-public-keys = [ "cache.m7.rs:kszZ/NSwE/TjhOcPPQ16IuUiuRSisdiIwhKZCxguaWg=" ];
+        extra-trusted-public-keys =
+          [ "cache.m7.rs:kszZ/NSwE/TjhOcPPQ16IuUiuRSisdiIwhKZCxguaWg=" ];
       };
     };
 }

@@ -1,15 +1,9 @@
-{ config, pkgs, nixpkgs, lib, inputs, ... }:
-{
-  imports =
-    [
-      ../apps/zsh/zsh.nix
-      ../apps/vim/vim.nix
-      ../apps/vscode.nix
-    ];
+{ config, pkgs, nixpkgs, lib, inputs, ... }: {
+  imports = [ ../apps/zsh/zsh.nix ../apps/vim/vim.nix ../apps/vscode.nix ];
   home = {
     stateVersion = "22.11";
     packages = with pkgs; [
-      ( python310.withPackages (ps: with ps; [ pip ansible ]) )
+      (python310.withPackages (ps: with ps; [ pip ansible ]))
       awscli2
       alacritty
       bitwarden
@@ -59,6 +53,7 @@
       wget
       obsidian
       minikube
+      nix-linter
     ];
   };
 
@@ -91,9 +86,7 @@
 
   programs.direnv = {
     enable = true;
-    nix-direnv = {
-      enable = true;
-    };
+    nix-direnv = { enable = true; };
   };
   programs.fzf.enable = true;
   programs.exa = {
@@ -119,7 +112,7 @@
         bold_italic.family = "FiraCode Nerd Font Mono";
         bold_italic.style = "Bold Italic";
       };
-      window.opacity = 0.90;
+      window.opacity = 0.9;
       colors = {
         primary.background = "0x1a1b26";
         primary.foreground = "0xa9b1d6";
@@ -164,7 +157,7 @@
       ];
       scan_timeout = 10;
       battery.display = [{
-            threshold = 15; # display battery information if charge is <= 15%
+        threshold = 15; # display battery information if charge is <= 15%
       }];
       nix_shell = {
         symbol = "nix";
@@ -218,9 +211,7 @@
         show_always = true;
         disabled = false;
       };
-      kubernetes = {
-        disabled = false;
-      };
+      kubernetes = { disabled = false; };
     };
   };
 

@@ -1,5 +1,4 @@
-{ pkgs, inputs, ...}:
-{
+{ pkgs, inputs, ... }: {
 
   imports = [
     ./generic.nix
@@ -29,7 +28,6 @@
     psmisc
     zlib
     dmenu
-    picom
     scrot
     imagemagick
     pywal
@@ -46,24 +44,24 @@
     read-edid
 
     (pkgs.writeScriptBin "webex" ''
-    #!/usr/bin/env bash
-    pkill CiscoCollabHost
-    /opt/Webex/bin/CiscoCollabHost
+      #!/usr/bin/env bash
+      pkill CiscoCollabHost
+      /opt/Webex/bin/CiscoCollabHost
     '')
 
     (pkgs.writeScriptBin "slk" ''
-    #!/usr/bin/env bash
-    /usr/bin/slack > /dev/null 2>&1 &
+      #!/usr/bin/env bash
+      /usr/bin/slack > /dev/null 2>&1 &
     '')
 
     (pkgs.writeScriptBin "1p" ''
-    #!/usr/bin/env bash
-    /home/bjohn/.nix-profile/bin/1password > /dev/null 2>&1 &
+      #!/usr/bin/env bash
+      /home/bjohn/.nix-profile/bin/1password > /dev/null 2>&1 &
     '')
 
     (pkgs.writeScriptBin "eaa" ''
-    #!/usr/bin/env bash
-    /opt/wapp/bin/EAAClient > /dev/null 2>&1 &
+      #!/usr/bin/env bash
+      /opt/wapp/bin/EAAClient > /dev/null 2>&1 &
     '')
 
     (pkgs.writeScriptBin "nrb" ''
@@ -74,9 +72,7 @@
 
   ];
 
-  services.pasystray-custom = {
-    enable = true;
-  };
+  services.pasystray-custom = { enable = true; };
 
   services.dunst = {
     enable = true;
@@ -94,7 +90,9 @@
         horizontal_padding = 8;
         frame_width = 1;
         line_height = 4;
-        format = "<b>%s</b>\n%b";
+        format = ''
+          <b>%s</b>
+          %b'';
         show_age_threshold = 30;
         separator_height = 2;
         separator_color = "frame";

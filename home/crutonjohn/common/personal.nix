@@ -1,5 +1,4 @@
-{ pkgs, inputs, ...}:
-{
+{ pkgs, inputs, ... }: {
 
   imports = [
     ./generic.nix
@@ -21,8 +20,8 @@
     # Custom Scripts #
     ##################
     (pkgs.writeScriptBin "glsteam" ''
-    #!/usr/bin/env bash
-    nix run github:guibou/nixGL#nixGLIntel -- steam > /dev/null 2>&1 &
+      #!/usr/bin/env bash
+      nix run github:guibou/nixGL#nixGLIntel -- steam > /dev/null 2>&1 &
     '')
 
     (pkgs.writeScriptBin "nrb" ''
@@ -49,7 +48,9 @@
         horizontal_padding = 8;
         frame_width = 1;
         line_height = 4;
-        format = "<b>%s</b>\n%b";
+        format = ''
+          <b>%s</b>
+          %b'';
         show_age_threshold = 30;
         separator_height = 2;
         separator_color = "frame";
