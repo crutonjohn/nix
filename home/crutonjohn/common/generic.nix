@@ -9,7 +9,7 @@
   home = {
     stateVersion = "22.11";
     packages = with pkgs; [
-      ( python310.withPackages (ps: with ps; [ pip poetry ansible ]) )
+      ( python310.withPackages (ps: with ps; [ pip ansible ]) )
       awscli2
       alacritty
       bitwarden
@@ -24,7 +24,7 @@
       fluxcd
       ffmpeg
       gawk
-      go-chromecast
+      #go-chromecast
       home-manager
       htop
       jq
