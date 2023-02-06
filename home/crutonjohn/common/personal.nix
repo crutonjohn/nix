@@ -25,6 +25,12 @@
     nix run github:guibou/nixGL#nixGLIntel -- steam > /dev/null 2>&1 &
     '')
 
+    (pkgs.writeScriptBin "nrb" ''
+    #!/usr/bin/env bash
+    cd $HOME/Documents/nixos
+    sudo nixos-rebuild switch --flake '.#endurance'
+    '')
+
   ];
 
   services.dunst = {

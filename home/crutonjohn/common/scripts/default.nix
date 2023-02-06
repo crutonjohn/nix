@@ -37,12 +37,6 @@
     sudo nixos-rebuild switch --upgrade --flake '.#endurance'
     '')
 
-    (pkgs.writeScriptBin "nrb" ''
-    #!/usr/bin/env bash
-    cd $HOME/Documents/nixos
-    sudo nixos-rebuild switch --flake '.#endurance'
-    '')
-
     (pkgs.writeScriptBin "launchrofi" ''
     #!/usr/bin/env bash
     rofi -no-lazy-grab -show combi -combi-modes "run,drun" -modes combi -theme ~/.config/polybar/material/scripts/rofi/launcher.rasi

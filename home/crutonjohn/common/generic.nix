@@ -25,6 +25,7 @@
       ffmpeg
       gawk
       #go-chromecast
+      go
       home-manager
       htop
       jq
