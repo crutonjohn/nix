@@ -26,10 +26,16 @@
       nix run github:guibou/nixGL#nixGLIntel -- steam > /dev/null 2>&1 &
     '')
 
+    (pkgs.writeScriptBin "nrbu" ''
+      #!/usr/bin/env bash
+      cd $HOME/Documents/nixos
+      sudo nixos-rebuild switch --upgrade --flake '.#endurance'
+    '')
+
     (pkgs.writeScriptBin "nrb" ''
-    #!/usr/bin/env bash
-    cd $HOME/Documents/nixos
-    sudo nixos-rebuild switch --flake '.#endurance'
+      #!/usr/bin/env bash
+      cd $HOME/Documents/nixos
+      sudo nixos-rebuild switch --flake '.#endurance'
     '')
 
   ];
