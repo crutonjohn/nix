@@ -14,10 +14,10 @@
     _1password
     _1password-gui
     blueman
-    bundix
     i3status-rust
     networkmanager_dmenu
     comma
+    cfssl
     feh
     rofi
     pasystray
@@ -42,6 +42,7 @@
     pulseaudio
     gdk-pixbuf
     read-edid
+    mkcert
 
     (pkgs.writeScriptBin "webex" ''
       #!/usr/bin/env bash

@@ -58,6 +58,33 @@
           DP-4.enable = false;
         };
       };
+      "docked-DP4" = {
+#        hooks = {
+#          preswitch = {
+#            "block" = "grep -q open /proc/acpi/button/lid/LID0/state";
+#            "notify-i3" = "${pkgs.i3}/bin/i3-msg restart";
+#          };
+#        };
+        fingerprint = {
+          DP-4-3 = "00ffffffffffff004c2d537000000000011e0104b57722783ac725b14b46a8260e5054bfef80714f810081c08180a9c0b3009500d1c0565e00a0a0a0295030203500a9504100001a000000fd00324b1e5a19000a202020202020000000fc004c433439473935540a20202020000000ff004831414b3530303030300a2020014b020313f146905a591f04132309070783010000023a801871382d40582c4500a9504100001e584d00b8a1381440f82c4500a9504100001e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000024";
+        };
+        config = {
+          DP-4-3 = {
+            enable = true;
+            crtc = 0;
+            primary = true;
+            position = "0x0";
+            mode = "5120x1440_59.99";
+            rate = "59.94";
+            dpi = 108;
+          };
+          DP-1.enable = false;
+          HDMI-1.enable = false;
+          DP-3.enable = false;
+          eDP-1.enable = false;
+          DP-4.enable = false;
+        };
+      };
       "docked-DP3" = {
         #        hooks = {
         #          preswitch = {
