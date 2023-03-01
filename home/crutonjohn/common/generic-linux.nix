@@ -1,6 +1,10 @@
 { pkgs, inputs, ... }: {
 
-  imports = [ ./scripts ];
+  imports = [
+    ./scripts
+    ./custom-modules/desktop/picom.nix
+    ./custom-modules/audio/pasystray.nix
+  ];
 
   # Unfree/Tax
   nixpkgs.config.allowUnfree = true;
@@ -36,6 +40,11 @@
     neofetch
     catimg
   ];
+
+  #########
+  # Audio #
+  #########
+  services.pasystray-custom.enable = true;
 
   # Syncthing
   services.syncthing = {

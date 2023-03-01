@@ -23,10 +23,14 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # TODO: figure out precommit stuff
+    # https://github.com/cachix/pre-commit-hooks.nix#nix-flakes-support
+    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs =
-    { self, nixpkgs, darwin, home-manager, nur, nixos-hardware, ... }@inputs:
+    { self, nixpkgs, darwin, home-manager, nur, nixos-hardware, pre-commit-hooks, flake-utils, ... }@inputs:
     let
       inherit (nixpkgs.lib) filterAttrs traceVal;
       inherit (builtins) mapAttrs elem;

@@ -4,7 +4,6 @@
     ./generic.nix
     ./generic-linux.nix
     ./git.nix
-    ./custom-modules/desktop/picom.nix
   ];
 
   # Unfree/Tax
@@ -15,6 +14,9 @@
     signal-desktop
     steam
     discord
+    zoom-us
+    cura
+    docker-compose
 
     ##################
     # Custom Scripts #

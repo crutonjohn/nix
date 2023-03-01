@@ -12,6 +12,8 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  nix.settings.trusted-users = [ "root" "crutonjohn" ];
+
   # GRUB/Plymouth
   #  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_5_19.override {
   #    argsOverride = rec {
@@ -226,15 +228,16 @@
   }];
 
   # Sound Pipewire
-  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.enable = false;
+  sound.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
-    enable = false;
+    enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
   };
 
   # Blueman

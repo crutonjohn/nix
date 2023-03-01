@@ -53,7 +53,6 @@
       wget
       obsidian
       minikube
-      nix-linter
     ];
   };
 
@@ -96,6 +95,17 @@
   programs.bat = {
     enable = true;
     config.theme = "ansi-dark";
+  };
+
+  programs.tmux = {
+    enable = true;
+    clock24 = true;
+    keyMode = "vi";
+    newSession = true;
+    shortcut = "a";
+    shell = "${pkgs.zsh}/bin/zsh";
+    terminal = "screen-256color";
+    tmuxp.enable = true;
   };
 
   programs.alacritty = {
