@@ -89,7 +89,7 @@ both system and Home Manager configuration).
   - PR submitted: https://github.com/NixOS/nixpkgs/pull/193995
 - nix-ify the k3s cluster
 - edit $PATH for pkgs.fish to enable krew plugins
- - `set -gx PATH $PATH $HOME/.krew/bin`
+  - `set -gx PATH $PATH $HOME/.krew/bin`
 
 [1]: https://github.com/gytis-ivaskevicius/flake-utils-plus/
 [2]: https://github.com/Mic92/sops-nix
