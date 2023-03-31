@@ -1,5 +1,9 @@
-{ config, pkgs, nixpkgs, lib, inputs, ... }: {
-  imports = [ ../apps/zsh/zsh.nix ../apps/vim/vim.nix ../apps/vscode.nix ];
+{ pkgs, nixpkgs, inputs, lib, ... }:
+
+let
+  inherit (pkgs) neovim ripgrep;
+in
+{
   home = {
     stateVersion = "22.11";
     packages = with pkgs; [
@@ -8,8 +12,6 @@
       alacritty
       bitwarden
       bitwarden-cli
-      cachix
-      chezmoi
       containerd
       commitizen
       cz-cli
@@ -18,7 +20,6 @@
       fluxcd
       ffmpeg
       gawk
-      go-chromecast
       go
       home-manager
       htop
@@ -83,6 +84,12 @@
     ];
   };
 
+  programs.fish = {
+    enable = true;
+    functions = {
+    };
+  };
+
   programs.direnv = {
     enable = true;
     nix-direnv = { enable = true; };
@@ -103,7 +110,7 @@
     keyMode = "vi";
     newSession = true;
     shortcut = "a";
-    shell = "${pkgs.fish}/bin/fish";
+    shell = "${pkgs.zsh}/bin/zsh";
     terminal = "screen-256color";
     tmuxp.enable = true;
   };
@@ -152,7 +159,7 @@
 
   programs.starship = {
     enable = true;
-    enableZshIntegration = true;
+    enableFishIntegration = true;
     settings = {
       add_newline = true;
       format = lib.concatStrings [
@@ -225,11 +232,5 @@
     };
   };
 
-  xdg.configFile."oh-my-zsh/plugins/nix-shell".source = pkgs.fetchFromGitHub {
-    owner = "chisui";
-    repo = "zsh-nix-shell";
-    rev = "f8574f27e1d7772629c9509b2116d504798fe30a";
-    sha256 = "0svskd09vvbzqk2ziw6iaz1md25xrva6s6dhjfb471nqb13brmjq";
-  };
 }
 

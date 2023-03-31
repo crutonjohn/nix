@@ -1,0 +1,42 @@
+{
+    "border": "pixel",
+    "current_border_width": 3,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 705,
+       "width": 1717,
+       "x": 0,
+       "y": 0
+    },
+    "name": "i3-save-tree /home/crutonjohn/.config/i3",
+    "percent": 0.283333333333333,
+    "swallows": [
+       {
+         "class": "^alacritty$",
+         "instance": "^alacritty$",
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "pixel",
+    "current_border_width": 3,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1415,
+       "width": 1717,
+       "x": 0,
+       "y": 0
+    },
+    "name": "Mozilla Firefox",
+    "percent": 0.583333333333333,
+    "swallows": [
+       {
+         "class": "^firefox$",
+         "title": "^Mozilla\\ Firefox$",
+       }
+    ],
+    "type": "con"
+}
+
