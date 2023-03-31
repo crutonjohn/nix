@@ -18,7 +18,7 @@
   };
 
   users.defaultUserShell = pkgs.fish;
-  users.mutableUsers = false;
+  users.mutableUsers = true;
 
   zramSwap = {
     enable = false;
