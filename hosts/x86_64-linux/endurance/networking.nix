@@ -18,4 +18,8 @@
     allowedTCPPorts = [ 53 ];
     allowedUDPPorts = [ 53 51830 ];
   };
+  # tailscale daemon
+  services.tailscale = {
+    enable = true;
+  };
 }

@@ -43,6 +43,7 @@
     sonixd
     neofetch
     catimg
+    tailscale
   ];
 
   services.dunst = {
