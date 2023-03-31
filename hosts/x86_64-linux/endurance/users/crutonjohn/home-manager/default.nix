@@ -6,6 +6,7 @@
     ./scripts.nix
     ./custom-modules/desktop/picom.nix
     ./custom-modules/audio/pasystray.nix
+    ./custom-modules/tools/kns.nix
   ];
 
   home.packages = with pkgs; [
