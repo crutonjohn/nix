@@ -66,6 +66,12 @@ Current look for framework laptop:
 * `common/users/crutonjohn/configuration.nix`
 * `common/users/crutonjohn/home-manager`
 
+#### Example bootrapping
+
+```bash
+sudo nixos-rebuild switch --flake github:crutonjohn/nixos#endurance
+```
+
 ## Extra Packages
 
 My configs follow the `nixos-22.11` channel on both Linux and Darwin.  A GitHub action updates
@@ -75,7 +81,7 @@ both system and Home Manager configuration).
 * **flakePkgs**: This is the contents of the flake’s `packages` attribute.
 * **unstablePkgs**: This tracks `nixos-unstable`.
 
-# Attribution
+## Attribution
 * Heavily inspired by and borrowed from [reckenrode's](https://github.com/reckenrode) very well organized [nixos-configs](https://github.com/reckenrode/nixos-configs)
 
 #TODO
