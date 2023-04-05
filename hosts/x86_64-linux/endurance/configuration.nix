@@ -8,7 +8,8 @@
     ./loader.nix
     ./networking.nix
     ./virtualization.nix
-    ./x.nix
+    ./x11.nix
+    #./wayland
   ];
 
   time.timeZone = "America/New_York";
