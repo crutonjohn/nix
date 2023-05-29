@@ -1,77 +1,87 @@
 {
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
-    # Nix hardware tweaks
+  description = "My NixOS configuration";
+
+  nixConfig = {
+    extra-substituters = [ "https://cache.m7.rs" ];
+    extra-trusted-public-keys = [ "cache.m7.rs:kszZ/NSwE/TjhOcPPQ16IuUiuRSisdiIwhKZCxguaWg=" ];
+  };
+
+  inputs = rec {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.11";
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    # TODO: impermanence
-    # Nix user repository
     nur.url = "github:nix-community/nur";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # macbook stuff
-    darwin = {
-      url = "github:lnl7/nix-darwin/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # FIXME: switch back to a versioned branch once the fix for building on recent nix-darwin
-    # lands there.
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
+
+    # impermanence.url = "github:nix-community/impermanence";
+    nix-colors.url = "github:misterio77/nix-colors";
+    # sops-nix.url = "github:mic92/sops-nix";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-22.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
 
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    hyprland.url = "github:hyprwm/Hyprland";
+    hypr-contrib.url = "github:hyprwm/contrib";
     hyprpicker.url = "github:hyprwm/hyprpicker";
+
+    firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
 
   };
 
-  outputs = inputs@{ self, utils, nixpkgs, nixpkgs-unstable, firefox-addons, darwin, home-manager, nixos-hardware, nur, ... }:
+  outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs:
     let
-      inherit (nixpkgs.lib) recursiveUpdate;
+      inherit (self) outputs;
+      forEachSystem = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ];
+      forEachPkgs = f: forEachSystem (sys: f nixpkgs.legacyPackages.${sys});
 
-      lib = import ./lib;
-      overlays = import ./overlays { inherit lib; };
-      packages = import ./pkgs;
+      mkNixos = modules: nixpkgs.lib.nixosSystem {
+        inherit modules;
+        specialArgs = { inherit inputs outputs; };
+      };
+      mkHome = modules: pkgs: home-manager.lib.homeManagerConfiguration {
+        inherit modules pkgs;
+        extraSpecialArgs = { inherit inputs outputs; };
+      };
     in
-    utils.lib.mkFlake rec {
-      inherit self inputs lib;
+    {
+      # nixosModules = import ./modules/nixos;
+      # homeManagerModules = import ./modules/home-manager;
+      # templates = import ./templates;
 
-      channelsConfig.allowUnfree = true;
+      # overlays = import ./overlays { inherit inputs outputs; };
 
-      sharedOverlays = [
-        overlays
-        nur.overlay
-      ];
+      packages = forEachPkgs (pkgs: (import ./pkgs { inherit pkgs; }));
+      # devShells = forEachPkgs (pkgs: import ./shell.nix { inherit pkgs; });
+      formatter = forEachPkgs (pkgs: pkgs.nixpkgs-fmt);
 
-      hostDefaults.modules = [
-        nur.nixosModules.nur
-        home-manager.nixosModules.home-manager
-        ./common/configuration.nix
-      ];
-
-      hosts = lib.mkHosts {
-        inherit self;
-        hostsPath = ./hosts;
+      nixosConfigurations = {
+        # Laptops
+        endurance = mkNixos [ ./hosts/endurance ];
+        wayward = mkNixos [ 
+          ./hosts/wayward
+          hyprland.nixosModules.default
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users = {
+              crutonjohn = import ./home/crutonjohn/wayward;
+            };
+            home-manager.extraSpecialArgs = {};
+          }
+        ];
       };
 
-      outputsBuilder = channels: {
-        packages =
-          let
-            inherit (channels.nixpkgs.stdenv.hostPlatform) system;
-          in
-          packages { inherit lib channels; } // {
-          };
+      homeConfigurations = {
+        # Laptops
+        "crutonjohn@endurance" = mkHome [
+          hyprland.homeManagerModules.default
+          ./home/crutonjohn/endurance 
+        ] nixpkgs.legacyPackages."x86_64-linux";
+        "crutonjohn@wayward" = mkHome [ ./home/crutonjohn/wayward ] nixpkgs.legacyPackages."x86_64-linux";
       };
     };
 }
