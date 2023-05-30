@@ -12,6 +12,7 @@
   boot.kernelParams = [
     "quiet"
     "splash"
+    "i915.force_probe=4626"
   ];
   boot.extraModulePackages = [ ];
 

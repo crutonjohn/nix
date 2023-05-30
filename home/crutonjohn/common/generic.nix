@@ -1,10 +1,12 @@
 { config, pkgs, nixpkgs, lib, inputs, ... }: {
-  imports = [ 
+  imports = [
     ../apps/fish/fish.nix
     ../apps/vim/vim.nix
-    ../apps/vscode.nix 
+    ../apps/vscode.nix
     ./firefox.nix
   ];
+  programs.home-manager.enable = true;
+
   home = {
     stateVersion = "22.11";
     packages = with pkgs; [
@@ -15,7 +17,6 @@
       bitwarden-cli
       cachix
       containerd
-      commitizen
       cz-cli
       dig
       file

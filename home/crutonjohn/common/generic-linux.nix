@@ -32,6 +32,4 @@
     tray = { enable = true; };
   };
 
-  home.file.".config/wall".source = ./bg;
-
 }

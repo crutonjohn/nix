@@ -1,5 +1,5 @@
-{ config, lib, pkgs, outputs, ... }: {
-  imports = [ 
+{ config, lib, pkgs, inputs, outputs, ... }: {
+  imports = [
     ../common/personal.nix
     ./hyprland.nix
     ./git.nix
@@ -34,6 +34,11 @@
     neofetch
     catimg
     tailscale
+    swaybg
+    waybar
+    sway-contrib.grimshot
+    inputs.hypr-contrib.packages.${pkgs.system}.grimblast
+    inputs.hyprpicker.packages.${pkgs.system}.hyprpicker
   ];
 
   services.dunst = {

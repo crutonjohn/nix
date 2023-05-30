@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  networking.hostName = "endurance";
+  networking.hostName = "wayward";
   networking.networkmanager.enable = true;
   networking.wireless.enable = false;
   networking.firewall = {

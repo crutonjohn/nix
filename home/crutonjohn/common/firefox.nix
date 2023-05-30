@@ -28,14 +28,14 @@ in
         "signon.rememberSignons" = false;
         "privacy.trackingprotection.enabled" = true;
       };
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        onepassword-password-manager
+        bitwarden
+        ublock-origin
+        darkreader
+      ];
     };
-    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      onepassword-password-manager
-      bitwarden
-      ublock-origin
-      darkreader
-    ];
-    
+
   };
 
   home = {

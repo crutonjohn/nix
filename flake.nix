@@ -1,87 +1,78 @@
 {
-  description = "My NixOS configuration";
+  description = "A (not so) Good Flake";
 
   nixConfig = {
     extra-substituters = [ "https://cache.m7.rs" ];
     extra-trusted-public-keys = [ "cache.m7.rs:kszZ/NSwE/TjhOcPPQ16IuUiuRSisdiIwhKZCxguaWg=" ];
   };
 
-  inputs = rec {
+  inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.11";
-    nixos-hardware.url = "github:nixos/nixos-hardware";
-    nur.url = "github:nix-community/nur";
 
-    # impermanence.url = "github:nix-community/impermanence";
-    nix-colors.url = "github:misterio77/nix-colors";
-    # sops-nix.url = "github:mic92/sops-nix";
-
-    home-manager = {
+    home = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+
+    nur.url = "github:nix-community/nur";
+
+    picom.url = "github:Arian8j2/picom-jonaburg-fix";
+    picom.flake = false;
+
+    devenv.url = "github:cachix/devenv/latest";
 
     hyprland.url = "github:hyprwm/Hyprland";
     hypr-contrib.url = "github:hyprwm/contrib";
+    hypr-contrib.inputs.nixpkgs.follows = "nixpkgs";
     hyprpicker.url = "github:hyprwm/hyprpicker";
 
-    firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+    nix-index-database.url = "github:Mic92/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixGL.url = "github:guibou/nixGL";
+    nixGL.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs:
+  outputs = { self, nixpkgs, home, hyprland, nix-index-database, nixGL, nur, ... }@inputs:
     let
-      inherit (self) outputs;
-      forEachSystem = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ];
-      forEachPkgs = f: forEachSystem (sys: f nixpkgs.legacyPackages.${sys});
+      overlays = ({ pkgs, ... }: {
+        nixpkgs.overlays = [
+          nixGL.overlay
+          nur.overlay
+        ];
+      });
 
-      mkNixos = modules: nixpkgs.lib.nixosSystem {
-        inherit modules;
-        specialArgs = { inherit inputs outputs; };
-      };
-      mkHome = modules: pkgs: home-manager.lib.homeManagerConfiguration {
-        inherit modules pkgs;
-        extraSpecialArgs = { inherit inputs outputs; };
+      mkMachine = name: system: nixpkgs.lib.nixosSystem {
+        inherit system;
+
+        modules = [
+          overlays
+          ./hosts/${name}
+
+          home.nixosModules.home-manager
+          {
+            home-manager.users.crutonjohn = ./home/crutonjohn/${name}/default.nix;
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+              hostname = name;
+            };
+            home-manager.sharedModules = [ overlays ];
+          }
+        ];
+
+        specialArgs = {
+          inherit inputs;
+          hostname = name;
+        };
       };
     in
     {
-      # nixosModules = import ./modules/nixos;
-      # homeManagerModules = import ./modules/home-manager;
-      # templates = import ./templates;
-
-      # overlays = import ./overlays { inherit inputs outputs; };
-
-      packages = forEachPkgs (pkgs: (import ./pkgs { inherit pkgs; }));
-      # devShells = forEachPkgs (pkgs: import ./shell.nix { inherit pkgs; });
-      formatter = forEachPkgs (pkgs: pkgs.nixpkgs-fmt);
-
       nixosConfigurations = {
-        # Laptops
-        endurance = mkNixos [ ./hosts/endurance ];
-        wayward = mkNixos [ 
-          ./hosts/wayward
-          hyprland.nixosModules.default
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users = {
-              crutonjohn = import ./home/crutonjohn/wayward;
-            };
-            home-manager.extraSpecialArgs = {};
-          }
-        ];
-      };
-
-      homeConfigurations = {
-        # Laptops
-        "crutonjohn@endurance" = mkHome [
-          hyprland.homeManagerModules.default
-          ./home/crutonjohn/endurance 
-        ] nixpkgs.legacyPackages."x86_64-linux";
-        "crutonjohn@wayward" = mkHome [ ./home/crutonjohn/wayward ] nixpkgs.legacyPackages."x86_64-linux";
+        wayward = mkMachine "wayward" "x86_64-linux";
+        endurance = mkMachine "endurance" "x86_64-linux";
       };
     };
 }

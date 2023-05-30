@@ -25,8 +25,6 @@
     })
   ];
 
-  programs.hyprland.enable = true;
-
   environment = {
     systemPackages = with pkgs; [
       inputs.hypr-contrib.packages.${pkgs.system}.grimblast
@@ -34,6 +32,7 @@
       libnotify
       wl-clipboard
       wlr-randr
+      wlrctl
       wayland
       wayland-scanner
       wayland-utils
@@ -55,16 +54,16 @@
       sshpass
       lxappearance
       imagemagick
-      pkgs.sway-contrib.grimshot
-      flameshot
       grim
-      waybar
+      toybox
+      rocgdb
     ];
   };
 
   services.xserver = {
     xkbOptions = "caps:escape";
   };
+
   console.useXkbConfig = true;
 
   services = {
