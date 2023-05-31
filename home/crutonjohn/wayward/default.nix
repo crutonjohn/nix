@@ -3,6 +3,7 @@
     ../common/personal.nix
     ./hyprland.nix
     ./git.nix
+    ./scripts.nix
   ];
 
   home.username = "crutonjohn";
@@ -36,6 +37,7 @@
     tailscale
     swaybg
     waybar
+    hyprpaper
     sway-contrib.grimshot
     inputs.hypr-contrib.packages.${pkgs.system}.grimblast
     inputs.hyprpicker.packages.${pkgs.system}.hyprpicker
@@ -105,6 +107,6 @@
 
   #Desktop Experience
 
-  home.file.".config/wall".source = ./bg;
+  home.file.".config/wall.jpg".source = ./bg;
 
 }

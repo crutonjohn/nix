@@ -22,15 +22,23 @@
       sudo nixos-rebuild switch --flake '.#wayward'
     '')
 
-    (pkgs.writeScriptBin "launchpolybar" ''
+    (pkgs.writeScriptBin "wofi-powermenu" ''
       #!/usr/bin/env bash
-      POLYBAR_DIR=$HOME/.config/polybar
-      $POLYBAR_DIR/material/launch.sh
-    '')
 
-    (pkgs.writeScriptBin "launchrofi" ''
-      #!/usr/bin/env bash
-      rofi -no-lazy-grab -show combi -combi-modes "run,drun" -modes combi -theme ~/.config/polybar/material/scripts/rofi/launcher.rasi
+      entries="⇠ Logout\n⏾ Suspend\n⭮ Reboot\n⏻ Shutdown"
+
+      selected=$(echo -e $entries|wofi --width 250 --height 210 --dmenu --cache-file /dev/null | awk '{print tolower($2)}')
+
+      case $selected in
+	logout)
+	  swaymsg exit;;
+	suspend)
+	  exec systemctl suspend;;
+	reboot)
+	  exec systemctl reboot;;
+	shutdown)
+	  exec systemctl poweroff -i;;
+      esac
     '')
 
   ];

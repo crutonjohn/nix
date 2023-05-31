@@ -20,7 +20,7 @@ in
     };
     style = ''
       * {
-        font-family: monospace;
+        font-family: FiraCode Nerd Font Mono;
       }
       window {
         background-color: #7c818c;
@@ -54,7 +54,7 @@ in
       text = ''
         # $scripts=$HOME/.config/hypr/scripts
 
-        monitor=,preferred,auto,1
+        monitor=,preferred,auto,1.5
         # monitor=HDMI-A-1, 1920x1080, 0x0, 1
         # monitor=eDP-1, 1920x1080, 1920x0, 1
 
@@ -73,7 +73,10 @@ in
           numlock_by_default = true
 
           touchpad {
-          natural_scroll = yes
+          disable_while_typing=1
+          natural_scroll=1
+          clickfinger_behavior=1
+          tap-to-click=0
           }
 
           sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
@@ -82,7 +85,7 @@ in
         general {
           gaps_in = 3
           gaps_out = 5
-          border_size = 3
+          border_size = 2
           col.active_border = rgb(ffc0cb)
           col.inactive_border = rgba(595959aa)
 
@@ -168,9 +171,11 @@ in
         }
 
         bind = SUPER,RETURN,exec,alacritty
+        bind = SUPER,SPACE,exec,wofi -S drun
         bind = SUPER_SHIFT,Return,exec,alacritty --class="termfloat"
-        bind = SUPER_SHIFT,P,killactive,
-        bind = SUPER_SHIFT,Q,exit,
+        bind = SUPER_SHIFT,R,exec,hyprctl reload && pkill -l USR2 waybar
+        bind = SUPER_SHIFT,Escape,exit,
+        bind = SUPER_SHIFT,Q,killactive,
         bind = SUPER_SHIFT,Space,togglefloating,
         bind = SUPER,F,fullscreen
         bind = SUPER,Y,pin
@@ -179,7 +184,7 @@ in
         # Toggle grouped layout #
         #-----------------------#
         bind = SUPER, K, togglegroup,
-        bind = SUPER, Tab, changegroupactive, f
+        bind = SUPER, Tab, cyclenext,
 
         #------------#
         # change gap #
@@ -295,7 +300,7 @@ in
         #---------------#
         # waybar toggle #
         # --------------#
-        bind=SUPER,O,exec,killall -SIGUSR1 .waybar-wrapped
+        bind=SUPER,O,exec,pkill -l USR1 waybar
 
         #---------------#
         # resize window #
@@ -325,10 +330,11 @@ in
         bindm = SUPER, mouse:272, movewindow
         bindm = SUPER, mouse:273, resizewindow
 
-        #-----------------------#
-        # wall(by swww service) #
-        #-----------------------#
-        #exec-once = swww-daemon && default_wall
+        #------#
+        # wall #
+        #------#
+        exec-once = hyprpaper &
+        exec-once = hyprctl hyprpaper wallpaper "eDP-1,~/.config/wall"
 
         #------------#
         # auto start #
@@ -373,6 +379,16 @@ in
         windowrule=move 25%-,ncmpcpp
         windowrule=size 960 540,ncmpcpp
         windowrule=noblur,^(firefox)$
+      '';
+    };
+    hyprpaper = {
+      enable = true;
+      target = ".config/hypr/hyprpaper.conf";
+      text = ''
+        preload = ~/.config/wall.jpg
+        # .. more preloads
+        #set the default wallpaper(s) seen on inital workspace(s) --depending on the number of monitors used
+        wallpaper = eDP-1,~/.config/wall.jpg
       '';
     };
   };

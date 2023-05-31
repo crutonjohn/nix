@@ -18,12 +18,13 @@
     psmisc
     zlib
     dmenu
-    scrot
     imagemagick
     libnotify
     sonixd
     neofetch
     catimg
+    font-manager
+    unixtools.procps
   ];
 
   # Syncthing
