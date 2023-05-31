@@ -1,77 +1,78 @@
 {
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
-    # Nix hardware tweaks
-    nixos-hardware.url = "github:nixos/nixos-hardware";
-    # TODO: impermanence
-    # Nix user repository
-    nur.url = "github:nix-community/nur";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # macbook stuff
-    darwin = {
-      url = "github:lnl7/nix-darwin/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # FIXME: switch back to a versioned branch once the fix for building on recent nix-darwin
-    # lands there.
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
+  description = "A (not so) Good Flake";
 
-    home-manager = {
-      url = "github:nix-community/home-manager/release-22.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    hyprpicker.url = "github:hyprwm/hyprpicker";
-
+  nixConfig = {
+    extra-substituters = [ "https://cache.m7.rs" ];
+    extra-trusted-public-keys = [ "cache.m7.rs:kszZ/NSwE/TjhOcPPQ16IuUiuRSisdiIwhKZCxguaWg=" ];
   };
 
-  outputs = inputs@{ self, utils, nixpkgs, nixpkgs-unstable, firefox-addons, darwin, home-manager, nixos-hardware, nur, ... }:
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.11";
+
+    home = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+
+    nur.url = "github:nix-community/nur";
+
+    picom.url = "github:Arian8j2/picom-jonaburg-fix";
+    picom.flake = false;
+
+    devenv.url = "github:cachix/devenv/latest";
+
+    hyprland.url = "github:hyprwm/Hyprland";
+    hypr-contrib.url = "github:hyprwm/contrib";
+    hypr-contrib.inputs.nixpkgs.follows = "nixpkgs";
+    hyprpicker.url = "github:hyprwm/hyprpicker";
+
+    nix-index-database.url = "github:Mic92/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixGL.url = "github:guibou/nixGL";
+    nixGL.inputs.nixpkgs.follows = "nixpkgs";
+  };
+
+  outputs = { self, nixpkgs, home, hyprland, nix-index-database, nixGL, nur, ... }@inputs:
     let
-      inherit (nixpkgs.lib) recursiveUpdate;
+      overlays = ({ pkgs, ... }: {
+        nixpkgs.overlays = [
+          nixGL.overlay
+          nur.overlay
+        ];
+      });
 
-      lib = import ./lib;
-      overlays = import ./overlays { inherit lib; };
-      packages = import ./pkgs;
-    in
-    utils.lib.mkFlake rec {
-      inherit self inputs lib;
+      mkMachine = name: system: nixpkgs.lib.nixosSystem {
+        inherit system;
 
-      channelsConfig.allowUnfree = true;
+        modules = [
+          overlays
+          ./hosts/${name}
 
-      sharedOverlays = [
-        overlays
-        nur.overlay
-      ];
+          home.nixosModules.home-manager
+          {
+            home-manager.users.crutonjohn = ./home/crutonjohn/${name}/default.nix;
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+              hostname = name;
+            };
+            home-manager.sharedModules = [ overlays ];
+          }
+        ];
 
-      hostDefaults.modules = [
-        nur.nixosModules.nur
-        home-manager.nixosModules.home-manager
-        ./common/configuration.nix
-      ];
-
-      hosts = lib.mkHosts {
-        inherit self;
-        hostsPath = ./hosts;
+        specialArgs = {
+          inherit inputs;
+          hostname = name;
+        };
       };
-
-      outputsBuilder = channels: {
-        packages =
-          let
-            inherit (channels.nixpkgs.stdenv.hostPlatform) system;
-          in
-          packages { inherit lib channels; } // {
-          };
+    in
+    {
+      nixosConfigurations = {
+        wayward = mkMachine "wayward" "x86_64-linux";
+        endurance = mkMachine "endurance" "x86_64-linux";
       };
     };
 }

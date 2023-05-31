@@ -1,0 +1,23 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "pixel",
+    "current_border_width": 6,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 2399,
+       "width": 3839,
+       "x": 0,
+       "y": 42
+    },
+    "name": "VSCodium",
+    "percent": 1,
+    "swallows": [
+       {
+       // "class": "^VSCodium$",
+       // "instance": "^vscodium$",
+       // "window_role": "^browser\\-window$"
+       }
+    ],
+    "type": "con"
+}
+
