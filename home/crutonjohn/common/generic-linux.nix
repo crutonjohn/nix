@@ -25,6 +25,7 @@
     catimg
     font-manager
     unixtools.procps
+    pamixer
   ];
 
   # Syncthing

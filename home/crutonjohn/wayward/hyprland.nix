@@ -279,7 +279,7 @@ in
         #------------------------#
         bind=SUPER,B,exec,firefox
         bind=SUPER SHIFT,X,exec,myswaylock
-        bind=,Print,exec,grimblast --notify --cursor  copysave area ~/Pictures/$(date "+%Y-%m-%d"T"%H:%M:%S_no_watermark").png
+        bind=,Print,exec,grimblast --notify --cursor  copysave screen ~/Pictures/$(date "+%Y-%m-%d"T"%H:%M:%S_no_watermark").png
         bind=SUPER,bracketright,exec, grimblast --notify --cursor  copy area
         bind=SUPER,A,exec,grimblast_watermark
         bind=SUPER:,Super_L,exec, bash ~/.config/rofi/powermenu.sh
