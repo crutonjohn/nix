@@ -214,7 +214,7 @@
         "type": "github"
       }
     },
-    "hyprpicker": {
+    "hyprlang": {
       "inputs": {
         "nixpkgs": "nixpkgs_4"
       },
@@ -586,6 +586,7 @@
           "hyprland",
           "hyprland-protocols"
         ],
+        "hyprlang": "hyprlang",
         "nixpkgs": [
           "hyprland",
           "nixpkgs"
