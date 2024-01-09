@@ -2,12 +2,6 @@
 
 {
 
-  # i18n.inputMethod = {
-  #   enabled = "fcitx5";
-  #   fcitx5.addons = with pkgs; [ fcitx5-rime fcitx5-table-extra ];
-  #   # fcitx5-pinyin-moegirl fcitx5-pinyin-zhwiki
-  # };
-
   nixpkgs.overlays = [
     (final: prev: {
       waybar =
@@ -30,6 +24,7 @@
       inputs.hypr-contrib.packages.${pkgs.system}.grimblast
       inputs.hyprpicker.packages.${pkgs.system}.hyprpicker
       libnotify
+      libinput
       wl-clipboard
       wlr-randr
       wlrctl
@@ -42,6 +37,7 @@
       glfw-wayland
       xwayland
       pkgs.qt6.qtwayland
+      pkgs.qt5.qtwayland
       cinnamon.nemo
       networkmanagerapplet
       wev
@@ -56,7 +52,8 @@
       imagemagick
       grim
       toybox
-      rocgdb
+      rocmPackages.rocgdb
+      wireshark
     ];
   };
 

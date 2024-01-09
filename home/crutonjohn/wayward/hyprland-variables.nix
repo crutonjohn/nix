@@ -34,6 +34,7 @@
       "$HOME/.npm-global/bin"
       "$HOME/.local/bin"
       "$HOME/go/bin"
+      "$HOME/.krew/bin"
     ];
   };
 }
