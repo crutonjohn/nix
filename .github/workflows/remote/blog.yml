@@ -1,0 +1,11 @@
+---
+name: "Image: Rebuild"
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "apps/**"
+      - "!apps/**/metadata.json"
+      - "!apps/**/README.md"

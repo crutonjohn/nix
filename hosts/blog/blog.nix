@@ -1,4 +1,4 @@
-{ name, nodes, pkgs, lib, ... }: {
+{ name, nodes, pkgs, lib, inputs, ... }: {
 
 services.nginx = {
   enable = true;
@@ -17,7 +17,7 @@ services.nginx.virtualHosts = {
   "baremetalblog.com" = {
     useACMEHost = "baremetalblog.com";
     forceSSL = true;
-    root = "/var/www/blog";
+    root = "${inputs.hugoBlog.packages.x86_64-linux.default}";
     locations."/" = {
       tryFiles = "$uri $uri/ =404";
       index = "index.html";
@@ -32,13 +32,11 @@ services.nginx.virtualHosts = {
   };
 };
 
-
-
 security.acme.certs = {
   "baremetalblog.com" = {
     dnsProvider = "linode";
     # linode ns1
-    dnsResolver = "162.159.27.72:53";
+    #dnsResolver = "162.159.27.72:53";
     # https://go-acme.github.io/lego/dns/linode/
     # LINODE_TOKEN=xxxxx
     # https://search.nixos.org/options?channel=23.05&show=security.acme.certs.%3Cname%3E.domain&from=0&size=50&sort=relevance&type=packages&query=security.acme.certs
@@ -49,7 +47,7 @@ security.acme.certs = {
     #  LINODE_TOKEN=8c3770cb3a0f5993247ea02405384c49311d0a0cbc60f04170b6d605cf61f952
     #  '';
     extraDomainNames = [
-      "*.baremetalblog.com"
+      "www.baremetalblog.com"
     ];
     group = "nginx";
   };
