@@ -12,13 +12,13 @@
 
     (pkgs.writeScriptBin "nrbu" ''
       #!/usr/bin/env bash
-      cd $HOME/Documents/nixos
+      cd $HOME/Documents/nix
       sudo nixos-rebuild switch --upgrade --flake '.#wayward'
     '')
 
     (pkgs.writeScriptBin "nrb" ''
       #!/usr/bin/env bash
-      cd $HOME/Documents/nixos
+      cd $HOME/Documents/nix
       sudo nixos-rebuild switch --flake '.#wayward'
     '')
 

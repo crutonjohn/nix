@@ -18,6 +18,16 @@
     zoom-us
     cura
     docker-compose
+    lutris
+    wineWowPackages.waylandFull
+    remmina
+    runelite
+    appimage-run
+    winetricks
+    jdk11
+    pixman
+    at-spi2-atk
+    mqttui
 
   ];
 

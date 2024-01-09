@@ -21,6 +21,7 @@
 
   # Unfree/Tax
   nixpkgs.config.allowUnfree = true;
+
   nix = {
     registry = {
       nixpkgs.flake = inputs.nixpkgs;
@@ -53,13 +54,13 @@
 
   # Fonts
   fonts = {
-    enableDefaultFonts = true;
+    enableDefaultPackages = true;
     fontconfig = {
       enable = true;
       allowBitmaps = true;
     };
     fontDir.enable = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       noto-fonts
       noto-fonts-extra
       noto-fonts-cjk-sans
@@ -82,8 +83,7 @@
     crutonjohn = {
       description = "Curtis Ray John";
       shell = pkgs.fish;
-      group = "crutonjohn";
-      extraGroups = [ "wheel" "networkmanager" "docker" ];
+      extraGroups = [ "wheel" "networkmanager" "docker" "dialout" "wireshark" "libvirtd" ];
       isNormalUser = true;
       home = "/home/crutonjohn";
     };
@@ -117,6 +117,8 @@
     enableSSHSupport = true;
   };
 
+  programs.wireshark.enable = true;
+
   programs.fish.enable = true;
 
   # SSH Server
@@ -128,6 +130,6 @@
   };
 
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.11";
 
 }

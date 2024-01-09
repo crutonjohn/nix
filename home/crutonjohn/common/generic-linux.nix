@@ -26,6 +26,12 @@
     font-manager
     unixtools.procps
     pamixer
+    termshark
+    nmap
+    virt-manager
+    qemu
+    godot_4
+    helvum
   ];
 
   # Syncthing

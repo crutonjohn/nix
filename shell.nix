@@ -16,7 +16,6 @@ pkgs.mkShell {
     home-manager
     git
     nixfmt
-    nix-linter
     nix-index
 
   ];

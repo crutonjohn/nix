@@ -31,16 +31,22 @@
     dmenu
     imagemagick
     libnotify
+    libinput
     sonixd
     neofetch
     catimg
     tailscale
     swaybg
     waybar
+    wdisplays
     hyprpaper
     sway-contrib.grimshot
+    wev
     inputs.hypr-contrib.packages.${pkgs.system}.grimblast
     inputs.hyprpicker.packages.${pkgs.system}.hyprpicker
+    catt
+    hexchat
+    colmena
   ];
 
   services.dunst = {

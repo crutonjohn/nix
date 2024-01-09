@@ -34,9 +34,11 @@
 
     nixGL.url = "github:guibou/nixGL";
     nixGL.inputs.nixpkgs.follows = "nixpkgs";
+
+    hugoBlog.url = "github:crutonjohn/baremetalblog";
   };
 
-  outputs = { self, nixpkgs, home, hyprland, nix-index-database, nixGL, nur, ... }@inputs:
+  outputs = { self, nixpkgs, home, hyprland, nix-index-database, nixGL, nur, hugoBlog, ... }@inputs:
     let
       overlays = ({ pkgs, ... }: {
         nixpkgs.overlays = [
@@ -59,7 +61,9 @@
               inherit inputs;
               hostname = name;
             };
-            home-manager.sharedModules = [ overlays ];
+            home-manager.sharedModules = [
+              overlays
+            ];
           }
         ];
 
@@ -68,11 +72,27 @@
           hostname = name;
         };
       };
+
     in
     {
+      colmena = {
+        meta = {
+          nixpkgs = import nixpkgs {
+            system = "x86_64-linux";
+            overlays = [
+              nur.overlay
+            ];
+          };
+          specialArgs = {
+            inherit inputs;
+          };
+        };
+        blog = ./hosts/blog;
+      };
       nixosConfigurations = {
         wayward = mkMachine "wayward" "x86_64-linux";
         endurance = mkMachine "endurance" "x86_64-linux";
       };
+
     };
 }
