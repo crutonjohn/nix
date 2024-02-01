@@ -28,6 +28,7 @@
     pixman
     at-spi2-atk
     mqttui
+    rpi-imager
 
   ];
 
