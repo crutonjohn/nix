@@ -69,15 +69,17 @@ My configs follow the `unstable` channel.  A GitHub action updates
 
 # TODO
 [x] migrate from stinky crusty X11 to shiny beautiful Wayland
-[] create nixpkg for [kns](https://github.com/blendle/kns)
+[x] create nixpkg for [kns](https://github.com/blendle/kns)
   - PR submitted: https://github.com/NixOS/nixpkgs/pull/193995
-[] nix-ify the k3s cluster
+[] nix-ify the k8s cluster
 [] edit $PATH for pkgs.fish to enable krew plugins
   - `set -gx PATH $PATH $HOME/.krew/bin`
 [] create multi-user pattern in `flake.nix`
-[] re-create Home Manager config for non-NixOS machines
-[] nix-ify VPS
-[] nix-ify Headscale VPN
+[x] re-create Home Manager config for non-NixOS machines
+[x] create linode nixos image
+[x] nix-ify VPS
+[x] nix-ify Headscale VPN
+[x] nix-ify blog
 
 [1]: https://nixos.wiki/wiki/Flakes
 [2]: https://github.com/nix-community/home-manager
