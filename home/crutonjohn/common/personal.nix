@@ -7,6 +7,16 @@
     ./scripts
   ];
 
+  programs.git = {
+    enable = true;
+    userName = "Curtis John";
+    includes = [
+      {
+        path = "~/.config/git/gitconfig-personal";
+      }
+    ];
+  };
+
   # Unfree/Tax
   nixpkgs.config.allowUnfree = true;
 

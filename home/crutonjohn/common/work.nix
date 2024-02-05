@@ -1,11 +1,28 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
 
+{
   imports = [
     ./generic.nix
     ./generic-linux.nix
     ./git.nix
     ./scripts
   ];
+
+  programs.git = {
+    enable = true;
+    userName = "Buck John";
+    includes = [
+      {
+        path = "~/.config/git/gitconfig-work";
+        condition = "gitdir:~/Documents/Projects/";
+      }
+      {
+        path = "~/.config/git/gitconfig-personal";
+        condition = "gitdir:~/Documents/nix/";
+      }
+    ];
+  };
+
 
   # Unfree/Tax
   nixpkgs.config.allowUnfree = true;
@@ -38,11 +55,11 @@
     syncthing-tray
     material-icons
     nerdfonts
-    glibc
     pulseaudio
     gdk-pixbuf
     read-edid
     mkcert
+    slack
 
   ];
 

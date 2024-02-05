@@ -20,12 +20,9 @@
       alias =
         "!git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\	 => \\2/' | sort";
     };
+    difftastic.enable = true;
     extraConfig = {
       init.defaultBranch = "main";
-      diff.tool = "vimdiff";
-      diff.colorMoved = "zebra";
-      difftool.prompt = false;
-      difftool.trustExitCode = true;
       merge.tool = "ediff";
       merge.keepBackup = false;
       merge.conflictStyle = "diff3";
@@ -180,6 +177,29 @@
       "repl-temp-*"
       "result"
     ];
+  };
+
+  home.file = {
+    ".config/git/gitconfig-work".text = ''
+      [user]
+	name = Buck John
+	email = bjohn@akamai.com
+
+      [color "status"]
+      	added = yellow
+      	changed = green
+      	untracked = cyan
+    '';
+    ".config/git/gitconfig-personal".text = ''
+      [user]
+      	email = crutonjohn@pm.me
+      	name = Curtis John
+
+      [color "status"]
+      	added = yellow
+      	changed = green
+      	untracked = cyan
+    '';
   };
 }
 
