@@ -68,11 +68,38 @@
           hostname = name;
         };
       };
-    in
+
+      inherit (self) outputs;
+      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+
+    in rec
     {
       nixosConfigurations = {
         wayward = mkMachine "wayward" "x86_64-linux";
         endurance = mkMachine "endurance" "x86_64-linux";
       };
+
+      homeConfigurations = {
+        # Work
+        "bjohn@res-lpw733u9" = home.lib.homeManagerConfiguration {
+          pkgs = legacyPackages."x86_64-linux";
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/crutonjohn/res-lpw733u9 ];
+        };
+        # For easy bootstraping from a nixos live usb
+        "nixos@nixos" = home.lib.homeManagerConfiguration {
+          pkgs = legacyPackages."x86_64-linux";
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/crutonjohn/generic.nix ];
+        };
+      };
+
+      legacyPackages = forAllSystems (system:
+        import nixpkgs {
+          inherit system;
+          overlays = with outputs.overlays; [ nur.overlay nixGL.overlay ];
+          config.allowUnfree = true;
+        });
     };
 }
