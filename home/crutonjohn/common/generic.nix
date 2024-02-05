@@ -55,8 +55,10 @@
       watchexec
       whois
       wget
-      obsidian
+      #obsidian
       minikube
+      dyff
+      traceroute
     ];
   };
 
@@ -65,7 +67,7 @@
     nix-direnv = { enable = true; };
   };
   programs.fzf.enable = true;
-  programs.exa = {
+  programs.eza = {
     enable = true;
     enableAliases = true;
   };

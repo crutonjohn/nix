@@ -30,6 +30,12 @@
     gettext
     gimp
     galculator
+    termshark
+    nmap
+    virt-manager
+    qemu
+    godot_4
+    helvum
   ];
 
   # Syncthing

@@ -29,11 +29,11 @@ in
   };
 
   programs = {
-  #  fish.loginShellInit = ''
-  #    if test (tty) = "/dev/tty1"
-  #      exec Hyprland &> /dev/null
-  #    end
-  #  '';
+    fish.loginShellInit = ''
+      if test (tty) = "/dev/tty1"
+        exec Hyprland &> /dev/null
+      end
+    '';
     zsh.loginExtra = ''
       if [ "$(tty)" = "/dev/tty1" ]; then
         exec Hyprland &> /dev/null
@@ -46,6 +46,18 @@ in
     '';
   };
 
+  programs.swaylock = {
+    enable = true;
+    settings = {
+      color = "808080";
+      font-size = 24;
+      indicator-idle-visible = false;
+      indicator-radius = 100;
+      line-color = "ffffff";
+      show-failed-attempts = true;
+    };
+  };
+
   systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
   home.file = {
     hyprland = {
@@ -54,7 +66,12 @@ in
       text = ''
         # $scripts=$HOME/.config/hypr/scripts
 
-        monitor=,preferred,auto,1.5
+        monitor=eDP-1, preferred, auto, 1.5
+        monitor=DP-1, 5120x1440, auto, 1.25
+
+        # Lid Based docking options
+        bindl=,switch:off:Lid Switch,exec,hyprctl keyword monitor "eDP-1, preferred, auto, 1.5"
+        bindl=,switch:on:Lid Switch,exec,hyprctl keyword monitor "eDP-1, disable"
         # monitor=HDMI-A-1, 1920x1080, 0x0, 1
         # monitor=eDP-1, 1920x1080, 1920x0, 1
 
@@ -111,17 +128,10 @@ in
 
         # cursor_inactive_timeout = 0
         decoration {
-          multisample_edges = true
           active_opacity = 1.0
           inactive_opacity = 1.0
           fullscreen_opacity = 1.0
-          rounding = 0
-          blur = yes
-          blur_size = 3
-          blur_passes = 1
-          blur_new_optimizations = true
-          blur_xray = true
-
+          rounding = 2
           drop_shadow = false
           shadow_range = 4
           shadow_render_power = 3
@@ -131,8 +141,15 @@ in
         # shadow_offset
           dim_inactive = false
         # dim_strength = #0.0 ~ 1.0
-          blur_ignore_opacity = false
           col.shadow = rgba(1a1a1aee)
+          blur {
+            enabled = true
+            size = 3
+            passes = 1
+            ignore_opacity = false
+            new_optimizations = true
+            xray = true
+          }
         }
 
         animations {
@@ -279,7 +296,8 @@ in
         #------------------------#
         bind=SUPER,B,exec,firefox
         bind=SUPER SHIFT,X,exec,myswaylock
-        bind=,Print,exec,grimblast --notify --cursor  copysave screen ~/Pictures/$(date "+%Y-%m-%d"T"%H:%M:%S_no_watermark").png
+        bind=,Print,exec,grimblast --notify --cursor  copy screen ~/Pictures/$(date "+%Y-%m-%d"T"%H:%M:%S_no_watermark").png
+        bind=SHIFT,Print,exec,grimblast --notify --cursor copy area
         bind=SUPER,bracketright,exec, grimblast --notify --cursor  copy area
         bind=SUPER,A,exec,grimblast_watermark
         bind=SUPER:,Super_L,exec, bash ~/.config/rofi/powermenu.sh
