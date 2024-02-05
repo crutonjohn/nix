@@ -19,12 +19,12 @@
       containerd
       cz-cli
       dig
+      fish
       file
       fluxcd
       ffmpeg
       gawk
       go
-      home-manager
       htop
       jq
       jsonnet

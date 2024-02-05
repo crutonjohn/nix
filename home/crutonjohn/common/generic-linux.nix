@@ -26,6 +26,10 @@
     font-manager
     unixtools.procps
     pamixer
+    gnome-network-displays
+    gettext
+    gimp
+    galculator
     termshark
     nmap
     virt-manager
