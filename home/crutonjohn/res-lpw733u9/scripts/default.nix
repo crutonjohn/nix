@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = [
     (pkgs.writeScriptBin "webex" ''
       #!/usr/bin/env bash
@@ -8,7 +9,8 @@
 
     (pkgs.writeScriptBin "slk" ''
       #!/usr/bin/env bash
-      /usr/bin/slack > /dev/null 2>&1 &
+      pkill slack
+      /home/bjohn/.nix-profile/bin/slack > /dev/null 2>&1 &
     '')
 
     (pkgs.writeScriptBin "1p" ''
@@ -23,7 +25,7 @@
 
     (pkgs.writeScriptBin "nrb" ''
     #!/usr/bin/env bash
-    cd $HOME/Documents/nixos
+    cd $HOME/Documents/nix
     home-manager switch --flake '.#bjohn@res-lpw733u9'
     '')
 
