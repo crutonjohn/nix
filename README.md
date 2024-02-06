@@ -75,9 +75,9 @@ My configs follow the `unstable` channel.  A GitHub action updates
 - [x] nix-ify VPS
 - [x] nix-ify Headscale VPN
 - [x] nix-ify blog
-- [] nix-ify the k8s cluster
-- [] edit $PATH for pkgs.fish to enable krew plugins (`set -gx PATH $PATH $HOME/.krew/bin`)
-- [] create multi-user pattern in `flake.nix`
+- [ ] nix-ify the k8s cluster
+- [ ] edit $PATH for pkgs.fish to enable krew plugins (`set -gx PATH $PATH $HOME/.krew/bin`)
+- [ ] create multi-user pattern in `flake.nix`
 
 [1]: https://nixos.wiki/wiki/Flakes
 [2]: https://github.com/nix-community/home-manager
