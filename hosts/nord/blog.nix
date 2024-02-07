@@ -1,4 +1,4 @@
-{ name, nodes, pkgs, lib, inputs, ... }: {
+{ name, nodes, pkgs, lib, inputs, config, ... }: {
 
 services.nginx = {
   enable = true;
@@ -24,11 +24,17 @@ services.nginx.virtualHosts = {
     };
   };
   "www.baremetalblog.com" = {
-    useACMEHost = "baremetalblog.com";
-    forceSSL = true;
     locations."/" = {
       return = "301 https://baremetalblog.com$request_uri";
     };
+  };
+};
+
+sops = {
+  secrets."acme/linode/credentials" = {
+    mode = "0440";
+    group = "nginx";
+    owner = "acme";
   };
 };
 
@@ -36,24 +42,19 @@ security.acme.certs = {
   "baremetalblog.com" = {
     dnsProvider = "linode";
     # linode ns1
-    #dnsResolver = "162.159.27.72:53";
+    dnsResolver = "162.159.27.72:53";
+    enableDebugLogs = true;
     # https://go-acme.github.io/lego/dns/linode/
-    # LINODE_TOKEN=xxxxx
-    # https://search.nixos.org/options?channel=23.05&show=security.acme.certs.%3Cname%3E.domain&from=0&size=50&sort=relevance&type=packages&query=security.acme.certs
-    # this has been manually created on the destination host for now.
-    credentialsFile = "/var/lib/acme/linode/credentials";
-    #credentialsFile = pkgs.writeText "linode-credentials"
-    #  ''
-    #  LINODE_TOKEN=8c3770cb3a0f5993247ea02405384c49311d0a0cbc60f04170b6d605cf61f952
-    #  '';
+    #credentialsFile = "/var/lib/acme/linode/credentials";
+    # secret handled by sops now
+    credentialsFile = "/run/secrets/acme/linode/credentials";
     extraDomainNames = [
-      "www.baremetalblog.com"
+      #"www.baremetalblog.com"
     ];
     group = "nginx";
   };
 };
 
-# setup pushing static site build artifact to linode
 
 ## integrate flake changes in this repo to main flake repo
 ## rename `nixos` repo to something else like `dootfiles` or maybe some other cool video game lore thing

@@ -24,6 +24,8 @@
 
     devenv.url = "github:cachix/devenv/latest";
 
+    sops-nix.url = "github:Mic92/sops-nix";
+
     hyprland.url = "github:hyprwm/Hyprland";
     hypr-contrib.url = "github:hyprwm/contrib";
     hypr-contrib.inputs.nixpkgs.follows = "nixpkgs";
@@ -38,13 +40,18 @@
     hugoBlog.url = "github:crutonjohn/baremetalblog";
   };
 
-  outputs = { self, nixpkgs, home, hyprland, nix-index-database, nixGL, nur, hugoBlog, ... }@inputs:
+  outputs = { self, nixpkgs, home, hyprland, nix-index-database, nixGL, nur, sops-nix, hugoBlog, ... }@inputs:
     let
+      pkgs = nixpkgs.legacyPackages.x86_64-linux.pkgs;
       overlays = ({ pkgs, ... }: {
         nixpkgs.overlays = [
           nixGL.overlay
           nur.overlay
         ];
+      });
+
+      nixpkgsFor = forAllSystems (system: import nixpkgs {
+        inherit system;
       });
 
       mkMachine = name: system: nixpkgs.lib.nixosSystem {
@@ -53,6 +60,7 @@
         modules = [
           overlays
           ./hosts/${name}
+          sops-nix.nixosModules.sops
 
           home.nixosModules.home-manager
           {
@@ -77,6 +85,10 @@
       supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
+      makeShells = system: {
+        inherit system;
+      };
+
     in rec
     {
       colmena = {
@@ -91,12 +103,31 @@
             inherit inputs;
           };
         };
-        blog = ./hosts/blog;
+        defaults = {
+          imports = [
+            sops-nix.nixosModules.sops
+          ];
+        };
+        nord = ./hosts/nord;
       };
       nixosConfigurations = {
         wayward = mkMachine "wayward" "x86_64-linux";
         endurance = mkMachine "endurance" "x86_64-linux";
       };
+
+      devShells = forAllSystems (system:
+        let pkgs = nixpkgsFor.${system}; in
+        {
+          default = pkgs.mkShell {
+            buildInputs = [
+              pkgs.git
+              pkgs.nixfmt
+              pkgs.colmena
+              pkgs.nix-index
+              pkgs.sops
+            ];
+          };
+        });
 
       homeConfigurations = {
         # Work

@@ -1,4 +1,4 @@
-{ pkgs, pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }: {
   home.packages = [
     (pkgs.writeScriptBin "i3loadlayout" ''
       #!/usr/bin/env bash

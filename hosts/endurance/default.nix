@@ -3,7 +3,7 @@
 {
   imports = [
     inputs.nixos-hardware.nixosModules.framework-12th-gen-intel
-    inputs.hardware.nixosModules.common-pc-ssd
+    inputs.nixos-hardware.nixosModules.common-pc-ssd
     ./hardware-configuration.nix
     ./vm-hook.nix
     ./hardware.nix
@@ -29,7 +29,7 @@
   fonts = {
     fontconfig.enable = true;
     fontDir.enable = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       noto-fonts
       noto-fonts-extra
       noto-fonts-cjk-sans
@@ -44,6 +44,18 @@
 
   # User
   users.defaultUserShell = pkgs.fish;
+  users.users = {
+    crutonjohn = {
+      description = "Curtis Ray John";
+      shell = pkgs.fish;
+      extraGroups = [ "wheel" "networkmanager" "docker" "dialout" "wireshark" "libvirtd" ];
+      isNormalUser = true;
+      home = "/home/crutonjohn";
+    };
+    root = {
+      shell = pkgs.bashInteractive;
+    };
+  };
 
   ## allow me to run nixos-rebuild without a password
   security.sudo.extraRules = [{
@@ -63,6 +75,7 @@
     enable = true;
     enableSSHSupport = true;
   };
+  programs.fish.enable = true;
 
   # SSH Server
   services.openssh.enable = true;
