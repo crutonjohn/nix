@@ -134,11 +134,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1707264186,
-        "narHash": "sha256-FIRrgHpHC8RhTW6zwGacv8ZvKaApg9OXKP3D+8MuyeU=",
+        "lastModified": 1707350591,
+        "narHash": "sha256-WmfVgX8Esrs66aEA9vzWnA/wrmz/88TbWvOoPp0epbc=",
         "owner": "crutonjohn",
         "repo": "baremetalblog",
-        "rev": "3dff1c884470ab5ec5cec5a596b577164ffe643a",
+        "rev": "a57d4a0bdcc3ea46a99b87b1a7824d7d3cc3e42b",
         "type": "github"
       },
       "original": {
@@ -176,11 +176,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1707265127,
-        "narHash": "sha256-N9SDNTePf9vQgQbHz40B47ADLmMfC85redhhMsxS7Ks=",
+        "lastModified": 1707349634,
+        "narHash": "sha256-enBIncPDMroHjkykdRdvjvaZbhlb4d/LrR4R1qHeenY=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "f085ed4454fc0c9045b324c32f9ca34cd4c28808",
+        "rev": "a6ccd36147109d5cb2981122595f06ae93999b55",
         "type": "github"
       },
       "original": {
@@ -511,11 +511,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1707284699,
-        "narHash": "sha256-tt2ZM+I23cEdYwqF0TgkttmgJytNfYbm4iguWuTYeEY=",
+        "lastModified": 1707370884,
+        "narHash": "sha256-OuAhTqxJEi2fTO2hUuKVbLML+HNXCWYSXXX/uTRc6bI=",
         "owner": "nix-community",
         "repo": "nur",
-        "rev": "94ca168756e90b856bb94a40b0c4cbc403ec4c10",
+        "rev": "aa75d9f3084a6c17dd0e4bef38be65df390a50b9",
         "type": "github"
       },
       "original": {
