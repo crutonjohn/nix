@@ -10,7 +10,7 @@
   home = {
     stateVersion = "22.11";
     packages = with pkgs; [
-      (python310.withPackages (ps: with ps; [ pip ansible ]))
+      #(python310.withPackages (ps: with ps; [ pip ansible ]))
       awscli2
       alacritty
       bitwarden
