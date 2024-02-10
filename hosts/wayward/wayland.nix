@@ -58,7 +58,7 @@
   };
 
   services.xserver = {
-    xkbOptions = "caps:escape";
+    xkb.options = "caps:escape";
   };
 
   console.useXkbConfig = true;
