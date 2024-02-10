@@ -134,11 +134,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1707451327,
-        "narHash": "sha256-YAV1hJK+u9wfia9ftyk/70qTXN2mEWcoWnfL7yI1dak=",
+        "lastModified": 1707508911,
+        "narHash": "sha256-hGJn4Q/27yABy8DO2r2N42mQuw05uXmfj9VOhlG9XMk=",
         "owner": "crutonjohn",
         "repo": "baremetalblog",
-        "rev": "5ff5dd6ec2cb3e520e1a3a5abf5bf78a4b831d10",
+        "rev": "99fe012e3b8e9f3443f0f87ff0f8ad6e073d7821",
         "type": "github"
       },
       "original": {
