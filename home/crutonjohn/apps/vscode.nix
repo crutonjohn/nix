@@ -8,6 +8,7 @@
       "editor.fontLigatures" = true;
       "editor.fontSize" = 13;
       "workbench.colorTheme" = "Solarized Dark";
+      "explorer.confirmDragAndDrop" = false;
     };
   };
 }
