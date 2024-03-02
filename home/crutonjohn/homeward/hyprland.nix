@@ -66,6 +66,8 @@ in
       text = ''
         # $scripts=$HOME/.config/hypr/scripts
 
+        env = WLR_DRM_DEVICES,/dev/dri/card0
+
         monitor=DP-1, preferred, auto, 1.25
 
         # Source a file (multi-file configs)

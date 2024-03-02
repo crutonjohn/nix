@@ -21,7 +21,6 @@
       CLUTTER_BACKEND = "wayland";
       # LIBVA_DRIVER_NAME = "nvidia";
       WLR_RENDERER = "vulkan";
-      WLR_DRM_DEVICES = /dev/dri/card0
       #__NV_PRIME_RENDER_OFFLOAD="1";
 
       XDG_CURRENT_DESKTOP = "Hyprland";
