@@ -47,7 +47,7 @@
     catt
     hexchat
     colmena
-    pciutils
+    toybox
   ];
 
   services.dunst = {

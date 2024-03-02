@@ -19,7 +19,13 @@
   hardware.enableAllFirmware = true;
   hardware.opengl = {
     enable = true;
-    extraPackages = with pkgs; [ amdvlk ];
+    driSupport = true;
+    driSupport32Bit = true;
+    extraPackages = with pkgs; [
+      vulkan-loader
+      vulkan-validation-layers
+      vulkan-extension-layer
+    ];
   };
   # bluetooth
   hardware.bluetooth.enable = true;
