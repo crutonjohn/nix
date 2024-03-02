@@ -47,6 +47,7 @@
     catt
     hexchat
     colmena
+    pciutils
   ];
 
   services.dunst = {
