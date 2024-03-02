@@ -112,6 +112,7 @@
       };
       nixosConfigurations = {
         wayward = mkMachine "wayward" "x86_64-linux";
+        homeward = mkMachine "homeward" "x86_64-linux";
         endurance = mkMachine "endurance" "x86_64-linux";
       };
 
