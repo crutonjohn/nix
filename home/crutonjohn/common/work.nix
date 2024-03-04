@@ -60,6 +60,7 @@
     read-edid
     mkcert
     slack
+    vault
 
   ];
 

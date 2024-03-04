@@ -13,6 +13,7 @@
       #(python310.withPackages (ps: with ps; [ pip ansible ]))
       awscli2
       alacritty
+      asciinema
       bitwarden
       bitwarden-cli
       cachix
@@ -59,6 +60,7 @@
       minikube
       dyff
       traceroute
+      kns
     ];
   };
 

@@ -158,7 +158,7 @@
 
   # Locale Fixes
   home.file.".xsessionrc".text = ''
-    export PATH=$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$HOME/.local/bin:$PATH
+    export PATH=$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$HOME/.local/bin:$PATH:$HOME/.krew/bin
     xset r rate 200 50
     export LOCALES_ARCHIVE=/usr/lib/locale/locale-archive
     export LOCALE_ARCHIVE_2_27=/usr/lib/locale/locale-archive
