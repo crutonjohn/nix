@@ -1,4 +1,27 @@
-{ name, nodes, pkgs, lib, inputs, config, ... }: {
+{ name, nodes, pkgs, lib, inputs, config, ... }:
+
+let
+  baremetalblogSrc = pkgs.fetchgit {
+    url = "https://github.com/crutonjohn/baremetalblog.git";
+    rev = "d27d852f7749f0f1212e930d5c3a4a33ab74e5fa";
+    sha256 = "sha256-JFhxUBnSf+lBaOp8e7zXUyJTP+tUmY7fFqmScGaXX5g=";
+    fetchSubmodules = true;
+  };
+
+  baremetalblog = pkgs.stdenv.mkDerivation rec {
+    name = "baremetalblog";
+    src = baremetalblogSrc;
+    buildPhase =
+    ''
+      ls -al themes/hello-friend
+      mkdir -p $out
+      ${pkgs.hugo}/bin/hugo --minify --noBuildLock -t hello-friend -d $out/
+    '';
+  };
+
+in
+
+{
 
 services.nginx = {
   enable = true;
@@ -17,7 +40,7 @@ services.nginx.virtualHosts = {
   "baremetalblog.com" = {
     useACMEHost = "baremetalblog.com";
     forceSSL = true;
-    root = "${inputs.hugoBlog.packages.x86_64-linux.default}";
+    root = "${baremetalblog}";
     locations."/" = {
       tryFiles = "$uri $uri/ =404";
       index = "index.html";

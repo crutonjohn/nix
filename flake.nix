@@ -37,7 +37,7 @@
     nixGL.url = "github:guibou/nixGL";
     nixGL.inputs.nixpkgs.follows = "nixpkgs";
 
-    hugoBlog.url = "github:crutonjohn/baremetalblog";
+    # hugoBlog.url = "github:crutonjohn/baremetalblog";
   };
 
   outputs = { self, nixpkgs, home, hyprland, nix-index-database, nixGL, nur, sops-nix, hugoBlog, ... }@inputs:
