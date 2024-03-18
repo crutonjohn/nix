@@ -64,9 +64,16 @@
     ];
   };
 
-  programs.zoxide = {
+  programs.yazi = {
     enable = true;
     enableFishIntegration = true;
+  };
+
+  programs.zoxide = {
+    enable = true;
+    options = [
+      "--cmd cd"
+    ];
   };
 
   programs.direnv = {
@@ -74,9 +81,9 @@
     nix-direnv = { enable = true; };
   };
   programs.fzf.enable = true;
+
   programs.eza = {
     enable = true;
-    enableAliases = true;
   };
   programs.bat = {
     enable = true;

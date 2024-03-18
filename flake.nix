@@ -40,7 +40,7 @@
     # hugoBlog.url = "github:crutonjohn/baremetalblog";
   };
 
-  outputs = { self, nixpkgs, home, hyprland, nix-index-database, nixGL, nur, sops-nix, hugoBlog, ... }@inputs:
+  outputs = { self, nixpkgs, home, hyprland, nix-index-database, nixGL, nur, sops-nix, ... }@inputs:
     let
       pkgs = nixpkgs.legacyPackages.x86_64-linux.pkgs;
       overlays = ({ pkgs, ... }: {

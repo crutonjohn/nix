@@ -183,10 +183,6 @@ in
           focus_on_activate = true
         }
 
-        device:epic mouse V1 {
-          sensitivity = -0.5
-        }
-
         bind = SUPER,RETURN,exec,alacritty
         bind = SUPER,SPACE,exec,wofi -S drun
         bind = SUPER_SHIFT,Return,exec,alacritty --class="termfloat"

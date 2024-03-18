@@ -1,18 +1,14 @@
 { config, lib, pkgs, ... }:
 {
-  services.greetd = {
-    enable = false;
-    settings = {
-      default_session = {
-        command = "${pkgs.hyprland}/bin/Hyprland";
-      };
-    };
-  };
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm.wayland.enable = true;
+  services.xserver.displayManager.sddm.theme = "sddm-chili-theme";
 
-  environment.etc."greetd/environments".text = ''
-    fish
-    bash
-    Hyprland
-  '';
+    environment = {
+    systemPackages = with pkgs; [
+      sddm-chili-theme
+    ];
+  };
 }
 

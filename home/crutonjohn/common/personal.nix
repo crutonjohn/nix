@@ -31,7 +31,6 @@
     lutris
     wineWowPackages.waylandFull
     remmina
-    runelite
     appimage-run
     winetricks
     jdk11
