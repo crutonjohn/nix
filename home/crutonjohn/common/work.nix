@@ -61,6 +61,7 @@
     mkcert
     slack
     vault
+    linode-cli
 
   ];
 
