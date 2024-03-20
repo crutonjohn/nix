@@ -4,6 +4,7 @@
     ./hyprland.nix
     ./git.nix
     ./scripts.nix
+    ./fish.nix
   ];
 
   home.username = "crutonjohn";

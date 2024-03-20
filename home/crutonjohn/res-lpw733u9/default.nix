@@ -4,6 +4,7 @@
     ./scripts
     ./pasystray.nix
     ./picom.nix
+    ./fish.nix
   ];
 
   home.username = "bjohn";

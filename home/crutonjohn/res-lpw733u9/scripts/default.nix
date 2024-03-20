@@ -7,6 +7,7 @@
       /opt/Webex/bin/CiscoCollabHost
     '')
 
+
     (pkgs.writeScriptBin "slk" ''
       #!/usr/bin/env bash
       pkill slack
@@ -21,12 +22,6 @@
     (pkgs.writeScriptBin "eaa" ''
       #!/usr/bin/env bash
       /opt/wapp/bin/EAAClient > /dev/null 2>&1 &
-    '')
-
-    (pkgs.writeScriptBin "nrb" ''
-    #!/usr/bin/env bash
-    cd $HOME/Documents/nix
-    home-manager switch --flake '.#bjohn@res-lpw733u9'
     '')
 
     (pkgs.writeScriptBin "i3loadlayout" ''
