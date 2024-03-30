@@ -305,8 +305,8 @@ in
         bind=,XF86AudioLowerVolume,exec, pamixer -d 5
         bind=,XF86AudioMute,exec, pamixer -t
         bind=,XF86AudioMicMute,exec, pamixer --default-source -t
-        bind=,XF86MonBrightnessUp,exec, light -A 5
-        bind=,XF86MonBrightnessDown, exec, light -U 5
+        bind=,XF86MonBrightnessUp,exec, brightnessctl -d intel_backlight s +10%
+        bind=,XF86MonBrightnessDown, exec, brightnessctl -d intel_backlight s -10%
         bind=,XF86AudioPlay,exec, mpc -q toggle
         bind=,XF86AudioNext,exec, mpc -q next
         bind=,XF86AudioPrev,exec, mpc -q prev
