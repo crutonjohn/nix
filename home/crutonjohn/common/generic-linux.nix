@@ -36,6 +36,7 @@
     qemu
     godot_4
     helvum
+    brightnessctl
   ];
 
   # Syncthing
