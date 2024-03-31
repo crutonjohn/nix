@@ -3,7 +3,7 @@
 let
   baremetalblogSrc = pkgs.fetchgit {
     url = "https://github.com/crutonjohn/baremetalblog.git";
-    rev = "d27d852f7749f0f1212e930d5c3a4a33ab74e5fa";
+    rev = "76614fb2b74ebb5f2b0e7e17bfe18b5a756c06eb";
     sha256 = "sha256-JFhxUBnSf+lBaOp8e7zXUyJTP+tUmY7fFqmScGaXX5g=";
     fetchSubmodules = true;
   };
