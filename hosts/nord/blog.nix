@@ -4,7 +4,7 @@ let
   baremetalblogSrc = pkgs.fetchgit {
     url = "https://github.com/crutonjohn/baremetalblog.git";
     rev = "76614fb2b74ebb5f2b0e7e17bfe18b5a756c06eb";
-    sha256 = "sha256-JFhxUBnSf+lBaOp8e7zXUyJTP+tUmY7fFqmScGaXX5g=";
+    sha256 = "sha256-EVC/4Vmqk/Yub8x5hD2jv0+eWcrn1KLo4UmXecfd8A0=";
     fetchSubmodules = true;
   };
 
