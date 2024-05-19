@@ -22,6 +22,14 @@ networking.interfaces.eth0.useDHCP = true;
 time.timeZone = "America/Chicago";
 i18n.defaultLocale = "en_US.UTF-8";
 
+boot.kernel.sysctl = {
+  "net.ipv6.conf.all.disable_ipv6" = 1;
+
+  "net.ipv6.conf.default.disable_ipv6" = 1;
+
+  "net.ipv6.conf.lo.disable_ipv6" = 1;
+};
+
 nix.settings.trusted-users = [ "root" "@wheel" ];
 
 users.users.crutonjohn = {
