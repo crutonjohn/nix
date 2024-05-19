@@ -37,6 +37,7 @@
     godot_4
     helvum
     brightnessctl
+    lapce
   ];
 
   # Syncthing
