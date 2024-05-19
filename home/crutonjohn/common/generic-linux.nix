@@ -38,6 +38,7 @@
     helvum
     brightnessctl
     lapce
+    nil
   ];
 
   # Syncthing
