@@ -4,8 +4,6 @@
   imports = [
     inputs.nixos-hardware.nixosModules.framework-12th-gen-intel
     inputs.nixos-hardware.nixosModules.common-pc-ssd
-    inputs.nixos-hardware.nixosModules.common-cpu-intel
-    inputs.nixos-hardware.nixosModules.common-gpu-intel
     ./hardware-configuration.nix
     ./vm-hook.nix
     ./hardware.nix

@@ -8,9 +8,11 @@
     enable = true;
     extraPackages = with pkgs; [ intel-media-driver vaapiVdpau libvdpau-va-gl ];
   };
-  services.xserver.libinput.touchpad.naturalScrolling = true;
-  services.xserver.libinput.touchpad.tapping = false;
-  services.xserver.libinput.touchpad.clickMethod = "clickfinger";
+  services.libinput.touchpad = {
+    naturalScrolling = true;
+    tapping = false;
+    clickMethod = "clickfinger";
+  };
   # bluetooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
