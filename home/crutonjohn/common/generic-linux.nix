@@ -39,6 +39,7 @@
     brightnessctl
     lapce
     nil
+    ceph
   ];
 
   # Syncthing
