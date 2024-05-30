@@ -41,4 +41,6 @@
     # If you want to use JACK applications, uncomment this
     jack.enable = true;
   };
+
+  services.ceph.client.enable = true;
 }
