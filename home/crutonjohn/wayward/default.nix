@@ -48,6 +48,7 @@
     catt
     hexchat
     colmena
+    vesktop
   ];
 
   services.dunst = {

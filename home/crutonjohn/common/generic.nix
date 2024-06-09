@@ -62,6 +62,7 @@
       dyff
       traceroute
       kns
+      zed-editor
     ];
   };
 
