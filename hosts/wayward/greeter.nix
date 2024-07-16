@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 {
-  services.xserver.enable = true;
+  services.xserver.enable = false;
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
-    theme = "sddm-chili-theme";
+    theme = "breeze";
   };
   environment = {
     systemPackages = with pkgs; [

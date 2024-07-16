@@ -49,6 +49,7 @@
     hexchat
     colmena
     vesktop
+    tuxguitar
   ];
 
   services.dunst = {

@@ -4,10 +4,11 @@
   boot.kernelModules = [ "iwlwifi" ];
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [ intel-media-driver vaapiVdpau libvdpau-va-gl ];
+    extraPackages = with pkgs; [ intel-media-driver vaapiVdpau libvdpau-va-gl vpl-gpu-rt ];
   };
+  services.fwupd.enable = true;
   services.libinput.touchpad = {
     naturalScrolling = true;
     tapping = false;
@@ -17,7 +18,7 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
   #Power stuff
-  services.tlp.enable = true;
+  #services.tlp.enable = true;
   powerManagement.powertop.enable = true;
   services.logind = {
     lidSwitch = "suspend";

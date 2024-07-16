@@ -66,6 +66,8 @@ in
       text = ''
         # $scripts=$HOME/.config/hypr/scripts
 
+        #env = WLR_DRM_DEVICES,$HOME/.config/hypr/card
+
         monitor=eDP-1, preferred, auto, 1.566667
         monitor=DP-1, 5120x1440, auto, 1.25
 
@@ -120,9 +122,8 @@ in
         }
 
         master {
-          new_is_master = true
+          new_on_top = true
           special_scale_factor = 0.8
-          new_is_master = true
           no_gaps_when_only = false
         }
 

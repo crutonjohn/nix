@@ -12,6 +12,7 @@
     ./virtualization.nix
     ./wayland.nix
     ./hyprland.nix
+    ./kde.nix
     ./greeter.nix
   ];
 
@@ -74,6 +75,7 @@
       font-awesome_5
       material-icons
       material-symbols
+      pciutils
     ];
   };
 
