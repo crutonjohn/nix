@@ -16,6 +16,7 @@ services.headscale = {
   settings = {
     server_url = "https://headscale.heyjohn.family";
     dns_config = {
+      override_local_dns = true;
       nameservers = [
         "192.168.130.1"
         "9.9.9.9"

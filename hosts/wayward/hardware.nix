@@ -32,7 +32,6 @@
   security.pam.services.xscreensaver.fprintAuth = true;
   # Pipewire
   hardware.pulseaudio.enable = false;
-  sound.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
