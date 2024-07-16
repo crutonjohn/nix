@@ -26,7 +26,6 @@
     steam
     discord
     zoom-us
-    cura
     docker-compose
     lutris
     wineWowPackages.waylandFull
