@@ -14,7 +14,6 @@
     signal-desktop
     steam
     discord
-    cura
     docker-compose
     networkmanager_dmenu
     docker
