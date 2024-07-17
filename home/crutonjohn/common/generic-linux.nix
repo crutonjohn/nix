@@ -40,6 +40,7 @@
     lapce
     nil
     ceph
+    libgcc
   ];
 
   # Syncthing
