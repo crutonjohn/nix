@@ -397,11 +397,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1728086481,
-        "narHash": "sha256-JIrRa9sziwEfqIIpecg+PAWPsrU337YyqsvsxyQRnc4=",
+        "lastModified": 1728142617,
+        "narHash": "sha256-ramJ6G9bKYuZshtYRc0olhtN89bP9i4BDhhTU0E0cLc=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "595eb89f6e16df0e19916e3c02bf5ceac5a61c57",
+        "rev": "0ec6072a290051a03ab66cfb9bc616b2f5540e64",
         "type": "github"
       },
       "original": {
@@ -689,11 +689,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1727658919,
-        "narHash": "sha256-YAePt2GldkkRJ08LvZNHcuS6shIVStj+K+1DZN3gbnM=",
+        "lastModified": 1728185226,
+        "narHash": "sha256-W+wWyNjFywVfFrbErXhGwgO2HlR0yMHqd1doEEbW9yw=",
         "owner": "Mic92",
         "repo": "nix-index-database",
-        "rev": "f9fdf8285690a351e8998f1e703ebdf9cdf51dee",
+        "rev": "0f7169d3ec7ef1477af6e39731e67a1dc7a9f6e7",
         "type": "github"
       },
       "original": {
@@ -991,11 +991,11 @@
     },
     "nixpkgs_6": {
       "locked": {
-        "lastModified": 1727802920,
-        "narHash": "sha256-HP89HZOT0ReIbI7IJZJQoJgxvB2Tn28V6XS3MNKnfLs=",
+        "lastModified": 1728018373,
+        "narHash": "sha256-NOiTvBbRLIOe5F6RbHaAh6++BNjsb149fGZd1T4+KBg=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "27e30d177e57d912d614c88c622dcfdb2e6e6515",
+        "rev": "bc947f541ae55e999ffdb4013441347d83b00feb",
         "type": "github"
       },
       "original": {
@@ -1023,11 +1023,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1728105690,
-        "narHash": "sha256-lvrJBBnvhzr/RVfU5uoL+jlEZDnaqcl9LRaGypTr4qQ=",
+        "lastModified": 1728192139,
+        "narHash": "sha256-gysWw9JZpedKvCDiKa0fy64bhED9A7ABDfSalSfgs8E=",
         "owner": "nix-community",
         "repo": "nur",
-        "rev": "c618676f7584437c78c91561baf50281181de20c",
+        "rev": "882ce566122ca45ad2f00ad868bfec184923d9db",
         "type": "github"
       },
       "original": {
