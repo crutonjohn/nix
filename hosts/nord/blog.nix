@@ -23,19 +23,6 @@ in
 
 {
 
-services.nginx = {
-  enable = true;
-  recommendedProxySettings = true;
-  recommendedTlsSettings = true;
-  logError = "stderr info";
-};
-
-users.users.nginx.extraGroups = [ "acme" ];
-security.acme = {
-  acceptTerms = true;
-  defaults.email = "certs+crutonjohn@pm.me";
-};
-
 services.nginx.virtualHosts = {
   "baremetalblog.com" = {
     useACMEHost = "baremetalblog.com";
@@ -64,15 +51,12 @@ sops = {
 security.acme.certs = {
   "baremetalblog.com" = {
     dnsProvider = "linode";
-    # linode ns1
-    dnsResolver = "162.159.27.72:53";
+    dnsResolver = "172.232.0.18:53";
     enableDebugLogs = true;
     # https://go-acme.github.io/lego/dns/linode/
-    #credentialsFile = "/var/lib/acme/linode/credentials";
-    # secret handled by sops now
-    credentialsFile = "/run/secrets/acme/linode/credentials";
+    # https://search.nixos.org/options?channel=23.05&show=security.acme.certs.%3Cname%3E.domain&from=0&size=50&sort=relevance&type=packages&query=security.acme.certs
+    environmentFile = "/var/lib/acme/linode/credentials";
     extraDomainNames = [
-      #"www.baremetalblog.com"
     ];
     group = "nginx";
   };

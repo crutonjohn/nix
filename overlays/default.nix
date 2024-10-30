@@ -1,17 +1,26 @@
-{ lib }:
-
-final: prev:
+{ inputs, ... }:
 let
-  inherit (builtins) listToAttrs pathExists;
-  inherit (prev.lib.trivial) pipe;
+  inherit (inputs.nixpkgs) lib;
 
-  platform = prev.hostPlatform.parsed.kernel.name;
-  overlays = lib.readDirNames ./${platform};
+  lycheeOverlay = self: super: {
+    lychee-slicer = super.callPackage ./lychee-slicer { };
+  };
+  omadaExporterOverlay = self: super: {
+    omada-exporter = super.callPackage ./omada-exporter { };
+  };
 in
-if pathExists ./${platform}
-then
-  pipe overlays [
-    (map (pkg: { name = pkg; value = import ./${platform}/${pkg} final prev; }))
-    listToAttrs
-  ]
-else { }
+{
+  nur = inputs.nur.overlay;
+  lychee-slicer = lycheeOverlay;
+  omada-exporter = omadaExporterOverlay;
+
+  # The unstable nixpkgs set (declared in the flake inputs) will
+  # be accessible through 'pkgs.unstable'
+  unstable-packages = final: _prev: {
+    unstable = import inputs.nixpkgs-unstable {
+      inherit (final) system;
+      config.allowUnfree = true;
+    };
+  };
+
+}

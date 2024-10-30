@@ -7,16 +7,10 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    home = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixos-hardware.url = "github:nixos/nixos-hardware";
-
+    # Nix User Repository: User contributed nix packages
     nur.url = "github:nix-community/nur";
 
     picom.url = "github:Arian8j2/picom-jonaburg-fix";
@@ -26,6 +20,10 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
 
+    # nix-community hardware quirks
+    # https://github.com/nix-community
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
     hyprland.url = "github:hyprwm/Hyprland";
     hypr-contrib.url = "github:hyprwm/contrib";
     hypr-contrib.inputs.nixpkgs.follows = "nixpkgs";
@@ -34,122 +32,140 @@
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixGL.url = "github:guibou/nixGL";
-    nixGL.inputs.nixpkgs.follows = "nixpkgs";
+    # home-manager - Manage user configuration with nix
+    # https://github.com/nix-community/home-manager
+    home = {
+      url = "github:nix-community/home-manager/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    # hugoBlog.url = "github:crutonjohn/baremetalblog";
+    # nix-inspect - inspect nix derivations usingn a TUI interface
+    # https://github.com/bluskript/nix-inspect
+    nix-inspect = {
+      url = "github:bluskript/nix-inspect";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # krewfile - Declarative krew plugin management
+    krewfile = {
+      # url = "github:brumhard/krewfile";
+      url = "github:ajgon/krewfile?ref=feat/indexes";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home, hyprland, nix-index-database, nixGL, nur, sops-nix, ... }@inputs:
+  outputs = { self, nixpkgs, sops-nix, home, hyprland, nix-index-database, krewfile, ... }@inputs:
     let
-      pkgs = nixpkgs.legacyPackages.x86_64-linux.pkgs;
-      overlays = ({ pkgs, ... }: {
-        nixpkgs.overlays = [
-          nixGL.overlay
-          nur.overlay
-        ];
-      });
+      forAllSystems = nixpkgs.lib.genAttrs [
+        "aarch64-linux"
+        "x86_64-linux"
+      ];
+    in
+    rec {
+      # Use nixpkgs-fmt for 'nix fmt'
+      formatter = forAllSystems (system: nixpkgs.legacyPackages."${system}".nixpkgs-fmt);
 
-      nixpkgsFor = forAllSystems (system: import nixpkgs {
-        inherit system;
-      });
+      # setup devshells against shell.nix
+      # devShells = forAllSystems (pkgs: import ./shell.nix { inherit pkgs; });
 
-      mkMachine = name: system: nixpkgs.lib.nixosSystem {
-        inherit system;
-
-        modules = [
-          overlays
-          ./hosts/${name}
-          sops-nix.nixosModules.sops
-
-          home.nixosModules.home-manager
-          {
-            home-manager.users.crutonjohn = ./home/crutonjohn/${name}/default.nix;
-            home-manager.extraSpecialArgs = {
-              inherit inputs;
-              hostname = name;
-            };
-            home-manager.sharedModules = [
-              overlays
-            ];
-          }
-        ];
-
-        specialArgs = {
+      nixosConfigurations =
+        let
           inherit inputs;
-          hostname = name;
-        };
-      };
-
-      inherit (self) outputs;
-      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
-      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-
-      makeShells = system: {
-        inherit system;
-      };
-
-    in rec
-    {
-      colmena = {
-        meta = {
-          nixpkgs = import nixpkgs {
-            system = "x86_64-linux";
-            overlays = [
-              nur.overlay
-            ];
-          };
-          specialArgs = {
-            inherit inputs;
-          };
-        };
-        defaults = {
-          imports = [
-            sops-nix.nixosModules.sops
-          ];
-        };
-        nord = ./hosts/nord;
-      };
-      nixosConfigurations = {
-        wayward = mkMachine "wayward" "x86_64-linux";
-        homeward = mkMachine "homeward" "x86_64-linux";
-        endurance = mkMachine "endurance" "x86_64-linux";
-      };
-
-      devShells = forAllSystems (system:
-        let pkgs = nixpkgsFor.${system}; in
+          # Import overlays for building nixosconfig with them.
+          overlays = import ./overlays { inherit inputs; };
+          # generate a base nixos configuration with the specified overlays, hardware modules, and any AerModules applied
+          mkNixosConfig =
+            { hostname
+            , system ? "x86_64-linux"
+            , nixpkgs ? inputs.nixpkgs
+            , hardwareModules ? [ ]
+              # basemodules is the base of the entire machine building
+              # here we import all the modules and setup home-manager
+            , baseModules ? [
+                sops-nix.nixosModules.sops
+                home.nixosModules.home-manager
+                ./hosts/global # all machines get a global profile
+                ./hosts/${hostname}   # load this host's config folder for machine-specific config
+                {
+                  home-manager = {
+                    useUserPackages = true;
+                    useGlobalPkgs = true;
+                    extraSpecialArgs = {
+                      inherit inputs hostname system;
+                    };
+                  };
+                }
+              ]
+            , profileModules ? [ ]
+            }:
+            nixpkgs.lib.nixosSystem {
+              inherit system;
+              modules = baseModules ++ hardwareModules ++ profileModules;
+              specialArgs = { inherit self inputs nixpkgs; };
+              # Add our overlays
+              pkgs = import nixpkgs {
+                inherit system;
+                overlays = builtins.attrValues overlays;
+                config = {
+                  allowUnfree = true;
+                  allowUnfreePredicate = _: true;
+                };
+              };
+            };
+        in
         {
-          default = pkgs.mkShell {
-            buildInputs = [
-              pkgs.git
-              pkgs.nixfmt
-              pkgs.colmena
-              pkgs.nix-index
-              pkgs.sops
+          "wayward" = mkNixosConfig {
+            # Framework 13 Intel i5-1240P
+            hostname = "wayward";
+            system = "x86_64-linux";
+            hardwareModules = [
+              inputs.nixos-hardware.nixosModules.framework-12th-gen-intel
+              inputs.nixos-hardware.nixosModules.common-pc-ssd
+            ];
+            profileModules = [
+              { home-manager.users.crutonjohn = ./home/crutonjohn/wayward; }
             ];
           };
-        });
-
-      homeConfigurations = {
-        # Work
-        "bjohn@res-lpw733u9" = home.lib.homeManagerConfiguration {
-          pkgs = legacyPackages."x86_64-linux";
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/crutonjohn/res-lpw733u9 ];
+          
+          "nord" = mkNixosConfig {
+            # VPS
+            hostname = "nord";
+            system = "x86_64-linux";
+            profileModules = [
+            ];
+          };
         };
-        # For easy bootstraping from a nixos live usb
-        "nixos@nixos" = home.lib.homeManagerConfiguration {
-          pkgs = legacyPackages."x86_64-linux";
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/crutonjohn/generic.nix ];
+
+      # Convenience output that aggregates the outputs for home, nixos.
+      # Also used in ci to build targets generally.
+      top =
+        let
+          nixtop = nixpkgs.lib.genAttrs
+            (builtins.attrNames inputs.self.nixosConfigurations)
+            (attr: inputs.self.nixosConfigurations.${attr}.config.system.build.toplevel);
+        in
+        nixtop;
+      
+      # Standalone home-manager configurations
+      homeConfigurations =
+        let
+          inherit inputs;
+          overlays = import ./overlays { inherit inputs; };
+        in
+        {
+        # Work
+        "bjohn@work" = home.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            overlays = builtins.attrValues overlays;
+            config = {
+              allowUnfree = true;
+              allowUnfreePredicate = _: true;
+            };
+          };
+          extraSpecialArgs = { inherit inputs; };
+          modules = [ ./home/crutonjohn/work ];
         };
       };
-
-      legacyPackages = forAllSystems (system:
-        import nixpkgs {
-          inherit system;
-          overlays = with outputs.overlays; [ nur.overlay nixGL.overlay ];
-          config.allowUnfree = true;
-        });
     };
+
 }

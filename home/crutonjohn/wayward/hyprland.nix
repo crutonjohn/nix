@@ -4,7 +4,7 @@ let
 in
 {
 
-
+  home.file.".config/wall.jpg".source = ./bg;
 
   imports = [
     ./hyprland-variables.nix

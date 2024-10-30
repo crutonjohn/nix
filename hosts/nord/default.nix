@@ -1,18 +1,17 @@
 { name, nodes, pkgs, lib, inputs, ... }: {
 
-deployment = {
-  targetHost = "nord";
-  targetPort = 22;
-  targetUser = "crutonjohn";
-  buildOnTarget = true;
-};
-
 imports =
   [
-    ./hardware-configuration.nix
+    # ./grafana
+    # ./loki
+    # ./prometheus
+
     ./blog.nix
+    ./hardware-configuration.nix
     ./headscale.nix
+    ./nginx.nix
     ./sops.nix
+    ./tailscale.nix
   ];
 
 boot.loader.grub.enable = true;

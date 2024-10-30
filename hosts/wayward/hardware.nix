@@ -6,7 +6,7 @@
   hardware.enableAllFirmware = true;
   hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [ intel-media-driver vaapiVdpau libvdpau-va-gl vpl-gpu-rt ];
+    extraPackages = with pkgs; [ intel-media-driver vaapiVdpau libvdpau-va-gl ];
   };
   services.fwupd.enable = true;
   services.libinput.touchpad = {

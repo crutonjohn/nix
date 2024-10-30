@@ -10,62 +10,56 @@ The file pattern allows to create additional users under `home/<host>`.
 
 ### System Configuration
 
-The core flake is written to bootstrap my specific laptop, either:
+The core flake is written to bootstrap my specific system(s):
 
-- `endurance`: X11 + XFCE + i3
-- `wayward`: Wayland + Hyprland
+- `wayward`: Laptop with Wayland + Hyprland
+- `nord`: VPS
 
 ### Example
 
-`endurance` is my Framework laptop running i3. It's directories contain the following configuration: a host definition,
-and home-manager configuration.  Its configuration is found in the following directories:
+`wayward` is my Framework laptop running hyprland. Its configuration is found in the following directories:
 
 **Host Path**: `hosts/<host>/`
 **Home-Manager Path**: `home/crutonjohn/<host>/`
 **Home-Manager Common**: `home/crutonjohn/common/`
 
-Current look for X11:
+Current look for Wayland on my laptop:
 
 <p align="center">
-  <a href="https://nixos.org#gh-light-mode-only">
-    <img src="https://raw.githubusercontent.com/crutonjohn/nixos/master/framework-x11.png" width="500px" alt="X11"/>
-  </a>
-  <a href="https://nixos.org#gh-dark-mode-only">
-    <img src="https://raw.githubusercontent.com/crutonjohn/nixos/master/framework-x11.png" width="500px" alt="X11"/>
-  </a>
-</p>
-
-Current look for Wayland
-
-<p align="center">
-  <a href="https://nixos.org#gh-light-mode-only">
+  <a href="https://raw.githubusercontent.com/crutonjohn/nixos/master/framework-wayland.png">
     <img src="https://raw.githubusercontent.com/crutonjohn/nixos/master/framework-wayland.png" width="500px" alt="Wayland"/>
   </a>
-  <a href="https://nixos.org#gh-dark-mode-only">
+  <a href=https://raw.githubusercontent.com/crutonjohn/nixos/master/framework-wayland.png">
     <img src="https://raw.githubusercontent.com/crutonjohn/nixos/master/framework-wayland.png" width="500px" alt="Wayland"/>
   </a>
 </p>
 
-#### Example bootrapping
+#### Example NixOS bootrapping
 
 ```bash
-## Install X11 + XFCE + i3
-sudo nixos-rebuild switch --flake github:crutonjohn/nixos#endurance
-
 ## Install Wayland + Hyprland
 sudo nixos-rebuild switch --flake github:crutonjohn/nixos#wayward
 ```
 
+#### Example home-manager bootstrapping
+
+```bash
+## Install Wayland + Hyprland
+home-manager switch --flake github:crutonjohn/nixos#bjohn@work
+```
+
 ## Actions
 
-My configs follow the `unstable` channel.  A GitHub action updates
-`flake.lock` nightly.
+My configs follow the `stable` channel.  A GitHub action updates `flake.lock` nightly.
 
 ## Attribution
-* Heavily inspired by and borrowed from [reckenrode's](https://github.com/reckenrode) very well organized [nixos-configs](https://github.com/reckenrode/nixos-configs)
-* Some direction from [Ruixi-rebirth's](https://github.com/Ruixi-rebirth/flakes) [flakes](https://github.com/Ruixi-rebirth/flakes)
+* Heavily inspired by and borrowed from:
+  * [reckenrode's](https://github.com/reckenrode) very well organized [nixos-configs](https://github.com/reckenrode/nixos-configs)
+  * [Ruixi-rebirth's](https://github.com/Ruixi-rebirth) [flakes](https://github.com/Ruixi-rebirth/flakes)
+  * [jahanson's](https://github.com/jahanson) nix repo ["mochi"](https://github.com/jahanson/mochi) 
 * The NixOS community on [Reddit](https://www.reddit.com/r/NixOS/)
 * The [Unofficial Nix/NixOS Discord Server](https://discord.com/invite/RbvHtGa)
+* The wonderful folks in the [Home Operations Discord Server](https://discord.gg/home-operations)
 
 # TODO
 - [x] migrate from stinky crusty X11 to shiny beautiful Wayland
@@ -75,7 +69,7 @@ My configs follow the `unstable` channel.  A GitHub action updates
 - [x] nix-ify VPS
 - [x] nix-ify Headscale VPN
 - [x] nix-ify blog
-- [ ] nix-ify the k8s cluster
+- [ ] ~~nix-ify the k8s cluster~~
 - [ ] edit $PATH for pkgs.fish to enable krew plugins (`set -gx PATH $PATH $HOME/.krew/bin`)
 - [ ] create multi-user pattern in `flake.nix`
 

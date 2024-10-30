@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }:
 {
+
   services.xserver.enable = false;
   services.displayManager.sddm = {
     enable = true;
@@ -11,5 +12,10 @@
       sddm-chili-theme
     ];
   };
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+  };
+
 }
 

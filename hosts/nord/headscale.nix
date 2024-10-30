@@ -14,6 +14,7 @@ services.headscale = {
   port = 8080;
   address = "127.0.0.1";
   settings = {
+    metrics_listen_addr = "127.0.0.1:9090";
     server_url = "https://headscale.heyjohn.family";
     dns_config = {
       override_local_dns = true;
@@ -22,7 +23,7 @@ services.headscale = {
         "9.9.9.9"
       ];
       magic_dns = true;
-      base_domain = "heyjohn.family";
+      base_domain = "vpn.heyjohn.family";
     };
     log = {
       level = "info";

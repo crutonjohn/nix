@@ -1,10 +1,12 @@
 { config, lib, pkgs, inputs, outputs, ... }: {
+
   imports = [
-    ../common/personal.nix
-    ./hyprland.nix
+    ../common
     ./git.nix
+    ./hyprland-variables.nix
+    ./hyprland.nix
     ./scripts.nix
-    ./fish.nix
+    ./waybar.nix
   ];
 
   home.username = "crutonjohn";
@@ -12,7 +14,15 @@
 
   home.packages = with pkgs; [
     signal-desktop
-    steam
+    zoom-us
+    wineWowPackages.waylandFull
+    remmina
+    appimage-run
+    jdk11
+    pixman
+    at-spi2-atk
+    mqttui
+    rpi-imager
     discord
     docker-compose
     networkmanager_dmenu
@@ -47,8 +57,45 @@
     catt
     hexchat
     colmena
-    vesktop
     tuxguitar
+    lychee-slicer
+    networkmanager_dmenu
+    docker
+    comma
+    nfs-utils
+    nerdfonts
+    networkmanager
+    powertop
+    pavucontrol
+    pulsemixer
+    volctl
+    zeal
+    psmisc
+    zlib
+    dmenu
+    imagemagick
+    libnotify
+    sonixd
+    neofetch
+    catimg
+    font-manager
+    unixtools.procps
+    pamixer
+    gnome-network-displays
+    gettext
+    gimp
+    galculator
+    termshark
+    nmap
+    virt-manager
+    qemu
+    godot_4
+    helvum
+    brightnessctl
+    lapce
+    nil
+    ceph
+    libgcc
   ];
 
   services.dunst = {
@@ -112,9 +159,5 @@
     enable = true;
     tray = { enable = true; };
   };
-
-  #Desktop Experience
-
-  home.file.".config/wall.jpg".source = ./bg;
 
 }
