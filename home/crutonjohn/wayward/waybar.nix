@@ -190,7 +190,7 @@
           "default" = [ "" "" "" ];
         };
         "states" = {
-          "warning" = 85;
+          "warning" = 15;
         };
         "on-click" = "pavucontrol -t 4";
         "tooltip" = false;

@@ -2,6 +2,7 @@
 
   imports = [
     ../common
+    ./desktop.nix
     ./git.nix
     ./hyprland-variables.nix
     ./hyprland.nix
