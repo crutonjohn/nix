@@ -166,8 +166,8 @@
         "tooltip" = false;
       };
       "hyprland/window" = {
-	  "format" = "{}";
-	  "separate-outputs" = true;
+	      "format" = "{}";
+	      "separate-outputs" = true;
       };
       "wlr/workspaces" = {
         "format" = "{icon}";
@@ -189,9 +189,9 @@
         "format-icons" = {
           "default" = [ "" "" "" ];
         };
-        "states" = {
-          "warning" = 15;
-        };
+        # "states" = {
+        #   "warning" = 90;
+        # };
         "on-click" = "pavucontrol -t 4";
         "tooltip" = false;
       };
