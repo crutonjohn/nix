@@ -29,9 +29,6 @@ Current look for Wayland on my laptop:
   <a href="https://raw.githubusercontent.com/crutonjohn/nixos/master/framework-wayland.png">
     <img src="https://raw.githubusercontent.com/crutonjohn/nixos/master/framework-wayland.png" width="500px" alt="Wayland"/>
   </a>
-  <a href="https://raw.githubusercontent.com/crutonjohn/nixos/master/framework-wayland.png">
-    <img src="https://raw.githubusercontent.com/crutonjohn/nixos/master/framework-wayland.png" width="500px" alt="Wayland"/>
-  </a>
 </p>
 
 #### Example NixOS bootrapping
