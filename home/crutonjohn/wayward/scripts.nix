@@ -14,7 +14,7 @@
 
       case $selected in
         logout)
-          swaymsg exit;;
+          loginctl kill-session $XDG_SESSION_ID;;
         suspend)
           exec systemctl suspend;;
         reboot)

@@ -2,6 +2,8 @@
 
   imports = [
     ../common
+    ./programs
+    ./cursor.nix
     ./desktop.nix
     ./git.nix
     ./hyprland-variables.nix
@@ -15,7 +17,6 @@
 
   home.packages = with pkgs; [
     signal-desktop
-    zoom-us
     wineWowPackages.waylandFull
     remmina
     appimage-run
@@ -44,7 +45,6 @@
     libnotify
     libinput
     sonixd
-    neofetch
     catimg
     tailscale
     swaybg
@@ -61,7 +61,6 @@
     tuxguitar
     lychee-slicer
     networkmanager_dmenu
-    docker
     comma
     nfs-utils
     nerdfonts
@@ -97,6 +96,7 @@
     nil
     ceph
     libgcc
+    owncloud-client
   ];
 
   services.dunst = {

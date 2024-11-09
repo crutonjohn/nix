@@ -2,6 +2,7 @@
 
   imports = [
     ./firefox.nix
+    ./floorp.nix
     ./git.nix
     ./shell.nix
     ./vim.nix
