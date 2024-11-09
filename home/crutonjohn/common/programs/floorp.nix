@@ -104,7 +104,7 @@ in
     "font.name.serif.x-western" = "FiraCode Nerd Font Mono";
 
     "app.update.auto" = true;
-    "browser.toolbars.bookmarks.visibility" = "always";
+    "browser.toolbars.bookmarks.visibility" = "never";
     "browser.urlbar.placeholderName.private" = "Kagi";
     "browser.firefox-view.feature-tour" = "{'screen':'','complete':true}";
     "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.searchEngines" = "kagi";
