@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }: {
 
   imports = [
-    ./firefox.nix
+    # ./firefox.nix
     ./floorp.nix
     ./git.nix
     ./shell.nix
