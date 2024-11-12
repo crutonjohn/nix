@@ -6,7 +6,6 @@
       jnoortheen.nix-ide
       redhat.vscode-yaml
       ms-vscode-remote.remote-ssh
-      3timeslazy.vscodium-devpodcontainers
     ];
     userSettings = {
       "editor.fontFamily" = "FiraCode Nerd Font Mono";
