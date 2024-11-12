@@ -46,7 +46,6 @@
       nix-index
       nixfmt
       openssl
-      p7zip
       pre-commit
       rclone
       ripgrep
@@ -65,6 +64,8 @@
       dyff
       traceroute
       kns
+      p7zip
+      rar
       pkgs.unstable.fluxcd
       pkgs.unstable.zed-editor
     ];

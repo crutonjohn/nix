@@ -30,6 +30,13 @@
 
   nix.settings.trusted-users = [ "root" "crutonjohn" ];
 
+  nix.settings.auto-optimise-store = true;
+
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 30d";
+  };
+
   i18n.defaultLocale = "en_US.UTF-8";
 
 }

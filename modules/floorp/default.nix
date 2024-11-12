@@ -227,7 +227,7 @@ in {
           }
         '';
         description = ''
-          The Floorp package to use. If state version ≥ 19.09 then
+          The Floorp package to use. If state version ≥ 19.09 then
           this should be a wrapped Floorp package. For earlier state
           versions it should be an unwrapped Floorp package.
           Set to `null` to disable installing Floorp.

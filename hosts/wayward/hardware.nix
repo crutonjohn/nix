@@ -23,7 +23,15 @@
   services.logind = {
     lidSwitch = "suspend";
     lidSwitchExternalPower = "lock";
+    extraConfig = ''
+      IdleAction=hybrid-sleep
+      IdleActionSec=2min
+      HandlePowerKey=suspend
+    '';
   };
+
+  programs.xss-lock.enable = true;
+
   # Usbmuxd
   services.usbmuxd.enable = true;
   # Fingerprints
