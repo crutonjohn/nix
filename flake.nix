@@ -53,6 +53,10 @@
       url = "github:ajgon/krewfile?ref=feat/indexes";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # compose2nix - Nixify docker compose
+    compose2nix.url = "github:aksiksi/compose2nix/v0.3.1";
+    compose2nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, sops-nix, home, hyprland, nix-index-database, krewfile, ... }@inputs:
@@ -127,7 +131,7 @@
               { home-manager.users.crutonjohn = ./home/crutonjohn/wayward; }
             ];
           };
-          
+
           "nord" = mkNixosConfig {
             # VPS
             hostname = "nord";
@@ -135,6 +139,13 @@
             profileModules = [
             ];
           };
+
+          "workbench" = mkNixosConfig {
+            # Workbench and Local Volsync Backup Machine
+            hostname = "workbench";
+            system = "x86_64-linux";
+          };
+
         };
 
       # Convenience output that aggregates the outputs for home, nixos.
@@ -146,7 +157,7 @@
             (attr: inputs.self.nixosConfigurations.${attr}.config.system.build.toplevel);
         in
         nixtop;
-      
+
       # Standalone home-manager configurations
       homeConfigurations =
         let
