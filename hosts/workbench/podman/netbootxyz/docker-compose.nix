@@ -23,7 +23,7 @@
   virtualisation.oci-containers.containers."netbootxyz" = {
     image = "ghcr.io/netbootxyz/netbootxyz:0.7.3-nbxyz1@sha256:8dbca4d24354fd6ace12b9970188c866341384df2925753c807e87da83587438";
     environment = {
-      "MENU_VERSION" = "2.0.82";
+      "MENU_VERSION" = "2.0.83";
       "NGINX_PORT" = "80";
       "WEB_APP_PORT" = "3000";
     };

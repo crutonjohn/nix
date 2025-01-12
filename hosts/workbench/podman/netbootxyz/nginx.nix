@@ -3,6 +3,19 @@
 {
 
   services.nginx.virtualHosts = {
+    "_" = {
+      default = true;
+      forceSSL = false;
+      listenAddresses = [
+        "192.168.128.5"
+      ];
+      locations."/" = {
+        root = "/WD-RD0E4NHE/netbootxyz/assets";
+        extraConfig = ''
+          autoindex on;
+        '';
+      };
+    };
     "netboot.heyjohn.family" = {
       enableACME = false;
       acmeRoot = "/var/lib/acme/acme-challenge";
