@@ -7,7 +7,6 @@
     ./shell.nix
     ./vim.nix
     ./vscode.nix
-    ./zsh/zsh.nix
   ];
 
   programs.home-manager.enable = true;
@@ -24,6 +23,7 @@
       containerd
       cz-cli
       dig
+      figlet
       fish
       file
       ffmpegthumbnailer

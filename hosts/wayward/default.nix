@@ -19,11 +19,11 @@
   time.timeZone = "America/New_York";
 
   # SSH Server
-  services.openssh.enable = false;
+  services.openssh.enable = true;
 
   # Enable Flatpak
   services.flatpak.enable = true;
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 
 }

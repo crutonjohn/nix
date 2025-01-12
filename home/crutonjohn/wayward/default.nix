@@ -97,6 +97,8 @@
     ceph
     libgcc
     owncloud-client
+    inputs.compose2nix.packages.x86_64-linux.default
+    bambu-studio
   ];
 
   services.dunst = {
