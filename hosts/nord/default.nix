@@ -4,12 +4,13 @@ imports =
   [
     # ./grafana
     # ./loki
-    # ./prometheus
 
+    ./prometheus
     ./blog.nix
     ./hardware-configuration.nix
     ./headscale.nix
     ./nginx.nix
+    ./podman
     ./sops.nix
     ./tailscale.nix
   ];
