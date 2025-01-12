@@ -1,0 +1,27 @@
+modules:
+  http_2xx:
+    http:
+      fail_if_not_ssl: false
+      follow_redirects: true
+      ip_protocol_fallback: false
+      method: GET
+      preferred_ip_protocol: ip4
+      tls_config:
+        insecure_skip_verify: true
+      valid_http_versions:
+      - HTTP/1.1
+      - HTTP/2.0
+    prober: http
+    timeout: 20s
+  icmp_external:
+    icmp:
+      preferred_ip_protocol: ip4
+      source_ip_address: 172.234.18.199
+    prober: icmp
+    timeout: 5s
+  icmp_internal:
+    icmp:
+      preferred_ip_protocol: ip4
+      source_ip_address: 100.64.0.9
+    prober: icmp
+    timeout: 5s

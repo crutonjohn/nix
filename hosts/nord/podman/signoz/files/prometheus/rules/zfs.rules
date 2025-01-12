@@ -1,0 +1,95 @@
+groups:
+- name: ZFS Rules
+  rules:
+  - alert: ZfsOfflinePool
+    expr: node_zfs_zpool_state{state=~"faulted|offline|unavail"} > 0
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: ZFS offline pool (instance {{ $labels.instance }})
+      description: "A ZFS zpool is in a unexpected state: {{ $labels.state }}.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+  - alert: ZfsDegradedPool
+    expr: node_zfs_zpool_state{state=~"degraded"} > 0
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: ZFS offline pool (instance {{ $labels.instance }})
+      description: "A ZFS zpool is in a unexpected state: {{ $labels.state }}.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+  - alert: ZfsPoolOutOfSpace
+    expr: zfs_pool_free_bytes * 100 / zfs_pool_size_bytes < 10 and ON (instance, device, mountpoint) zfs_pool_readonly == 0
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: ZFS pool out of space (instance {{ $labels.instance }})
+      description: "Disk is almost full (< 10% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+  # 0: ONLINE
+  # 1: DEGRADED
+  # 2: FAULTED
+  # 3: OFFLINE
+  # 4: UNAVAIL
+  # 5: REMOVED
+  # 6: SUSPENDED
+  - alert: ZfsPoolUnhealthy
+    expr: zfs_pool_health > 0
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: ZFS pool unhealthy (instance {{ $labels.instance }})
+      description: "ZFS pool state is {{ $value }}. See comments for more information.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+  - alert: ZfsPoolUnhealthy
+    expr: zfs_pool_health > 0 and zfs_pool_readonly > 0
+    for: 2m
+    labels:
+      severity: critical
+    annotations:
+      summary: ZFS pool readonly and offline ({{ $labels.pool }})
+      description: "ZFS pool {{ $labels.pool }} is in readonly mode."
+  - alert: ZfsCollectorFailed
+    expr: zfs_scrape_collector_success != 1
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: ZFS collector failed (instance {{ $labels.instance }})
+      description: "ZFS collector for {{ $labels.instance }} has failed to collect information\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+  - alert: ZpoolVolumeFillingUp
+    expr: |
+      (zfs_dataset_written_bytes{type="volume"} / zfs_dataset_volume_size_bytes * 100 > 60 and predict_linear(zfs_dataset_written_bytes{type="volume"}[6h], 24 * 60 * 60) < 0 and zfs_pool_readonly == 0)
+    for: 30m
+    labels:
+      severity: warning
+    annotations:
+      summary: Filesystem is predicted to run out of space within the next 24 hours.
+      description: Filesystem on volume {{ $labels.name }} is at {{ printf "%.2f" $value }}% capacity and is filling up.
+  - alert: ZpoolVolumeFillingUp
+    expr: |
+      (zfs_dataset_written_bytes{type="volume"} / zfs_dataset_volume_size_bytes * 100 > 80 and predict_linear(zfs_dataset_written_bytes{type="volume"}[6h], 4 * 60 * 60) < 0 and zfs_pool_readonly == 0)
+    for: 30m
+    labels:
+      severity: critical
+    annotations:
+      summary: Filesystem is predicted to run out of space within the next 4 hours.
+      description: Filesystem on volume {{ $labels.name }} is at {{ printf "%.2f" $value }}% capacity and is filling up.
+  - alert: ZpoolGlobalDataSetFillingUp
+    expr: |
+      (zfs_dataset_logical_used_bytes{name=~"(apollo|wd-pool|boot-pool)"} / zfs_dataset_available_bytes{name=~"(apollo|wd-pool|boot-pool)"} * 100 > 50 and predict_linear(zfs_dataset_logical_used_bytes{name=~"(apollo|wd-pool|boot-pool)"}[6h], 24 * 60 * 60) < 0 and zfs_pool_readonly == 0)
+    for: 30m
+    labels:
+      severity: warning
+    annotations:
+      summary: Filesystem is predicted to run out of space within the next 24 hours.
+      description: Filesystem on volume {{ $labels.name }} is at {{ printf "%.2f" $value }}% capacity and is filling up.
+  - alert: ZpoolGlobalDataSetFillingUp
+    expr: |
+      (zfs_dataset_logical_used_bytes{name=~"(apollo|wd-pool|boot-pool)"} / zfs_dataset_available_bytes{name=~"(apollo|wd-pool|boot-pool)"} * 100 > 80 and predict_linear(zfs_dataset_logical_used_bytes{name=~"(apollo|wd-pool|boot-pool)"}[6h], 4 * 60 * 60) < 0 and zfs_pool_readonly == 0)
+    for: 30m
+    labels:
+      severity: critical
+    annotations:
+      summary: Filesystem is predicted to run out of space within the next 4 hours.
+      description: Filesystem on volume {{ $labels.name }} is at {{ printf "%.2f" $value }}% capacity and is filling up.
+
