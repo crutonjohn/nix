@@ -65,6 +65,10 @@
         "aarch64-linux"
         "x86_64-linux"
       ];
+
+      # expose overlays as flake outputs
+      overlays = import ./overlays { inherit inputs; };
+
     in
     rec {
       # Use nixpkgs-fmt for 'nix fmt'
@@ -72,6 +76,9 @@
 
       # setup devshells against shell.nix
       # devShells = forAllSystems (pkgs: import ./shell.nix { inherit pkgs; });
+
+      # expose overlays as flake outputs
+      inherit overlays;
 
       nixosConfigurations =
         let
