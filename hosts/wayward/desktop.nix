@@ -32,7 +32,7 @@
       xwayland
       pkgs.qt6.qtwayland
       pkgs.qt5.qtwayland
-      cinnamon.nemo
+      nemo
       networkmanagerapplet
       wev
       wf-recorder

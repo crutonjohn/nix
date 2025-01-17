@@ -22,6 +22,6 @@ appimageTools.wrapType2 {
     gsettings-desktop-schemas glib gtk3
 
     # needed for icons
-    gnome.adwaita-icon-theme
+    adwaita-icon-theme
   ]);
 }

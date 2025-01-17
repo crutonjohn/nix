@@ -5,11 +5,11 @@ fullName = "dns issue";
 in
 {
 
-  imports = [
-    ../../../../modules/floorp
-  ];
+#  imports = [
+#    ../../../../modules/floorp
+#  ];
 
-  programs.floorp.enable = 
+  programs.floorp.enable =
     if isDarwin then
       true
     else
@@ -28,7 +28,7 @@ in
   programs.floorp.profiles =
     let
 
-  path = 
+  path =
     if isDarwin then
       "${config.home.homeDirectory}/Library/Application Support/Floorp"
     else
