@@ -16,91 +16,74 @@
   home.homeDirectory = "/home/crutonjohn";
 
   home.packages = with pkgs; [
-    signal-desktop
-    wineWowPackages.waylandFull
-    remmina
     appimage-run
-    jdk11
-    pixman
     at-spi2-atk
-    mqttui
-    rpi-imager
-    discord
-    docker-compose
-    networkmanager_dmenu
-    docker
-    comma
-    nfs-utils
-    nerdfonts
-    networkmanager
-    powertop
-    pavucontrol
-    pulsemixer
-    volctl
-    zeal
-    psmisc
-    zlib
-    dmenu
-    imagemagick
-    libnotify
-    libinput
-    sonixd
+    bambu-studio
+    brightnessctl
     catimg
-    tailscale
-    swaybg
-    waybar
-    wdisplays
-    hyprpaper
-    sway-contrib.grimshot
-    wev
-    inputs.hypr-contrib.packages.${pkgs.system}.grimblast
-    inputs.hyprpicker.packages.${pkgs.system}.hyprpicker
     catt
-    hexchat
+    ceph
     colmena
-    tuxguitar
-    lychee-slicer
-    networkmanager_dmenu
     comma
-    nfs-utils
-    nerdfonts
-    networkmanager
-    powertop
-    pavucontrol
-    pulsemixer
-    volctl
-    zeal
-    psmisc
-    zlib
+    discord
     dmenu
-    imagemagick
-    libnotify
-    sonixd
-    neofetch
-    catimg
+    docker
+    docker-compose
     font-manager
-    unixtools.procps
-    pamixer
-    gnome-network-displays
+    galculator
     gettext
     gimp
-    galculator
-    termshark
-    nmap
-    virt-manager
-    qemu
+    gnome-network-displays
     godot_4
     helvum
-    brightnessctl
-    lapce
-    nil
-    ceph
-    libgcc
-    owncloud-client
+    hexchat
+    hyprpaper
+    imagemagick
     inputs.compose2nix.packages.x86_64-linux.default
-    bambu-studio
-    pog
+    inputs.hypr-contrib.packages.${pkgs.system}.grimblast
+    inputs.hyprpicker.packages.${pkgs.system}.hyprpicker
+    jdk11
+    lapce
+    libgcc
+    libinput
+    libnotify
+    lychee-slicer
+    mqttui
+    neofetch
+    nerdfonts
+    networkmanager
+    networkmanager_dmenu
+    nextcloud-client
+    nfs-utils
+    nil
+    nmap
     openscad
+    pamixer
+    pavucontrol
+    pixman
+    pog
+    powertop
+    psmisc
+    pulsemixer
+    qemu
+    remmina
+    rpi-imager
+    signal-desktop
+    sonixd
+    sway-contrib.grimshot
+    swaybg
+    tailscale
+    termshark
+    tuxguitar
+    unixtools.procps
+    virt-manager
+    volctl
+    waybar
+    wdisplays
+    wev
+    wineWowPackages.waylandFull
+    zeal
+    zlib
   ];
 
   services.dunst = {
