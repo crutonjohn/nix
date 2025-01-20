@@ -112,7 +112,6 @@ in
         }
 
         dwindle {
-          no_gaps_when_only = false
           force_split = 0
           special_scale_factor = 0.8
           split_width_multiplier = 1.0
@@ -124,7 +123,6 @@ in
         master {
           new_on_top = true
           special_scale_factor = 0.8
-          no_gaps_when_only = false
         }
 
         # cursor_inactive_timeout = 0
@@ -133,9 +131,6 @@ in
           inactive_opacity = 1.0
           fullscreen_opacity = 1.0
           rounding = 2
-          drop_shadow = false
-          shadow_range = 4
-          shadow_render_power = 3
           shadow_ignore_window = true
         # col.shadow =
         # col.shadow_inactive
