@@ -51,6 +51,9 @@
       HandlePowerKey=suspend-then-hibernate
     '';
   };
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=720min
+  '';
 
   programs.xss-lock.enable = true;
 
