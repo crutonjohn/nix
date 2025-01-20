@@ -131,13 +131,11 @@ in
           inactive_opacity = 1.0
           fullscreen_opacity = 1.0
           rounding = 2
-          shadow_ignore_window = true
         # col.shadow =
         # col.shadow_inactive
         # shadow_offset
           dim_inactive = false
         # dim_strength = #0.0 ~ 1.0
-          col.shadow = rgba(1a1a1aee)
           blur {
             enabled = true
             size = 3
