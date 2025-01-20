@@ -74,6 +74,7 @@
     swaybg
     tailscale
     termshark
+    tlp
     tuxguitar
     unixtools.procps
     virt-manager
