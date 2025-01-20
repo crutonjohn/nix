@@ -43,12 +43,12 @@
   };
   powerManagement.powertop.enable = true;
   services.logind = {
-    lidSwitch = "suspend";
-    lidSwitchExternalPower = "lock";
+    lidSwitch = "suspend-then-hibernate";
+    lidSwitchExternalPower = "suspend-then-hibernate";
     extraConfig = ''
-      IdleAction=hybrid-sleep
+      IdleAction=suspend-then-hibernate
       IdleActionSec=2min
-      HandlePowerKey=suspend
+      HandlePowerKey=suspend-then-hibernate
     '';
   };
 
