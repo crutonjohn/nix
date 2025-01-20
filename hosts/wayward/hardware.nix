@@ -52,7 +52,7 @@
     '';
   };
   systemd.sleep.extraConfig = ''
-    HibernateDelaySec=720min
+    HibernateDelaySec=180min
   '';
 
   programs.xss-lock.enable = true;
