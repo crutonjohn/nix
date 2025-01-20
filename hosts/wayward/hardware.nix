@@ -18,6 +18,7 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
   #Power stuff
+  services.power-profiles-daemon.enable = false;
   services.tlp = {
     enable = true;
   };
