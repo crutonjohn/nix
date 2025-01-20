@@ -18,7 +18,28 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
   #Power stuff
-  #services.tlp.enable = true;
+  services.tlp = {
+    enable = true;
+  };
+  services.auto-cpufreq = {
+    enable = true;
+    settings = {
+      charger = {
+        governor = "performance";
+        energy_performance_preference = "performance";
+        turbo = "auto";
+        #scaling_min_freq = 800000;
+        #scaling_max_freq = 3500000;
+      };
+      battery = {
+        governor = "powersave";
+        energy_performance_preference = "balance_power";
+        turbo = "never";
+        #scaling_min_freq = 800000;
+        #scaling_max_freq = 2000000;
+      };
+    };
+  };
   powerManagement.powertop.enable = true;
   services.logind = {
     lidSwitch = "suspend";
