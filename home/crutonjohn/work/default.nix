@@ -8,6 +8,7 @@
     ./pasystray.nix
     ./picom.nix
     ./pkgs
+    ../common/
   ];
 
   home.username = "bjohn";
