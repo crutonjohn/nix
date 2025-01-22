@@ -56,8 +56,6 @@
   home.file.".config/i3/ws2.json".source = ./i3/layout/ws2.json;
   home.file.".config/i3/ws3.json".source = ./i3/layout/ws3.json;
   home.file.".config/i3/ws4.json".source = ./i3/layout/ws4.json;
-  home.file.".config/i3/screen_shot.sh".source = ../apps/i3/screen_shot.sh;
-  home.file.".config/i3/lockicon.png".source = ../apps/i3/lockicon.png;
   home.file.".config/polybar/hack" = {
     source = ./polybar/hack;
     recursive = true;
