@@ -38,5 +38,6 @@
     vault
     linode-cli
     jsonnet-bundler
+    teleport_15
   ];
 }
