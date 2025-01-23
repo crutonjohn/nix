@@ -3,7 +3,7 @@
 {
 
   home.packages = with pkgs; [
-    _1password
+    _1password-cli
     _1password-gui
     blueman
     i3status-rust
@@ -37,5 +37,6 @@
     slack
     vault
     linode-cli
+    jsonnet-bundler
   ];
 }
