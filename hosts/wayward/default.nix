@@ -14,6 +14,7 @@
     ./networking.nix
     ./virtualization.nix
     ./vm-hook.nix
+    ./obs.nix
   ];
 
   time.timeZone = "America/New_York";
