@@ -1,11 +1,11 @@
 { pkgs, ... }:
 {
   home.packages = [
-    (pkgs.writeScriptBin "webex" ''
-      #!/usr/bin/env bash
-      pkill CiscoCollabHost
-      /opt/Webex/bin/CiscoCollabHost
-    '')
+#    (pkgs.writeScriptBin "webex" ''
+#      #!/usr/bin/env bash
+#      pkill CiscoCollabHost
+#      /opt/Webex/bin/CiscoCollabHost
+#    '')
 
 
     (pkgs.writeScriptBin "slk" ''
