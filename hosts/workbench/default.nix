@@ -12,14 +12,14 @@
     ./greeter.nix
     ./hardware-configuration.nix
     ./hardware.nix
-    ./vm-hook.nix
     ./loader.nix
     ./networking.nix
     ./nginx.nix
+    ./obs.nix
+    ./smb.nix
     ./virtualization.nix
     ./vm-hook.nix
     ./zfs.nix
-    ./obs.nix
   ];
 
   time.timeZone = "America/New_York";
