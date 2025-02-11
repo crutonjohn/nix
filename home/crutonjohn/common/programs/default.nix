@@ -17,7 +17,6 @@
       awscli2
       alacritty
       asciinema
-      bitwarden
       bitwarden-cli
       cachix
       containerd

@@ -11,12 +11,16 @@ let
   omadaExporterOverlay = self: super: {
     omada-exporter = super.callPackage ./omada-exporter { };
   };
+  bitwardenOverlay = self: super: {
+    bitwarden-gui = super.callPackage ./bitwarden-desktop { };
+  };
 in
 {
   nur = inputs.nur.overlay;
   lychee-slicer = lycheeOverlay;
   pog = pogOverlay;
   omada-exporter = omadaExporterOverlay;
+  bitwarden-gui = bitwardenOverlay;
 
   # The unstable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.unstable'

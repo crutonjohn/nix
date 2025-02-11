@@ -19,6 +19,7 @@
     appimage-run
     at-spi2-atk
     bambu-studio
+    bitwarden-gui
     brightnessctl
     catimg
     catt
