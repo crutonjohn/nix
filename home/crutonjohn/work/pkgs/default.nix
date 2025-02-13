@@ -39,6 +39,5 @@
     linode-cli
     jsonnet-bundler
     teleport_15
-    obs-studio
   ];
 }
