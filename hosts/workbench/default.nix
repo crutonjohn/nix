@@ -14,6 +14,7 @@
     ./hardware.nix
     ./loader.nix
     ./networking.nix
+    ./nfs.nix
     ./nginx.nix
     ./obs.nix
     ./smb.nix
