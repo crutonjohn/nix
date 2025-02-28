@@ -5,9 +5,9 @@
   services.nfs.server = {
     enable = true;
     # Configure the shares
-    exports = [
+    exports = ''
       "/mnt/apollo/games/ark *(rw,sync,no_subtree_check)"
-    ];
+    '';
   };
 
 # Set up the directories for the shares
