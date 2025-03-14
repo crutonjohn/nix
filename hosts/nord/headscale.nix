@@ -16,9 +16,9 @@ services.headscale = {
   settings = {
     metrics_listen_addr = "127.0.0.1:9090";
     server_url = "https://headscale.heyjohn.family";
-    dns_config = {
+    dns = {
       override_local_dns = true;
-      nameservers = [
+      nameservers.global = [
         "192.168.130.1"
         "9.9.9.9"
       ];
