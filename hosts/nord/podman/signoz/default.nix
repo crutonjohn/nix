@@ -8,7 +8,7 @@
     [
       ./files
       ./nginx.nix
-
+      ./certs.nix
     ];
 
 
@@ -30,83 +30,7 @@
   virtualisation.oci-containers.backend = "podman";
 
   # Containers
-  virtualisation.oci-containers.containers."hotrod" = {
-    image = "jaegertracing/example-hotrod:1.30";
-    environment = {
-      "JAEGER_ENDPOINT" = "http://otel-collector:14268/api/traces";
-    };
-    cmd = [ "all" ];
-    extraOptions = [
-      "--log-opt=max-file=3"
-      "--log-opt=max-size=50m"
-      "--network-alias=hotrod"
-      "--network=signoz_default"
-      "--log-opt=max-size=10mb"
-      #"--log-opt=path=/var/log/container/{{.Name}}.json"
-
-    ];
-  };
-  systemd.services."podman-hotrod" = {
-    serviceConfig = {
-      Restart = lib.mkOverride 90 "no";
-    };
-    after = [
-      "podman-network-signoz_default.service"
-    ];
-    requires = [
-      "podman-network-signoz_default.service"
-    ];
-    partOf = [
-      "podman-compose-signoz-root.target"
-    ];
-    wantedBy = [
-      "podman-compose-signoz-root.target"
-    ];
-  };
-  virtualisation.oci-containers.containers."load-hotrod" = {
-    image = "signoz/locust:1.2.3";
-    environment = {
-      "ATTACKED_HOST" = "http://hotrod:8080";
-      "LOCUST_MODE" = "standalone";
-      "LOCUST_OPTS" = "--headless -u 10 -r 1";
-      "NO_PROXY" = "standalone";
-      "QUIET_MODE" = "false";
-      "TASK_DELAY_FROM" = "5";
-      "TASK_DELAY_TO" = "30";
-    };
-    volumes = [
-      "/etc/signoz/load-testing/locust-scripts:/locust:rw"
-    ];
-    log-driver = "k8s-file";
-    extraOptions = [
-      "--hostname=load-hotrod"
-      "--network-alias=load-hotrod"
-      "--network=signoz_default"
-      "--log-opt=max-size=10mb"
-      #"--log-opt=path=/var/log/container/{{.Name}}.json"
-
-    ];
-  };
-  systemd.services."podman-load-hotrod" = {
-    serviceConfig = {
-      Restart = lib.mkOverride 90 "no";
-    };
-    after = [
-      "podman-network-signoz_default.service"
-    ];
-    requires = [
-      "podman-network-signoz_default.service"
-    ];
-    partOf = [
-      "podman-compose-signoz-root.target"
-    ];
-    wantedBy = [
-      "podman-compose-signoz-root.target"
-    ];
-    unitConfig.RequiresMountsFor = [
-      "/etc/signoz/load-testing/locust-scripts"
-    ];
-  };
+      # "JAEGER_ENDPOINT" = "http://otel-collector:14268/api/traces";
   virtualisation.oci-containers.containers."otel-migrator-async" = {
     image = "signoz/signoz-schema-migrator:0.111.5";
     cmd = [ "async" "--dsn=tcp://clickhouse:9000" "--up=" ];
@@ -141,7 +65,7 @@
     ];
   };
   virtualisation.oci-containers.containers."otel-migrator-sync" = {
-    image = "signoz/signoz-schema-migrator:0.111.5";
+    image = "signoz/signoz-schema-migrator:0.111.29";
     cmd = [ "sync" "--dsn=tcp://clickhouse:9000" "--up=" ];
     dependsOn = [
       "signoz-clickhouse"
@@ -269,7 +193,7 @@
     ];
   };
   virtualisation.oci-containers.containers."signoz-frontend" = {
-    image = "signoz/frontend:0.65.1";
+    image = "signoz/frontend:0.74.0";
     volumes = [
       "/etc/signoz/frontend/nginx-config.conf:/etc/nginx/conf.d/default.conf:rw"
     ];
@@ -309,60 +233,21 @@
       "/etc/signoz/frontend/nginx-config.conf"
     ];
   };
-  virtualisation.oci-containers.containers."signoz-logspout" = {
-    image = "gliderlabs/logspout:v3.2.14";
-    volumes = [
-      "/etc/hostname:/etc/host_hostname:ro"
-      "/run/podman/podman.sock:/var/run/docker.sock:rw"
-    ];
-    cmd = [ "syslog+tcp://otel-collector:2255" ];
-    dependsOn = [
-      "signoz-otel-collector"
-    ];
-    log-driver = "k8s-file";
-    extraOptions = [
-      "--network-alias=logspout"
-      "--network=signoz_default"
-      "--log-opt=max-size=10mb"
-      #"--log-opt=path=/var/log/container/{{.Name}}.json"
-
-    ];
-  };
-  systemd.services."podman-signoz-logspout" = {
-    serviceConfig = {
-      Restart = lib.mkOverride 90 "on-failure";
-    };
-    after = [
-      "podman-network-signoz_default.service"
-    ];
-    requires = [
-      "podman-network-signoz_default.service"
-    ];
-    partOf = [
-      "podman-compose-signoz-root.target"
-    ];
-    wantedBy = [
-      "podman-compose-signoz-root.target"
-    ];
-    unitConfig.RequiresMountsFor = [
-      "/etc/hostname"
-      "/run/podman/podman.sock"
-    ];
-  };
   virtualisation.oci-containers.containers."signoz-otel-collector" = {
-    image = "signoz/signoz-otel-collector:0.111.5";
+    image = "signoz/signoz-otel-collector:0.111.29";
     environment = {
       "LOW_CARDINAL_EXCEPTION_GROUPING" = "false";
-      "OTEL_RESOURCE_ATTRIBUTES" = "host.name=nord.heyjohn.family,os.type=linux";
+      "OTEL_RESOURCE_ATTRIBUTES" = "host.name=otelgw.internal.heyjohn.family,os.type=linux";
     };
     volumes = [
       "/etc/signoz/otel-collector/otel-collector-config.yaml:/etc/otel-collector-config.yaml:rw"
       "/etc/signoz/otel-collector/otel-collector-opamp-config.yaml:/etc/manager-config.yaml:rw"
+      "/var/lib/acme/otelgw.internal.heyjohn.family:/var/lib/acme/otelgw.internal.heyjohn.family:ro"
       "/var/lib/containers:/var/lib/containers:ro"
     ];
     ports = [
-      "100.64.0.9:4317:4317/tcp"
-      "100.64.0.9:4318:4318/tcp"
+      "0.0.0.0:4317:4317/tcp"
+      "0.0.0.0:4318:4318/tcp"
     ];
     cmd = [ "--config=/etc/otel-collector-config.yaml" "--manager-config=/etc/manager-config.yaml" "--copy-path=/var/tmp/collector-config.yaml" "--feature-gates=-pkg.translator.prometheus.NormalizeName" ];
     dependsOn = [
@@ -403,7 +288,7 @@
     ];
   };
   virtualisation.oci-containers.containers."signoz-query-service" = {
-    image = "signoz/query-service:0.65.1";
+    image = "signoz/query-service:0.74.0";
     environment = {
       "ALERTMANAGER_API_PREFIX" = "http://alertmanager:9093/api/";
       "ClickHouseUrl" = "tcp://clickhouse:9000";
