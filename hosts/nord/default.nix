@@ -13,6 +13,7 @@ imports =
     ./podman
     ./sops.nix
     ./tailscale.nix
+    ./otelcol
   ];
 
 boot.loader.grub.enable = true;
