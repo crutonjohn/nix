@@ -14,6 +14,9 @@ let
   bitwardenOverlay = self: super: {
     bitwarden-gui = super.callPackage ./bitwarden-desktop { };
   };
+  baremetalblogOverlay = self: super: {
+    baremetalblog = super.callPackage ./baremetalblog { };
+  };
 in
 {
   nur = inputs.nur.overlay;
@@ -21,6 +24,7 @@ in
   pog = pogOverlay;
   omada-exporter = omadaExporterOverlay;
   bitwarden-gui = bitwardenOverlay;
+  baremetalblog = baremetalblogOverlay;
 
   # The unstable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.unstable'
