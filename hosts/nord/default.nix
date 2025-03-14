@@ -73,6 +73,8 @@ environment.systemPackages = with pkgs; [
   sysstat
   dig
   openssl
+  tcpdump
+  step-cli
 ];
 
 services.openssh = {
@@ -80,7 +82,7 @@ services.openssh = {
   settings.PermitRootLogin = "no";
 };
 
-networking.firewall.allowedTCPPorts = [ 22 80 443 ];
+networking.firewall.allowedTCPPorts = [ 22 80 443 4317 4318 ];
 # networking.firewall.allowedUDPPorts = [ ... ];
 networking.firewall.enable = true;
 networking.usePredictableInterfaceNames = false;
