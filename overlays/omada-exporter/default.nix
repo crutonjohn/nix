@@ -2,7 +2,7 @@
 
 buildGoModule rec {
   pname = "omada-exporter";
-  version = "v0.13.0";
+  version = "v0.13.1";
 
   src = fetchFromGitHub {
     owner = "charlie-haley";
