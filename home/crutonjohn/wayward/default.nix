@@ -71,6 +71,7 @@
     rpi-imager
     signal-desktop
     sonixd
+    step-cli
     sway-contrib.grimshot
     swaybg
     tailscale
