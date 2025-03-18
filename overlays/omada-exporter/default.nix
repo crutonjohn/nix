@@ -8,7 +8,7 @@ buildGoModule rec {
     owner = "charlie-haley";
     repo = "omada_exporter";
     rev = version;
-    sha256 = "sha256-JedDF9uFUiYGwV6HATtbXDu08Ft0KRw08/sKSW+aqRo=";
+    sha256 = "sha256-zJBwGWY9/DqcK4Oew8DbJ8R/hssVSCIhtqT5MSt4/00=";
   };
 
   vendorHash = "sha256-m4zc2/BVvhCuk+WWxBu283qF/kdeRZdYGv3N3zIslgU=";

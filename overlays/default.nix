@@ -17,6 +17,9 @@ let
   baremetalblogOverlay = self: super: {
     baremetalblog = super.callPackage ./baremetalblog { };
   };
+  otelcolOverlay = self: super: {
+    otelcol = super.callPackage ./otelcol { };
+  };
 in
 {
   nur = inputs.nur.overlay;
@@ -25,6 +28,7 @@ in
   omada-exporter = omadaExporterOverlay;
   bitwarden-gui = bitwardenOverlay;
   baremetalblog = baremetalblogOverlay;
+  otelcol = otelcolOverlay;
 
   # The unstable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.unstable'

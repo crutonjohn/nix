@@ -7,6 +7,7 @@
 
   services.opentelemetry-collector = {
     enable = true;
+    package = pkgs.otelcol;
     configFile = "/etc/otelcol/config.yaml";
   };
 
