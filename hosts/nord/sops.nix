@@ -9,6 +9,7 @@
       "tailscale/nord/preauthkey" = { };
       "alertmanager/environmentFile" = { };
       "prometheus/exporters/omada/environmentFile" = { };
+      "prometheus/alertmanager/environmentFile" = { };
     };
   };
 }

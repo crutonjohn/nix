@@ -173,7 +173,7 @@
         in
         {
         # Work
-        "bjohn@work" = home.lib.homeManagerConfiguration {
+        "bjohn@host" = home.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             system = "x86_64-linux";
             overlays = builtins.attrValues overlays;
@@ -183,7 +183,7 @@
             };
           };
           extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home/crutonjohn/work ];
+          modules = [ ./home/crutonjohn/common ];
         };
       };
     };

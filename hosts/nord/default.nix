@@ -2,18 +2,20 @@
 
 imports =
   [
-    # ./grafana
-    # ./loki
+    ../global
 
+    # ./loki
+    #./podman
+    #./otelcol
+
+    ./grafana
     ./prometheus
     ./blog.nix
     ./hardware-configuration.nix
     ./headscale.nix
     ./nginx.nix
-    ./podman
     ./sops.nix
     ./tailscale.nix
-    ./otelcol
   ];
 
 boot.loader.grub.enable = true;
@@ -29,6 +31,12 @@ boot.kernel.sysctl = {
   "net.ipv6.conf.default.disable_ipv6" = 1;
 
   "net.ipv6.conf.lo.disable_ipv6" = 1;
+};
+
+networking.nameservers = [ "192.168.130.1" "9.9.9.9" ];
+
+networking.hosts = {
+  "192.168.142.2" = [ "ra.heyjohn.family" ];
 };
 
 nix.settings.trusted-users = [ "root" "@wheel" ];
@@ -48,6 +56,22 @@ users.users.crutonjohn = {
 # really bad deployment tool hack
 # need to limit the scope of the commands in the future
 security.sudo.wheelNeedsPassword = false;
+
+security.pki.certificates = [
+  ''
+    -----BEGIN CERTIFICATE-----
+    MIIBlzCCAT2gAwIBAgIQUpQBQxZIqmRM7G2TXqG+6TAKBggqhkjOPQQDAjAqMSgw
+    JgYDVQQDEx9oZXlqb2huLmZhbWlseSBJbnRlcm5hbCBSb290IENBMB4XDTI1MDMw
+    MjA3MDE1MFoXDTM1MDIyODA3MDE1MFowKjEoMCYGA1UEAxMfaGV5am9obi5mYW1p
+    bHkgSW50ZXJuYWwgUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJ3X
+    mNYRYbLLKbGizAKZR3lYxPqnsnXmPotYokuY+vKJ8iuc7nFbSKLbl95EKR1gMY6u
+    iO9zmxqsBMGff6kvb66jRTBDMA4GA1UdDwEB/wQEAwIBhjASBgNVHRMBAf8ECDAG
+    AQH/AgEBMB0GA1UdDgQWBBTlfB3jEuTS6VvJdlv7ZZxrOY4fnDAKBggqhkjOPQQD
+    AgNIADBFAiEAr8RV0ixLb0c2zCQeJc1SfCRDC6rhT9xWey62p+qpmzYCIBXz63ba
+    tBOU7WFC8guYTAO9xMu35MnTgYD7K0OLLGvG
+    -----END CERTIFICATE-----
+  ''
+];
 
 # https://nixos.wiki/wiki/Fail2ban
 services.fail2ban = {

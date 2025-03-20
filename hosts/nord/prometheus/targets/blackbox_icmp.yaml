@@ -1,0 +1,5 @@
+- targets:
+    - 'dyn4.crutonjohn.com:443'
+  labels:
+    datacenter: lyh
+    service: opnsense

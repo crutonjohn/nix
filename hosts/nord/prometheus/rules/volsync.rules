@@ -1,0 +1,17 @@
+groups:
+- name: volsync rules
+  rules:
+  - alert: VolSyncVolumeOutOfSync
+    expr: count by (obj_name) (volsync_volume_out_of_sync{obj_name!~".*bootstrap"} == 1)
+    for: 15m
+    labels:
+      severity: critical
+    annotations:
+      summary: Restic Backup Job {{ $labels.obj_name }} out of sync
+  - alert: VolSyncComponentAbsent
+    expr: absent(up{job="k8s_pods",app_kubernetes_io_name="volsync"})
+    for: 15m
+    labels:
+      severity: critical
+    annotations:
+      summary: VolSync component has disappeared from Prometheus target discovery.

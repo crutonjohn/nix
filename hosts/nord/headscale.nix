@@ -14,7 +14,7 @@ services.headscale = {
   port = 8080;
   address = "127.0.0.1";
   settings = {
-    metrics_listen_addr = "127.0.0.1:9090";
+    metrics_listen_addr = "127.0.0.1:9080";
     server_url = "https://headscale.heyjohn.family";
     dns = {
       override_local_dns = true;
@@ -22,8 +22,8 @@ services.headscale = {
         "192.168.130.1"
         "9.9.9.9"
       ];
-      magic_dns = true;
-      base_domain = "vpn.heyjohn.family";
+      magic_dns = false;
+      # base_domain = "vpn.heyjohn.family";
     };
     log = {
       level = "info";
@@ -54,7 +54,6 @@ services.headscale = {
 services.nginx.virtualHosts = {
   "headscale.heyjohn.family" = {
     enableACME = true;
-    acmeRoot = "/var/lib/acme/acme-challenge";
     forceSSL = true;
     locations."/" = {
       proxyPass = "http://127.0.0.1:8080/";

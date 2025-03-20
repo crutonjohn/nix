@@ -5,6 +5,7 @@
 
     ./minio
     ./podman
+    ./prometheus
 
     inputs.nixos-hardware.nixosModules.common-pc-ssd
     ./desktop.nix

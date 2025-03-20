@@ -1,0 +1,23 @@
+- targets:
+    - https://cloud.linode.com
+    - https://vault.bitwarden.com
+    - https://github.com
+  labels:
+    datacenter: external
+    service: cloud
+- targets:
+    - https://speedof.heyjohn.family
+  labels:
+    datacenter: lyh
+    service: speedtest
+- targets:
+    - https://omada.heyjohn.family
+  labels:
+    datacenter: lyh
+    service: omada
+- targets:
+    - https://baremetalblog.com
+  labels:
+    datacenter: ord
+    environment: production
+    service: blog

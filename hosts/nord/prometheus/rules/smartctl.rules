@@ -1,0 +1,20 @@
+groups:
+- name: custom smartctl rules
+  rules:
+  - alert: SmartReallocSector
+    expr: sum by (serial_number,model_name)(increase(smartprom_reallocated_sector_ct_raw[24h])) >= 5
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: Unsafe increase in reallocated sectors
+      description: "Disk: {{ $labels.model_name }} Serial Num: {{ $labels.serial_number }}"
+  - alert: SmartReallocSector
+    expr: sum by (serial_number,model_name)(increase(smartprom_reallocated_sector_ct_raw[24h])) >= 2
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      summary: Unsafe increase in reallocated sectors
+      description: "Disk: {{ $labels.model_name }} Serial Num: {{ $labels.serial_number }}"
+
