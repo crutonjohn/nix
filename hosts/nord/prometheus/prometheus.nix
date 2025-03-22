@@ -30,6 +30,9 @@ services.prometheus = {
   enableReload = true;
   retentionTime = "30d";
   checkConfig = false;
+  extraFlags = [
+    "--web.enable-remote-write-receiver"
+  ];
   ruleFiles = [
     "/etc/prometheus/rules/*.rules"
   ];

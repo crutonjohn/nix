@@ -1,0 +1,51 @@
+auth_enabled: false
+
+server:
+  http_listen_port: 3100
+  grpc_listen_port: 9096
+
+common:
+  instance_addr: 100.64.0.9
+  path_prefix: /var/lib/loki
+  storage:
+    filesystem:
+      rules_directory: /var/lib/loki/rules
+  replication_factor: 1
+  ring:
+    kvstore:
+      store: inmemory
+
+query_range:
+  results_cache:
+    cache:
+      embedded_cache:
+        enabled: true
+        max_size_mb: 1000
+
+schema_config:
+  configs:
+    - from: 2020-10-24
+      store: tsdb
+      object_store: filesystem
+      schema: v13
+      index:
+        prefix: index_
+        period: 24h
+
+limits_config:
+  retention_period: 30d
+  allow_structured_metadata: true
+
+compactor:
+  retention_enabled: true
+  delete_request_store: filesystem
+
+storage_config:
+  filesystem:
+    directory: /var/lib/loki/chunks
+
+ruler:
+  alertmanager_url: http://127.0.0.1:9093
+
+analytics:
+ reporting_enabled: false
