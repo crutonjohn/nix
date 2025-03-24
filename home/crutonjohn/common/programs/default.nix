@@ -51,6 +51,7 @@
       screen
       sops
       sqlite
+      telegram
       terraform
       tree
       unzip
