@@ -51,7 +51,7 @@
       screen
       sops
       sqlite
-      telegram
+      telegram-desktop
       terraform
       tree
       unzip
@@ -67,7 +67,7 @@
       p7zip
       rar
       pkgs.unstable.fluxcd
-      pkgs.unstable.zed-editor
+      zed-editor
     ];
   };
 
