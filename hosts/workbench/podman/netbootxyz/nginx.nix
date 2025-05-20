@@ -7,7 +7,7 @@
       default = true;
       forceSSL = false;
       listenAddresses = [
-        "192.168.128.5"
+        "192.168.130.4"
       ];
       locations."/" = {
         root = "/WD-RD0E4NHE/netbootxyz/assets";
@@ -21,7 +21,7 @@
       acmeRoot = "/var/lib/acme/acme-challenge";
       forceSSL = false;
       listenAddresses = [
-        "192.168.128.5"
+        "192.168.130.4"
       ];
       locations."/" = {
         proxyPass = "http://127.0.0.1:3000";
@@ -34,7 +34,7 @@
       acmeRoot = "/var/lib/acme/acme-challenge";
       forceSSL = false;
       listenAddresses = [
-        "192.168.128.5"
+        "192.168.130.4"
       ];
       locations."/" = {
         proxyPass = "http://127.0.0.1:8080";

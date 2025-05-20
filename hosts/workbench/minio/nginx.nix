@@ -8,12 +8,12 @@
       forceSSL = false;
       listen = [
         {
-          addr = "192.168.128.5";
+          addr = "192.168.130.4";
           port = 9001;
         }
       ];
       listenAddresses = [
-        "192.168.128.5"
+        "192.168.130.4"
       ];
       locations."/" = {
         proxyPass = "http://${config.services.minio.consoleAddress}";
@@ -35,12 +35,12 @@
       forceSSL = false;
       listen = [
         {
-          addr = "192.168.128.5";
+          addr = "192.168.130.4";
           port = 9000;
         }
       ];
       listenAddresses = [
-        "192.168.128.5"
+        "192.168.130.4"
       ];
       locations."/" = {
         proxyPass = "http://${config.services.minio.listenAddress}";

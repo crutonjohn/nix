@@ -14,7 +14,7 @@
       "/WD-RD0E4NHE/volsync/minio"
     ];
     configDir = "/WD-RD0E4NHE/volsync/minio-config";
-    consoleAddress = "192.168.128.5:9001";
-    listenAddress = "192.168.128.5:9000";
+    consoleAddress = "192.168.130.4:9001";
+    listenAddress = "192.168.130.4:9000";
   };
 }

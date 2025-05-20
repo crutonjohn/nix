@@ -4,10 +4,10 @@ imports =
   [
     ../global
 
-    # ./loki
     #./podman
     #./otelcol
 
+    ./loki
     ./grafana
     ./prometheus
     ./blog.nix
@@ -33,7 +33,7 @@ boot.kernel.sysctl = {
   "net.ipv6.conf.lo.disable_ipv6" = 1;
 };
 
-networking.nameservers = [ "192.168.130.1" "9.9.9.9" ];
+networking.nameservers = [ "192.168.130.2" "192.168.130.3" ];
 
 networking.hosts = {
   "192.168.142.2" = [ "ra.heyjohn.family" ];
