@@ -20,9 +20,3 @@
   labels:
     datacenter: lyh
     service: nut
-- targets:
-    - 'cs-us-ord.heyjohn.family:9100'
-  labels:
-    datacenter: ord
-    service: counterstrike
-

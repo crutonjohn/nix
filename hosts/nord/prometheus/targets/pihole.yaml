@@ -1,0 +1,6 @@
+- targets:
+    - 'peanut1.heyjohn.family:9617'
+    - 'peanut2.heyjohn.family:9617'
+  labels:
+    datacenter: lyh
+    service: pihole

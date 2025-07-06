@@ -114,7 +114,8 @@ services.prometheus = {
       metrics_path = "/metrics";
       file_sd_configs = [{
         files = [
-          "/etc/prometheus/targets/nodes.yaml"
+          "/etc/prometheus/targets/nodes-internal.yaml"
+          "/etc/prometheus/targets/nodes-external.yaml"
           "/etc/prometheus/targets/user.yaml"
         ];
       }];
@@ -181,15 +182,16 @@ services.prometheus = {
       ];
     }
     {
-      job_name = "blackbox_icmp_internal";
+      # gets renamed to blackbox_icmp
+      job_name = "blackbox_icmp_external";
       scrape_timeout = "15s";
       scrape_interval = "60s";
       metrics_path = "/probe";
       params = {
-        module = [ "icmp_internal" ];
+        module = [ "icmp_external" ];
       };
       file_sd_configs = [{
-        files = [ "/etc/prometheus/targets/nodes.yaml" ];
+        files = [ "/etc/prometheus/targets/nodes-external.yaml" ];
       }];
       relabel_configs = [
         {
@@ -205,6 +207,47 @@ services.prometheus = {
         {
           target_label = "__address__";
           replacement = "${config.services.prometheus.exporters.blackbox.listenAddress}:${toString config.services.prometheus.exporters.blackbox.port}";
+        }
+        {
+          source_labels = [ "job"];
+          regex = "(.*)";
+          replacement = "blackbox_icmp";
+          target_label = "job";
+        }
+      ];
+    }
+    {
+      # gets renamed to blackbox_icmp
+      job_name = "blackbox_icmp_internal";
+      scrape_timeout = "15s";
+      scrape_interval = "60s";
+      metrics_path = "/probe";
+      params = {
+        module = [ "icmp_internal" ];
+      };
+      file_sd_configs = [{
+        files = [ "/etc/prometheus/targets/nodes-internal.yaml" ];
+      }];
+      relabel_configs = [
+        {
+          source_labels = [ "__address__" ];
+          regex = "(.*):(.*)";
+          replacement = "$1";
+          target_label = "__param_target";
+        }
+        {
+          source_labels = [ "__param_target" ];
+          target_label = "instance";
+        }
+        {
+          target_label = "__address__";
+          replacement = "${config.services.prometheus.exporters.blackbox.listenAddress}:${toString config.services.prometheus.exporters.blackbox.port}";
+        }
+        {
+          source_labels = [ "job"];
+          regex = "(.*)";
+          replacement = "blackbox_icmp";
+          target_label = "job";
         }
       ];
     }
@@ -224,13 +267,22 @@ services.prometheus = {
       metrics_path = "/metrics";
       static_configs = [
         {
-          targets = [ "${config.services.prometheus.exporters.blackbox.listenAddress}:${toString config.services.prometheus.exporters.blackbox.port}" ];
+          targets = [ "100.64.0.9:3100" ];
           labels = {
             datacenter = "ord";
             instance = "loki.heyjohn.family";
           };
         }
       ];
+    }
+    {
+      job_name = "pihole";
+      scrape_timeout = "30s";
+      scrape_interval = "60s";
+      metrics_path = "/metrics";
+      file_sd_configs = [{
+        files = [ "/etc/prometheus/targets/pihole.yaml" ];
+      }];
     }
 
   ];

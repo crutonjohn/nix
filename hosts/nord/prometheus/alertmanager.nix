@@ -35,7 +35,7 @@ services.nginx.virtualHosts = {
 };
 
 # idea: use a fake virtualhost listening on public ip to get the cert
-## and make sure the fake virtualhost has the real domain, but 
+## and make sure the fake virtualhost has the real domain, but
 ## they share the same useACMEHost directive.
 
 services.prometheus.alertmanager = {
@@ -44,7 +44,17 @@ services.prometheus.alertmanager = {
   port = 9093;
   environmentFile = "/run/secrets/prometheus/alertmanager/environmentFile";
   checkConfig = false;
-  configText = ''
+  configText = builtins.replaceStrings [
+    "@AM_PUSHOVER_TOKEN@"
+    "@AM_PUSHOVER_USER_KEY@"
+    "@AM_DISCORD_ARK_WEBHOOK@"
+    "@AM_DISCORD_GENERIC_WEBHOOK@"
+  ] [
+    "\${AM_PUSHOVER_TOKEN}"
+    "\${AM_PUSHOVER_USER_KEY}"
+    "\${AM_DISCORD_ARK_WEBHOOK}"
+    "\${AM_DISCORD_GENERIC_WEBHOOK}"
+  ] ''
     global:
       resolve_timeout: 3m
     templates:
@@ -52,13 +62,30 @@ services.prometheus.alertmanager = {
     receivers:
       - name: pushover
         pushover_configs:
-          - token: $ENVIRONMENT $AM_PUSHOVER_TOKEN
-            user_key: $ENVIRONMENT $AM_PUSHOVER_USER_KEY
+          - token: "@AM_PUSHOVER_TOKEN@"
+            user_key: "@AM_PUSHOVER_USER_KEY@"
       - name: discord_ark
-        slack_configs:
-          - api_url: $ENVIRONMENT $AM_DISCORD_ARK_SLACK_WEBHOOK
-            channel: '#ark'
-
+        discord_configs:
+        - webhook_url: "@AM_DISCORD_ARK_WEBHOOK@"
+          title: '{{ .CommonLabels.alertname }}'
+          message: |
+            {{ range .Alerts }}
+            **Alert:** {{ .Labels.alertname }}
+            **Severity:** {{ .Labels.severity }}
+            **Instance:** {{ .Labels.instance }}
+            **Description:** {{ .Annotations.description }}
+            {{ end }}
+      - name: discord_generic
+        discord_configs:
+        - webhook_url: "@AM_DISCORD_GENERIC_WEBHOOK@"
+          title: '{{ .CommonLabels.alertname }}'
+          message: |
+            {{ range .Alerts }}
+            **Alert:** {{ .Labels.alertname }}
+            **Severity:** {{ .Labels.severity }}
+            **Instance:** {{ .Labels.instance }}
+            **Description:** {{ .Annotations.description }}
+            {{ end }}
     inhibit_rules:
     - equal:
       - instance
@@ -129,10 +156,15 @@ services.prometheus.alertmanager = {
       repeat_interval: 24h
       routes:
       - continue: true
-        group_wait: 10s
         matchers:
         - container=~"(ark.*)"
         receiver: discord_ark
+      - receiver: discord_generic
+        matchers:
+        - severity="warning"
+      - receiver: pushover
+        matchers:
+        - severity="critical"
   '';
 
 };

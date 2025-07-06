@@ -29,7 +29,7 @@ groups:
     rules:
       - alert: "CephMonDownQuorumAtRisk"
         annotations:
-          description: "{{ $min := query \"floor(count(ceph_mon_metadata) / 2) + 1\" | first | value }}Quorum requires a majority of monitors (x {{ $min }}) to be active. Without quorum the cluster will become inoperable, affecting all services and connected clients. The following monitors are down: {{- range query \"(ceph_mon_quorum_status == 0) + on(ceph_daemon) group_left(hostname) (ceph_mon_metadata * 0)\" }} - {{ .Labels.ceph_daemon }} on {{ .Labels.hostname }} {{- end }}"
+          description: "{{ $min := query \"floor(count(ceph_mon_metadata) / 2) + 1\" | first | value }}Quorum requires a majority of monitors (x {{ $min }}) to be active. Without quorum the cluster will become inoperable, affecting all services and connected clients. The following monitors are down: {{- range query \"(ceph_mon_quorum_status == 0) + on(ceph_daemon,rook_cluster) group_left(hostname) (ceph_mon_metadata * 0)\" }} - {{ .Labels.ceph_daemon }} on {{ .Labels.hostname }} {{- end }}"
           documentation: "https://docs.ceph.com/en/latest/rados/operations/health-checks#mon-down"
           summary: "Monitor quorum is at risk"
         expr: |
@@ -46,7 +46,7 @@ groups:
       - alert: "CephMonDown"
         annotations:
           description: |
-            {{ $down := query "count(ceph_mon_quorum_status == 0)" | first | value }}{{ $s := "" }}{{ if gt $down 1.0 }}{{ $s = "s" }}{{ end }}You have {{ $down }} monitor{{ $s }} down. Quorum is still intact, but the loss of an additional monitor will make your cluster inoperable.  The following monitors are down: {{- range query "(ceph_mon_quorum_status == 0) + on(ceph_daemon) group_left(hostname) (ceph_mon_metadata * 0)" }}   - {{ .Labels.ceph_daemon }} on {{ .Labels.hostname }} {{- end }}
+            {{ $down := query "count(ceph_mon_quorum_status == 0)" | first | value }}{{ $s := "" }}{{ if gt $down 1.0 }}{{ $s = "s" }}{{ end }}You have {{ $down }} monitor{{ $s }} down. Quorum is still intact, but the loss of an additional monitor will make your cluster inoperable.  The following monitors are down: {{- range query "(ceph_mon_quorum_status == 0) + on(ceph_daemon,rook_cluster) group_left(hostname) (ceph_mon_metadata * 0)" }}   - {{ .Labels.ceph_daemon }} on {{ .Labels.hostname }} {{- end }}
           documentation: "https://docs.ceph.com/en/latest/rados/operations/health-checks#mon-down"
           summary: "One or more monitors down"
         expr: |
@@ -90,7 +90,7 @@ groups:
     rules:
       - alert: "CephOSDDownHigh"
         annotations:
-          description: "{{ $value | humanize }}% or {{ with query \"count(ceph_osd_up == 0)\" }}{{ . | first | value }}{{ end }} of {{ with query \"count(ceph_osd_up)\" }}{{ . | first | value }}{{ end }} OSDs are down (>= 10%). The following OSDs are down: {{- range query \"(ceph_osd_up * on(ceph_daemon) group_left(hostname) ceph_osd_metadata) == 0\" }} - {{ .Labels.ceph_daemon }} on {{ .Labels.hostname }} {{- end }}"
+          description: "{{ $value | humanize }}% or {{ with query \"count(ceph_osd_up == 0)\" }}{{ . | first | value }}{{ end }} of {{ with query \"count(ceph_osd_up)\" }}{{ . | first | value }}{{ end }} OSDs are down (>= 10%). The following OSDs are down: {{- range query \"(ceph_osd_up * on(ceph_daemon,rook_cluster) group_left(hostname) ceph_osd_metadata) == 0\" }} - {{ .Labels.ceph_daemon }} on {{ .Labels.hostname }} {{- end }}"
           summary: "More than 10% of OSDs are down"
         expr: "count(ceph_osd_up == 0) / count(ceph_osd_up) * 100 >= 10"
         for: "5m"
@@ -100,7 +100,7 @@ groups:
           type: "ceph_default"
       - alert: "CephOSDHostDown"
         annotations:
-          description: "The following OSDs are down: {{- range query \"(ceph_osd_up * on(ceph_daemon) group_left(hostname) ceph_osd_metadata) == 0\" }} - {{ .Labels.hostname }} : {{ .Labels.ceph_daemon }} {{- end }}"
+          description: "The following OSDs are down: {{- range query \"(ceph_osd_up * on(ceph_daemon,rook_cluster) group_left(hostname) ceph_osd_metadata) == 0\" }} - {{ .Labels.hostname }} : {{ .Labels.ceph_daemon }} {{- end }}"
           summary: "An OSD host is offline"
         expr: "ceph_health_detail{name=\"OSD_HOST_DOWN\"} == 1"
         for: "5m"
@@ -111,7 +111,7 @@ groups:
       - alert: "CephOSDDown"
         annotations:
           description: |
-            {{ $num := query "count(ceph_osd_up == 0)" | first | value }}{{ $s := "" }}{{ if gt $num 1.0 }}{{ $s = "s" }}{{ end }}{{ $num }} OSD{{ $s }} down for over 5mins. The following OSD{{ $s }} {{ if eq $s "" }}is{{ else }}are{{ end }} down: {{- range query "(ceph_osd_up * on(ceph_daemon) group_left(hostname) ceph_osd_metadata) == 0"}} - {{ .Labels.ceph_daemon }} on {{ .Labels.hostname }} {{- end }}
+            {{ $num := query "count(ceph_osd_up == 0)" | first | value }}{{ $s := "" }}{{ if gt $num 1.0 }}{{ $s = "s" }}{{ end }}{{ $num }} OSD{{ $s }} down for over 5mins. The following OSD{{ $s }} {{ if eq $s "" }}is{{ else }}are{{ end }} down: {{- range query "(ceph_osd_up * on(ceph_daemon,rook_cluster) group_left(hostname) ceph_osd_metadata) == 0"}} - {{ .Labels.ceph_daemon }} on {{ .Labels.hostname }} {{- end }}
           documentation: "https://docs.ceph.com/en/latest/rados/operations/health-checks#osd-down"
           summary: "An OSD has been marked down"
         expr: "ceph_health_detail{name=\"OSD_DOWN\"} == 1"
@@ -226,7 +226,7 @@ groups:
           description: "OSD {{ $labels.ceph_daemon }} on {{ $labels.hostname }} was marked down and back up {{ $value | humanize }} times once a minute for 5 minutes. This may indicate a network issue (latency, packet loss, MTU mismatch) on the cluster network, or the public network if no cluster network is deployed. Check the network stats on the listed host(s)."
           documentation: "https://docs.ceph.com/en/latest/rados/troubleshooting/troubleshooting-osd#flapping-osds"
           summary: "Network issues are causing OSDs to flap (mark each other down)"
-        expr: "(rate(ceph_osd_up[5m]) * on(ceph_daemon) group_left(hostname) ceph_osd_metadata) * 60 > 1"
+        expr: "(rate(ceph_osd_up[5m]) * on(ceph_daemon,rook_cluster) group_left(hostname) ceph_osd_metadata) * 60 > 1"
         labels:
           oid: "1.3.6.1.4.1.50495.1.2.1.4.4"
           severity: "warning"
@@ -249,7 +249,7 @@ groups:
           abs(
             ((ceph_osd_numpg > 0) - on (job) group_left avg(ceph_osd_numpg > 0) by (job)) /
             on (job) group_left avg(ceph_osd_numpg > 0) by (job)
-          ) * on (ceph_daemon) group_left(hostname) ceph_osd_metadata > 0.30
+          ) * on (ceph_daemon,rook_cluster) group_left(hostname) ceph_osd_metadata > 0.30
         for: "5m"
         labels:
           oid: "1.3.6.1.4.1.50495.1.2.1.4.5"
@@ -361,7 +361,7 @@ groups:
         annotations:
           description: "{{ $value }} PGs have been inactive for more than 5 minutes in pool {{ $labels.name }}. Inactive placement groups are not able to serve read/write requests."
           summary: "One or more placement groups are inactive"
-        expr: "ceph_pool_metadata * on(pool_id,instance) group_left() (ceph_pg_total - ceph_pg_active) > 0"
+        expr: "ceph_pool_metadata * on(pool_id,instance,rook_cluster) group_left() (ceph_pg_total - ceph_pg_active) > 0"
         for: "5m"
         labels:
           oid: "1.3.6.1.4.1.50495.1.2.1.7.1"
@@ -371,7 +371,7 @@ groups:
         annotations:
           description: "{{ $value }} PGs have been unclean for more than 15 minutes in pool {{ $labels.name }}. Unclean PGs have not recovered from a previous failure."
           summary: "One or more placement groups are marked unclean"
-        expr: "ceph_pool_metadata * on(pool_id,instance) group_left() (ceph_pg_total - ceph_pg_clean) > 0"
+        expr: "ceph_pool_metadata * on(pool_id,instance,rook_cluster) group_left() (ceph_pg_total - ceph_pg_clean) > 0"
         for: "15m"
         labels:
           oid: "1.3.6.1.4.1.50495.1.2.1.7.2"
@@ -656,7 +656,7 @@ groups:
         annotations:
           description: "The prometheus job that scrapes from Ceph MGR is no longer defined, this will effectively mean you'll have no metrics or alerts for the cluster.  Please review the job definitions in the prometheus.yml file of the prometheus instance."
           summary: "The scrape job for Ceph MGR is missing from Prometheus"
-        expr: "absent(up{job=\"rook-ceph-mgr\"})"
+        expr: "absent(up{job=\"k8s_pods\",app=\"rook-ceph-exporter\"})"
         for: "30s"
         labels:
           oid: "1.3.6.1.4.1.50495.1.2.1.12.1"
@@ -666,7 +666,7 @@ groups:
         annotations:
           description: "The prometheus job that scrapes from Ceph Exporter is no longer defined, this will effectively mean you'll have no metrics or alerts for the cluster.  Please review the job definitions in the prometheus.yml file of the prometheus instance."
           summary: "The scrape job for Ceph Exporter is missing from Prometheus"
-        expr: "sum(absent(up{job=\"rook-ceph-exporter\"})) and sum(ceph_osd_metadata{ceph_version=~\"^ceph version (1[89]|[2-9][0-9]).*\"}) > 0"
+        expr: "sum(absent(up{job=\"k8s_pods\",app=\"rook-ceph-exporter\"})) and sum(ceph_osd_metadata{ceph_version=~\"^ceph version (1[89]|[2-9][0-9]).*\"}) > 0"
         for: "30s"
         labels:
           oid: "1.3.6.1.4.1.50495.1.2.1.12.1"

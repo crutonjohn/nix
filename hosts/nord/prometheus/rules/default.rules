@@ -169,7 +169,7 @@ groups:
       summary: Host physical component too hot (instance {{ $labels.instance }})
       description: "Physical hardware component too hot\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
   - alert: HostSystemdServiceCrashed
-    expr: (node_systemd_unit_state{state="failed",name!="user@0.service"} == 1) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
+    expr: (node_systemd_unit_state{state="failed",name!~"(user@0|openipmi|nvmf-autoconnect).service"} == 1) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
     for: 10m
     labels:
       severity: warning

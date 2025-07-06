@@ -1,6 +1,0 @@
-- targets:
-    - '100.64.0.9:9202'
-  labels:
-    datacenter: lyh
-    service: omada
-

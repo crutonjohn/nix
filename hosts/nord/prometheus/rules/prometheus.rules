@@ -238,8 +238,9 @@ groups:
         summary: Prometheus TSDB WAL truncations failed (instance {{ $labels.instance }})
         description: "Prometheus encountered {{ $value }} TSDB WAL truncation failures\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: PrometheusTimeserieCardinality
-      expr: 'count by (__name__) ({__name__=~".+",__name__!~"(etcd_request_duration_seconds_bucket|apiserver_request_duration_seconds_bucket|apiserver_request_slo_duration_seconds_bucket|apiserver_response_sizes_bucket|rest_client_rate_limiter_duration_seconds_bucket|rest_client_request_duration_seconds_bucket)"}) > 10000'
+    - alert: PrometheusTimeseriesCardinality
+      expr: label_replace(count by(__name__) ({__name__=~".+"}), "name", "$1", "__name__", "(.+)") > 10000
+      # expr: 'count by (__name__) ({__name__!~"(etcd_request_duration_seconds_bucket|apiserver_request_duration_seconds_bucket|apiserver_request_slo_duration_seconds_bucket|apiserver_response_sizes_bucket|rest_client_rate_limiter_duration_seconds_bucket|rest_client_request_duration_seconds_bucket,apiserver_request_body_size_bytes_bucket)",datacenter=~"(lyh|ord)"}) > 10000'
       for: 0m
       labels:
         severity: warning
