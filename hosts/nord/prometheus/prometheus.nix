@@ -23,6 +23,23 @@ environment.etc = {
     "prometheus/rules".source = ./rules;
 };
 
+sops = {
+  secrets = {
+    "prometheus/minio/bench/cluster-token" = {
+      owner = "prometheus";
+    };
+    "prometheus/minio/bench/node-token" = {
+      owner = "prometheus";
+    };
+    "prometheus/minio/bench/bucket-token" = {
+      owner = "prometheus";
+    };
+    "prometheus/minio/bench/resource-token" = {
+      owner = "prometheus";
+    };
+  };
+};
+
 services.prometheus = {
   enable = true;
   listenAddress = "100.64.0.9";
