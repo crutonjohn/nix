@@ -153,7 +153,7 @@ services.prometheus.alertmanager = {
       group_interval: 5m
       group_wait: 30s
       receiver: pushover
-      repeat_interval: 24h
+      repeat_interval: 72h
       routes:
       - continue: true
         matchers:
