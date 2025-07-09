@@ -10,6 +10,18 @@
       "alertmanager/environmentFile" = { };
       "prometheus/exporters/omada/environmentFile" = { };
       "prometheus/alertmanager/environmentFile" = { };
+      "prometheus/minio/bench/cluster-token" = {
+        owner = "prometheus";
+      };
+      "prometheus/minio/bench/node-token" = {
+        owner = "prometheus";
+      };
+      "prometheus/minio/bench/bucket-token" = {
+        owner = "prometheus";
+      };
+      "prometheus/minio/bench/resource-token" = {
+        owner = "prometheus";
+      };
     };
   };
 }

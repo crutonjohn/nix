@@ -18,7 +18,7 @@
 
     devenv.url = "github:cachix/devenv/latest";
 
-    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.url = "github:Mic92/sops-nix/8e873886bbfc32163fe027b8676c75637b7da114";
 
     # nix-community hardware quirks
     # https://github.com/nix-community
