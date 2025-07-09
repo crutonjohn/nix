@@ -268,15 +268,15 @@ services.prometheus = {
         }
       ];
     }
-    {
-      job_name = "omada";
-      scrape_timeout = "30s";
-      scrape_interval = "60s";
-      metrics_path = "/metrics";
-      file_sd_configs = [{
-        files = [ "/etc/prometheus/targets/omada.yaml" ];
-      }];
-    }
+    #{
+    #  job_name = "omada";
+    #  scrape_timeout = "30s";
+    #  scrape_interval = "60s";
+    #  metrics_path = "/metrics";
+    #  file_sd_configs = [{
+    #    files = [ "/etc/prometheus/targets/omada.yaml" ];
+    #  }];
+    #}
     {
       job_name = "loki";
       scrape_timeout = "30s";
