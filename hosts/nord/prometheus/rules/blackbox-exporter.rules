@@ -93,7 +93,7 @@ groups:
         description: "ICMP success rate %{{ $value }} on {{ $labels.instance }} for 2m"
 
     - alert: BlackboxHTTPJobFailed
-      exgr: 'avg by (instance) (avg_over_time({__name__="probe_success",job=~"blackbox_http.*"}[1h])) * 100 <= 50'
+      expr: 'avg by (instance) (avg_over_time({__name__="probe_success",job=~"blackbox_http.*"}[1h])) * 100 <= 50'
       for: 5m
       labels:
         severity: warning
