@@ -5,13 +5,13 @@ groups:
   rules:
 
     - alert: ContainerKilled
-      expr: 'time() - container_last_seen{container_label_com_docker_compose_service!=""} > 60'
+      expr: 'time() - container_last_seen{} > 60'
       for: 0m
       labels:
         severity: warning
       annotations:
-        summary: Container killed (instance {{ $labels.container }})
-        description: "A container has disappeared\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: Container killed or missing
+        description: "Container {{ $labels.pod }} {{ $labels.container }} has disappeared"
 
     - alert: ContainerAbsent
       expr: 'absent(container_last_seen)'
@@ -19,8 +19,8 @@ groups:
       labels:
         severity: warning
       annotations:
-        summary: Container absent (instance {{ $labels.container }})
-        description: "A container is absent for 5 min\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: Container is absent
+        description: "Container {{ $labels.pod }} {{ $labels.container }} is absent for 5 min"
 
     - alert: ContainerHighCpuUtilization
       expr: '(sum(rate(container_cpu_usage_seconds_total{name!=""}[3m])) BY (instance, container, container_label_com_docker_compose_project, pod) * 100) > 80'
@@ -28,8 +28,8 @@ groups:
       labels:
         severity: warning
       annotations:
-        summary: Container High CPU utilization (instance {{ $labels.container }})
-        description: "Container CPU utilization is above 80%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: Container High CPU utilization
+        description: "{{ $labels.pod }} container {{ $labels.container }} CPU utilization is above 80%"
 
     - alert: ContainerHighMemoryUsage
       expr: '(sum(container_memory_working_set_bytes{container!=""}) BY (instance, container, container_label_com_docker_compose_project, pod) / sum(container_spec_memory_limit_bytes > 0) BY (instance, container, container_label_com_docker_compose_project, pod) * 100) > 80'
@@ -37,8 +37,8 @@ groups:
       labels:
         severity: warning
       annotations:
-        summary: Container High Memory usage (instance {{ $labels.container }})
-        description: "Container Memory usage is above 80%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: Container High Memory utilization
+        description: "{{ $labels.pod }} container {{ $labels.container }} Memory utilization is above 80%"
 
     - alert: ContainerVolumeUsage
       expr: '(1 - (sum(container_fs_inodes_free{name=~"!cadvisor|!caddy|!ntfy-alertmanager"}) BY (instance) / sum(container_fs_inodes_total) BY (instance))) * 100 > 80'

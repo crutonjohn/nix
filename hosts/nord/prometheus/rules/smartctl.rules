@@ -1,6 +1,56 @@
 groups:
-- name: custom smartctl rules
+- name: smartctl-rules
   rules:
+  ### smartctl-exporter derived
+  - alert: SmartCTLDeviceMediaErrors
+    expr: smartctl_device_media_errors != 0
+    for: 1m
+    annotations:
+      summary: Device has media errors
+      description: Device {{ $labels.device }} on instance {{ or $labels.instance $labels.node }} has media errors
+    labels:
+      severity: critical
+  - alert: SmartCTLDeviceCriticalWarning
+    expr: smartctl_device_critical_warning != 0
+    for: 1m
+    annotations:
+      summary: Device has critical controller warnings
+      description: Device {{ $labels.device }} on instance {{ or $labels.instance $labels.node }} has critical controller warnings
+    labels:
+      severity: critical
+  - alert: SmartCTLDeviceAvailableSpareUnderThreshold
+    expr: smartctl_device_available_spare_threshold > smartctl_device_available_spare
+    for: 1m
+    annotations:
+      summary: Device is under available spare threshold
+      description: Device {{ $labels.device }} on instance {{ or $labels.instance $labels.node }} is under available spare threshold
+    labels:
+      severity: warning
+  - alert: SmartCTLDeviceStatus
+    expr: smartctl_device_status != 1
+    for: 1m
+    annotations:
+      summary: Device has bad status
+      description: Device {{ $labels.device }} on instance {{ or $labels.instance $labels.node }} has bad status
+    labels:
+      severity: critical
+  - alert: SmartCTLDInterfaceSlow
+    expr: smartctl_device_interface_speed{speed_type="current"} != on(device, instance, namespace, pod) smartctl_device_interface_speed{speed_type="max"}
+    for: 1m
+    annotations:
+      summary: Device interface is slower then it should be
+      description: Device {{ $labels.device }} on instance {{ or $labels.instance $labels.node }} interface is slower then it should be
+    labels:
+      severity: warning
+  - alert: SmartCTLDDeviceTemperature
+    expr: smartctl_device_temperature{temperature_type="current"} > 60
+    for: 1m
+    annotations:
+      summary: Device has temperature higher than 60°C
+      description: Device {{ $labels.device }} on instance {{ or $labels.instance $labels.node }} has temperature higher than 60°C
+    labels:
+      severity: warning
+  ### Node Exporter Derived ###
   - alert: SmartReallocSector
     expr: sum by (serial_number,model_name)(increase(smartprom_reallocated_sector_ct_raw[24h])) >= 5
     for: 0m

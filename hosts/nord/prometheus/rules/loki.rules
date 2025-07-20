@@ -10,8 +10,8 @@ groups:
       labels:
         severity: warning
       annotations:
-        summary: Loki process too many restarts (instance {{ $labels.instance }})
-        description: "A loki process had too many restarts (target {{ $labels.instance }})\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: Loki process too many restarts
+        description: "A loki process had too many restarts on {{ $labels.instance }}"
 
     - alert: LokiRequestErrors
       expr: '100 * sum(rate(loki_request_duration_seconds_count{status_code=~"5.."}[1m])) by (namespace, job, route) / sum(rate(loki_request_duration_seconds_count[1m])) by (namespace, job, route) > 10'
@@ -19,8 +19,8 @@ groups:
       labels:
         severity: critical
       annotations:
-        summary: Loki request errors (instance {{ $labels.instance }})
-        description: "The {{ $labels.job }} and {{ $labels.route }} are experiencing errors\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: Loki request errors
+        description: "Loki endpoint {{ $labels.route }} is experiencing errors"
 
     - alert: LokiRequestPanic
       expr: 'sum(increase(loki_panic_total[10m])) by (namespace, job) > 0'
@@ -28,14 +28,14 @@ groups:
       labels:
         severity: critical
       annotations:
-        summary: Loki request panic (instance {{ $labels.instance }})
-        description: "The {{ $labels.job }} is experiencing {{ printf \"%.2f\" $value }}% increase of panics\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: Loki request panic
+        description: "Loki is experiencing {{ printf \"%.2f\" $value }}% increase of panics"
 
     - alert: LokiRequestLatency
-      expr: '(histogram_quantile(0.99, sum(rate(loki_request_duration_seconds_bucket{route!~"(?i).*tail.*"}[5m])) by (le)))  > 1'
+      expr: '(histogram_quantile(0.99, sum(rate(loki_request_duration_seconds_bucket{route!~"(?i).*tail.*"}[5m])) by (le,route)))  > 1'
       for: 5m
       labels:
         severity: critical
       annotations:
         summary: Loki request latency (instance {{ $labels.instance }})
-        description: "The {{ $labels.job }} {{ $labels.route }} is experiencing {{ printf \"%.2f\" $value }}s 99th percentile latency\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        description: "The Loki route {{ $labels.route }} is experiencing {{ printf \"%.2f\" $value }}s 99th percentile latency"

@@ -11,7 +11,7 @@ groups:
         severity: critical
       annotations:
         summary: Minio cluster disk offline (instance {{ $labels.instance }})
-        description: "Minio cluster disk is offline\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        description: "Minio cluster disk is offline"
 
     - alert: MinioNodeDiskOffline
       expr: 'minio_cluster_nodes_offline_total > 0'
@@ -20,13 +20,31 @@ groups:
         severity: critical
       annotations:
         summary: Minio node disk offline (instance {{ $labels.instance }})
-        description: "Minio cluster node disk is offline\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        description: "Minio cluster node disk is offline"
 
     - alert: MinioDiskSpaceUsage
-      expr: 'disk_storage_available / disk_storage_total * 100 < 10'
+      expr: 'minio_cluster_capacity_usable_free_bytes / minio_cluster_capacity_usable_total_bytes * 100 < 10'
       for: 0m
       labels:
         severity: warning
       annotations:
-        summary: Minio disk space usage (instance {{ $labels.instance }})
-        description: "Minio available free space is low (< 10%)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: Minio disk space usage
+        description: "Minio available free space is low (< 10%)"
+
+    - alert: MinioStorageFillingUp
+      expr: '(minio_cluster_capacity_usable_free_bytes / minio_cluster_capacity_usable_total_bytes * 100 < 40 and predict_linear(minio_cluster_capacity_usable_free_bytes[6h], 24 * 60 * 60) < 0)'
+      for: 30m
+      labels:
+        severity: warning
+      annotations:
+        summary: Minio {{ $labels.instance}} is predicted to run out of space within the next 24 hours
+        description: "Storage on {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left and is filling up"
+
+    - alert: MinioStorageFillingUp
+      expr: '(minio_cluster_capacity_usable_free_bytes / minio_cluster_capacity_usable_total_bytes * 100 < 20 and predict_linear(minio_cluster_capacity_usable_free_bytes[6h], 4 * 60 * 60) < 0)'
+      for: 30m
+      labels:
+        severity: critical
+      annotations:
+        summary: Minio {{ $labels.instance}} is predicted to run out of space within the next 4 hours
+        description: "Storage on {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left and is filling up"

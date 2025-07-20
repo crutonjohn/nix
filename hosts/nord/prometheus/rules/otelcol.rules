@@ -2,18 +2,18 @@ groups:
   - name: opentelemetry-collector
     rules:
       - alert: OTelLogSendFailure
-        expr: sum by (pod,host,environment) (rate(otelcol_exporter_send_failed_log_records{}[5m])) * 100 > 50
+        expr: sum by (pod,instance) (rate(otelcol_exporter_send_failed_log_records{}[5m])) * 100 > 50
         for: 10m
         labels:
           severity: critical
         annotations:
-          summary: "{{ $labels.pod }} on labels.node Failed Sending 50% of logs"
+          summary: "{{ $labels.instance }} Failed Sending 50% of logs"
           description: Collector has restarted or it reached some limits
       - alert: OTelQueueCapacity
-        expr: sum by (pod,host,environment) ((otelcol_exporter_queue_size / otelcol_exporter_queue_capacity) * 100) > 50
+        expr: sum by (pod,instance) ((otelcol_exporter_queue_size / otelcol_exporter_queue_capacity) * 100) > 50
         for: 10m
         labels:
           severity: critical
         annotations:
-          summary: "{{ $labels.pod }} on labels.node Queue Backing Up"
+          summary: "{{ $labels.instance }} Queue Backing Up"
           description: Destination has a problem or used payload is not correct

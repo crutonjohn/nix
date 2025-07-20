@@ -22,11 +22,29 @@ groups:
         summary: Traefik high HTTP 4xx error rate service (instance {{ $labels.instance }})
         description: "Traefik service {{ $labels.service }} 4xx error rate is above 30%"
 
+    - alert: TraefikHighHttp4xxErrorRateService
+      expr: 'sum(rate(traefik_service_requests_total{code=~"4.*"}[10m])) by (service) / sum(rate(traefik_service_requests_total[3m])) by (service) * 100 > 5'
+      for: 1m
+      labels:
+        severity: warning
+      annotations:
+        summary: Traefik high HTTP 4xx error rate service (instance {{ $labels.instance }})
+        description: "Traefik service {{ $labels.service }} 4xx error rate is above 30%"
+
     - alert: TraefikHighHttp5xxErrorRateService
       expr: 'sum(rate(traefik_service_requests_total{code=~"5.*"}[10m])) by (service) / sum(rate(traefik_service_requests_total[3m])) by (service) * 100 > 30'
       for: 1m
       labels:
         severity: critical
+      annotations:
+        summary: Traefik high HTTP 5xx error rate service (instance {{ $labels.instance }})
+        description: "Traefik service {{ $labels.service }} 5xx error rate is above 30%"
+
+    - alert: TraefikHighHttp5xxErrorRateService
+      expr: 'sum(rate(traefik_service_requests_total{code=~"5.*"}[10m])) by (service) / sum(rate(traefik_service_requests_total[3m])) by (service) * 100 > 5'
+      for: 1m
+      labels:
+        severity: warning
       annotations:
         summary: Traefik high HTTP 5xx error rate service (instance {{ $labels.instance }})
         description: "Traefik service {{ $labels.service }} 5xx error rate is above 30%"
