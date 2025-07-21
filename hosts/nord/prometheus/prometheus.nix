@@ -50,7 +50,7 @@ services.prometheus = {
   extraFlags = [
     "--web.enable-remote-write-receiver"
     "--web.enable-lifecycle"
-    "--web.enable-admin-api"
+    "--web.external-url https://prometheus.heyjohn.family"
   ];
   ruleFiles = [
     "/etc/prometheus/rules/*.rules"

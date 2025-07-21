@@ -42,6 +42,7 @@ services.prometheus.alertmanager = {
   enable = true;
   listenAddress = "127.0.0.1";
   port = 9093;
+  webExternalUrl = "https://alerts.heyjohn.family";
   environmentFile = "/run/secrets/prometheus/alertmanager/environmentFile";
   checkConfig = false;
   configText = builtins.replaceStrings [
