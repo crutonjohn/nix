@@ -38,7 +38,7 @@ groups:
         severity: warning
       annotations:
         summary: Minio {{ $labels.instance}} is predicted to run out of space within the next 24 hours
-        description: "Storage on {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left and is filling up"
+        description: "Storage on {{ $labels.instance }} has only {{ $value | humanize }}% available space left and is filling up"
 
     - alert: MinioStorageFillingUp
       expr: '(minio_cluster_capacity_usable_free_bytes / minio_cluster_capacity_usable_total_bytes * 100 < 20 and predict_linear(minio_cluster_capacity_usable_free_bytes[6h], 4 * 60 * 60) < 0)'
@@ -47,4 +47,4 @@ groups:
         severity: critical
       annotations:
         summary: Minio {{ $labels.instance}} is predicted to run out of space within the next 4 hours
-        description: "Storage on {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left and is filling up"
+        description: "Storage on {{ $labels.instance }} has only {{ $value | humanize }}% available space left and is filling up"

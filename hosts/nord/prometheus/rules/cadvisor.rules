@@ -4,14 +4,15 @@ groups:
 
   rules:
 
-    - alert: ContainerKilled
-      expr: 'time() - container_last_seen{} > 60'
-      for: 0m
-      labels:
-        severity: warning
-      annotations:
-        summary: Container killed or missing
-        description: "Container {{ $labels.pod }} {{ $labels.container }} has disappeared"
+# need to investigate why this is so noisy
+#    - alert: ContainerKilled
+#      expr: 'time() - container_last_seen{} > 60'
+#      for: 0m
+#      labels:
+#        severity: warning
+#      annotations:
+#        summary: Container killed or missing
+#        description: "Container {{ $labels.pod }} {{ $labels.container }} has disappeared"
 
     - alert: ContainerAbsent
       expr: 'absent(container_last_seen)'
