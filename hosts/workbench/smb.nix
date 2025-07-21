@@ -38,6 +38,16 @@
         "force user" = "crutonjohn";
         "force group" = "users";
       };
+      "music" = {
+        "path" = "/mnt/apollo/k8/music-library";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "root";
+        "force group" = "users";
+      };
       "root" = {
         "path" = "/WD-RD0E4NHE";
         "browseable" = "yes";
