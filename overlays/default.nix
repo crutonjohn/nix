@@ -22,7 +22,7 @@ let
   };
 in
 {
-  nur = inputs.nur.overlay;
+  nur = inputs.nur.overlays.default;
   lychee-slicer = lycheeOverlay;
   pog = pogOverlay;
   omada-exporter = omadaExporterOverlay;
