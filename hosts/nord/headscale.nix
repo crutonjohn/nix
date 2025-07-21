@@ -9,6 +9,10 @@ sops = {
   };
 };
 
+networking.hosts = {
+  "127.0.0.1" = [ "headscale.heyjohn.family" ];
+};
+
 services.headscale = {
   enable = true;
   port = 8080;
@@ -19,8 +23,8 @@ services.headscale = {
     dns = {
       override_local_dns = true;
       nameservers.global = [
-        "192.168.130.1"
-        "9.9.9.9"
+        "192.168.130.2"
+        "192.168.130.3"
       ];
       magic_dns = false;
       # base_domain = "vpn.heyjohn.family";
