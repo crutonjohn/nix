@@ -1,10 +1,8 @@
-{ lib, buildGoModule, fetchFromGitHub }:
-
 {
   buildGoModule,
   fetchFromGitHub,
-  lib,
   stdenv,
+  lib,
   systemdMinimal,
   withSystemd ? false,
 }:
