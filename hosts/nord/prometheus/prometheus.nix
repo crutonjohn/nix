@@ -49,6 +49,8 @@ services.prometheus = {
   checkConfig = false;
   extraFlags = [
     "--web.enable-remote-write-receiver"
+    "--web.enable-lifecycle"
+    "--web.enable-admin-api"
   ];
   ruleFiles = [
     "/etc/prometheus/rules/*.rules"
