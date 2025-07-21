@@ -48,7 +48,7 @@ groups:
         severity: warning
       annotations:
         summary: Container Volume usage (instance {{ $labels.container }})
-        description: "Container Volume usage is above 80%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        description: "Container Volume usage is {{ $value | humanize }}%"
 
     - alert: ContainerHighThrottleRate
       expr: 'rate(container_cpu_cfs_throttled_seconds_total[3m]) > 1'
@@ -57,4 +57,4 @@ groups:
         severity: warning
       annotations:
         summary: Container high throttle rate (instance {{ $labels.instance }})
-        description: "Container is being throttled\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        description: "Container is being throttled {{ $value }}"
