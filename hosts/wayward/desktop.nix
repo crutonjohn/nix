@@ -4,7 +4,15 @@
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
+
+  #nixGL.packages = inputs.nixgl.packages;
+  #nixGL.defaultWrapper = "mesa";
+  #nixGL.offloadWrapper = "nixGLIntel";
+  #nixGL.installScripts = [ "mesa" ];
+  #nixGL.vulkan.enable = true;
 
   services = {
     desktopManager.plasma6 = {
@@ -75,7 +83,7 @@
     xkb.options = "caps:escape";
   };
 
-  console.useXkbConfig = true;
+  console.keyMap = "us";
 
   services = {
     dbus.packages = [ pkgs.gcr ];

@@ -51,7 +51,6 @@
     lychee-slicer
     mqttui
     neofetch
-    nerdfonts
     networkmanager
     networkmanager_dmenu
     nextcloud-client

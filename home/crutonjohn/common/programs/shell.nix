@@ -65,13 +65,13 @@
     settings = {
       font = {
         size = 10;
-        normal.family = "FiraCode Nerd Font Mono";
+        normal.family = "0xProto Nerd Font Mono";
         normal.style = "Regular";
-        bold.family = "FiraCode Nerd Font Mono";
+        bold.family = "0xProto Nerd Font Mono";
         bold.style = "Bold";
-        italic.family = "FiraCode Nerd Font Mono";
+        italic.family = "0xProto Nerd Font Mono";
         italic.style = "Italic";
-        bold_italic.family = "FiraCode Nerd Font Mono";
+        bold_italic.family = "0xProto Nerd Font Mono";
         bold_italic.style = "Bold Italic";
       };
       window.opacity = 0.9;

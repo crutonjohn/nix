@@ -26,6 +26,8 @@
       material-icons
       material-symbols
       pciutils
+      nerd-fonts._0xproto
+      nerd-fonts.droid-sans-mono
     ];
   };
 
