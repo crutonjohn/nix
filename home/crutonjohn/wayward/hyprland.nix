@@ -11,6 +11,10 @@
         name=pixa3854:00-093a:0274-touchpad
         tap-to-click=false
       }
+      device {
+        name=ploopy-corporation-ploopy-pavonis-trackpad-touchpad
+        tap-to-click=true
+      }
       plugin:hyprexpo {
             enabled = true
             columns = 3
