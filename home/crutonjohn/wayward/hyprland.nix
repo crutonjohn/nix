@@ -224,9 +224,7 @@
         "SUPER,B,exec,firefox"
         "SUPER SHIFT,X,exec,myswaylock"
         ",Print,exec,grimblast --notify --cursor copy screen ~/Pictures/$(date '+%Y-%m-%dT%H:%M:%S_no_watermark').png"
-        "SHIFT,Print,exec,grimblast --notify --cursor copy area"
-        "SUPER,bracketright,exec,grimblast --notify --cursor copy area"
-        "SUPER,A,exec,grimblast_watermark"
+        "SHIFT,Print,exec,grimblast --notify copy area"
         "SUPER:,Super_L,exec,bash ~/.config/rofi/powermenu.sh"
 
         # Media keys
@@ -310,8 +308,10 @@
   services.hyprpaper = {
     enable = true;
     settings = {
-      preload =
-        [ "/home/crutonjohn/.config/wall.jpg" ];
+      preload = [
+        "/home/crutonjohn/.config/mobile.jpg"
+        "/home/crutonjohn/.config/docked.jpg"
+      ];
       wallpaper = [
         "eDP-1,~/.config/mobile.jpg"
         "DP-1,~/.config/docked.jpg"
