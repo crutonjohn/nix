@@ -1,4 +1,4 @@
-{ pkgs, home }: {
+{ home, ... }: {
   services.kanshi = {
     enable = true;
   };
