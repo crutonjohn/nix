@@ -4,6 +4,26 @@
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # needed due to https://github.com/hyprwm/Hyprland/discussions/4768
+    extraConfig = ''
+      # built in touchpad
+      device {
+        name=pixa3854:00-093a:0274-touchpad
+        tap-to-click=false
+      }
+      plugin:hyprexpo {
+            enabled = true
+            columns = 3
+            gap_size = 5
+            bg_col = rgb(ffc0cb)
+            workspace_method = center current # [center/first] [workspace] e.g. first 1 or center m+1
+
+            enable_gesture = true
+            gesture_fingers = 4
+            gesture_distance = 300 # how far is the "max"
+            gesture_positive = false # positive = swipe down. Negative = swipe up.
+      }
+    '';
     settings = {
       monitor = [
         "eDP-1, preferred, auto, 1.566667"
@@ -26,7 +46,7 @@
           disable_while_typing = true;
           natural_scroll = true;
           clickfinger_behavior = 1;
-          tap-to-click = true;
+          tap-to-click = false;
         };
       };
 
@@ -273,7 +293,9 @@
     };
     plugins = [
       # https://github.com/KZDKM/Hyprspace
+      # disabled due to https://github.com/KZDKM/Hyprspace/issues/184
       #inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
+      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
     ];
 
   };
