@@ -301,14 +301,16 @@
   };
 
   # Wallpaper/Hyprpaper
-  home.file.".config/wall.jpg".source = ./bg;
+  home.file.".config/mobile.jpg".source = ./wallpapers/mobile;
+  home.file.".config/docked.jpg".source = ./wallpapers/docked;
   services.hyprpaper = {
     enable = true;
     settings = {
       preload =
         [ "/home/crutonjohn/.config/wall.jpg" ];
       wallpaper = [
-        "eDP-1,~/.config/wall.jpg"
+        "eDP-1,~/.config/mobile.jpg"
+        "DP-1,~/.config/docked.jpg"
       ];
     };
   };
