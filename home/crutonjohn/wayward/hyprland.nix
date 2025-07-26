@@ -29,10 +29,11 @@
       }
     '';
     settings = {
-      monitor = [
-        "eDP-1, preferred, auto, 1.566667"
-        "DP-1, 5120x1440, auto, 1.25"
-      ];
+      # disabled for kanshi
+      #monitor = [
+      #  "eDP-1, preferred, auto, 1.566667"
+      #  "DP-1, 5120x1440, auto, 1.25"
+      #];
 
       bindl = [
         ",switch:off:Lid Switch,exec,hyprctl keyword monitor \"eDP-1, preferred, auto, 1.5\""
@@ -280,6 +281,10 @@
         "SUPER,mouse:273,resizewindow"
       ];
 
+      exec = [
+        "kanshictl reload"
+      ];
+
       exec-once = [
         "hyprpaper &"
         "hyprctl hyprpaper wallpaper \"eDP-1,~/.config/wall\""
@@ -302,47 +307,6 @@
 
   };
 
-  # Wallpaper/Hyprpaper
-  home.file.".config/mobile.jpg".source = ./wallpapers/mobile;
-  home.file.".config/docked.jpg".source = ./wallpapers/docked;
-  services.hyprpaper = {
-    enable = true;
-    settings = {
-      preload = [
-        "/home/crutonjohn/.config/mobile.jpg"
-        "/home/crutonjohn/.config/docked.jpg"
-      ];
-      wallpaper = [
-        "eDP-1,~/.config/mobile.jpg"
-        "DP-1,~/.config/docked.jpg"
-      ];
-    };
-  };
-
-
-
-  imports = [
-    ./hyprland-variables.nix
-    ./waybar.nix
-  ];
-
-  programs.wofi = {
-    enable = true;
-    settings = {
-      location = "bottom-right";
-      allow_markup = true;
-      width = 250;
-    };
-    style = ''
-      * {
-        font-family: 0xProto Nerd Font Mono;
-      }
-      window {
-        background-color: #7c818c;
-      }
-    '';
-  };
-
   programs = {
     fish.loginShellInit = ''
       if test (tty) = "/dev/tty1"
@@ -359,18 +323,6 @@
         exec Hyprland &> /dev/null
       fi
     '';
-  };
-
-  programs.swaylock = {
-    enable = true;
-    settings = {
-      color = "808080";
-      font-size = 24;
-      indicator-idle-visible = false;
-      indicator-radius = 100;
-      line-color = "ffffff";
-      show-failed-attempts = true;
-    };
   };
 
   systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];

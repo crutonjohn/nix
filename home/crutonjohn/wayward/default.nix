@@ -2,6 +2,7 @@
 
   imports = [
     ../common
+    ./wallpapers
     ./programs
     ./cursor.nix
     ./desktop.nix
@@ -10,6 +11,9 @@
     ./hyprland.nix
     ./scripts.nix
     ./waybar.nix
+    ./kanshi.nix
+    ./wofi.nix
+    ./swaylock.nix
   ];
 
   home.username = "crutonjohn";
@@ -44,6 +48,7 @@
     inputs.hypr-contrib.packages.${pkgs.system}.grimblast
     inputs.hyprpicker.packages.${pkgs.system}.hyprpicker
     jdk11
+    kanshi
     lapce
     libgcc
     libinput
