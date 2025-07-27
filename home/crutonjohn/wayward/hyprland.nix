@@ -14,6 +14,7 @@
       device {
         name=ploopy-corporation-ploopy-pavonis-trackpad-touchpad
         tap-to-click=true
+        sensitivity=0.5
       }
       plugin:hyprexpo {
             enabled = true
