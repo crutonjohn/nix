@@ -8,7 +8,7 @@
       output "Samsung Electric Company LC49G95T H1AK500000" {
         mode 5120x1440@119.99900
         position 0,0
-        scale 2
+        scale 1
         alias $G9_1
       }
 
