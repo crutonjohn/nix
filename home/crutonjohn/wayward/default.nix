@@ -25,6 +25,7 @@
     bambu-studio
     bitwarden-desktop
     brightnessctl
+    bewcloud-client
     catimg
     catt
     ceph
@@ -58,7 +59,6 @@
     neofetch
     networkmanager
     networkmanager_dmenu
-    nextcloud-client
     nfs-utils
     nil
     nmap

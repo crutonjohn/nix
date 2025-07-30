@@ -8,6 +8,9 @@ let
   pogOverlay = self: super: {
     pog = super.callPackage ./pog { };
   };
+  bewcloudClientOverlay = self: super: {
+    bewcloud-client = super.callPackage ./bewcloud { };
+  };
   omadaExporterOverlay = self: super: {
     omada-exporter = super.callPackage ./omada-exporter { };
   };
@@ -25,6 +28,7 @@ in
   nur = inputs.nur.overlays.default;
   lychee-slicer = lycheeOverlay;
   pog = pogOverlay;
+  bewcloud-client = bewcloudClientOverlay;
   omada-exporter = omadaExporterOverlay;
   bitwarden-gui = bitwardenOverlay;
   baremetalblog = baremetalblogOverlay;
