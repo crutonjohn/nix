@@ -7,7 +7,7 @@ let
   };
 in
 appimageTools.wrapType2 {
-  pname = "bambu-studio-local";
+  pname = "bambu-studio";
   inherit version;
 
   src = appImage;
