@@ -3,7 +3,7 @@ let
   version = "0.0.5";
   appImage = fetchurl {
     url = "https://github.com/bewcloud/bewcloud-desktop/releases/download/v${version}/bewCloud-desktop-sync_${version}_amd64.AppImage";
-    sha256 = "sha256-CJQJDX7HxbYTzq2/nVskH/uf6HPbMqLVHRtR3qMZ5bM=";
+    sha256 = "sha256-PVNhyXLIjivR5dBuOWL85/c5BAL2fKx3q6/5pKReWuE=";
   };
 in
 appimageTools.wrapType2 {
