@@ -33,12 +33,10 @@
       inputs.hyprland.follows = "hyprland";
     };
     rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
-    #Hyprspace = {
-    #  url = "github:KZDKM/Hyprspace";
-
-    #  # Hyprspace uses latest Hyprland. We declare this to keep them in sync.
-    #  inputs.hyprland.follows = "hyprland";
-    #};
+    Hyprspace = {
+      url = "github:KZDKM/Hyprspace";
+      inputs.hyprland.follows = "hyprland";
+    };
 
     nixgl = {
       url = "github:johanneshorner/nixGL";
@@ -147,6 +145,19 @@
             system = "x86_64-linux";
             hardwareModules = [
               inputs.nixos-hardware.nixosModules.framework-12th-gen-intel
+              inputs.nixos-hardware.nixosModules.common-pc-ssd
+            ];
+            profileModules = [
+              { home-manager.users.crutonjohn = ./home/crutonjohn/wayward; }
+            ];
+          };
+
+          "fabius" = mkNixosConfig {
+            # Main gaming Desktop
+            hostname = "fabius";
+            system = "x86_64-linux";
+            hardwareModules = [
+              inputs.nixos-hardware.nixosModules.common-gpu-amd
               inputs.nixos-hardware.nixosModules.common-pc-ssd
             ];
             profileModules = [
