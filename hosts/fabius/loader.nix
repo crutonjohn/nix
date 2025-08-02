@@ -2,11 +2,18 @@
 
 {
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.devices = [ "nodev" ];
-  boot.loader.grub.efiSupport = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  boot.loader.grub.useOSProber = true;
+  boot.loader.systemd-boot = {
+    enable = true;
+    # used to find UEFI bootable Windows Parts
+    #edk2-uefi-shell.enable = true;
+    windows = {
+      "11" = {
+        title = "Windows 11 Shitty OS Edition";
+        efiDeviceHandle = "HD2b";
+      };
+    };
+  };
+  boot.loader.efi.efiSysMountPoint = "/boot";
   boot.blacklistedKernelModules = [ "nouveau" "nvidia" ];
 
   # for pinning kernel version
