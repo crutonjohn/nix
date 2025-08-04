@@ -135,7 +135,7 @@
       modules-left = [
         "custom/launcher"
         "hyprland/workspaces"
-        "custom/wall"
+        #"custom/wall"
         "mpd"
       ];
       modules-center = [
@@ -239,7 +239,7 @@
         "hwmon-path"= "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon6/temp1_input";
         "critical-threshold"= 80;
         "tooltip" = false;
-        "format" = "<span font='14'></span> {temperatureC}°C";
+        "format" = "<span font='12'></span> {temperatureC}°C";
       };
       "custom/gpu" = {
         "exec" = "cat /sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/0000:02:00.0/0000:03:00.0/hwmon/hwmon0/device/gpu_busy_percent";
@@ -251,7 +251,7 @@
         "hwmon-path"= "/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/0000:02:00.0/0000:03:00.0/hwmon/hwmon0/temp1_input";
         "critical-threshold"= 90;
         "tooltip" = false;
-        "format" = "<span font='14'></span> {temperatureC}°C";
+        "format" = "<span font='12'></span> {temperatureC}°C";
       };
       "custom/powermenu" = {
         "format" = "";
