@@ -22,6 +22,7 @@
       containerd
       cz-cli
       dig
+      easyeffects
       figlet
       fish
       file
@@ -49,6 +50,7 @@
       rclone
       ripgrep
       screen
+      socat
       sops
       sqlite
       telegram-desktop

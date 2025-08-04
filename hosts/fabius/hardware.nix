@@ -6,8 +6,10 @@
   hardware.enableAllFirmware = true;
   hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [  ];
+    #extraPackages = with pkgs; [  ];
   };
+  hardware.amdgpu.amdvlk.enable = true;
+  hardware.amdgpu.opencl.enable = true;
   services.fwupd.enable = true;
   services.libinput.touchpad = {
     naturalScrolling = true;
@@ -73,6 +75,18 @@
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     jack.enable = true;
+    extraConfig.pipewire = {
+      "10-clock-rate" = {
+        "context.properties" = {
+          "default.clock.rate" = 44100;
+        };
+      };
+      "11-quantum-sync" = {
+        "context.properties" = {
+          "default.clock.min-quantum" = 1024;
+        };
+      };
+    };
   };
 
   services.ceph.client.enable = true;

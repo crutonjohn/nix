@@ -20,7 +20,7 @@ xdg.desktopEntries = {
     genericName = "Valve'Video Game Monopoly";
     exec = "steam -vgui";
     terminal = false;
-    categories = [ "Games" ];
+    categories = [ "Application" ];
   };
 };
 

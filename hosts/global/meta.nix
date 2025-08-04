@@ -41,7 +41,7 @@
 
   nix.gc = {
     automatic = true;
-    options = "--delete-older-than 30d";
+    options = "--delete-older-than 3d";
   };
 
   i18n.defaultLocale = "en_US.UTF-8";

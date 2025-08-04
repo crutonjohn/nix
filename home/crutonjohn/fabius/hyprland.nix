@@ -28,6 +28,11 @@
             gesture_distance = 300 # how far is the "max"
             gesture_positive = false # positive = swipe down. Negative = swipe up.
       }
+      plugin:csgo-vulkan-fix {
+            enabled = false
+            fix_mouse = true
+            vkfix-app = cs2, 2560, 1440
+      }
     '';
     settings = {
       # disabled for kanshi
@@ -170,7 +175,7 @@
         "SUPER,7,workspace,7"
         "SUPER,8,workspace,8"
         "SUPER,9,workspace,9"
-        "SUPER,0,workspace,10"
+        "SUPER,0,workspace,gaming"
         "SUPER,L,workspace,+1"
         "SUPER,H,workspace,-1"
         "SUPER,period,workspace,e+1"
@@ -199,7 +204,7 @@
         "SUPER:CTRL,7,movetoworkspace,7"
         "SUPER:CTRL,8,movetoworkspace,8"
         "SUPER:CTRL,9,movetoworkspace,9"
-        "SUPER:CTRL,0,movetoworkspace,10"
+        "SUPER:CTRL,0,movetoworkspace,gaming"
         "SUPER:CTRL,left,movetoworkspace,-1"
         "SUPER:CTRL,right,movetoworkspace,+1"
 
@@ -213,7 +218,7 @@
         "SUPER SHIFT,7,movetoworkspacesilent,7"
         "SUPER SHIFT,8,movetoworkspacesilent,8"
         "SUPER SHIFT,9,movetoworkspacesilent,9"
-        "SUPER SHIFT,0,movetoworkspacesilent,10"
+        "SUPER SHIFT,0,movetoworkspacesilent,gaming"
 
         # Scroll workspaces
         "SUPER,mouse_down,workspace,e+1"
@@ -223,7 +228,7 @@
         "SUPER,slash,workspace,previous"
 
         # App shortcuts
-        "SUPER,B,exec,firefox"
+        "SUPER,B,exec,floorp"
         "SUPER SHIFT,X,exec,myswaylock"
         ",Print,exec,grimblast --notify --cursor copy screen ~/Pictures/$(date '+%Y-%m-%dT%H:%M:%S_no_watermark').png"
         "SHIFT,Print,exec,grimblast --notify copy area"
@@ -234,8 +239,8 @@
         ",XF86AudioLowerVolume,exec,pamixer -d 5"
         ",XF86AudioMute,exec,pamixer -t"
         ",XF86AudioMicMute,exec,pamixer --default-source -t"
-        ",XF86MonBrightnessUp,exec,brightnessctl -d intel_backlight s +10%"
-        ",XF86MonBrightnessDown,exec,brightnessctl -d intel_backlight s 10%-"
+        #",XF86MonBrightnessUp,exec,brightnessctl -d intel_backlight s +10%"
+        #",XF86MonBrightnessDown,exec,brightnessctl -d intel_backlight s 10%-"
         ",XF86AudioPlay,exec,mpc -q toggle"
         ",XF86AudioNext,exec,mpc -q next"
         ",XF86AudioPrev,exec,mpc -q prev"
@@ -291,19 +296,70 @@
         "hyprctl hyprpaper wallpaper \"eDP-1,~/.config/wall\""
         "waybar --config ~/.config/waybar/config &"
         "nm-applet --indicator &"
+        "/etc/profiles/per-user/crutonjohn/bin/hyprland-gaming-auto-waybar-toggle"
+        "/etc/profiles/per-user/crutonjohn/bin/discord"
+        "/etc/profiles/per-user/crutonjohn/bin/floorp"
       ];
 
-      windowrule = [
+      workspace = [
+        "name:gaming, monitor:DP-1, persistent:true, decorate:false, shadow:false"
+        "gaming, on-created-empty:hyprland-gaming-steam-vgui"
+      ];
+
+      windowrulev2 = [
+
+        ### Firefox/Floorp PiP ###
         "float,title:^(Picture-in-Picture)$"
-        "size 960 540,title:^(Picture-in-Picture)$"
-        "move 25%-,title:^(Picture-in-Picture)$"
+        "size 640 360,title:^(Picture-in-Picture)$"
+        "move 4158 46,title:^(Picture-in-Picture)$"
+        "pin, title:^(Picture-in-Picture)$"
+        ##########################
+
+        ### Discord Streaming Popout ###
+        "float, initialTitle:^(Discord Popout)$"
+        "size 1085 901, initialTitle:^(Discord Popout)$"
+        "pin, initialTitle:^(Discord Popout)$"
+        ### Discord To Special Workspace ###
+        "workspace special, initialClass:^(discord)$, initialTitle:^(Discord)$"
+        ################################
+
+        ### GAMING ###
+        # setting up gaming windows
+        "tag +game, class:^(cs2|steam_app_.*)$"
+        "noborder, tag:game"
+        "pseudo, tag:game"
+        "tile, tag:game"
+        "roundingpower 0, tag:game"
+        "size 2560 1440, tag:game"
+        "noblur, tag:game"
+        "content game, tag:game"
+
+        # setting up static workspace
+        "workspace gaming, class:^(steam)$"
+        "workspace gaming, tag:game"
+        "move 0 0, class:^(steam)$, workspace gaming"
+        "size 1280 1440, class:^(steam)$, workspace gaming"
+        "move 1280 0, tag:game, workspace gaming"
+        "size 2560 1440, tag:game, workspace gaming"
+        "move 3840 0, class:^(floorp)$, workspace gaming"
+        "size 1280 1440, class:^(floorp)$, workspace gaming"
+         # "setprop keepaspectratio 1, tag:game"
+         # "setprop size 2560 1440, tag:game"
+         # "setprop norounding 1, tag:game"
+
+         ## steam sub-windows ##
+         "float, title:Friends List, class:steam"
+         "float, title:^.*(Chat).*$, class:steam"
+         ##########################
+
       ];
     };
     plugins = [
       # https://github.com/KZDKM/Hyprspace
       # disabled due to https://github.com/KZDKM/Hyprspace/issues/184
       #inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
-      #inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+      #inputs.hyprland-plugins.packages.${pkgs.system}.csgo-vulkan-fix
     ];
 
   };
@@ -327,4 +383,33 @@
   };
 
   systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
+
+  ####################
+  # Hyprland Scripts #
+  ####################
+  home.packages = with pkgs; [
+    (pkgs.writeScriptBin "hyprland-gaming-auto-waybar-toggle" ''
+      #!/usr/bin/env bash
+      # Use hyprctl to watch for workspace changes
+      #hyprctl dispatch focusmonitor 0  # Needed in some cases to avoid hyprctl bug
+
+      hyprctl -j workspaces | jq -r '.[] | .id'
+
+      socat - UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock | while read -r line; do
+          if echo "$line" | grep -q "^workspace>>"; then
+              current_ws=$(hyprctl activeworkspace -j | jq '.id')
+
+              if [ "$current_ws" -eq 9 ]; then
+                  pkill waybar
+              else
+                  pgrep waybar >/dev/null || waybar &
+              fi
+          fi
+      done
+    '')
+    (pkgs.writeScriptBin "hyprland-gaming-steam-vgui" ''
+      #!/usr/bin/env bash
+      pgrep steam >/dev/null || /run/current-system/sw/bin/steam -vgui
+    '')
+  ];
 }

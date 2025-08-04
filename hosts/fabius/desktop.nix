@@ -59,6 +59,7 @@
       hyprcursor
       xsettingsd
       xorg.xrdb
+      amdgpu_top
     ];
   };
 
