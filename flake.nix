@@ -24,12 +24,14 @@
     # https://github.com/nix-community
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    hyprland.url = "github:hyprwm/Hyprland/v0.50.0";
-    hypr-contrib.url = "github:hyprwm/contrib";
-    hypr-contrib.inputs.nixpkgs.follows = "nixpkgs";
+    hyprland.url = "github:hyprwm/Hyprland/v0.50.1";
+    hypr-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hyprpicker.url = "github:hyprwm/hyprpicker";
     hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
+      url = "github:hyprwm/hyprland-plugins/v0.50.0";
       inputs.hyprland.follows = "hyprland";
     };
     rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
