@@ -28,9 +28,9 @@
 
   programs.fish = {
     functions = {
-      nrb = "sudo nixos-rebuild switch --flake github:crutonjohn/nix#wayward --option tarball-ttl 0";
-      nrbu = "sudo nixos-rebuild switch --upgrade --flake github:crutonjohn/nix#wayward --option tarball-ttl 0";
-      nrbl = "sudo nixos-rebuild switch --flake /home/crutonjohn/nix#wayward'";
+      nrb = "sudo nixos-rebuild switch --flake github:crutonjohn/nix#fabius --option tarball-ttl 0";
+      nrbu = "sudo nixos-rebuild switch --upgrade --flake github:crutonjohn/nix#fabius --option tarball-ttl 0";
+      nrbl = "sudo nixos-rebuild switch --flake /home/crutonjohn/nix#fabius'";
       nrbl-nord = "sudo nixos-rebuild switch --use-remote-sudo --build-host localhost --target-host nord --flake '/home/crutonjohn/nix#nord'";
       nrbu-nord = "sudo nixos-rebuild switch --use-remote-sudo --build-host localhost --target-host nord --flake 'github:crutonjohn/nix#nord'";
     };
