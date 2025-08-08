@@ -41,15 +41,10 @@
       #  "DP-1, 5120x1440, auto, 1.25"
       #];
 
-      bindl = [
-        ",switch:off:Lid Switch,exec,hyprctl keyword monitor \"eDP-1, preferred, auto, 1.5\""
-        ",switch:on:Lid Switch,exec,hyprctl keyword monitor \"eDP-1, disable\""
-      ];
-
       input = {
         kb_layout = "us";
         kb_options = "caps:escape";
-        follow_mouse = 2;
+        follow_mouse = 1;
         float_switch_override_focus = 2;
         numlock_by_default = true;
         sensitivity = 0.0;
@@ -150,6 +145,7 @@
         "SUPER_SHIFT,Space,togglefloating,"
         "SUPER,F,fullscreen"
         "SUPER,Y,pin"
+        "SUPER,L,exec,hyprlock"
 
         # Layouts and groups
         "SUPER,K,togglegroup,"
@@ -176,8 +172,8 @@
         "SUPER,8,workspace,8"
         "SUPER,9,workspace,9"
         "SUPER,0,workspace,gaming"
-        "SUPER,L,workspace,+1"
-        "SUPER,H,workspace,-1"
+        #"SUPER,L,workspace,+1"
+        #"SUPER,H,workspace,-1"
         "SUPER,period,workspace,e+1"
         "SUPER,comma,workspace,e-1"
         "SUPER,Q,workspace,QQ"
@@ -293,24 +289,27 @@
 
       exec-once = [
         "hyprpaper &"
-        "hyprctl hyprpaper wallpaper \"eDP-1,~/.config/wall\""
+        "hyprctl hyprpaper wallpaper \"DP-1,~/.config/docked.jpg\""
         "waybar --config ~/.config/waybar/config &"
         "nm-applet --indicator &"
-        "/etc/profiles/per-user/crutonjohn/bin/hyprland-gaming-auto-waybar-toggle"
-        "/etc/profiles/per-user/crutonjohn/bin/discord"
-        "/etc/profiles/per-user/crutonjohn/bin/floorp"
+        # auto toggle waybar on gaming workspace
+        "/etc/profiles/per-user/crutonjohn/bin/hyprland-gaming-auto-waybar-toggle &>/dev/null"
+        # autostart programs #
+        "/etc/profiles/per-user/crutonjohn/bin/discord &"
+        "/etc/profiles/per-user/crutonjohn/bin/floorp &"
+        "hyprland-gaming-init"
+        ######################
       ];
 
       workspace = [
-        "name:gaming, monitor:DP-1, persistent:true, decorate:false, shadow:false"
-        "gaming, on-created-empty:hyprland-gaming-steam-vgui"
+        "9, name:gaming, monitor:DP-1, persistent:true, decorate:false, shadow:false"
       ];
 
       windowrulev2 = [
 
         ### Firefox/Floorp PiP ###
         "float,title:^(Picture-in-Picture)$"
-        "size 640 360,title:^(Picture-in-Picture)$"
+        "size 896 504,title:^(Picture-in-Picture)$"
         "move 4158 46,title:^(Picture-in-Picture)$"
         "pin, title:^(Picture-in-Picture)$"
         ##########################
@@ -334,23 +333,38 @@
         "noblur, tag:game"
         "content game, tag:game"
 
-        # setting up static workspace
+        ## steam windows ##
+        "float, initialTitle:Steam, class:steam"
+        "pseudo, initialTitle:Steam, class:steam"
+        "float, title:Friends List, class:steam"
+        "size 504 896, title:Friends List, class:steam"
+        "pseudo, title:Friends List, class:steam"
+        "float, title:^.*(Chat).*$, class:steam"
+        "size 504 896, title:^.*(Chat).*$, class:steam"
+        "pseudo, title:^.*(Chat).*$, class:steam"
+        ##############
+
+        ## setting up static workspace ##
         "workspace gaming, class:^(steam)$"
         "workspace gaming, tag:game"
-        "move 0 0, class:^(steam)$, workspace gaming"
-        "size 1280 1440, class:^(steam)$, workspace gaming"
+        "move 0 0, initialTitle:Steam, workspace gaming"
         "move 1280 0, tag:game, workspace gaming"
         "size 2560 1440, tag:game, workspace gaming"
-        "move 3840 0, class:^(floorp)$, workspace gaming"
-        "size 1280 1440, class:^(floorp)$, workspace gaming"
-         # "setprop keepaspectratio 1, tag:game"
-         # "setprop size 2560 1440, tag:game"
-         # "setprop norounding 1, tag:game"
+        #"move 3840 0, class:^(floorp)$, workspace gaming"
+        #"size 1280 1440, class:^(floorp)$, workspace gaming"
+        # "setprop keepaspectratio 1, tag:game"
+        # "setprop size 2560 1440, tag:game"
+        # "setprop norounding 1, tag:game"
 
-         ## steam sub-windows ##
-         "float, title:Friends List, class:steam"
-         "float, title:^.*(Chat).*$, class:steam"
-         ##########################
+
+        ### xwaylandvideobridge hider ###
+        "opacity 0.0 override, class:^(xwaylandvideobridge)$"
+        "noanim, class:^(xwaylandvideobridge)$"
+        "noinitialfocus, class:^(xwaylandvideobridge)$"
+        "maxsize 1 1, class:^(xwaylandvideobridge)$"
+        "noblur, class:^(xwaylandvideobridge)$"
+        "nofocus, class:^(xwaylandvideobridge)$"
+        #################################
 
       ];
     };
@@ -362,6 +376,75 @@
       #inputs.hyprland-plugins.packages.${pkgs.system}.csgo-vulkan-fix
     ];
 
+  };
+
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        after_sleep_cmd = "hyprctl dispatch dpms on";
+        ignore_dbus_inhibit = false;
+        lock_cmd = "hyprlock";
+      };
+
+      listener = [
+        {
+          timeout = 300;
+          on-timeout = "hyprlock";
+        }
+        {
+          timeout = 1200;
+          on-timeout = "hyprctl dispatch dpms off";
+          on-resume = "hyprctl dispatch dpms on";
+        }
+      ];
+    };
+  };
+
+  programs.hyprlock = {
+    enable = true;
+    settings = {
+      general = {
+        hide_cursor = true;
+        ignore_empty_input = true;
+      };
+
+      animations = {
+        enabled = true;
+        fade_in = {
+          duration = 300;
+          bezier = "easeOutQuint";
+        };
+        fade_out = {
+          duration = 300;
+          bezier = "easeOutQuint";
+        };
+      };
+
+      background = [
+        {
+          path = "~/.config/docked.jpg";
+          blur_passes = 3;
+          blur_size = 8;
+        }
+      ];
+
+      input-field = [
+        {
+          size = "200, 50";
+          position = "0, -80";
+          monitor = "";
+          dots_center = true;
+          fade_on_empty = false;
+          font_color = "rgb(202, 211, 245)";
+          inner_color = "rgb(91, 96, 120)";
+          outer_color = "rgb(24, 25, 38)";
+          outline_thickness = 5;
+          placeholder_text = "<span foreground='##cad3f5'>Password...</span>";
+          shadow_passes = 2;
+        }
+      ];
+    };
   };
 
   programs = {
@@ -407,9 +490,10 @@
           fi
       done
     '')
-    (pkgs.writeScriptBin "hyprland-gaming-steam-vgui" ''
+    (pkgs.writeScriptBin "hyprland-gaming-init" ''
       #!/usr/bin/env bash
-      pgrep steam >/dev/null || /run/current-system/sw/bin/steam -vgui
+      pgrep steam >/dev/null || steam -vgui
+      pgrep lutris >/dev/null || lutris
     '')
   ];
 }

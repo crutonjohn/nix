@@ -22,6 +22,13 @@ xdg.desktopEntries = {
     terminal = false;
     categories = [ "Application" ];
   };
+  TeamSpeak6 = {
+    name = "TeamSpeak 6";
+    genericName = "Teamspeak VOIP Service";
+    exec = "TeamSpeak";
+    terminal = false;
+    categories = [ "Application" ];
+  };
 };
 
 }

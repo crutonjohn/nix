@@ -76,11 +76,23 @@
                 padding-left: 10px;
                 padding-right: 10px;
               }
+        #cpu, #custom-gpu, #memory {
+                padding-bottom: 5px;
+              }
+        #temperature.cpu, #temperature.gpu {
+                padding-top: 5px;
+              }
         #memory {
                 color: rgb(181, 232, 224);
               }
         #cpu, #temperature.cpu {
                 color: rgb(245, 194, 231);
+              }
+        #custom-gpu, #temperature.gpu {
+                color: rgb(150, 205, 251);
+              }
+        #pulseaudio {
+                color: rgb(245, 224, 220);
               }
         #window {
                 color: rgb(245, 224, 220);
@@ -88,12 +100,6 @@
               }
         #clock {
                 color: rgb(217, 224, 238);
-              }
-        #custom-gpu, #temperature.gpu {
-                color: rgb(150, 205, 251);
-              }
-        #pulseaudio {
-                color: rgb(245, 224, 220);
               }
         #network {
                 color: #ABE9B3;
@@ -198,15 +204,11 @@
       };
       "clock" = {
         "interval" = 1;
-        "format" = "{:%I:%M %p  %A %b %d}";
+        "format" = "{:%H:%M  %A %b %d}";
         "tooltip" = true;
-        "tooltip-format" = "\n<tt>{calendar}</tt>";
-      };
-      "memory" = {
-        "interval" = 5;
-        "format" = "<span font='18'></span> {percentage}%";
-        "states" = {
-          "warning" = 85;
+        "tooltip-format" = "\n<tt><small>{calendar}</small></tt>";
+        "calendar" = {
+          "today" = "<span color='#ff6699'><b><u>{}</u></b></span>";
         };
       };
       "mpd" = {
@@ -239,7 +241,14 @@
         "hwmon-path"= "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon6/temp1_input";
         "critical-threshold"= 80;
         "tooltip" = false;
-        "format" = "<span font='12'></span> {temperatureC}°C";
+        "format" = "<span font='17'></span> {temperatureC}°C";
+      };
+      "memory" = {
+        "interval" = 5;
+        "format" = "<span font='18'></span> {percentage}%";
+        "states" = {
+          "warning" = 85;
+        };
       };
       "custom/gpu" = {
         "exec" = "cat /sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/0000:02:00.0/0000:03:00.0/hwmon/hwmon0/device/gpu_busy_percent";
@@ -251,10 +260,10 @@
         "hwmon-path"= "/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/0000:02:00.0/0000:03:00.0/hwmon/hwmon0/temp1_input";
         "critical-threshold"= 90;
         "tooltip" = false;
-        "format" = "<span font='12'></span> {temperatureC}°C";
+        "format" = "<span font='17'></span> {temperatureC}°C";
       };
       "custom/powermenu" = {
-        "format" = "";
+        "format" = "󰐥";
         "on-click" = "pkill wofi || wofi-powermenu";
         "tooltip" = false;
       };
