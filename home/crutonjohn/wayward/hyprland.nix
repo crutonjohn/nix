@@ -134,6 +134,9 @@
         allow_workspace_cycles = true;
       };
 
+      gestures = {
+      };
+
       bind = [
         # Launchers & System
         "SUPER,RETURN,exec,alacritty"

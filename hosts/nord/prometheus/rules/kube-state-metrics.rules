@@ -121,44 +121,44 @@ groups:
         summary: Kubernetes StatefulSet down
         description: "StatefulSet {{ $labels.statefulset }} is down"
 
-    - alert: KubernetesHpaScalingAbility
-      expr: 'kube_horizontalpodautoscaler_status_condition{status="false", condition="AbleToScale"} == 1'
-      for: 2m
-      labels:
-        severity: warning
-      annotations:
-        summary: Kubernetes HPA scaling ability
-        description: "{{ $labels.horizontalpodautoscaler }} is unable to scale"
-
-    - alert: KubernetesHpaMetricAvailability
-      expr: 'kube_horizontalpodautoscaler_status_condition{status="false", condition="ScalingActive"} == 1'
-      for: 0m
-      labels:
-        severity: warning
-      annotations:
-        summary: Kubernetes HPA metric availability
-        description: "HPA {{ $labels.horizontalpodautoscaler }} is not able to collect metrics"
-
-    - alert: KubernetesHpaScaleCapability
-      expr: 'kube_horizontalpodautoscaler_status_desired_replicas >= kube_horizontalpodautoscaler_spec_max_replicas'
-      for: 2m
-      labels:
-        severity: info
-      annotations:
-        summary: Kubernetes HPA scale capability
-        description: "HPA {{ $labels.horizontalpodautoscaler }} maximum number of desired Pods has been hit"
-
-    - alert: KubernetesHpaUnderutilized
-      expr: 'max(quantile_over_time(0.5, kube_horizontalpodautoscaler_status_desired_replicas[1d]) == kube_horizontalpodautoscaler_spec_min_replicas) by (horizontalpodautoscaler) > 3'
-      for: 0m
-      labels:
-        severity: info
-      annotations:
-        summary: Kubernetes HPA underutilized
-        description: "HPA {{ $labels.horizontalpodautoscaler }} is constantly at minimum replicas for 50% of the time."
+#    - alert: KubernetesHpaScalingAbility
+#      expr: 'kube_horizontalpodautoscaler_status_condition{status="false", condition="AbleToScale"} == 1'
+#      for: 2m
+#      labels:
+#        severity: warning
+#      annotations:
+#        summary: Kubernetes HPA scaling ability
+#        description: "{{ $labels.horizontalpodautoscaler }} is unable to scale"
+#
+#    - alert: KubernetesHpaMetricAvailability
+#      expr: 'kube_horizontalpodautoscaler_status_condition{status="false", condition="ScalingActive"} == 1'
+#      for: 0m
+#      labels:
+#        severity: warning
+#      annotations:
+#        summary: Kubernetes HPA metric availability
+#        description: "HPA {{ $labels.horizontalpodautoscaler }} is not able to collect metrics"
+#
+#    - alert: KubernetesHpaScaleCapability
+#      expr: 'kube_horizontalpodautoscaler_status_desired_replicas >= kube_horizontalpodautoscaler_spec_max_replicas'
+#      for: 2m
+#      labels:
+#        severity: info
+#      annotations:
+#        summary: Kubernetes HPA scale capability
+#        description: "HPA {{ $labels.horizontalpodautoscaler }} maximum number of desired Pods has been hit"
+#
+#    - alert: KubernetesHpaUnderutilized
+#      expr: 'max(quantile_over_time(0.5, kube_horizontalpodautoscaler_status_desired_replicas[1d]) == kube_horizontalpodautoscaler_spec_min_replicas) by (horizontalpodautoscaler) > 3'
+#      for: 0m
+#      labels:
+#        severity: info
+#      annotations:
+#        summary: Kubernetes HPA underutilized
+#        description: "HPA {{ $labels.horizontalpodautoscaler }} is constantly at minimum replicas for 50% of the time."
 
     - alert: KubernetesPodNotHealthy
-      expr: 'sum by (namespace, pod) (kube_pod_status_phase{phase=~"Pending|Unknown|Failed"}) > 0'
+      expr: 'sum by (namespace, pod) (kube_pod_status_phase{phase=~"Pending|Unknown|Failed",pod!~"(rook-ceph-exporter-.*)"}) > 0'
       for: 15m
       labels:
         severity: critical
@@ -176,7 +176,7 @@ groups:
         description: "Pod {{ $labels.pod }} is crash looping"
 
     - alert: KubernetesReplicassetMismatch
-      expr: 'kube_replicaset_spec_replicas != kube_replicaset_status_ready_replicas'
+      expr: 'kube_replicaset_spec_replicas{replicaset!~"(rook-ceph-exporter-.*)"} != kube_replicaset_status_ready_replicas'
       for: 10m
       labels:
         severity: warning

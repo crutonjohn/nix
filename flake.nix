@@ -9,6 +9,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-hugopin.url = "github:nixos/nixpkgs/29dcf702b10d258b9bcd56bd38667c329614e128";
 
     # Nix User Repository: User contributed nix packages
     nur.url = "github:nix-community/nur";
@@ -164,6 +165,20 @@
             ];
             profileModules = [
               { home-manager.users.crutonjohn = ./home/crutonjohn/fabius; }
+            ];
+          };
+
+          "servitor" = mkNixosConfig {
+            # Local AI and Gaming Desktop
+            hostname = "servitor";
+            system = "x86_64-linux";
+            hardwareModules = [
+              inputs.nixos-hardware.nixosModules.common-cpu-amd-raphael-igpu
+              inputs.nixos-hardware.nixosModules.common-pc-ssd
+              inputs.nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
+            ];
+            profileModules = [
+              { home-manager.users.crutonjohn = ./home/crutonjohn/servitor; }
             ];
           };
 

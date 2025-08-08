@@ -62,6 +62,7 @@
       whois
       wget
       #obsidian
+      teamspeak6-client
       minikube
       dyff
       traceroute

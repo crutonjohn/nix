@@ -12,7 +12,9 @@ The file pattern allows to create additional users under `home/<host>`.
 
 The core flake is written to bootstrap my specific system(s):
 
-- `wayward`: Laptop with Wayland + Hyprland
+- `wayward`: Laptop
+- `fabius`: Desktop
+- `servitor`: Transient Local AI
 - `nord`: VPS
 
 ### Example
@@ -38,11 +40,17 @@ Current look for Wayland on my laptop:
 sudo nixos-rebuild switch --flake github:crutonjohn/nixos#wayward
 ```
 
+#### Example remote deploy to NixOS host
+
+```bash
+nixos-rebuild switch --use-remote-sudo --build-host servitor --target-host servitor --flake ".#servitor"
+```
+
 #### Example home-manager bootstrapping
 
 ```bash
 ## Install Wayland + Hyprland
-home-manager switch --flake github:crutonjohn/nixos#bjohn@work
+home-manager switch --flake github:crutonjohn/nixos#bjohn@computer
 ```
 
 ## Actions
@@ -53,7 +61,7 @@ My configs follow the `stable` channel.  A GitHub action updates `flake.lock` ni
 * Heavily inspired by and borrowed from:
   * [reckenrode's](https://github.com/reckenrode) very well organized [nixos-configs](https://github.com/reckenrode/nixos-configs)
   * [Ruixi-rebirth's](https://github.com/Ruixi-rebirth) [flakes](https://github.com/Ruixi-rebirth/flakes)
-  * [jahanson's](https://github.com/jahanson) nix repo ["mochi"](https://github.com/jahanson/mochi) 
+  * [jahanson's](https://github.com/jahanson) nix repo ["mochi"](https://github.com/jahanson/mochi)
 * The NixOS community on [Reddit](https://www.reddit.com/r/NixOS/)
 * The [Unofficial Nix/NixOS Discord Server](https://discord.com/invite/RbvHtGa)
 * The wonderful folks in the [Home Operations Discord Server](https://discord.gg/home-operations)
@@ -67,7 +75,7 @@ My configs follow the `stable` channel.  A GitHub action updates `flake.lock` ni
 - [x] nix-ify Headscale VPN
 - [x] nix-ify blog
 - [ ] ~~nix-ify the k8s cluster~~
-- [ ] edit $PATH for pkgs.fish to enable krew plugins (`set -gx PATH $PATH $HOME/.krew/bin`)
+- [X] edit $PATH for pkgs.fish to enable krew plugins (`set -gx PATH $PATH $HOME/.krew/bin`)
 - [ ] create multi-user pattern in `flake.nix`
 
 [1]: https://nixos.wiki/wiki/Flakes

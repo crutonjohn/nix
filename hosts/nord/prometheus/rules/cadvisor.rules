@@ -56,5 +56,5 @@ groups:
       labels:
         severity: warning
       annotations:
-        summary: Container high throttle rate (instance {{ $labels.instance }})
-        description: "Container is being throttled {{ $value }}"
+        summary: Container high CPU throttle rate
+        description: "Container in pod {{ $labels.pod }} is being CPU throttled"

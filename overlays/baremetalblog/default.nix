@@ -14,6 +14,6 @@ stdenv.mkDerivation rec {
   buildPhase = ''
     mkdir -p $out
 
-    ${pkgs.hugo}/bin/hugo --minify --noBuildLock -t hello-friend -d $out/
+    ${pkgs.hugopin.hugo}/bin/hugo --minify --noBuildLock -t hello-friend -d $out/
   '';
 }
