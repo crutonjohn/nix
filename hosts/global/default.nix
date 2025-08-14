@@ -3,6 +3,7 @@
 {
 
   imports = [
+    ./certificates.nix
     ./meta.nix
     ./programs.nix
     ./services.nix

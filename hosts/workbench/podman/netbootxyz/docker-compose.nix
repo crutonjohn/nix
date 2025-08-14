@@ -23,7 +23,7 @@
   virtualisation.oci-containers.containers."netbootxyz" = {
     image = "ghcr.io/netbootxyz/netbootxyz:0.7.3-nbxyz1@sha256:8dbca4d24354fd6ace12b9970188c866341384df2925753c807e87da83587438";
     environment = {
-      "MENU_VERSION" = "2.0.83";
+      "MENU_VERSION" = "2.0.88";
       "NGINX_PORT" = "80";
       "WEB_APP_PORT" = "3000";
     };
@@ -34,7 +34,7 @@
     ports = [
       "127.0.0.1:3000:3000/tcp"
       "69:69/udp"
-      "127.0.0.1:8080:80/tcp"
+      "127.0.0.1:8088:80/tcp"
     ];
     log-driver = "journald";
     extraOptions = [

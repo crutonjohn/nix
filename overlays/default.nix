@@ -47,4 +47,13 @@ in
     };
   };
 
+  # Pinned package set (declared in the flake inputs)
+  # will be accessible through 'pkgs.hugopin'
+  hugopin-packages = final: _prev: {
+    hugopin = import inputs.nixpkgs-hugopin {
+      inherit (final) system;
+      config.allowUnfree = true;
+    };
+  };
+
 }

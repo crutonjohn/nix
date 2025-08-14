@@ -9,7 +9,7 @@
     ./networking.nix
     ./virtualization.nix
     ./vm-hook.nix
-    ./local-ai.nix
+    ./ai
   ];
 
   time.timeZone = "America/New_York";

@@ -11,6 +11,7 @@
       linux-firmware
       sshpass
       rocmPackages.rocgdb
+      vim
     ];
   };
 

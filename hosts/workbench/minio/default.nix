@@ -4,7 +4,7 @@
 
   imports =
     [
-#      ./nginx.nix
+     ./nginx.nix
     ];
 
   services.minio = {
@@ -14,7 +14,7 @@
       "/WD-RD0E4NHE/volsync/minio"
     ];
     configDir = "/WD-RD0E4NHE/volsync/minio-config";
-    consoleAddress = "192.168.130.4:9001";
-    listenAddress = "192.168.130.4:9000";
+    consoleAddress = "127.0.0.1:9001";
+    listenAddress = "127.0.0.1:9000";
   };
 }

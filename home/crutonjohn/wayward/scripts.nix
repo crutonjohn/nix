@@ -31,8 +31,9 @@
       nrb = "sudo nixos-rebuild switch --flake github:crutonjohn/nix#wayward --option tarball-ttl 0";
       nrbu = "sudo nixos-rebuild switch --upgrade --flake github:crutonjohn/nix#wayward --option tarball-ttl 0";
       nrbl = "sudo nixos-rebuild switch --flake /home/crutonjohn/nix#wayward'";
-      nrbl-nord = "sudo nixos-rebuild switch --use-remote-sudo --build-host localhost --target-host nord --flake '/home/crutonjohn/nix#nord'";
-      nrbu-nord = "sudo nixos-rebuild switch --use-remote-sudo --build-host localhost --target-host nord --flake 'github:crutonjohn/nix#nord'";
+      nrb-nord = "nixos-rebuild switch --use-remote-sudo --build-host nord --target-host nord --flake 'github:crutonjohn/nix#nord'";
+      nrbl-nord = "nixos-rebuild switch --use-remote-sudo --build-host nord --target-host nord --flake '/home/crutonjohn/nix#nord'";
+      nrbu-nord = "nixos-rebuild switch --upgrade --use-remote-sudo --build-host nord --target-host nord --flake 'github:crutonjohn/nix#nord'";
     };
   };
 

@@ -7,12 +7,13 @@
     package = pkgs.ollama.override { config.cudaSupport = true; config.rocmSupport = false; };
     # Optional: preload models, see https://ollama.com/library
     loadModels = [
-      "deepseek-r1:1.5b"
-      "deepseek-r1:14b"
       "qwen3:14b"
       "qwen3:1.7b"
       "gemma3:12b"
       "gemma3:4b"
+      "qwen2.5-coder:14b"
+      "deepseek-coder-v2:16b"
+      "codegemma:7b"
     ];
     acceleration = "cuda";
     host = "0.0.0.0";

@@ -73,6 +73,7 @@
     # compose2nix - Nixify docker compose
     compose2nix.url = "github:aksiksi/compose2nix/v0.3.1";
     compose2nix.inputs.nixpkgs.follows = "nixpkgs";
+
   };
 
   outputs = { self, nixpkgs, sops-nix, home, hyprland, nix-index-database, krewfile, ... }@inputs:
