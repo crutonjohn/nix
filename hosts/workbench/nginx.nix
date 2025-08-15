@@ -6,6 +6,7 @@ services.nginx = {
   recommendedTlsSettings = true;
   logError = "stderr info";
   enableReload = true;
+  clientMaxBodySize = "2048m"
   # defaultListen = [
   #   { addr = "192.168.130.4"; proxyProtocol = true; ssl = true; }
   # ]
