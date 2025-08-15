@@ -31,6 +31,10 @@
             set system $argv
             nixos-rebuild switch --use-remote-sudo --build-host $system --target-host $system --flake github:crutonjohn/nix#$system
         '';
+        nrbuild = ''
+            set system $argv
+            nixos-rebuild build --flake github:crutonjohn/nix#$system
+        '';
         nrbu = ''
             set system $argv
             nixos-rebuild switch --use-remote-sudo --upgrade --build-host $system --target-host $system --flake github:crutonjohn/nix#$system
