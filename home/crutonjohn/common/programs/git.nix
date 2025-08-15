@@ -1,6 +1,13 @@
-{ config, pkgs, ... }: {
+{ ... }: {
   programs.git = {
     enable = true;
+    userEmail = "crutonjohn@pm.me";
+    userName = "Curtis John";
+    includes = [
+      {
+        path = "~/.config/git/gitconfig-personal";
+      }
+    ];
     aliases = {
       lg =
         "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit";
@@ -181,16 +188,6 @@
   };
 
   home.file = {
-    ".config/git/gitconfig-work".text = ''
-      [user]
-        name = Buck John
-        email = bjohn@akamai.com
-
-      [color "status"]
-      	added = yellow
-      	changed = green
-      	untracked = cyan
-    '';
     ".config/git/gitconfig-personal".text = ''
       [user]
       	email = crutonjohn@pm.me
@@ -203,4 +200,3 @@
     '';
   };
 }
-

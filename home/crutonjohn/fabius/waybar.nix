@@ -264,7 +264,7 @@
       };
       "custom/powermenu" = {
         "format" = "󰐥";
-        "on-click" = "pkill wofi || wofi-powermenu";
+        "on-click" = "pkill wofi-powermenu || wofi-powermenu";
         "tooltip" = false;
       };
       "tray" = {

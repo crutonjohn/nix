@@ -1,4 +1,4 @@
-{ lib, config, pkgs, home, ... }:
+{ config, pkgs, ... }:
 {
 
   programs.floorp = {
@@ -25,7 +25,7 @@
           istilldontcareaboutcookies
           bitwarden
           darkreader
-          enhancer-for-youtube
+          #enhancer-for-youtube
           linkwarden
           reddit-enhancement-suite
         ];

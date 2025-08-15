@@ -1,0 +1,86 @@
+{ pkgs, inputs, ... }: {
+
+  imports = [
+    ./cursor.nix
+    ./dunst.nix
+    ./swaylock.nix
+    ./wofi.nix
+
+  ];
+
+  home.packages = with pkgs; [
+    appimage-run
+    at-spi2-atk
+    bambu-studio
+    bitwarden-desktop
+    brightnessctl
+    bewcloud-client
+    catimg
+    catt
+    ceph
+    colmena
+    comma
+    discord
+    dmenu
+    docker
+    docker-compose
+    font-manager
+    galculator
+    gettext
+    gimp
+    gnome-network-displays
+    godot_4
+    helvum
+    hexchat
+    hyprpaper
+    imagemagick
+    inputs.compose2nix.packages.x86_64-linux.default
+    inputs.hypr-contrib.packages.${pkgs.system}.grimblast
+    inputs.hyprpicker.packages.${pkgs.system}.hyprpicker
+    jdk11
+    kanshi
+    lapce
+    libgcc
+    libinput
+    libnotify
+    lychee-slicer
+    mqttui
+    neofetch
+    networkmanager
+    networkmanager_dmenu
+    nfs-utils
+    nil
+    nmap
+    openscad
+    pamixer
+    pavucontrol
+    pixman
+    pog
+    powertop
+    psmisc
+    pulsemixer
+    qemu
+    remmina
+    rpi-imager
+    signal-desktop
+    sonixd
+    soulseekqt
+    step-cli
+    sway-contrib.grimshot
+    swaybg
+    tailscale
+    termshark
+    tlp
+    tuxguitar
+    unixtools.procps
+    virt-manager
+    volctl
+    waybar
+    wdisplays
+    wev
+    wineWowPackages.waylandFull
+    zeal
+    zlib
+  ];
+
+}

@@ -1,0 +1,56 @@
+{ pkgs, inputs, ... }: {
+
+  home.packages = with pkgs; [
+    appimage-run
+    at-spi2-atk
+    bambu-studio
+    bitwarden-desktop
+    brightnessctl
+    bewcloud-client
+    discord
+    dmenu
+    font-manager
+    galculator
+    gimp
+    gnome-network-displays
+    godot_4
+    helvum
+    hexchat
+    hyprpaper
+    imagemagick
+    inputs.compose2nix.packages.x86_64-linux.default
+    inputs.hypr-contrib.packages.${pkgs.system}.grimblast
+    inputs.hyprpicker.packages.${pkgs.system}.hyprpicker
+    kanshi
+    lychee-slicer
+    mqttui
+    neofetch
+    networkmanager
+    networkmanager_dmenu
+    openscad
+    pamixer
+    pavucontrol
+    pixman
+    pog
+    pulsemixer
+    remmina
+    rpi-imager
+    signal-desktop
+    sonixd
+    soulseekqt
+    sway-contrib.grimshot
+    swaybg
+    tuxguitar
+    virt-manager
+    waybar
+    wdisplays
+    wineWowPackages.waylandFull
+    alacritty
+    easyeffects
+    telegram-desktop
+    vlc
+    #obsidian
+    teamspeak6-client
+  ];
+
+}
