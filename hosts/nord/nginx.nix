@@ -28,7 +28,13 @@
         "grafana.heyjohn.family"
       ];
       email = "curtis@heyjohn.family";
-      renewInterval = "23hr";
+      renewInterval = "* 23:00:00";
+      reloadServices = [
+        "prometheus.service"
+        "alertmanager.service"
+        "loki.service"
+        "grafana.service"
+      ];
       group = "nginx";
     };
   };
