@@ -27,18 +27,18 @@
 
   programs.fish = {
     functions = {
-        nrb = ''
-            set system $argv
-            nixos-rebuild switch --use-remote-sudo --build-host $system --target-host $system --flake github:crutonjohn/nix#$system
-        '';
-        nrbuild = ''
-            set system $argv
-            nixos-rebuild build --flake github:crutonjohn/nix#$system
-        '';
-        nrbu = ''
-            set system $argv
-            nixos-rebuild switch --use-remote-sudo --upgrade --build-host $system --target-host $system --flake github:crutonjohn/nix#$system
-        '';
+      nrb = ''
+        set system $argv
+        nixos-rebuild switch --use-remote-sudo --build-host $system --target-host $system --flake github:crutonjohn/nix#$system --option tarball-ttl 0
+      '';
+      nrbuild = ''
+        set system $argv
+        nixos-rebuild build --flake github:crutonjohn/nix#$system --option tarball-ttl 0
+      '';
+      nrbu = ''
+        set system $argv
+        nixos-rebuild switch --use-remote-sudo --upgrade --build-host $system --target-host $system --flake github:crutonjohn/nix#$system --option tarball-ttl 0
+      '';
     };
   };
 
