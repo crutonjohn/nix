@@ -8,7 +8,7 @@
       target = "graphical-session.target";
     };
     style = ''
-              * {
+        * {
                 font-family: Noto Sans Mono, Material Symbols Sharp;
                 font-size: 12pt;
                 font-weight: bold;
@@ -16,23 +16,23 @@
                 transition-property: background-color;
                 transition-duration: 0.5s;
               }
-              @keyframes blink_red {
+        @keyframes blink_red {
                 to {
                   background-color: rgb(242, 143, 173);
                   color: rgb(26, 24, 38);
                 }
               }
-              .warning, .critical, .urgent {
+        .warning, .critical, .urgent {
                 animation-name: blink_red;
                 animation-duration: 1s;
                 animation-timing-function: linear;
                 animation-iteration-count: infinite;
                 animation-direction: alternate;
               }
-              window#waybar {
+        window#waybar {
                 background-color: transparent;
               }
-              window > box {
+        window > box {
                 margin-left: 5px;
                 margin-right: 5px;
                 margin-top: 5px;
@@ -141,7 +141,6 @@
       "position" = "top";
       modules-left = [
         "custom/launcher"
-        "wlr/workspaces"
         "temperature"
         "custom/wall"
         "mpd"
