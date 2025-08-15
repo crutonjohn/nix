@@ -188,6 +188,7 @@
             hostname = "nord";
             system = "x86_64-linux";
             profileModules = [
+              { home-manager.users.crutonjohn = ./home/crutonjohn/nord; }
             ];
           };
 
