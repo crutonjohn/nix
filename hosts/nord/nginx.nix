@@ -28,7 +28,7 @@
         "grafana.heyjohn.family"
       ];
       email = "curtis@heyjohn.family";
-      renewInterval = "23h";
+      renewInterval = "23hr";
       group = "nginx";
     };
   };
