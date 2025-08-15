@@ -29,16 +29,16 @@
         origin = "bottom-right";
         gap_size = 2;
         stack_duplicates = true;
-        corner_radius = 0;
+        corner_radius = 5;
       };
       urgency_low = {
-        background = "#282C34";
-        foreground = "#1e1e2e";
+        background = "#1e1e2e";
+        foreground = "#d9e0ee";
         timeout = 10;
       };
       urgency_normal = {
-        background = "#282C34";
-        foreground = "#1e1e2e";
+        background = "#1e1e2e";
+        foreground = "#d9e0ee";
         timeout = 10;
       };
       urgency_critical = {
