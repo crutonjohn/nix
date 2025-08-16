@@ -11,14 +11,14 @@
         follow = "keyboard";
         transparency = 50;
         frame_color = "#ffc0cb";
-        font = "0xProto Nerd Font Mono";
+        font = "0xProto Nerd Font Mono 10";
         padding = 8;
         horizontal_padding = 8;
         frame_width = 1;
         line_height = 4;
         format = ''
-          <b>%s</b>
-          %b'';
+          <small><b>%a :</b>%s</small>\n%b
+        '';
         show_age_threshold = 30;
         separator_height = 2;
         separator_color = "frame";
