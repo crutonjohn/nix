@@ -322,20 +322,9 @@
         "workspace special, initialClass:^(discord)$, initialTitle:^(Discord)$"
         ################################
 
-        ### GAMING ###
-        # setting up gaming windows
-        "tag +game, class:^(cs2|steam_app_.*)$"
-        "noborder, tag:game"
-        "pseudo, tag:game"
-        "tile, tag:game"
-        "roundingpower 0, tag:game"
-        "size 2560 1440, tag:game"
-        "noblur, tag:game"
-        "content game, tag:game"
-
         ## steam windows ##
-        "float, initialTitle:Steam, class:steam"
-        "pseudo, initialTitle:Steam, class:steam"
+        "float, initialClass:steam, class:steam"
+        "pseudo, initialClass:steam, class:steam"
         "float, title:Friends List, class:steam"
         "size 504 896, title:Friends List, class:steam"
         "pseudo, title:Friends List, class:steam"
@@ -343,6 +332,21 @@
         "size 504 896, title:^.*(Chat).*$, class:steam"
         "pseudo, title:^.*(Chat).*$, class:steam"
         ##############
+
+        ### GAMING ###
+        # setting up gaming windows
+        "tag +game, initialClass:^(cs2|steam_app_.*)$"
+        "noborder, tag:game"
+        #"pseudo, tag:game"
+        "float, tag:game"
+        "roundingpower 0, tag:game"
+        "size 2560 1440, tag:game"
+        "noblur, tag:game"
+        "content game, tag:game"
+
+        ### Testing Abyssus ###
+        "float, initialTitle:^(Abyssus)$"
+        "size 2560 1440, initialTitle:^(Abyssus)$"
 
         ## setting up static workspace ##
         "workspace gaming, class:^(steam)$"

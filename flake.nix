@@ -25,6 +25,7 @@
     # https://github.com/nix-community
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    # Hyprland related stuff
     hyprland.url = "github:hyprwm/Hyprland/v0.50.1";
     hypr-contrib = {
       url = "github:hyprwm/contrib";

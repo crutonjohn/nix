@@ -43,7 +43,7 @@
       };
     };
   };
-  powerManagement.powertop.enable = true;
+  #powerManagement.powertop.enable = true;
   services.logind = {
     lidSwitch = "suspend-then-hibernate";
     lidSwitchExternalPower = "suspend-then-hibernate";
