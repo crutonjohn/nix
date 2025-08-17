@@ -78,9 +78,6 @@
     compose2nix.url = "github:aksiksi/compose2nix/v0.3.1";
     compose2nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    # nixified-ai
-    nixified-ai.url = "github:nixified-ai/flake";
-
   };
 
   outputs = { self, nixpkgs, sops-nix, home, hyprland, nix-index-database
@@ -123,10 +120,11 @@
                 extraSpecialArgs = { inherit inputs hostname system; };
               };
             }
-          ], profileModules ? [ ] }:
+          ], profileModules ? [ ], bonusModules ? [ ] }:
           nixpkgs.lib.nixosSystem {
             inherit system;
-            modules = baseModules ++ hardwareModules ++ profileModules;
+            modules = baseModules ++ hardwareModules ++ profileModules
+              ++ bonusModules;
             specialArgs = { inherit self inputs nixpkgs; };
             # Add our overlays
             pkgs = import nixpkgs {
@@ -167,7 +165,6 @@
           # Local AI and Gaming Desktop
           hostname = "servitor";
           system = "x86_64-linux";
-          baseModules = [ nixified-ai.nixosModules.comfyui ];
           hardwareModules = [
             inputs.nixos-hardware.nixosModules.common-cpu-amd-raphael-igpu
             inputs.nixos-hardware.nixosModules.common-pc-ssd
@@ -189,6 +186,9 @@
           # Workbench and Local Volsync Backup Machine
           hostname = "workbench";
           system = "x86_64-linux";
+          profileModules =
+            [{ home-manager.users.crutonjohn = ./home/crutonjohn/nord; }];
+
         };
 
       };
