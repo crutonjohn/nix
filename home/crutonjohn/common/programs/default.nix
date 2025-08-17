@@ -75,7 +75,8 @@
       neofetch
       networkmanager
       nfs-utils
-      nil
+      # nil -- installed via flake
+      inputs.nil.packages.x86_64-linux.default
       nixd
       nmap
       pixman

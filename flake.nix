@@ -66,6 +66,7 @@
       url = "github:bluskript/nix-inspect";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nil.url = "github:oxalica/nil";
 
     # krewfile - Declarative krew plugin management
     krewfile = {
@@ -81,14 +82,14 @@
   };
 
   outputs = { self, nixpkgs, sops-nix, home, hyprland, nix-index-database
-    , krewfile, ... }@inputs:
+    , krewfile, nil, ... }@inputs:
     let
       forAllSystems = nixpkgs.lib.genAttrs [ "aarch64-linux" "x86_64-linux" ];
 
       # expose overlays as flake outputs
       overlays = import ./overlays { inherit inputs; };
 
-    in rec {
+    in {
       # Use nixpkgs-fmt for 'nix fmt'
       formatter =
         forAllSystems (system: nixpkgs.legacyPackages."${system}".nixpkgs-fmt);
@@ -103,7 +104,7 @@
         inherit inputs;
         # Import overlays for building nixosconfig with them.
         overlays = import ./overlays { inherit inputs; };
-        # generate a base nixos configuration with the specified overlays, hardware modules, and any AerModules applied
+        # generate a base nixos configuration with the specified overlays, hardware modules, and any other Modules applied
         mkNixosConfig = { hostname, system ? "x86_64-linux"
           , nixpkgs ? inputs.nixpkgs, hardwareModules ? [ ]
             # basemodules is the base of the entire machine building

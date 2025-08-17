@@ -49,7 +49,6 @@
     networkmanager
     networkmanager_dmenu
     nfs-utils
-    nil
     nmap
     openscad
     pamixer
