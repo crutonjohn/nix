@@ -44,6 +44,9 @@
     bottles
     heroic
     teamspeak6-client
+    sdl3
+    sdl3-ttf
+    sdl3-image
   ];
 
 
