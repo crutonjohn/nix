@@ -20,6 +20,14 @@
     };
   };
 
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      sdl3
+      SDL2
+    ];
+  };
+
   environment = {
     systemPackages = with pkgs; [
       inputs.hypr-contrib.packages.${pkgs.system}.grimblast
