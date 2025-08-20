@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ lib, pkgs, ... }: {
 
   programs.fzf = {
     enable = true;
@@ -9,9 +9,7 @@
     enable = true;
     enableFishIntegration = true;
     settings = {
-      log = {
-        enabled = false;
-      };
+      log = { enabled = false; };
       manager = {
         show_hidden = true;
         sort_by = "natural";
@@ -25,9 +23,7 @@
 
   programs.zoxide = {
     enable = true;
-    options = [
-      "--cmd cd"
-    ];
+    options = [ "--cmd cd" ];
   };
 
   programs.direnv = {
@@ -35,9 +31,7 @@
     nix-direnv = { enable = true; };
   };
 
-  programs.eza = {
-    enable = true;
-  };
+  programs.eza = { enable = true; };
 
   programs.bat = {
     enable = true;
@@ -58,10 +52,12 @@
   programs.starship = {
     enable = true;
     enableFishIntegration = true;
+    enableBashIntegration = true;
     settings = {
       add_newline = true;
       format = lib.concatStrings [
         "$username"
+        "$hostname"
         "$nix_shell"
         "$kubernetes"
         "$aws"
@@ -124,6 +120,14 @@
         style_root = "bold red";
         style_user = "cyan bold";
         show_always = true;
+        disabled = false;
+        format = "[$user]($style) ";
+      };
+      hostname = {
+        ssh_only = true;
+        ssh_symbol = "";
+        format = "[$ssh_symbol](cyan bold) @ [$hostname](green bold) ";
+        detect_env_vars = [ "!TMUX" "SSH_CONNECTION" ];
         disabled = false;
       };
       kubernetes = { disabled = false; };

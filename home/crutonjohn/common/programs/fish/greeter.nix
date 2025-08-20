@@ -1,8 +1,7 @@
-{ config, lib, pkgs, ... }: {
+{ ... }: {
   programs.fish = {
     functions = {
-      fish_greeting = ''
-      '';
+      fish_greeting = "";
       fish_get_ip_addr = ''
         ip addr | awk '/^[0-9]/ {dev=$2; up=0} /UP/ {up=1} /inet / && up {print dev, $2}' | grep -vE '(br.+|docker0|lo)' | cut -d/ -f1
       '';
@@ -39,7 +38,7 @@
           $W  Processes...:$W $G$PROCESS_ROOT$W (root), $G$PROCESS_USER$W (user), $G$PROCESS_ALL$W (total)
 
           $W  CPU.........: $W$PROCESSOR_NAME ($G$PROCESSOR_COUNT$W vCPU)
-          $W  Memory......: $G$USED$W used, $G$AVAIL$W avail, $G$TOTAL$W total$W"      
+          $W  Memory......: $G$USED$W used, $G$AVAIL$W avail, $G$TOTAL$W total$W"
       '';
 
     };

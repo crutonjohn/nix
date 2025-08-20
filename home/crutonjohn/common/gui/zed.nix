@@ -17,6 +17,7 @@
       "theme" = "Ayu Dark";
       "ui_font_size" = 16;
       "buffer_font_size" = 16;
+      "buffer_font_family" = "0xProto Nerd Font Mono";
       "language_models" = {
         "ollama" = {
           "api_url" = "http://192.168.128.9:11434";

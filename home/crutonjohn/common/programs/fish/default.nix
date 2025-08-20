@@ -1,8 +1,6 @@
-{ config, lib, pkgs, ... }: {
+{ pkgs, ... }: {
 
-  imports = [
-    ./greeter.nix
-  ];
+  imports = [ ./greeter.nix ];
 
   programs.fish = {
     enable = true;
@@ -28,7 +26,7 @@
         end
         for i in (seq $n)
           cd ..
-        end      
+        end
       '';
     };
     plugins = [
