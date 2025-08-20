@@ -52,4 +52,15 @@
     };
   };
 
+  systemd.timers."custom-acme-fakecloudhost.heyjohn.family" = {
+    description = "Hack to renew ACME Certificate every day";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "*-*-* 22:00:00";
+      Persistent = "yes";
+      AccuracySec = "600s";
+      Unit = "acme-fakecloudhost.heyjohn.family.service";
+    };
+  };
+
 }
