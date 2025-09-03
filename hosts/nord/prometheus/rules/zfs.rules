@@ -7,24 +7,24 @@ groups:
     labels:
       severity: critical
     annotations:
-      summary: ZFS offline pool (instance {{ $labels.instance }})
-      description: "A ZFS zpool is in a unexpected state: {{ $labels.state }}.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+      summary: ZFS offline pool on {{ $labels.instance }}
+      description: "A ZFS zpool is in a unexpected state: {{ $labels.state }}."
   - alert: ZfsDegradedPool
     expr: node_zfs_zpool_state{state=~"degraded"} > 0
     for: 5m
     labels:
       severity: warning
     annotations:
-      summary: ZFS offline pool (instance {{ $labels.instance }})
-      description: "A ZFS zpool is in a unexpected state: {{ $labels.state }}.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+      summary: ZFS offline pool on {{ $labels.instance }}
+      description: "A ZFS zpool is in a unexpected state: {{ $labels.state }}."
   - alert: ZfsPoolOutOfSpace
     expr: zfs_pool_free_bytes * 100 / zfs_pool_size_bytes < 10 and ON (instance, device, mountpoint) zfs_pool_readonly == 0
     for: 5m
     labels:
       severity: warning
     annotations:
-      summary: ZFS pool out of space (instance {{ $labels.instance }})
-      description: "Disk is almost full (< 10% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+      summary: ZFS pool out of space on {{ $labels.instance }}
+      description: "Disk is almost full (< 10% left)"
   # 0: ONLINE
   # 1: DEGRADED
   # 2: FAULTED
@@ -38,8 +38,8 @@ groups:
     labels:
       severity: warning
     annotations:
-      summary: ZFS pool unhealthy (instance {{ $labels.instance }})
-      description: "ZFS pool state is {{ $value }}. See comments for more information.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+      summary: ZFS pool unhealthy on {{ $labels.instance }}
+      description: "ZFS pool state is {{ $value }}. See comments for more information."
   - alert: ZfsPoolUnhealthy
     expr: zfs_pool_health > 0 and zfs_pool_readonly > 0
     for: 2m
@@ -54,8 +54,8 @@ groups:
     labels:
       severity: warning
     annotations:
-      summary: ZFS collector failed (instance {{ $labels.instance }})
-      description: "ZFS collector for {{ $labels.instance }} has failed to collect information\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+      summary: ZFS collector failed on {{ $labels.instance }}
+      description: "ZFS collector for {{ $labels.instance }} has failed to collect information"
   - alert: ZpoolVolumeFillingUp
     expr: |
       (zfs_dataset_written_bytes{type="volume"} / zfs_dataset_volume_size_bytes * 100 > 60 and predict_linear(zfs_dataset_written_bytes{type="volume"}[6h], 24 * 60 * 60) < 0 and zfs_pool_readonly == 0)
@@ -92,4 +92,3 @@ groups:
     annotations:
       summary: Filesystem is predicted to run out of space within the next 4 hours.
       description: Filesystem on volume {{ $labels.name }} is at {{ printf "%.2f" $value }}% capacity and is filling up.
-

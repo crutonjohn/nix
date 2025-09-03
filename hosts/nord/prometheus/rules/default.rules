@@ -28,7 +28,7 @@ groups:
     annotations:
       description: Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left and is filling up.
       summary: Filesystem is predicted to run out of space within the next 24 hours.
-    expr: "(\n  node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"} / node_filesystem_size_bytes{job=\"node\",fstype!=\"\"} * 100 < 40\nand\n  predict_linear(node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"}[6h], 24*60*60) < 0\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
+    expr: "(node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"} / node_filesystem_size_bytes{job=\"node\",fstype!=\"\"} * 100 < 40 and predict_linear(node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"}[6h], 24*60*60) < 0 and node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0)"
     for: 1h
     labels:
       severity: warning
@@ -36,7 +36,7 @@ groups:
     annotations:
       description: Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left and is filling up fast.
       summary: Filesystem is predicted to run out of space within the next 4 hours.
-    expr: "(\n  node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"} / node_filesystem_size_bytes{job=\"node\",fstype!=\"\"} * 100 < 20\nand\n  predict_linear(node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"}[6h], 4*60*60) < 0\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
+    expr: "(node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"} / node_filesystem_size_bytes{job=\"node\",fstype!=\"\"} * 100 < 20 and predict_linear(node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"}[6h], 4*60*60) < 0 and node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0)"
     for: 1h
     labels:
       severity: critical
@@ -44,7 +44,7 @@ groups:
     annotations:
       description: Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left.
       summary: Filesystem has less than 5% space left.
-    expr: "(\n  node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"} / node_filesystem_size_bytes{job=\"node\",fstype!=\"\"} * 100 < 5\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
+    expr: "(node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"} / node_filesystem_size_bytes{job=\"node\",fstype!=\"\"} * 100 < 5 and node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0)"
     for: 1h
     labels:
       severity: warning
@@ -52,7 +52,7 @@ groups:
     annotations:
       description: Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left.
       summary: Filesystem has less than 3% space left.
-    expr: "(\n  node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"} / node_filesystem_size_bytes{job=\"node\",fstype!=\"\"} * 100 < 3\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
+    expr: "( node_filesystem_avail_bytes{job=\"node\",fstype!=\"\"} / node_filesystem_size_bytes{job=\"node\",fstype!=\"\"} * 100 < 3 and node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0 )"
     for: 1h
     labels:
       severity: critical
@@ -60,7 +60,7 @@ groups:
     annotations:
       description: Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left and is filling up.
       summary: Filesystem is predicted to run out of inodes within the next 24 hours.
-    expr: "(\n  node_filesystem_files_free{job=\"node\",fstype!=\"\"} / node_filesystem_files{job=\"node\",fstype!=\"\"} * 100 < 40\nand\n  predict_linear(node_filesystem_files_free{job=\"node\",fstype!=\"\"}[6h], 24*60*60) < 0\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
+    expr: "( node_filesystem_files_free{job=\"node\",fstype!=\"\"} / node_filesystem_files{job=\"node\",fstype!=\"\"} * 100 < 40 and predict_linear(node_filesystem_files_free{job=\"node\",fstype!=\"\"}[6h], 24*60*60) < 0 and node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0)"
     for: 1h
     labels:
       severity: warning
@@ -68,7 +68,7 @@ groups:
     annotations:
       description: Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left and is filling up fast.
       summary: Filesystem is predicted to run out of inodes within the next 4 hours.
-    expr: "(\n  node_filesystem_files_free{job=\"node\",fstype!=\"\"} / node_filesystem_files{job=\"node\",fstype!=\"\"} * 100 < 20\nand\n  predict_linear(node_filesystem_files_free{job=\"node\",fstype!=\"\"}[6h], 4*60*60) < 0\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
+    expr: "( node_filesystem_files_free{job=\"node\",fstype!=\"\"} / node_filesystem_files{job=\"node\",fstype!=\"\"} * 100 < 20 and predict_linear(node_filesystem_files_free{job=\"node\",fstype!=\"\"}[6h], 4*60*60) < 0 and node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0)"
     for: 1h
     labels:
       severity: critical
@@ -76,7 +76,7 @@ groups:
     annotations:
       description: Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left.
       summary: Filesystem has less than 5% inodes left.
-    expr: "(\n  node_filesystem_files_free{job=\"node\",fstype!=\"\"} / node_filesystem_files{job=\"node\",fstype!=\"\"} * 100 < 5\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
+    expr: "( node_filesystem_files_free{job=\"node\",fstype!=\"\"} / node_filesystem_files{job=\"node\",fstype!=\"\"} * 100 < 5 and node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0)"
     for: 1h
     labels:
       severity: warning
@@ -84,8 +84,8 @@ groups:
     annotations:
       description: Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left.
       summary: Filesystem has less than 3% inodes left.
-    expr: "(\n  node_filesystem_files_free{job=\"node\",fstype!=\"\"} / node_filesystem_files{job=\"node\",fstype!=\"\"}
-      * 100 < 3\nand\n  node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0\n)\n"
+    expr: "( node_filesystem_files_free{job=\"node\",fstype!=\"\"} / node_filesystem_files{job=\"node\",fstype!=\"\"}
+      * 100 < 3 and node_filesystem_readonly{job=\"node\",fstype!=\"\"} == 0)"
     for: 1h
     labels:
       severity: critical
@@ -116,7 +116,7 @@ groups:
     annotations:
       message: Clock on {{ $labels.instance }} is out of sync by more than 300s. Ensure NTP is configured correctly on this host.
       summary: Clock skew detected.
-    expr: "(\n  node_timex_offset_seconds > 0.05\nand\n  deriv(node_timex_offset_seconds[5m]) >= 0\n)\nor\n(\n  node_timex_offset_seconds < -0.05\nand\n  deriv(node_timex_offset_seconds[5m]) <= 0\n)\n"
+    expr: "( node_timex_offset_seconds > 0.05 and deriv(node_timex_offset_seconds[5m]) >= 0) or ( node_timex_offset_seconds < -0.05 and deriv(node_timex_offset_seconds[5m]) <= 0)"
     for: 10m
     labels:
       severity: warning
@@ -134,54 +134,53 @@ groups:
     labels:
       severity: warning
     annotations:
-      summary: Host OOM kill detected (instance {{ $labels.instance }})
-      description: "OOM kill detected\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+      summary: Host OOM kill detected
+      description: "OOM kill detected on {{ $labels.instance }}"
   - alert: HostNetworkTransmitErrors
     expr: (rate(node_network_transmit_errs_total[2m]) / rate(node_network_transmit_packets_total[2m]) > 0.01) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
     for: 5m
     labels:
       severity: warning
     annotations:
-      summary: Host Network Transmit Errors (instance {{ $labels.instance }})
-      description: "Host {{ $labels.instance }} interface {{ $labels.device }} has encountered {{ printf \"%.0f\" $value }} transmit errors in the last two minutes.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+      summary: Host Network Transmit Errors on {{ $labels.instance }}
+      description: "Host {{ $labels.instance }} interface {{ $labels.device }} has encountered {{ printf \"%.0f\" $value }} transmit errors in the last two minutes."
   - alert: HostNetworkInterfaceSaturated
     expr: ((rate(node_network_receive_bytes_total{device!~"^tap.*|^vnet.*|^veth.*|^tun.*"}[1m]) + rate(node_network_transmit_bytes_total{device!~"^tap.*|^vnet.*|^veth.*|^tun.*"}[1m])) / node_network_speed_bytes{device!~"^tap.*|^vnet.*|^veth.*|^tun.*"} > 0.8 < 10000) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
     for: 5m
     labels:
       severity: warning
     annotations:
-      summary: Host Network Interface Saturated (instance {{ $labels.instance }})
-      description: "The network interface \"{{ $labels.device }}\" on \"{{ $labels.instance }}\" is getting overloaded.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+      summary: Host Network Interface Saturated on {{ $labels.instance }}
+      description: "The network interface {{ $labels.device }} on {{ $labels.instance }} is getting overloaded."
   - alert: HostConntrackLimit
     expr: (node_nf_conntrack_entries / node_nf_conntrack_entries_limit > 0.8) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
     for: 5m
     labels:
       severity: warning
     annotations:
-      summary: Host conntrack limit (instance {{ $labels.instance }})
-      description: "The number of conntrack is approaching limit\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+      summary: Host conntrack limit on {{ $labels.instance }}
+      description: "The number of conntrack is approaching limit"
   - alert: HostPhysicalComponentTooHot
     expr: ((node_hwmon_temp_celsius * ignoring(label) group_left(instance, job, node, sensor) node_hwmon_sensor_label{label!="tctl"} > 75)) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
     for: 10m
     labels:
       severity: warning
     annotations:
-      summary: Host physical component too hot (instance {{ $labels.instance }})
-      description: "Physical hardware component too hot\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+      summary: Host physical component too hot {{ $labels.instance }}
+      description: "Physical hardware component too hot"
   - alert: HostPhysicalComponentTooHot
     expr: ((node_hwmon_temp_celsius * ignoring(label) group_left(instance, job, node, sensor) node_hwmon_sensor_label{label!="tctl"} > 75)) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
     for: 20m
     labels:
       severity: critical
     annotations:
-      summary: Host physical component too hot (instance {{ $labels.instance }})
-      description: "Physical hardware component too hot\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+      summary: Host physical component too hot {{ $labels.instance }}
+      description: "Physical hardware component too hot"
   - alert: HostSystemdServiceCrashed
     expr: (node_systemd_unit_state{state="failed",name!~"(user@0|openipmi|nvmf-autoconnect).service"} == 1) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
     for: 10m
     labels:
       severity: warning
     annotations:
-      summary: Host systemd service crashed (instance {{ $labels.instance }})
-      description: "systemd service crashed\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-
+      summary: Host systemd service crashed {{ $labels.instance }}
+      description: "systemd service {{ $labels.service }} crashed"

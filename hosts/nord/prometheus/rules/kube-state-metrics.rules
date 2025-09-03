@@ -82,7 +82,7 @@ groups:
       labels:
         severity: warning
       annotations:
-        summary: Kubernetes PersistentVolumeClaim pending (instance {{ $labels.instance }})
+        summary: Kubernetes PersistentVolumeClaim pending on {{ $labels.instance }}
         description: "PersistentVolumeClaim {{ $labels.namespace }}/{{ $labels.persistentvolumeclaim }} is pending"
 
     - alert: KubernetesVolumeOutOfDiskSpace

@@ -10,7 +10,7 @@ groups:
       labels:
         severity: critical
       annotations:
-        summary: Blackbox probe failed (instance {{ $labels.instance }})
+        summary: Blackbox probe failed on {{ $labels.instance }}
         description: "Probe failed for {{ $labels.instance }}"
 
     - alert: BlackboxConfigurationReloadFailure

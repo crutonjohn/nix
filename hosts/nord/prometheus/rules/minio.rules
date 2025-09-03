@@ -10,7 +10,7 @@ groups:
       labels:
         severity: critical
       annotations:
-        summary: Minio cluster disk offline (instance {{ $labels.instance }})
+        summary: Minio cluster disk offline on {{ $labels.instance }}
         description: "Minio cluster disk is offline"
 
     - alert: MinioNodeDiskOffline
@@ -19,7 +19,7 @@ groups:
       labels:
         severity: critical
       annotations:
-        summary: Minio node disk offline (instance {{ $labels.instance }})
+        summary: Minio node disk offline on {{ $labels.instance }}
         description: "Minio cluster node disk is offline"
 
     - alert: MinioDiskSpaceUsage

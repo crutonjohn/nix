@@ -37,5 +37,5 @@ groups:
       labels:
         severity: critical
       annotations:
-        summary: Loki request latency (instance {{ $labels.instance }})
+        summary: Loki request latency on {{ $labels.instance }}
         description: "The Loki route {{ $labels.route }} is experiencing {{ printf \"%.2f\" $value }}s 99th percentile latency"
