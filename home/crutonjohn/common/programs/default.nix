@@ -51,6 +51,7 @@
       dyff
       traceroute
       kns
+      kubescape
       p7zip
       rar
       pkgs.unstable.fluxcd
