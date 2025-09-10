@@ -36,7 +36,7 @@
           owner = "evanlucas";
           repo = "fish-kubectl-completions";
           rev = "ced676392575d618d8b80b3895cdc3159be3f628";
-          sha256 = "sha256-t7FKKzD42hAZV7CpitrznRYLkCYok7Bqg1JXW7BaKyA=";
+          sha256 = "sha256-OYiYTW+g71vD9NWOcX1i2/TaQfAg+c2dJZ5ohwWSDCc=";
         };
       }
 
