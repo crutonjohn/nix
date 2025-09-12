@@ -17,7 +17,7 @@
           {
             criteria = "Samsung Electric Company LC49G95T H1AK500000";
             position = "0,0";
-            mode = "5120x1440@119.99900Hz";
+            mode = "5120x1440@59.98Hz";
           }
           {
             criteria = "eDP-1";
