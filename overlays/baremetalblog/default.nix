@@ -2,12 +2,12 @@
 
 stdenv.mkDerivation rec {
   pname = "baremetalblog";
-  version = "a2c9684225a3038430a97a9cb99f628c030f0da7";
+  version = "d5ca958bdd24ca46ed7a30862dbd61b14797c481";
 
   src = pkgs.fetchgit {
     url = "https://github.com/crutonjohn/baremetalblog.git";
     rev = version;
-    sha256 = "sha256-/Gsmf9cXaOwGNQMiXEnoYIroSl8+WgRx2vkBl+3DdTo=";
+    sha256 = "sha256-tKV0NcoKssR7c6z5TqhE7NuKsigk6NkkZRfXSEM7zxw=";
     fetchSubmodules = true;
   };
 
