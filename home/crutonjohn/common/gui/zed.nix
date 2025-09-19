@@ -20,7 +20,7 @@
       "buffer_font_family" = "0xProto Nerd Font Mono";
       "language_models" = {
         "ollama" = {
-          "api_url" = "http://192.168.128.9:11434";
+          "api_url" = "http://192.168.142.17:11434";
           "low_speed_timeout_in_seconds" = 120;
           "available_models" = [
             {
