@@ -6,8 +6,9 @@
     ../common/gui
     ./wallpapers
     ./desktop.nix
-    ./kanshi.nix
+    ./gaming.nix
     ./hyprland.nix
+    ./kanshi.nix
     ./waybar.nix
   ];
 

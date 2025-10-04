@@ -50,6 +50,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    chaotic.url =
+      "github:chaotic-cx/nyx/nyxpkgs-unstable"; # Bleeding edge packages from Chaotic-AUR
+    play-nix = {
+      url = "github:tophc7/play.nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs-unstable";
+        chaotic.follows = "chaotic";
+      };
+    };
+
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -82,7 +92,7 @@
   };
 
   outputs = { self, nixpkgs, sops-nix, home, hyprland, nix-index-database
-    , krewfile, nil, ... }@inputs:
+    , krewfile, nil, play-nix, chaotic, ... }@inputs:
     let
       forAllSystems = nixpkgs.lib.genAttrs [ "aarch64-linux" "x86_64-linux" ];
 
@@ -173,6 +183,8 @@
           ];
           profileModules =
             [{ home-manager.users.crutonjohn = ./home/crutonjohn/servitor; }];
+          bonusModules =
+            [ play-nix.nixosModules.play chaotic.nixosModules.default ];
         };
 
         "nord" = mkNixosConfig {

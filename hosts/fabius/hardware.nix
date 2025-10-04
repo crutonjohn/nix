@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   boot.kernelModules = [ "iwlwifi" ];
@@ -21,9 +21,7 @@
   services.blueman.enable = true;
   #Power stuff
   services.power-profiles-daemon.enable = false;
-  services.tlp = {
-    enable = true;
-  };
+  services.tlp = { enable = true; };
   services.auto-cpufreq = {
     enable = true;
     settings = {
@@ -77,14 +75,10 @@
     jack.enable = true;
     extraConfig.pipewire = {
       "10-clock-rate" = {
-        "context.properties" = {
-          "default.clock.rate" = 44100;
-        };
+        "context.properties" = { "default.clock.rate" = 44100; };
       };
       "11-quantum-sync" = {
-        "context.properties" = {
-          "default.clock.min-quantum" = 1024;
-        };
+        "context.properties" = { "default.clock.min-quantum" = 1024; };
       };
     };
   };

@@ -1,11 +1,13 @@
-{ config, pkgs, inputs, lib, ... }:
+{ pkgs, inputs, ... }:
 
 {
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    package =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
   #nixGL.packages = inputs.nixgl.packages;
@@ -14,18 +16,11 @@
   #nixGL.installScripts = [ "mesa" ];
   #nixGL.vulkan.enable = true;
 
-  services = {
-    desktopManager.plasma6 = {
-      enable = true;
-    };
-  };
+  services = { desktopManager.plasma6 = { enable = true; }; };
 
   programs.nix-ld = {
     enable = true;
-    libraries = with pkgs; [
-      sdl3
-      SDL2
-    ];
+    libraries = with pkgs; [ sdl3 SDL2 ];
   };
 
   environment = {
@@ -68,29 +63,27 @@
       xsettingsd
       xorg.xrdb
       amdgpu_top
+      python312
     ];
   };
 
   nixpkgs.overlays = [
     (final: prev: {
-      waybar =
-        let
-          hyprctl = "${pkgs.hyprland}/bin/hyprctl";
-          waybarPatchFile = import ./workspace-patch.nix { inherit pkgs hyprctl; };
-        in
-        prev.waybar.overrideAttrs (oldAttrs: {
-          mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-          patches = (oldAttrs.patches or [ ]) ++ [ waybarPatchFile ];
-          # postPatch = (oldAttrs.postPatch or "") + ''
-          #   sed -i 's/zext_workspace_handle_v1_activate(workspace_handle_);/const std::string command = "hyprctl dispatch workspace " + name_;\n\tsystem(command.c_str());/g' src/modules/wlr/workspace_manager.cpp
-          # '';
-        });
+      waybar = let
+        hyprctl = "${pkgs.hyprland}/bin/hyprctl";
+        waybarPatchFile =
+          import ./workspace-patch.nix { inherit pkgs hyprctl; };
+      in prev.waybar.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+        patches = (oldAttrs.patches or [ ]) ++ [ waybarPatchFile ];
+        # postPatch = (oldAttrs.postPatch or "") + ''
+        #   sed -i 's/zext_workspace_handle_v1_activate(workspace_handle_);/const std::string command = "hyprctl dispatch workspace " + name_;\n\tsystem(command.c_str());/g' src/modules/wlr/workspace_manager.cpp
+        # '';
+      });
     })
   ];
 
-  services.xserver = {
-    xkb.options = "caps:escape";
-  };
+  services.xserver = { xkb.options = "caps:escape"; };
 
   console.keyMap = "us";
 
@@ -100,6 +93,6 @@
   };
 
   security.polkit.enable = true;
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = { };
 
 }

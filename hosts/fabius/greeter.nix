@@ -1,5 +1,4 @@
-{ config, lib, pkgs, ... }:
-{
+{ pkgs, ... }: {
 
   services.xserver.enable = false;
   services.displayManager.sddm = {
@@ -7,15 +6,10 @@
     wayland.enable = true;
     theme = "breeze";
   };
-  environment = {
-    systemPackages = with pkgs; [
-      sddm-chili-theme
-    ];
-  };
+  environment = { systemPackages = with pkgs; [ sddm-chili-theme ]; };
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
   };
 
 }
-

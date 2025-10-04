@@ -1,9 +1,9 @@
-{ config, lib, pkgs, inputs, outputs, ... }:
-{
+{ pkgs, inputs, ... }: {
 
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    package =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     # needed due to https://github.com/hyprwm/Hyprland/discussions/4768
     extraConfig = ''
       # built in touchpad
@@ -138,7 +138,7 @@
         # Launchers & System
         "SUPER,RETURN,exec,alacritty"
         "SUPER,SPACE,exec,wofi -S drun"
-        "SUPER_SHIFT,Return,exec,alacritty --class=\"termfloat\""
+        ''SUPER_SHIFT,Return,exec,alacritty --class="termfloat"''
         "SUPER_SHIFT,R,exec,hyprctl reload && pkill -l USR2 waybar"
         "SUPER_SHIFT,Escape,exit,"
         "SUPER_SHIFT,Q,killactive,"
@@ -152,8 +152,10 @@
         "SUPER,Tab,cyclenext,"
 
         # Gaps
-        "SUPER SHIFT,G,exec,hyprctl --batch \"keyword general:gaps_out 5;keyword general:gaps_in 3\""
-        "SUPER,G,exec,hyprctl --batch \"keyword general:gaps_out 0;keyword general:gaps_in 0\""
+        ''
+          SUPER SHIFT,G,exec,hyprctl --batch "keyword general:gaps_out 5;keyword general:gaps_in 3"''
+        ''
+          SUPER,G,exec,hyprctl --batch "keyword general:gaps_out 0;keyword general:gaps_in 0"''
 
         # Focus movement
         "SUPER,left,movefocus,l"
@@ -278,18 +280,13 @@
       #  reset = {};
       #};
 
-      bindm = [
-        "SUPER,mouse:272,movewindow"
-        "SUPER,mouse:273,resizewindow"
-      ];
+      bindm = [ "SUPER,mouse:272,movewindow" "SUPER,mouse:273,resizewindow" ];
 
-      exec = [
-        "kanshictl reload"
-      ];
+      exec = [ "kanshictl reload" ];
 
       exec-once = [
         "hyprpaper &"
-        "hyprctl hyprpaper wallpaper \"DP-1,~/.config/docked.jpg\""
+        ''hyprctl hyprpaper wallpaper "DP-1,~/.config/docked.jpg"''
         "waybar --config ~/.config/waybar/config &"
         "nm-applet --indicator &"
         # auto toggle waybar on gaming workspace
@@ -360,7 +357,6 @@
         # "setprop size 2560 1440, tag:game"
         # "setprop norounding 1, tag:game"
 
-
         ### xwaylandvideobridge hider ###
         "opacity 0.0 override, class:^(xwaylandvideobridge)$"
         "noanim, class:^(xwaylandvideobridge)$"
@@ -425,29 +421,25 @@
         };
       };
 
-      background = [
-        {
-          path = "~/.config/docked.jpg";
-          blur_passes = 3;
-          blur_size = 8;
-        }
-      ];
+      background = [{
+        path = "~/.config/docked.jpg";
+        blur_passes = 3;
+        blur_size = 8;
+      }];
 
-      input-field = [
-        {
-          size = "200, 50";
-          position = "0, -80";
-          monitor = "";
-          dots_center = true;
-          fade_on_empty = false;
-          font_color = "rgb(202, 211, 245)";
-          inner_color = "rgb(91, 96, 120)";
-          outer_color = "rgb(24, 25, 38)";
-          outline_thickness = 5;
-          placeholder_text = "<span foreground='##cad3f5'>Password...</span>";
-          shadow_passes = 2;
-        }
-      ];
+      input-field = [{
+        size = "200, 50";
+        position = "0, -80";
+        monitor = "";
+        dots_center = true;
+        fade_on_empty = false;
+        font_color = "rgb(202, 211, 245)";
+        inner_color = "rgb(91, 96, 120)";
+        outer_color = "rgb(24, 25, 38)";
+        outline_thickness = 5;
+        placeholder_text = "<span foreground='##cad3f5'>Password...</span>";
+        shadow_passes = 2;
+      }];
     };
   };
 
@@ -469,12 +461,13 @@
     '';
   };
 
-  systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
+  systemd.user.targets.hyprland-session.Unit.Wants =
+    [ "xdg-desktop-autostart.target" ];
 
   ####################
   # Hyprland Scripts #
   ####################
-  home.packages = with pkgs; [
+  home.packages = [
     (pkgs.writeScriptBin "hyprland-gaming-auto-waybar-toggle" ''
       #!/usr/bin/env bash
       # Use hyprctl to watch for workspace changes
@@ -496,8 +489,8 @@
     '')
     (pkgs.writeScriptBin "hyprland-gaming-init" ''
       #!/usr/bin/env bash
-      pgrep steam >/dev/null || steam -vgui
-      pgrep lutris >/dev/null || lutris
+      # pgrep steam >/dev/null || steam -vgui
+      # pgrep lutris >/dev/null || lutris
     '')
   ];
 }
