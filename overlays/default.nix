@@ -26,6 +26,12 @@ let
   otelcolOverlay = self: super: {
     otelcol = super.callPackage ./otelcol { };
   };
+  newrecruitBuilderOverlay = self: super: {
+    newrecruit-builder = super.callPackage ./newrecruit/builder.nix { };
+  };
+  newrecruitEditorOverlay = self: super: {
+    newrecruit-editor = super.callPackage ./newrecruit/editor.nix { };
+  };
 in
 {
   nur = inputs.nur.overlays.default;
@@ -37,6 +43,8 @@ in
   bitwarden-gui = bitwardenOverlay;
   baremetalblog = baremetalblogOverlay;
   otelcol = otelcolOverlay;
+  newrecruit-builder = newrecruitBuilderOverlay;
+  newrecruit-editor = newrecruitEditorOverlay;
 
   # The unstable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.unstable'
