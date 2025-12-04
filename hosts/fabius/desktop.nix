@@ -39,7 +39,7 @@
       egl-wayland
       wayland-protocols
       pkgs.xorg.xeyes
-      glfw-wayland
+      glfw
       xwayland
       pkgs.qt6.qtwayland
       pkgs.qt5.qtwayland

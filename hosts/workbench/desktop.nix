@@ -24,7 +24,7 @@
       wayland-protocols
       # pkgs.plasma-wayland-protocols
       pkgs.xorg.xeyes
-      glfw-wayland
+      glfw
       xwayland
       qt6.qtwayland
       libsForQt5.qt5.qtwayland
@@ -51,9 +51,7 @@
     ];
   };
 
-  services.xserver = {
-    xkb.options = "caps:escape";
-  };
+  services.xserver = { xkb.options = "caps:escape"; };
 
   console.useXkbConfig = true;
 
@@ -65,10 +63,10 @@
   security.polkit.enable = true;
 
   environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";          # Electron apps: use Wayland
-    MOZ_ENABLE_WAYLAND = "1";       # Firefox: use Wayland
-    QT_QPA_PLATFORM = "wayland";    # Qt: use Wayland
-    SDL_VIDEODRIVER = "wayland";    # SDL: use Wayland
+    NIXOS_OZONE_WL = "1"; # Electron apps: use Wayland
+    MOZ_ENABLE_WAYLAND = "1"; # Firefox: use Wayland
+    QT_QPA_PLATFORM = "wayland"; # Qt: use Wayland
+    SDL_VIDEODRIVER = "wayland"; # SDL: use Wayland
     _JAVA_AWT_WM_NONREPARENTING = "1"; # Java: better Wayland compatibility
   };
 
