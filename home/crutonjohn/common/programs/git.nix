@@ -26,7 +26,7 @@
       };
       extraConfig = {
         init.defaultBranch = "main";
-        merge.tool = "ediff";
+        # merge.tool = "ediff";
         merge.keepBackup = false;
         merge.conflictStyle = "diff3";
         mergetool.keepBackup = false;
