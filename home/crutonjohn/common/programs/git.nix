@@ -39,6 +39,7 @@
         push.default = "upstream";
         push.autoSetupRemote = true;
       };
+    };
     ignores = [
       "#*#"
       ".#*"
