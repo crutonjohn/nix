@@ -46,7 +46,7 @@
     };
 
     nixgl = {
-      url = "github:johanneshorner/nixGL";
+      url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
