@@ -16,7 +16,7 @@
       noto-fonts-cjk-serif
       noto-fonts-color-emoji
       open-sans
-      ubuntu_font_family
+      ubuntu-classic
       iosevka
       aileron
       fira-code
