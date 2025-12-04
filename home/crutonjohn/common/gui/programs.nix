@@ -39,7 +39,6 @@
     rpi-imager
     signal-desktop
     sonixd
-    soulseekqt
     sway-contrib.grimshot
     swaybg
     tuxguitar
