@@ -1,14 +1,10 @@
 { ... }: {
   programs.git = {
     enable = true;
-    userEmail = "crutonjohn@pm.me";
-    userName = "Curtis John";
-    includes = [
-      {
-        path = "~/.config/git/gitconfig-personal";
-      }
-    ];
-    aliases = {
+    settings.userEmail = "crutonjohn@pm.me";
+    settings.userName = "Curtis John";
+    includes = [{ path = "~/.config/git/gitconfig-personal"; }];
+    settings.aliases = {
       lg =
         "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit";
       st = "status -s";
@@ -27,8 +23,8 @@
       alias =
         "!git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\	 => \\2/' | sort";
     };
-    difftastic.enable = true;
-    extraConfig = {
+    difftastic.git.enable = true;
+    settings.extraConfig = {
       init.defaultBranch = "main";
       merge.tool = "ediff";
       merge.keepBackup = false;
