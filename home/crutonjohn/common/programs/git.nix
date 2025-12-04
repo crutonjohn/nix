@@ -23,7 +23,6 @@
       alias =
         "!git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\	 => \\2/' | sort";
     };
-    difftastic.git.enable = true;
     settings.extraConfig = {
       init.defaultBranch = "main";
       merge.tool = "ediff";
@@ -182,6 +181,8 @@
       "result"
     ];
   };
+  programs.difftastic.enable = true;
+  programs.difftastic.git.enable = true;
 
   home.file = {
     ".config/git/gitconfig-personal".text = ''
