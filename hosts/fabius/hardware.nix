@@ -42,10 +42,12 @@
     };
   };
   #powerManagement.powertop.enable = true;
-  services.logind.settings = {
+  services.logind.settings.Login = {
+    HandleLidSwitch = "suspend-then-hibernate";
+    LidSwitchExternalPower = "suspend-then-hibernate";
     IdleAction = "suspend-then-hibernate";
     IdleActionSec = "2min";
-    # HandlePowerKey = "suspend-then-hibernate";
+    HandlePowerKey = "suspend-then-hibernate";
   };
   systemd.sleep.extraConfig = ''
     HibernateDelaySec=180min
