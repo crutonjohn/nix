@@ -43,8 +43,6 @@
   };
   #powerManagement.powertop.enable = true;
   services.logind.settings = {
-    HandleLidSwitch = "suspend-then-hibernate";
-    LidSwitchExternalPower = "suspend-then-hibernate";
     IdleAction = "suspend-then-hibernate";
     IdleActionSec = "2min";
     # HandlePowerKey = "suspend-then-hibernate";
