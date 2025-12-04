@@ -64,6 +64,7 @@
   security.pam.services.login.fprintAuth = true;
   security.pam.services.xscreensaver.fprintAuth = true;
   # Pipewire
+  boot.kernelParams = [ "usbcore.autosuspend=-1" ];
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
