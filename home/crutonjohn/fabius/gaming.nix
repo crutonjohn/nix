@@ -2,17 +2,18 @@
 
   imports = [ inputs.play-nix.homeManagerModules.play ];
 
+  # Configure monitors for automatic gamescope settings
+  monitors = [{
+    name = "DP-1";
+    primary = true;
+    width = 5120;
+    height = 1440;
+    refreshRate = 120;
+    hdr = false;
+    vrr = false;
+  }];
+
   play = {
-    # Configure monitors for automatic gamescope settings
-    monitors = [{
-      name = "DP-1";
-      primary = true;
-      width = 5120;
-      height = 1440;
-      refreshRate = 120;
-      hdr = false;
-      vrr = false;
-    }];
 
     # Enable gamescope wrapper
     gamescoperun = {

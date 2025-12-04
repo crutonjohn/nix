@@ -8,7 +8,7 @@
     enable = true;
     #extraPackages = with pkgs; [  ];
   };
-  hardware.amdgpu.amdvlk.enable = true;
+  # hardware.amdgpu.amdvlk.enable = true;
   hardware.amdgpu.opencl.enable = true;
   services.fwupd.enable = true;
   services.libinput.touchpad = {
