@@ -3,7 +3,7 @@ let
   version = "1.3.19";
   appImage = fetchurl {
     url = "https://www.newrecruit.eu/downloads/editor/NewRecruit-Editor-${version}.AppImage";
-    sha256 = "sha256:ce28a910ccf9f251bffaec6e6c2779ddce818c9f56ddda09f7f67c549a7e65ae";
+    sha256 = "sha256-97S0VhNS/InUg5InXOOcXS4GNedtXHGAiT+zvBkcluU=";
   };
 in
 appimageTools.wrapType2 {
