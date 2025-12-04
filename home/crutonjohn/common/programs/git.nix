@@ -31,7 +31,7 @@
         merge.conflictStyle = "diff3";
         mergetool.keepBackup = false;
         mergetool.trustExitCode = true;
-        mergetool.ediff.keepBackup = false;
+        # mergetool.ediff.keepBackup = false;
         github.user = "crutonjohn";
         color.ui = true;
         fetch.prune = true;
