@@ -8,7 +8,7 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-hugopin.url =
       "github:nixos/nixpkgs/29dcf702b10d258b9bcd56bd38667c329614e128";
@@ -66,7 +66,7 @@
     # home-manager - Manage user configuration with nix
     # https://github.com/nix-community/home-manager
     home = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
