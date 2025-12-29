@@ -1,10 +1,9 @@
 { lib, stdenv, pkgs, appimageTools, gsettings-desktop-schemas, gtk3, fetchurl, ...}:
 let
-  version = "02.02.02.56";
+  version = "02.04.00.70";
   appImage = fetchurl {
-    #url = "https://github.com/bambulab/BambuStudio/releases/download/v${version}/Bambu_Studio_linux_fedora-v${version}.AppImage";
-    url = "https://github.com/bambulab/BambuStudio/releases/download/v${version}/Bambu_Studio_ubuntu-24.04_PR-8184.AppImage";
-    sha256 = "sha256:ce28a910ccf9f251bffaec6e6c2779ddce818c9f56ddda09f7f67c549a7e65ae";
+    url = "https://github.com/bambulab/BambuStudio/releases/download/v${version}/Bambu_Studio_linux_fedora-v${version}.AppImage";
+    sha256 = "sha256:84acf43c2e6fb3813524554057e24c907d70e0b7fe4997891a0c90c55d3d279b";
   };
 in
 appimageTools.wrapType2 {
