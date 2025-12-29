@@ -15,6 +15,7 @@
     ./virtualization.nix
     ./vm-hook.nix
     ./gaming.nix
+    ./overlays.nix
   ];
 
   time.timeZone = "America/New_York";
