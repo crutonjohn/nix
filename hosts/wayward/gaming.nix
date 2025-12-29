@@ -8,7 +8,7 @@
     enable = true;
     plugins = with pkgs.obs-studio-plugins; [
       waveform
-      obs-ndi
+      distroav
       wlrobs
       obs-teleport
     ];
