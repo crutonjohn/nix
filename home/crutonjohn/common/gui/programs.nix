@@ -41,7 +41,6 @@
     sonixd
     sway-contrib.grimshot
     swaybg
-    tuxguitar
     virt-manager
     waybar
     wdisplays
