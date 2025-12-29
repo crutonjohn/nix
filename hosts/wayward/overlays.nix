@@ -5,7 +5,7 @@
 {
   # Create the nur overlay inside nixpkgs
   nixpkgs.overlays = [
-    inputs.nurpkgs.overlays.default
+    inputs.nur.overlays.default
     (final: prev: {
       floorp-bin-unwrapped = prev.floorp-bin-unwrapped.overrideAttrs (old: {
         src = final.fetchurl {
