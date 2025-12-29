@@ -3,9 +3,6 @@
 { inputs, ... }:
 
 {
-  # Enable nonfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # Create the nur overlay inside nixpkgs
   nixpkgs.overlays = [
     inputs.nurpkgs.overlays.default
