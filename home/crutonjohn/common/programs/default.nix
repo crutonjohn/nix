@@ -1,7 +1,15 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+{
 
-  imports =
-    [ ./fish ./zsh ./git.nix ./k9s.nix ./session.nix ./shell.nix ./vim.nix ];
+  imports = [
+    ./fish
+    ./zsh
+    ./git.nix
+    ./k9s.nix
+    ./session.nix
+    ./shell.nix
+    ./vim.nix
+  ];
 
   home = {
     packages = with pkgs; [

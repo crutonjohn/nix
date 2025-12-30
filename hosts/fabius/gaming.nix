@@ -33,9 +33,12 @@
 
     obs-studio = {
       enable = true;
+      enableVirtualCamera = true;
       plugins = with pkgs.obs-studio-plugins; [
         waveform
-        obs-ndi
+        distroav
+        obs-vaapi
+        obs-pipewire-audio-capture
         wlrobs
         obs-teleport
       ];
