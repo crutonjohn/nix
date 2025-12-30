@@ -11,9 +11,9 @@ let
   bewcloudClientOverlay = self: super: {
     bewcloud-client = super.callPackage ./bewcloud { };
   };
-  bambuStudioOverlay = self: super: {
-    bambu-studio-local = super.callPackage ./bambu-studio { };
-  };
+#  bambuStudioOverlay = self: super: {
+#    bambu-studio-local = super.callPackage ./bambu-studio { };
+#  };
   omadaExporterOverlay = self: super: {
     omada-exporter = super.callPackage ./omada-exporter { };
   };
@@ -38,7 +38,7 @@ in
   lychee-slicer = lycheeOverlay;
   pog = pogOverlay;
   bewcloud-client = bewcloudClientOverlay;
-  bambu-studio-local = bambuStudioOverlay;
+#  bambu-studio-local = bambuStudioOverlay;
   omada-exporter = omadaExporterOverlay;
   bitwarden-gui = bitwardenOverlay;
   baremetalblog = baremetalblogOverlay;

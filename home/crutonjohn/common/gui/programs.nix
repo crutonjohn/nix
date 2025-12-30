@@ -3,7 +3,6 @@
   home.packages = with pkgs; [
     appimage-run
     at-spi2-atk
-    bambu-studio
     bitwarden-desktop
     brightnessctl
     bewcloud-client

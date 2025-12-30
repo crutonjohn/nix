@@ -1,4 +1,7 @@
-{ config, lib, nixpkgs, pkgs, inputs, ... }:
+{
+  inputs,
+  ...
+}:
 
 {
   imports = [
@@ -16,6 +19,7 @@
     ./vm-hook.nix
     ./gaming.nix
     ./overlays.nix
+    ./flatpak.nix
   ];
 
   time.timeZone = "America/New_York";

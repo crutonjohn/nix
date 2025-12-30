@@ -1,4 +1,5 @@
-{ home, ... }: {
+{ ... }:
+{
   services.kanshi = {
     enable = true;
     profiles = {
