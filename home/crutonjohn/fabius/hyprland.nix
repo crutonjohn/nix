@@ -6,11 +6,6 @@
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     # needed due to https://github.com/hyprwm/Hyprland/discussions/4768
     extraConfig = ''
-      # built in touchpad
-      device {
-        name=pixa3854:00-093a:0274-touchpad
-        tap-to-click=false
-      }
       device {
         name=ploopy-corporation-ploopy-pavonis-trackpad-touchpad
         tap-to-click=true
@@ -33,6 +28,7 @@
             fix_mouse = true
             vkfix-app = cs2, 2560, 1440
       }
+      gesture = 3, horizontal, workspace
     '';
     settings = {
       # disabled for kanshi
@@ -109,8 +105,8 @@
       };
 
       gestures = {
-        workspace_swipe = true;
-        workspace_swipe_fingers = 3;
+        #workspace_swipe = true;
+        #workspace_swipe_fingers = 3;
         workspace_swipe_distance = 250;
         workspace_swipe_invert = true;
         workspace_swipe_min_speed_to_force = 15;
@@ -348,9 +344,9 @@
         ## setting up static workspace ##
         "workspace gaming, class:^(steam)$"
         "workspace gaming, tag:game"
-        "move 0 0, initialTitle:Steam, workspace gaming"
-        "move 1280 0, tag:game, workspace gaming"
-        "size 2560 1440, tag:game, workspace gaming"
+        #"move 0 0, initialTitle:Steam, workspace gaming"
+        #"move 1280 0, tag:game, workspace gaming"
+        #"size 2560 1440, tag:game, workspace gaming"
         #"move 3840 0, class:^(floorp)$, workspace gaming"
         #"size 1280 1440, class:^(floorp)$, workspace gaming"
         # "setprop keepaspectratio 1, tag:game"
