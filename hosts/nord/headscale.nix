@@ -36,7 +36,6 @@
         #client_secret_path = "/var/lib/headscale/oidc_client_secret";
         client_secret_path = "/run/secrets/headscale/oidc_client_secret";
         scope = [ "openid" "profile" "email" ];
-        strip_email_domain = true;
         extra_params = { domain_hint = "heyjohn.family"; };
         allowed_domains = [ "heyjohn.family" ];
       };
