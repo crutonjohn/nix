@@ -22,6 +22,6 @@ modules:
   icmp_internal:
     icmp:
       preferred_ip_protocol: ip4
-      source_ip_address: 100.64.0.9
+      source_ip_address: 100.64.0.11
     prober: icmp
     timeout: 5s

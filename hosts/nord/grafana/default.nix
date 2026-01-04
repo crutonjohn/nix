@@ -19,7 +19,7 @@ services.nginx.virtualHosts.${config.services.grafana.settings.server.domain} = 
   useACMEHost = "fakecloudhost.heyjohn.family";
   forceSSL = true;
   listenAddresses = [
-    "100.64.0.9"
+    "100.64.0.11"
   ];
 };
 

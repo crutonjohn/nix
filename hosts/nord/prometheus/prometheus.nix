@@ -14,7 +14,7 @@
         };
       };
       forceSSL = true;
-      listenAddresses = [ "100.64.0.9" ];
+      listenAddresses = [ "100.64.0.11" ];
     };
   };
 
@@ -34,7 +34,7 @@
 
   services.prometheus = {
     enable = true;
-    listenAddress = "100.64.0.9";
+    listenAddress = "100.64.0.11";
     port = 9090;
     enableReload = true;
     retentionTime = "30d";
@@ -278,7 +278,7 @@
         scrape_interval = "60s";
         metrics_path = "/metrics";
         static_configs = [{
-          targets = [ "100.64.0.9:3100" ];
+          targets = [ "100.64.0.11:3100" ];
           labels = {
             datacenter = "ord";
             instance = "loki.heyjohn.family";

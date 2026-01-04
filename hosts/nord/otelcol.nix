@@ -20,7 +20,7 @@
     exporters:
       debug: {}
       otlphttp:
-        endpoint: http://100.64.0.9:3100/otlp
+        endpoint: http://100.64.0.11:3100/otlp
     processors:
       batch:
         send_batch_max_size: 1500

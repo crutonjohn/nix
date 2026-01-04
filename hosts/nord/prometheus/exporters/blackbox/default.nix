@@ -8,7 +8,7 @@
     blackbox = {
       enable = true;
       openFirewall = true;
-      listenAddress = "100.64.0.9";
+      listenAddress = "100.64.0.11";
       port = 9115;
       configFile = ./files/blackbox.yaml;
     };
