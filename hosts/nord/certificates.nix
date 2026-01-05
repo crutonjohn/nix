@@ -2,7 +2,7 @@
 
 {
 
-systemd.timers."hello-world" = {
+systemd.timers."renew-step-cert" = {
   wantedBy = [ "timers.target" ];
     timerConfig = {
       OnCalendar = "*-*-* 0/20:00:00"; # Runs every 20 hours
