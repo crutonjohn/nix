@@ -12,6 +12,7 @@
     ./nginx.nix
     ./sops.nix
     ./tailscale.nix
+    ./certificates.nix
   ];
 
   boot.loader.grub.enable = true;

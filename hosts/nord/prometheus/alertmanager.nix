@@ -11,7 +11,8 @@
 
   services.nginx.virtualHosts = {
     "alerts.heyjohn.family" = {
-      useACMEHost = "fakecloudhost.heyjohn.family";
+      sslCertificate = "/var/lib/acme/nord.heyjohn.family/cert.pem";
+      sslCertificateKey = "/var/lib/acme/nord.heyjohn.family/key.pem";
       serverAliases = [ "alerts.ord.heyjohn.family" ];
       locations = {
         "/" = {

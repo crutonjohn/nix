@@ -44,7 +44,9 @@
 
   services.nginx.virtualHosts = {
     "headscale.heyjohn.family" = {
-      enableACME = true;
+      enableACME = false;
+      sslCertificate = "/var/lib/acme/nord.heyjohn.family/cert.pem";
+      sslCertificateKey = "/var/lib/acme/nord.heyjohn.family/key.pem";
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://127.0.0.1:8080/";

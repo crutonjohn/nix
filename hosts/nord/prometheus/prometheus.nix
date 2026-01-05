@@ -2,7 +2,8 @@
 
   services.nginx.virtualHosts = {
     "prometheus.heyjohn.family" = {
-      useACMEHost = "fakecloudhost.heyjohn.family";
+      sslCertificate = "/var/lib/acme/nord.heyjohn.family/cert.pem";
+      sslCertificateKey = "/var/lib/acme/nord.heyjohn.family/key.pem";
       serverAliases = [ "prometheus.ord.heyjohn.family" ];
       locations = {
         "/" = {

@@ -16,7 +16,8 @@ services.nginx.virtualHosts.${config.services.grafana.settings.server.domain} = 
       proxyWebsockets = true;
       recommendedProxySettings = true;
   };
-  useACMEHost = "fakecloudhost.heyjohn.family";
+  sslCertificate = "/var/lib/acme/nord.heyjohn.family/cert.pem";
+  sslCertificateKey = "/var/lib/acme/nord.heyjohn.family/key.pem";
   forceSSL = true;
   listenAddresses = [
     "100.64.0.11"
