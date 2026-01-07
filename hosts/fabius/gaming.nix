@@ -41,6 +41,8 @@
         obs-pipewire-audio-capture
         wlrobs
         obs-teleport
+        # https://github.com/nowrep/obs-vkcapture
+        obs-vkcapture
       ];
     };
   };
