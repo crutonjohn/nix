@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
 
   imports = [
     ../common
@@ -13,8 +14,10 @@
 
   # Syncthing
   services.syncthing = {
-    enable = true;
-    tray = { enable = true; };
+    enable = false;
+    tray = {
+      enable = true;
+    };
   };
 
 }
