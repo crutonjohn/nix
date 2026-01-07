@@ -1,4 +1,5 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+{
 
   home.packages = with pkgs; [
     appimage-run
@@ -34,7 +35,6 @@
     pixman
     pog
     pulsemixer
-    remmina
     rpi-imager
     signal-desktop
     sonixd

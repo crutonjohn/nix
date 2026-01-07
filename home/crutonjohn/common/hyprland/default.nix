@@ -1,4 +1,5 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+{
 
   imports = [
     ./cursor.nix
@@ -58,7 +59,6 @@
     psmisc
     pulsemixer
     qemu
-    remmina
     rpi-imager
     signal-desktop
     sonixd
