@@ -8,7 +8,7 @@
     primary = true;
     width = 5120;
     height = 1440;
-    refreshRate = 120;
+    refreshRate = 239.76;
     hdr = false;
     vrr = false;
   }];
