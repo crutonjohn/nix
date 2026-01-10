@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
 
   home.packages = [
     ##################
@@ -29,7 +30,7 @@
     functions = {
       nrb = ''
         set system $argv
-        nixos-rebuild switch --use-remote-sudo --build-host $system --target-host $system --flake github:crutonjohn/nix#$system --option tarball-ttl 0
+        nixos-rebuild switch --sudo --ask-sudo-password --build-host $system --target-host $system --flake github:crutonjohn/nix#$system --option tarball-ttl 0
       '';
       nrbuild = ''
         set system $argv
@@ -37,7 +38,7 @@
       '';
       nrbu = ''
         set system $argv
-        nixos-rebuild switch --use-remote-sudo --upgrade --build-host $system --target-host $system --flake github:crutonjohn/nix#$system --option tarball-ttl 0
+        nixos-rebuild switch --sudo --ask-sudo-password --upgrade --build-host $system --target-host $system --flake github:crutonjohn/nix#$system --option tarball-ttl 0
       '';
     };
   };
