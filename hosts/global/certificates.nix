@@ -1,9 +1,4 @@
 {
-  name,
-  nodes,
-  pkgs,
-  lib,
-  inputs,
   ...
 }:
 {
