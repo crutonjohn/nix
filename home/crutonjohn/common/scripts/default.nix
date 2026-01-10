@@ -33,7 +33,7 @@
         nixos-rebuild switch --sudo --ask-sudo-password --build-host $system --target-host $system --flake github:crutonjohn/nix#$system --option tarball-ttl 0
       '';
       nrl = ''
-        nixos-rebuild switch --flake '.#$hostname'
+        sudo nixos-rebuild switch --flake '.#$hostname'
       '';
       nrbuild = ''
         set system $argv
