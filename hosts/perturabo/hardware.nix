@@ -7,15 +7,12 @@
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
-      vaapiVdpau
+      libva-vdpau-driver
       libvdpau-va-gl
     ];
   };
   services.fwupd.enable = true;
 
-  # bluetooth
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
   #Power stuff
   #services.tlp.enable = true;
   powerManagement.powertop.enable = true;
