@@ -1,4 +1,4 @@
-{ config, lib, nixpkgs, pkgs, inputs, ... }:
+{ inputs, ... }:
 
 {
 
@@ -31,11 +31,17 @@
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
       ];
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
   };
-
-  nix.settings.trusted-users = [ "root" "crutonjohn" ];
+  nix.settings.trusted-users = [
+    "root"
+    "crutonjohn"
+    "@wheel"
+  ];
 
   nix.settings.auto-optimise-store = true;
 

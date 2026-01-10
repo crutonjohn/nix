@@ -5,6 +5,7 @@
 
 {
   imports = [
+    ../global
     inputs.nixos-hardware.nixosModules.framework-12th-gen-intel
     inputs.nixos-hardware.nixosModules.common-pc-ssd
     ./desktop.nix
@@ -27,9 +28,6 @@
   # SSH Server
   services.openssh.enable = true;
 
-  # Enable Flatpak
-  services.flatpak.enable = true;
-
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.11";
 
 }

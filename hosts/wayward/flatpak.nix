@@ -10,6 +10,8 @@ let
   ];
 in
 {
+  services.flatpak.enable = true;
+
   system.userActivationScripts.flatpakManagement = {
     text = ''
       # 2. Ensure the Flathub repo is added

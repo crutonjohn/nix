@@ -4,6 +4,7 @@
   imports = [
     inputs.nixos-hardware.nixosModules.common-gpu-amd
     inputs.nixos-hardware.nixosModules.common-pc-ssd
+    ../global
     ./desktop.nix
     ./fonts.nix
     ./greeter.nix
