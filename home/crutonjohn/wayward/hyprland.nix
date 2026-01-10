@@ -28,6 +28,7 @@
             gesture_distance = 300 # how far is the "max"
             gesture_positive = false # positive = swipe down. Negative = swipe up.
       }
+      gesture = 3, vertical, workspace
     '';
     settings = {
       # disabled for kanshi
@@ -109,8 +110,6 @@
       };
 
       gestures = {
-        workspace_swipe = true;
-        workspace_swipe_fingers = 3;
         workspace_swipe_distance = 250;
         workspace_swipe_invert = true;
         workspace_swipe_min_speed_to_force = 15;
