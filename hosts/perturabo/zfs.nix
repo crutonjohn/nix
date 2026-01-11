@@ -3,7 +3,6 @@
 {
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.forceImportRoot = false;
-  # TODO: update this
   # head -c 8 /etc/machine-id
   networking.hostId = "3787caae";
 
@@ -37,8 +36,8 @@
   #   fsType = "zfs";
   # };
 
-  # boot.zfs.extraPools = [
-  #   "WD-RD0E4NHE"
-  # ];
+  boot.zfs.extraPools = [
+    "WD-RD0E4NHE"
+  ];
 
 }
