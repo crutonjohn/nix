@@ -27,7 +27,7 @@
     neofetch
     networkmanager
     networkmanager_dmenu
-    #newrecruit-builder
+    newrecruit-builder
     #newrecruit-editor
     openscad
     pamixer

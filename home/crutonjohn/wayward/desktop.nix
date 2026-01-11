@@ -15,6 +15,13 @@ xdg.desktopEntries = {
     terminal = false;
     categories = [ "Utility" ];
   };
+  newrecruit-builder = {
+    name = "New Recruit - Builder";
+    genericName = "Builder";
+    exec = "newrecruit-builder %U";
+    terminal = false;
+    categories = [ "Utility" ];
+  };
 };
 
 }
