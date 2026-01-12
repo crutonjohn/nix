@@ -4,7 +4,7 @@
   imports = [
 
     # ./minio
-    # ./podman
+    ./podman
     ../global
     ./prometheus
 

@@ -44,6 +44,27 @@
         recommendedProxySettings = true;
         proxyWebsockets = true;
       };
+      locations."/talos/config" = {
+        proxyWebsockets = true;
+        root = "/var/www/nginx/talos/config";
+        extraConfig = ''
+          allow 192.168.130.131;
+          allow 192.168.130.132;
+          allow 192.168.130.133;
+          allow 192.168.130.140;
+          allow 192.168.130.141;
+          allow 192.168.130.142;
+          allow 192.168.130.143;
+          allow 192.168.130.4;
+          deny all;
+          limit_except GET { deny all; }
+          if ($arg_mac) {
+            return 302 http://$host/talos/config/$arg_mac;
+          }
+          try_files $uri =404;
+          return 400;
+        '';
+      };
     };
   };
 
