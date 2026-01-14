@@ -11,4 +11,23 @@
     "olympia"
   ];
 
+  services.smartd = {
+    enable = true;
+    autodetect = false;
+    devices = [
+      {
+        device = "/dev/disk/by-id/ata-WUH721414ALN6L0_9JH7X8PT";
+      }
+      {
+        device = "/dev/disk/by-id/ata-WUH721414ALN6L0_9JJ95TWT";
+      }
+      {
+        device = "/dev/disk/by-id/ata-WUH721414ALN6L0_9JJ9LR7T";
+      }
+      {
+        device = "/dev/disk/by-id/ata-WUH721414ALN6L0_9JJA2VWT";
+      }
+    ];
+  };
+
 }

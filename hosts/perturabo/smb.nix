@@ -21,7 +21,7 @@
       };
       "videos" = {
         "path" = "/mnt/olympia/videos";
-        "valid users" = "crutonjohn"
+        "valid users" = "crutonjohn";
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";
@@ -32,7 +32,7 @@
       };
       "music" = {
         "path" = "/mnt/olympia/music";
-        "valid users" = "crutonjohn"
+        "valid users" = "crutonjohn";
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";
@@ -43,7 +43,7 @@
       };
       "root" = {
         "path" = "/mnt/olympia";
-        "valid users" = "crutonjohn"
+        "valid users" = "crutonjohn";
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";
@@ -54,7 +54,7 @@
       };
       "apollo" = {
         "path" = "/mnt/apollo";
-        "valid users" = "crutonjohn"
+        "valid users" = "crutonjohn";
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";
