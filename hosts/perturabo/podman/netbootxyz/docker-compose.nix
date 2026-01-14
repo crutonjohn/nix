@@ -12,8 +12,8 @@
       "WEB_APP_PORT" = "3000";
     };
     volumes = [
-      "/WD-RD0E4NHE/netbootxyz/assets:/assets:rw"
-      "/WD-RD0E4NHE/netbootxyz/config:/config:rw"
+      "/mnt/olympia/docker/netbootxyz/assets:/assets:rw"
+      "/mnt/olympia/docker/netbootxyz/config:/config:rw"
     ];
     ports = [
       "127.0.0.1:3000:3000/tcp"
@@ -36,10 +36,8 @@
     partOf = [ "podman-compose-netboot-root.target" ];
     wantedBy = [ "podman-compose-netboot-root.target" ];
     unitConfig.RequiresMountsFor = [
-      "/WD-RD0E4NHE/netbootxyz/config"
-      "/WD-RD0E4NHE/netbootxyz/assets"
-      #"/mnt/olympia/docker/netbootxyz/config"
-      #"/mnt/olympia/docker/netbootxyz/assets"
+      "/mnt/olympia/docker/netbootxyz/config"
+      "/mnt/olympia/docker/netbootxyz/assets"
     ];
   };
 

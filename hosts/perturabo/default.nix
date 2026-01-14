@@ -2,22 +2,21 @@
 
 {
   imports = [
-
-    # ./minio
-    ./podman
     ../global
-    ./prometheus
-
     inputs.nixos-hardware.nixosModules.common-pc-ssd
     inputs.nixos-hardware.nixosModules.common-gpu-amd
     inputs.nixos-hardware.nixosModules.common-cpu-amd
+
+    ./minio
+    ./podman
+    ./prometheus
     ./hardware-configuration.nix
     ./hardware.nix
     ./loader.nix
     ./networking.nix
-    # ./nfs.nix
+    ./nfs.nix
     ./nginx.nix
-    # ./smb.nix
+    ./smb.nix
     ./virtualization.nix
     ./vm-hook.nix
     ./zfs.nix

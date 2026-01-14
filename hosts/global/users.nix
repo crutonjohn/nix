@@ -9,6 +9,7 @@
       description = "Curtis Ray John";
       shell = pkgs.fish;
       extraGroups = [
+        "crutonjohn"
         "wheel"
         "networkmanager"
         "docker"

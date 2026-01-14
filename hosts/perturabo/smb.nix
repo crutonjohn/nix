@@ -3,6 +3,7 @@
 {
   services.samba = {
     enable = true;
+    securityType = "user";
     openFirewall = true;
     settings = {
       global = {
@@ -18,18 +19,9 @@
         "guest account" = "nobody";
         "map to guest" = "bad user";
       };
-      "public" = {
-        "path" = "/mnt/olympia/public";
-        "browseable" = "yes";
-        "read only" = "no";
-        "guest ok" = "yes";
-        "create mask" = "0644";
-        "directory mask" = "0755";
-        "force user" = "nobody";
-        "force group" = "nogroup";
-      };
       "videos" = {
         "path" = "/mnt/olympia/videos";
+        "valid users" = "crutonjohn"
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";
@@ -40,6 +32,7 @@
       };
       "music" = {
         "path" = "/mnt/olympia/music";
+        "valid users" = "crutonjohn"
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";
@@ -50,6 +43,7 @@
       };
       "root" = {
         "path" = "/mnt/olympia";
+        "valid users" = "crutonjohn"
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";
@@ -60,6 +54,7 @@
       };
       "apollo" = {
         "path" = "/mnt/apollo";
+        "valid users" = "crutonjohn"
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";
