@@ -21,14 +21,25 @@
     };
   };
 
-  systemd.timers."custom-acme-fakecloudhost.heyjohn.family" = {
+  systemd.timers."custom-acme-s3-perturabo.heyjohn.family" = {
     description = "Hack to renew ACME Certificate every day";
     wantedBy = [ "timers.target" ];
     timerConfig = {
       OnCalendar = "*-*-* 22:00:00";
       Persistent = "yes";
       AccuracySec = "600s";
-      Unit = "acme-fakecloudhost.heyjohn.family.service";
+      Unit = "acme-s3-perturabo.heyjohn.family.service";
+    };
+  };
+
+  systemd.timers."custom-acme-minio-perturabo.heyjohn.family" = {
+    description = "Hack to renew ACME Certificate every day";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "*-*-* 22:00:00";
+      Persistent = "yes";
+      AccuracySec = "600s";
+      Unit = "acme-minio-perturabo.heyjohn.family.service";
     };
   };
 
