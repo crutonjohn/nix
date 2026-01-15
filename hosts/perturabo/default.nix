@@ -7,7 +7,6 @@
     inputs.nixos-hardware.nixosModules.common-gpu-amd
     inputs.nixos-hardware.nixosModules.common-cpu-amd
 
-    ./minio
     ./garage
     ./podman
     ./prometheus
