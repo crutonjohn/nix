@@ -8,6 +8,7 @@
     inputs.nixos-hardware.nixosModules.common-cpu-amd
 
     ./minio
+    ./garage
     ./podman
     ./prometheus
     ./hardware-configuration.nix
