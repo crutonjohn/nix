@@ -1,5 +1,5 @@
 - targets:
-    - 'workbench.heyjohn.family:9100'
+    - "perturabo.heyjohn.family:9100"
   labels:
     datacenter: lyh
-    service: client
+    service: nas

@@ -1,22 +1,22 @@
 - targets:
-    - 'router.heyjohn.family:9100'
+    - "router.heyjohn.family:9100"
   labels:
     datacenter: lyh
     service: opnsense
 - targets:
-    - 'horus.heyjohn.family:9100'
-    - 'lion.heyjohn.family:9100'
-    - 'magnus.heyjohn.family:9100'
-    - 'dorn.heyjohn.family:9100'
-    - 'sanguinius.heyjohn.family:9100'
-    - 'guilliman.heyjohn.family:9100'
-    - 'lorgar.heyjohn.family:9100'
+    - "horus.heyjohn.family:9100"
+    - "lion.heyjohn.family:9100"
+    - "magnus.heyjohn.family:9100"
+    - "dorn.heyjohn.family:9100"
+    - "sanguinius.heyjohn.family:9100"
+    - "guilliman.heyjohn.family:9100"
+    - "fulgrim.heyjohn.family:9100"
   labels:
     datacenter: lyh
     service: kubernetes
 - targets:
-    - 'peanut1.heyjohn.family:9100'
-    - 'peanut2.heyjohn.family:9100'
+    - "peanut1.heyjohn.family:9100"
+    - "peanut2.heyjohn.family:9100"
   labels:
     datacenter: lyh
     service: nut

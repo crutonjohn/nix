@@ -6,15 +6,15 @@
     datacenter: external
     service: cloud
 - targets:
-    - https://speedof.heyjohn.family
+    - https://music.heyjohn.family
   labels:
     datacenter: lyh
     service: speedtest
 - targets:
-    - https://omada.heyjohn.family
+    - https://ui.garage.heyjohn.family
   labels:
     datacenter: lyh
-    service: omada
+    service: nas
 - targets:
     - https://baremetalblog.com
   labels:

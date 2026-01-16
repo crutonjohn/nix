@@ -3,8 +3,11 @@
 
   services.nginx.virtualHosts = {
     "prometheus.heyjohn.family" = {
-      useACMEHost = "prometheus.heyjohn.family";
       serverAliases = [ "prometheus.ord.heyjohn.family" ];
+      enableACME = false;
+      sslCertificate = "/var/lib/acme/nord.heyjohn.family/cert.pem";
+      sslCertificateKey = "/var/lib/acme/nord.heyjohn.family/key.pem";
+      forceSSL = true;
       locations = {
         "/" = {
           proxyPass = "http://${config.services.prometheus.listenAddress}:${toString config.services.prometheus.port}";
@@ -12,35 +15,34 @@
           recommendedProxySettings = true;
         };
       };
-      forceSSL = true;
       listenAddresses = [ "100.64.0.11" ];
     };
   };
 
-  security.acme.certs = {
-    "prometheus.heyjohn.family" = {
-      server = "https://ra.heyjohn.family/acme/acme/directory";
-      enableDebugLogs = true;
-      webroot = "/var/lib/acme/acme-challenge";
-      email = "curtis@heyjohn.family";
-      extraLegoFlags = [ ];
-      group = "nginx";
-      extraDomainNames = [ "prometheus.ord.heyjohn.family" ];
-    };
-  };
+  # security.acme.certs = {
+  #   "prometheus.heyjohn.family" = {
+  #     server = "https://ra.heyjohn.family/acme/acme/directory";
+  #     enableDebugLogs = true;
+  #     webroot = "/var/lib/acme/acme-challenge";
+  #     email = "curtis@heyjohn.family";
+  #     extraLegoFlags = [ ];
+  #     group = "nginx";
+  #     extraDomainNames = [ "prometheus.ord.heyjohn.family" ];
+  #   };
+  # };
 
-  systemd.timers = {
-    "custom-acme-prometheus.heyjohn.family" = {
-      description = "Hack to renew ACME Certificate every day";
-      wantedBy = [ "timers.target" ];
-      timerConfig = {
-        OnCalendar = "*-*-* 22:00:00";
-        Persistent = "yes";
-        AccuracySec = "600s";
-        Unit = "acme-order-renew-prometheus.heyjohn.family.service";
-      };
-    };
-  };
+  # systemd.timers = {
+  #   "custom-acme-prometheus.heyjohn.family" = {
+  #     description = "Hack to renew ACME Certificate every day";
+  #     wantedBy = [ "timers.target" ];
+  #     timerConfig = {
+  #       OnCalendar = "*-*-* 22:00:00";
+  #       Persistent = "yes";
+  #       AccuracySec = "600s";
+  #       Unit = "acme-order-renew-prometheus.heyjohn.family.service";
+  #     };
+  #   };
+  # };
 
   environment.etc = {
     "prometheus/targets".source = ./targets;
