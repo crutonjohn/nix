@@ -295,72 +295,14 @@
           [{ files = [ "/etc/prometheus/targets/pihole.yaml" ]; }];
       }
       {
-        job_name = "minio-job";
+        job_name = "garage";
         scrape_timeout = "30s";
         scrape_interval = "60s";
-        metrics_path = "/minio/v2/metrics/cluster";
-        authorization = {
-          type = "Bearer";
-          credentials_file =
-            "/run/secrets/prometheus/minio/bench/cluster-token";
-        };
+        metrics_path = "/metrics";
         static_configs = [{
-          targets = [ "workbench.heyjohn.family:9000" ];
+          targets = [ "admin.garage.heyjohn.family" ];
           labels = {
             datacenter = "lyh";
-            #instance = "loki.heyjohn.family";
-          };
-        }];
-      }
-      {
-        job_name = "minio-job-node";
-        scrape_timeout = "30s";
-        scrape_interval = "60s";
-        metrics_path = "/minio/v2/metrics/node";
-        authorization = {
-          type = "Bearer";
-          credentials_file = "/run/secrets/prometheus/minio/bench/node-token";
-        };
-        static_configs = [{
-          targets = [ "workbench.heyjohn.family:9000" ];
-          labels = {
-            datacenter = "lyh";
-            #instance = "loki.heyjohn.family";
-          };
-        }];
-      }
-      {
-        job_name = "minio-job-bucket";
-        scrape_timeout = "30s";
-        scrape_interval = "60s";
-        metrics_path = "/minio/v2/metrics/bucket";
-        authorization = {
-          type = "Bearer";
-          credentials_file = "/run/secrets/prometheus/minio/bench/bucket-token";
-        };
-        static_configs = [{
-          targets = [ "workbench.heyjohn.family:9000" ];
-          labels = {
-            datacenter = "lyh";
-            #instance = "loki.heyjohn.family";
-          };
-        }];
-      }
-      {
-        job_name = "minio-job-resource";
-        scrape_timeout = "30s";
-        scrape_interval = "60s";
-        metrics_path = "/minio/v2/metrics/resource";
-        authorization = {
-          type = "Bearer";
-          credentials_file =
-            "/run/secrets/prometheus/minio/bench/resource-token";
-        };
-        static_configs = [{
-          targets = [ "workbench.heyjohn.family:9000" ];
-          labels = {
-            datacenter = "lyh";
-            #instance = "loki.heyjohn.family";
           };
         }];
       }
