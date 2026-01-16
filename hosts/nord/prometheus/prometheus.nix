@@ -1,21 +1,44 @@
-{ config, ... }: {
+{ config, ... }:
+{
 
   services.nginx.virtualHosts = {
     "prometheus.heyjohn.family" = {
-      sslCertificate = "/var/lib/acme/nord.heyjohn.family/cert.pem";
-      sslCertificateKey = "/var/lib/acme/nord.heyjohn.family/key.pem";
+      useACMEHost = "prometheus.heyjohn.family";
       serverAliases = [ "prometheus.ord.heyjohn.family" ];
       locations = {
         "/" = {
-          proxyPass = "http://${config.services.prometheus.listenAddress}:${
-              toString config.services.prometheus.port
-            }";
+          proxyPass = "http://${config.services.prometheus.listenAddress}:${toString config.services.prometheus.port}";
           proxyWebsockets = true;
           recommendedProxySettings = true;
         };
       };
       forceSSL = true;
       listenAddresses = [ "100.64.0.11" ];
+    };
+  };
+
+  security.acme.certs = {
+    "prometheus.heyjohn.family" = {
+      server = "https://ra.heyjohn.family/acme/acme/directory";
+      enableDebugLogs = true;
+      webroot = "/var/lib/acme/acme-challenge";
+      email = "curtis@heyjohn.family";
+      extraLegoFlags = [ ];
+      group = "nginx";
+      extraDomainNames = [ "prometheus.ord.heyjohn.family" ];
+    };
+  };
+
+  systemd.timers = {
+    "custom-acme-prometheus.heyjohn.family" = {
+      description = "Hack to renew ACME Certificate every day";
+      wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnCalendar = "*-*-* 22:00:00";
+        Persistent = "yes";
+        AccuracySec = "600s";
+        Unit = "acme-order-renew-prometheus.heyjohn.family.service";
+      };
     };
   };
 
@@ -26,10 +49,18 @@
 
   sops = {
     secrets = {
-      "prometheus/minio/bench/cluster-token" = { owner = "prometheus"; };
-      "prometheus/minio/bench/node-token" = { owner = "prometheus"; };
-      "prometheus/minio/bench/bucket-token" = { owner = "prometheus"; };
-      "prometheus/minio/bench/resource-token" = { owner = "prometheus"; };
+      "prometheus/minio/bench/cluster-token" = {
+        owner = "prometheus";
+      };
+      "prometheus/minio/bench/node-token" = {
+        owner = "prometheus";
+      };
+      "prometheus/minio/bench/bucket-token" = {
+        owner = "prometheus";
+      };
+      "prometheus/minio/bench/resource-token" = {
+        owner = "prometheus";
+      };
     };
   };
 
@@ -50,17 +81,21 @@
       scrape_interval = "60s";
       scrape_timeout = "20s";
       evaluation_interval = "30s";
-      external_labels = { datacenter = "ord"; };
+      external_labels = {
+        datacenter = "ord";
+      };
     };
-    alertmanagers = [{
-      static_configs = [{
-        targets = [
-          "${config.services.prometheus.alertmanager.listenAddress}:${
-            toString config.services.prometheus.alertmanager.port
-          }"
+    alertmanagers = [
+      {
+        static_configs = [
+          {
+            targets = [
+              "${config.services.prometheus.alertmanager.listenAddress}:${toString config.services.prometheus.alertmanager.port}"
+            ];
+          }
         ];
-      }];
-    }];
+      }
+    ];
 
     scrapeConfigs = [
       {
@@ -81,101 +116,111 @@
             };
           }
         ];
-        relabel_configs = [{
-          # Extract hostname from target
-          source_labels = [ "__address__" ];
-          regex = "(.*):.*";
-          target_label = "instance";
-          replacement = "$1";
-        }];
+        relabel_configs = [
+          {
+            # Extract hostname from target
+            source_labels = [ "__address__" ];
+            regex = "(.*):.*";
+            target_label = "instance";
+            replacement = "$1";
+          }
+        ];
       }
       {
         job_name = "alertmanager";
         metrics_path = "/metrics";
-        static_configs = [{
-          targets = [
-            "${config.services.prometheus.alertmanager.listenAddress}:${
-              toString config.services.prometheus.alertmanager.port
-            }"
-          ];
-          labels = {
-            datacenter = "ord";
-            instance = "alerts.heyjohn.family";
-          };
-        }];
+        static_configs = [
+          {
+            targets = [
+              "${config.services.prometheus.alertmanager.listenAddress}:${toString config.services.prometheus.alertmanager.port}"
+            ];
+            labels = {
+              datacenter = "ord";
+              instance = "alerts.heyjohn.family";
+            };
+          }
+        ];
       }
       {
         job_name = "headscale";
         metrics_path = "/metrics";
-        static_configs = [{
-          targets =
-            [ "${config.services.headscale.settings.metrics_listen_addr}" ];
-          labels = {
-            datacenter = "ord";
-            instance = "headscale.heyjohn.family";
-          };
-        }];
+        static_configs = [
+          {
+            targets = [ "${config.services.headscale.settings.metrics_listen_addr}" ];
+            labels = {
+              datacenter = "ord";
+              instance = "headscale.heyjohn.family";
+            };
+          }
+        ];
       }
       {
         job_name = "node";
         metrics_path = "/metrics";
-        file_sd_configs = [{
-          files = [
-            "/etc/prometheus/targets/nodes-internal.yaml"
-            "/etc/prometheus/targets/nodes-external.yaml"
-            "/etc/prometheus/targets/user.yaml"
-          ];
-        }];
-        relabel_configs = [{
-          source_labels = [ "__address__" ];
-          regex = "(.*):(.*)";
-          replacement = "$1";
-          target_label = "instance";
-        }];
+        file_sd_configs = [
+          {
+            files = [
+              "/etc/prometheus/targets/nodes-internal.yaml"
+              "/etc/prometheus/targets/nodes-external.yaml"
+              "/etc/prometheus/targets/user.yaml"
+            ];
+          }
+        ];
+        relabel_configs = [
+          {
+            source_labels = [ "__address__" ];
+            regex = "(.*):(.*)";
+            replacement = "$1";
+            target_label = "instance";
+          }
+        ];
       }
       {
         # gets renamed to node
         job_name = "node_local";
         metrics_path = "/metrics";
-        static_configs = [{
-          targets = [
-            "${config.services.prometheus.exporters.node.listenAddress}:${
-              toString config.services.prometheus.exporters.node.port
-            }"
-          ];
-          labels = {
-            datacenter = "ord";
-            instance = "nord.heyjohn.family";
-            service = "omnibus";
-          };
-        }];
-        relabel_configs = [{
-          source_labels = [ "job" ];
-          regex = "(.*)";
-          replacement = "node";
-          target_label = "job";
-        }];
+        static_configs = [
+          {
+            targets = [
+              "${config.services.prometheus.exporters.node.listenAddress}:${toString config.services.prometheus.exporters.node.port}"
+            ];
+            labels = {
+              datacenter = "ord";
+              instance = "nord.heyjohn.family";
+              service = "omnibus";
+            };
+          }
+        ];
+        relabel_configs = [
+          {
+            source_labels = [ "job" ];
+            regex = "(.*)";
+            replacement = "node";
+            target_label = "job";
+          }
+        ];
       }
       {
         job_name = "blackbox_exporter";
         scrape_timeout = "15s";
         metrics_path = "/metrics";
-        static_configs = [{
-          targets = [
-            "${config.services.prometheus.exporters.blackbox.listenAddress}:${
-              toString config.services.prometheus.exporters.blackbox.port
-            }"
-          ];
-        }];
+        static_configs = [
+          {
+            targets = [
+              "${config.services.prometheus.exporters.blackbox.listenAddress}:${toString config.services.prometheus.exporters.blackbox.port}"
+            ];
+          }
+        ];
       }
       {
         job_name = "blackbox_http";
         scrape_timeout = "15s";
         scrape_interval = "60s";
         metrics_path = "/probe";
-        params = { module = [ "http_2xx" ]; };
-        file_sd_configs =
-          [{ files = [ "/etc/prometheus/targets/blackbox_http.yaml" ]; }];
+        params = {
+          module = [ "http_2xx" ];
+        };
+        file_sd_configs = [ { files = [ "/etc/prometheus/targets/blackbox_http.yaml" ]; } ];
         relabel_configs = [
           {
             source_labels = [ "__address__" ];
@@ -187,10 +232,7 @@
           }
           {
             target_label = "__address__";
-            replacement =
-              "${config.services.prometheus.exporters.blackbox.listenAddress}:${
-                toString config.services.prometheus.exporters.blackbox.port
-              }";
+            replacement = "${config.services.prometheus.exporters.blackbox.listenAddress}:${toString config.services.prometheus.exporters.blackbox.port}";
           }
         ];
       }
@@ -200,9 +242,10 @@
         scrape_timeout = "15s";
         scrape_interval = "60s";
         metrics_path = "/probe";
-        params = { module = [ "icmp_external" ]; };
-        file_sd_configs =
-          [{ files = [ "/etc/prometheus/targets/nodes-external.yaml" ]; }];
+        params = {
+          module = [ "icmp_external" ];
+        };
+        file_sd_configs = [ { files = [ "/etc/prometheus/targets/nodes-external.yaml" ]; } ];
         relabel_configs = [
           {
             source_labels = [ "__address__" ];
@@ -216,10 +259,7 @@
           }
           {
             target_label = "__address__";
-            replacement =
-              "${config.services.prometheus.exporters.blackbox.listenAddress}:${
-                toString config.services.prometheus.exporters.blackbox.port
-              }";
+            replacement = "${config.services.prometheus.exporters.blackbox.listenAddress}:${toString config.services.prometheus.exporters.blackbox.port}";
           }
           {
             source_labels = [ "job" ];
@@ -235,9 +275,10 @@
         scrape_timeout = "15s";
         scrape_interval = "60s";
         metrics_path = "/probe";
-        params = { module = [ "icmp_internal" ]; };
-        file_sd_configs =
-          [{ files = [ "/etc/prometheus/targets/nodes-internal.yaml" ]; }];
+        params = {
+          module = [ "icmp_internal" ];
+        };
+        file_sd_configs = [ { files = [ "/etc/prometheus/targets/nodes-internal.yaml" ]; } ];
         relabel_configs = [
           {
             source_labels = [ "__address__" ];
@@ -251,10 +292,7 @@
           }
           {
             target_label = "__address__";
-            replacement =
-              "${config.services.prometheus.exporters.blackbox.listenAddress}:${
-                toString config.services.prometheus.exporters.blackbox.port
-              }";
+            replacement = "${config.services.prometheus.exporters.blackbox.listenAddress}:${toString config.services.prometheus.exporters.blackbox.port}";
           }
           {
             source_labels = [ "job" ];
@@ -278,33 +316,36 @@
         scrape_timeout = "30s";
         scrape_interval = "60s";
         metrics_path = "/metrics";
-        static_configs = [{
-          targets = [ "100.64.0.11:3100" ];
-          labels = {
-            datacenter = "ord";
-            instance = "loki.heyjohn.family";
-          };
-        }];
+        static_configs = [
+          {
+            targets = [ "100.64.0.11:3100" ];
+            labels = {
+              datacenter = "ord";
+              instance = "loki.heyjohn.family";
+            };
+          }
+        ];
       }
       {
         job_name = "pihole";
         scrape_timeout = "30s";
         scrape_interval = "60s";
         metrics_path = "/metrics";
-        file_sd_configs =
-          [{ files = [ "/etc/prometheus/targets/pihole.yaml" ]; }];
+        file_sd_configs = [ { files = [ "/etc/prometheus/targets/pihole.yaml" ]; } ];
       }
       {
         job_name = "garage";
         scrape_timeout = "30s";
         scrape_interval = "60s";
         metrics_path = "/metrics";
-        static_configs = [{
-          targets = [ "admin.garage.heyjohn.family" ];
-          labels = {
-            datacenter = "lyh";
-          };
-        }];
+        static_configs = [
+          {
+            targets = [ "admin.garage.heyjohn.family" ];
+            labels = {
+              datacenter = "lyh";
+            };
+          }
+        ];
       }
     ];
   };
