@@ -157,6 +157,19 @@
         ];
       }
       {
+        job_name = "zfs";
+        metrics_path = "/metrics";
+        static_configs = [
+          {
+            targets = [ "perturabo.heyjohn.family:9134" ];
+            labels = {
+              datacenter = "lyh";
+              instance = "perturabo.heyjohn.family";
+            };
+          }
+        ];
+      }
+      {
         job_name = "node";
         metrics_path = "/metrics";
         file_sd_configs = [
