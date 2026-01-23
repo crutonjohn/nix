@@ -10,26 +10,36 @@
     };
   };
 
+  security.acme.certs = {
+    "alerts.heyjohn.family" = {
+      server = "https://ra.heyjohn.family/acme/acme/directory";
+      enableDebugLogs = true;
+      renewInterval = "*-*-* 22:00:00";
+      webroot = "/var/lib/acme/acme-challenge";
+      email = "curtis@heyjohn.family";
+      extraLegoFlags = [ ];
+      group = "nginx";
+      extraDomainNames = [
+        "alerts.ord.heyjohn.family"
+        "alertmanager.heyjohn.family"
+      ];
+    };
+  };
+
   services.nginx.virtualHosts = {
     "alerts.heyjohn.family" = {
-      sslCertificate = "/var/lib/acme/nord.heyjohn.family/cert.pem";
-      sslCertificateKey = "/var/lib/acme/nord.heyjohn.family/key.pem";
-      serverAliases = [ "alerts.ord.heyjohn.family" ];
+      # enableACME = true;
+      useACMEHost = "alerts.heyjohn.family";
+      serverAliases = [
+        "alerts.ord.heyjohn.family"
+        "alertmanager.heyjohn.family"
+      ];
       locations = {
         "/" = {
           proxyPass = "http://${config.services.prometheus.alertmanager.listenAddress}:${toString config.services.prometheus.alertmanager.port}";
           proxyWebsockets = true;
           recommendedProxySettings = true;
         };
-        "/.well-known/acme-challenge/" = {
-          proxyPass = "http://127.0.0.1:1360/";
-        };
-        # "/.well-known/acme-challenge/" = {
-        #   root = "/var/lib/acme/acme-challenge";
-        #   # extraConfig = ''
-        #   #   rewrite /.well-known/acme-challenge/(.*) /$1 break;
-        #   # '';
-        # };
       };
       forceSSL = true;
       listenAddresses = [ "100.64.0.11" ];

@@ -21,16 +21,28 @@
         proxyWebsockets = true;
         recommendedProxySettings = true;
       };
-      "/.well-known/acme-challenge/" = {
-        proxyPass = "http://127.0.0.1:1360/";
-      };
     };
-    sslCertificate = "/var/lib/acme/nord.heyjohn.family/cert.pem";
-    sslCertificateKey = "/var/lib/acme/nord.heyjohn.family/key.pem";
+    enableACME = false;
+    useACMEHost = "grafana.heyjohn.family";
     forceSSL = true;
     listenAddresses = [
       "100.64.0.11"
     ];
+  };
+
+  security.acme.certs = {
+    "grafana.heyjohn.family" = {
+      server = "https://ra.heyjohn.family/acme/acme/directory";
+      enableDebugLogs = true;
+      renewInterval = "*-*-* 22:00:00";
+      webroot = "/var/lib/acme/acme-challenge";
+      email = "curtis@heyjohn.family";
+      extraLegoFlags = [ ];
+      group = "nginx";
+      extraDomainNames = [
+        "grafana.ord.heyjohn.family"
+      ];
+    };
   };
 
 }

@@ -4,9 +4,8 @@
   services.nginx.virtualHosts = {
     "prometheus.heyjohn.family" = {
       serverAliases = [ "prometheus.ord.heyjohn.family" ];
-      enableACME = false;
-      sslCertificate = "/var/lib/acme/nord.heyjohn.family/cert.pem";
-      sslCertificateKey = "/var/lib/acme/nord.heyjohn.family/key.pem";
+      # enableACME = true;
+      useACMEHost = "prometheus.heyjohn.family";
       forceSSL = true;
       locations = {
         "/" = {
@@ -14,25 +13,23 @@
           proxyWebsockets = true;
           recommendedProxySettings = true;
         };
-        "/.well-known/acme-challenge/" = {
-          proxyPass = "http://127.0.0.1:1360/";
-        };
       };
       listenAddresses = [ "100.64.0.11" ];
     };
   };
 
-  # security.acme.certs = {
-  #   "prometheus.heyjohn.family" = {
-  #     server = "https://ra.heyjohn.family/acme/acme/directory";
-  #     enableDebugLogs = true;
-  #     webroot = "/var/lib/acme/acme-challenge";
-  #     email = "curtis@heyjohn.family";
-  #     extraLegoFlags = [ ];
-  #     group = "nginx";
-  #     extraDomainNames = [ "prometheus.ord.heyjohn.family" ];
-  #   };
-  # };
+  security.acme.certs = {
+    "prometheus.heyjohn.family" = {
+      server = "https://ra.heyjohn.family/acme/acme/directory";
+      enableDebugLogs = true;
+      renewInterval = "*-*-* 22:00:00";
+      webroot = "/var/lib/acme/acme-challenge";
+      email = "curtis@heyjohn.family";
+      extraLegoFlags = [ ];
+      group = "nginx";
+      extraDomainNames = [ "prometheus.ord.heyjohn.family" ];
+    };
+  };
 
   # systemd.timers = {
   #   "custom-acme-prometheus.heyjohn.family" = {

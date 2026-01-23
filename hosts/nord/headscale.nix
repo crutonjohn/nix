@@ -55,9 +55,8 @@
 
   services.nginx.virtualHosts = {
     "headscale.heyjohn.family" = {
-      enableACME = false;
-      sslCertificate = "/var/lib/acme/nord.heyjohn.family/cert.pem";
-      sslCertificateKey = "/var/lib/acme/nord.heyjohn.family/key.pem";
+      # enableACME = true;
+      useACMEHost = "headscale.heyjohn.family";
       forceSSL = true;
       locations = {
         "/" = {
@@ -75,10 +74,21 @@
             add_header Strict-Transport-Security "max-age=15552000; includeSubDomains" always;
           '';
         };
-        "/.well-known/acme-challenge/" = {
-          proxyPass = "http://127.0.0.1:1360/";
-        };
       };
     };
   };
+
+  security.acme.certs = {
+    "headscale.heyjohn.family" = {
+      server = "https://ra.heyjohn.family/acme/acme/directory";
+      enableDebugLogs = true;
+      renewInterval = "*-*-* 22:00:00";
+      webroot = "/var/lib/acme/acme-challenge";
+      email = "curtis@heyjohn.family";
+      extraLegoFlags = [ ];
+      group = "nginx";
+      extraDomainNames = [ ];
+    };
+  };
+
 }
