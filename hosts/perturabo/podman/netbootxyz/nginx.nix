@@ -44,9 +44,9 @@
         recommendedProxySettings = true;
         proxyWebsockets = true;
       };
-      locations."/talos/machineconfig" = {
+      locations."/talos" = {
         proxyWebsockets = true;
-        proxyPass = "http://127.0.0.1:8088/talos/machineconfig";
+        proxyPass = "http://127.0.0.1:8088/talos";
         extraConfig = ''
           allow 192.168.130.131;
           allow 192.168.130.132;
@@ -55,6 +55,7 @@
           allow 192.168.130.141;
           allow 192.168.130.142;
           allow 192.168.130.143;
+          allow 192.168.134.107;
           allow 192.168.130.4;
           allow 192.168.128.8;
           allow 192.168.128.3;
