@@ -14,6 +14,9 @@
           proxyWebsockets = true;
           recommendedProxySettings = true;
         };
+        "/.well-known/acme-challenge/" = {
+          proxyPass = "http://127.0.0.1:1360/";
+        };
       };
       listenAddresses = [ "100.64.0.11" ];
     };
