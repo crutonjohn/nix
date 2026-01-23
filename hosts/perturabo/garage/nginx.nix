@@ -6,6 +6,7 @@
     "s3.garage.heyjohn.family" = {
       server = "https://ra.heyjohn.family/acme/acme/directory";
       enableDebugLogs = true;
+      renewInterval = "*-*-* 22:00:00";
       webroot = "/var/lib/acme/acme-challenge";
       email = "curtis@heyjohn.family";
       extraLegoFlags = [ ];
@@ -17,19 +18,6 @@
         "admin.garage.heyjohn.family"
         "ui.garage.heyjohn.family"
       ];
-    };
-  };
-
-  systemd.timers = {
-    "custom-acme-s3.garage.heyjohn.family" = {
-      description = "Hack to renew ACME Certificate every day";
-      wantedBy = [ "timers.target" ];
-      timerConfig = {
-        OnCalendar = "*-*-* 22:00:00";
-        Persistent = "yes";
-        AccuracySec = "600s";
-        Unit = "acme-order-renew-s3.garage.heyjohn.family.service";
-      };
     };
   };
 
@@ -76,7 +64,7 @@
     };
     "admin.garage.heyjohn.family" = {
       useACMEHost = "s3.garage.heyjohn.family";
-      forceSSL = true;
+      forceSSL = false;
       listenAddresses = [ "192.168.130.4" ];
       locations = {
         "/" = {
