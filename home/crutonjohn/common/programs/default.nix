@@ -13,6 +13,7 @@
 
   home = {
     packages = with pkgs; [
+      anytype
       awscli2
       asciinema
       bitwarden-cli
