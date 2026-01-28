@@ -7,6 +7,7 @@ let
   desiredFlatpaks = [
     "com.bambulab.BambuStudio"
     "com.github.tchx84.Flatseal"
+    "app.zen_browser.zen"
   ];
 in
 {
