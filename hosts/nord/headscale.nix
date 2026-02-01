@@ -89,6 +89,7 @@
       enableDebugLogs = true;
       # https://go-acme.github.io/lego/dns/gandiv5/
       environmentFile = "/run/secrets/acme/gandi/credentials";
+      extraDomainNames = [ ];
       group = "nginx";
     };
   };
