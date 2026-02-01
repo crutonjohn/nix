@@ -8,6 +8,11 @@
       owner = "headscale";
       restartUnits = [ "headscale.service" ];
     };
+    secrets."acme/gandi/credentials" = {
+      mode = "0440";
+      group = "nginx";
+      owner = "acme";
+    };
   };
 
   networking.hosts = {
@@ -80,15 +85,11 @@
 
   security.acme.certs = {
     "headscale.heyjohn.family" = {
-      server = "https://ra.heyjohn.family/acme/acme/directory";
+      dnsProvider = "gandiv5";
       enableDebugLogs = true;
-      renewInterval = "*-*-* 22:00:00";
-      webroot = "/var/lib/acme/acme-challenge";
-      email = "curtis@heyjohn.family";
-      extraLegoFlags = [ ];
+      # https://go-acme.github.io/lego/dns/gandiv5/
+      environmentFile = "/run/secrets/acme/gandi/credentials";
       group = "nginx";
-      extraDomainNames = [ ];
     };
   };
-
 }
