@@ -2,6 +2,7 @@
 {
 
   home.packages = with pkgs; [
+    anytype
     appimage-run
     at-spi2-atk
     bitwarden-desktop
