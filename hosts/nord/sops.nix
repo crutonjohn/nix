@@ -4,6 +4,7 @@
     defaultSopsFile = ./secrets.yaml;
     secrets = {
       "acme/linode/credentials" = { };
+      "acme/gandi/credentials" = { };
       "acme/step/environmentFile" = { };
       "headscale/oidc_client_secret" = { };
       "tailscale/nord/preauthkey" = { };
