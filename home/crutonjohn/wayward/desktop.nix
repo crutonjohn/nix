@@ -27,9 +27,9 @@
       categories = [ "Utility" ];
     };
     anytype = {
-      name = "Anytype";
-      genericName = "Anytype";
-      exec = "anytype %U";
+      name = "teamspeak";
+      genericName = "teamspeak";
+      exec = "TeamSpeak %U";
       terminal = false;
       categories = [ "Application" ];
     };

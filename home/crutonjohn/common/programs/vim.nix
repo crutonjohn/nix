@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.vim = {
     enable = true;
     defaultEditor = true;
@@ -91,13 +92,13 @@
       endfunction
       command! BTerm call BTerm()
 
-      function! ReSource()    
-          let l:winview = winsaveview()    
-          :source ~/.vimrc<cr>    
-          call winrestview(l:winview)    
-      endfunction    
-        
-        " function call    
+      function! ReSource()
+          let l:winview = winsaveview()
+          :source ~/.vimrc<cr>
+          call winrestview(l:winview)
+      endfunction
+
+        " function call
         nnoremap <leader>z :call ReSource()<cr>
 
 

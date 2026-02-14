@@ -2,7 +2,6 @@
 {
 
   imports = [
-    ./floorp.nix
     ./programs.nix
     ./terminal.nix
     ./vscode.nix

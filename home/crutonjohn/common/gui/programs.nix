@@ -2,7 +2,7 @@
 {
 
   home.packages = with pkgs; [
-    anytype
+    # anytype
     appimage-run
     at-spi2-atk
     bitwarden-desktop
@@ -51,6 +51,7 @@
     vlc
     #obsidian
     teamspeak6-client
+    # teamspeak3
   ];
 
 }
