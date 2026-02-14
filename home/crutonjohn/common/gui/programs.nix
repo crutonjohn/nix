@@ -51,7 +51,6 @@
     vlc
     #obsidian
     teamspeak6-client
-    # teamspeak3
   ];
 
 }
