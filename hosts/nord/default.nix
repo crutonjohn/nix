@@ -13,6 +13,7 @@
     ./nginx.nix
     ./sops.nix
     ./tailscale.nix
+    ./teamspeak.nix
   ];
 
   boot.loader.grub.enable = true;
