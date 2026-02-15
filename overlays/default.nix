@@ -35,6 +35,9 @@ let
   newrecruitEditorOverlay = self: super: {
     newrecruit-editor = super.callPackage ./newrecruit/editor.nix { };
   };
+  teamspeak6Overlay = self: super: {
+    teamspeak6-server = super.callPackage ./teamspeak6-server { };
+  };
 in
 {
   nur = inputs.nur.overlays.default;
@@ -49,6 +52,7 @@ in
   otelcol = otelcolOverlay;
   newrecruit-builder = newrecruitBuilderOverlay;
   newrecruit-editor = newrecruitEditorOverlay;
+  teamspeak6-server = teamspeak6Overlay;
 
   # The unstable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.unstable'
