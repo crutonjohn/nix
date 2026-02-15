@@ -6,7 +6,7 @@
 }:
 
 stdenv.mkDerivation rec {
-  pname = "teamspeak-server";
+  pname = "teamspeak6-server";
   version = "6.0.0";
   release = "beta8";
 
