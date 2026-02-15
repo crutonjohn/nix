@@ -4,8 +4,7 @@
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
-    package =
-      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage =
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
@@ -16,11 +15,18 @@
   #nixGL.installScripts = [ "mesa" ];
   #nixGL.vulkan.enable = true;
 
-  services = { desktopManager.plasma6 = { enable = true; }; };
+  services = {
+    desktopManager.plasma6 = {
+      enable = true;
+    };
+  };
 
   programs.nix-ld = {
     enable = true;
-    libraries = with pkgs; [ sdl3 SDL2 ];
+    libraries = with pkgs; [
+      sdl3
+      SDL2
+    ];
   };
 
   environment = {
@@ -83,7 +89,9 @@
   #   })
   # ];
 
-  services.xserver = { xkb.options = "caps:escape"; };
+  services.xserver = {
+    xkb.options = "caps:escape";
+  };
 
   console.keyMap = "us";
 
@@ -93,6 +101,8 @@
   };
 
   security.polkit.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.hyprland.enableGnomeKeyring = true;
   security.pam.services.hyprlock = { };
 
 }
