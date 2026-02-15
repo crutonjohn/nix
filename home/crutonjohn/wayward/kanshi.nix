@@ -30,6 +30,7 @@
         ];
       }
     ];
+  };
 
   #home.file = {
   #  ".config/kanshi/config".text = ''
