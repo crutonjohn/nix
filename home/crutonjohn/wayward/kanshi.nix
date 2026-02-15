@@ -2,32 +2,34 @@
 {
   services.kanshi = {
     enable = true;
-    profiles = {
-      undocked = {
-        outputs = [
+    settings = [
+      {
+        output.criteria = "eDP-1";
+        output.scale = 1.6;
+      }
+      {
+        profile.name = "undocked";
+        profile.outputs = [
           {
             criteria = "eDP-1";
-            scale = 1.6;
-            status = "enable";
           }
         ];
-      };
-
-      home_office = {
-        outputs = [
+      }
+      {
+        profile.name = "home_office";
+        profile.outputs = [
+          {
+            criteria = "eDP-1";
+            status = "disable";
+          }
           {
             criteria = "Samsung Electric Company LC49G95T H1AK500000";
             position = "0,0";
             mode = "5120x1440@59.98Hz";
           }
-          {
-            criteria = "eDP-1";
-            status = "disable";
-          }
         ];
-      };
-    };
-  };
+      }
+    ];
 
   #home.file = {
   #  ".config/kanshi/config".text = ''
