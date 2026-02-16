@@ -1,11 +1,16 @@
-{ config, pkgs, inputs, lib, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 
 {
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
-    package =
-      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage =
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
@@ -16,7 +21,11 @@
   #nixGL.installScripts = [ "mesa" ];
   #nixGL.vulkan.enable = true;
 
-  services = { desktopManager.plasma6 = { enable = true; }; };
+  services = {
+    desktopManager.plasma6 = {
+      enable = true;
+    };
+  };
 
   environment = {
     systemPackages = with pkgs; [
@@ -57,6 +66,7 @@
       hyprcursor
       xsettingsd
       xorg.xrdb
+      teamspeak6-server
     ];
   };
 
@@ -76,7 +86,9 @@
   #  })
   #];
 
-  services.xserver = { xkb.options = "caps:escape"; };
+  services.xserver = {
+    xkb.options = "caps:escape";
+  };
 
   console.keyMap = "us";
 
