@@ -18,6 +18,7 @@
     ./nginx.nix
     ./smb.nix
     ./sops.nix
+    ./ups.nix
     ./virtualization.nix
     ./vm-hook.nix
     ./zfs.nix

@@ -57,7 +57,7 @@
       url = "github:tophc7/play.nix";
       inputs = {
         nixpkgs.follows = "nixpkgs-unstable";
-        chaotic.follows = "chaotic";
+        # chaotic.follows = "chaotic";
       };
     };
     mix-nix = {
@@ -82,6 +82,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nil.url = "github:oxalica/nil";
+
+    utils.url = "github:numtide/flake-utils";
 
     # krewfile - Declarative krew plugin management
     krewfile = {
@@ -108,6 +110,7 @@
       nil,
       play-nix,
       chaotic,
+      utils,
       ...
     }@inputs:
     let
@@ -275,6 +278,16 @@
             modules = [ ./home/crutonjohn/common ];
           };
         };
+
+      packages =
+        let
+          system = "x86_64-linux";
+          pkgs = import nixpkgs { inherit system; };
+        in
+        utils.lib.eachDefaultSystemMap (system: {
+          teamspeak6-server = pkgs.callPackage ./pkgs/teamspeak6-server { };
+        });
+
     };
 
 }
