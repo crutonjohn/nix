@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 
 {
 
@@ -9,6 +9,17 @@
         group = "nutmon";
         owner = "nutmon";
         restartUnits = [
+          "upsd.service"
+          "upsmon.service"
+        ];
+      };
+      "ups/nut_exporter_password" = {
+        mode = "0660";
+        group = "nutmon";
+        owner = "nutmon";
+        restartUnits = [
+          "upsd.service"
+          "upsmon.service"
         ];
       };
     };
@@ -57,10 +68,6 @@
           address = "127.0.0.1";
           port = 3493;
         }
-        {
-          address = "::1";
-          port = 3493;
-        }
       ];
     };
     users."nut-admin" = {
@@ -76,4 +83,19 @@
       type = "primary";
     };
   };
+
+  power.ups.users."nut-exporter" = {
+    passwordFile = "/run/secrets/ups/nut_exporter_password";
+    upsmon = "secondary";
+  };
+
+  services.prometheus.exporters.nut = {
+    enable = true;
+    openFirewall = true;
+    port = 9199;
+    user = "nutmon";
+    nutUser = "nut-exporter";
+    passwordPath = config.power.ups.users."nut-exporter".passwordFile;
+  };
+
 }
