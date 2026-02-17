@@ -6,8 +6,8 @@
     secrets = {
       "ups/nut_admin_password" = {
         mode = "0660";
-        group = "upsmon";
-        owner = "upsmon";
+        group = "nutmon";
+        owner = "nutmon";
         restartUnits = [
         ];
       };
