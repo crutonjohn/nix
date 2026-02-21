@@ -1,6 +1,18 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
+
+  users.groups.talos = { };
+  users.users = {
+    talos = {
+      description = "Talos K8s Service Account";
+      shell = pkgs.bash;
+      group = "talos";
+      isSystemUser = true;
+      home = "/home/talos";
+    };
+  };
+
   services.samba = {
     enable = true;
     openFirewall = true;
@@ -20,7 +32,7 @@
       };
       "videos" = {
         "path" = "/mnt/olympia/videos";
-        "valid users" = "crutonjohn";
+        "valid users" = "crutonjohn talos";
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";
