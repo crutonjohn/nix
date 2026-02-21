@@ -70,6 +70,7 @@
       xorg.xrdb
       amdgpu_top
       python312
+      kdePackages.kdenlive
     ];
   };
 
