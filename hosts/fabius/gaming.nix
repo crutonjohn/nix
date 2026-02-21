@@ -36,7 +36,7 @@
       enableVirtualCamera = true;
       plugins = with pkgs.obs-studio-plugins; [
         waveform
-        distroav
+        # distroav
         obs-vaapi
         obs-pipewire-audio-capture
         wlrobs
