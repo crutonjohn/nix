@@ -1,23 +1,24 @@
 { ... }:
 {
-services.kanshi = {
-  enable = true;
-  # settings = [
-  #   {
-  #     output.criteria = "eDP-1";
-  #     output.scale = 1.6;
-  #   }
-  #   {
-  #     profile.name = "home_office";
-  #     profile.outputs = [
-  #       {
-  #         criteria = "Samsung Electric Company LC49G95T H1AK500000";
-  #         position = "0,0";
-  #         mode = "5120x1440@59.98Hz";
-  #       }
-  #     ];
-  #   }
-  # ];
+  services.kanshi = {
+    enable = true;
+    # settings = [
+    #   {
+    #     output.criteria = "eDP-1";
+    #     output.scale = 1.6;
+    #   }
+    #   {
+    #     profile.name = "home_office";
+    #     profile.outputs = [
+    #       {
+    #         criteria = "Samsung Electric Company LC49G95T H1AK500000";
+    #         position = "0,0";
+    #         mode = "5120x1440@59.98Hz";
+    #       }
+    #     ];
+    #   }
+    # ];
+  };
 
   home.file = {
     ".config/kanshi/config".text = ''
