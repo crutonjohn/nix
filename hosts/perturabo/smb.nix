@@ -43,7 +43,7 @@
       };
       "music" = {
         "path" = "/mnt/olympia/music";
-        "valid users" = "crutonjohn";
+        "valid users" = "crutonjohn talos";
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";
