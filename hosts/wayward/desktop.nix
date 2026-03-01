@@ -66,7 +66,6 @@
       hyprcursor
       xsettingsd
       xorg.xrdb
-      teamspeak6-server
     ];
   };
 
