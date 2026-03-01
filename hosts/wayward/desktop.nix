@@ -66,6 +66,7 @@
       hyprcursor
       xsettingsd
       xorg.xrdb
+      androidenv.androidPkgs.platform-tools
     ];
   };
 
