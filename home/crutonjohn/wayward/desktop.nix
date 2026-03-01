@@ -33,6 +33,13 @@
       terminal = false;
       categories = [ "Application" ];
     };
+    PixelFlasher = {
+      name = "PixelFlasher";
+      genericName = "pixelflasher";
+      exec = "pixelflasher";
+      terminal = false;
+      categories = [ "Application" ];
+    };
   };
 
 }
