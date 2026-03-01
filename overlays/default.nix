@@ -35,9 +35,9 @@ let
   newrecruitEditorOverlay = self: super: {
     newrecruit-editor = super.callPackage ./newrecruit/editor.nix { };
   };
-  pixelflasherOverlay = self: super: {
-    pixelflasher = super.callPackage ./pixelflasher { };
-  };
+  # pixelflasherOverlay = self: super: {
+  #   pixelflasher = super.callPackage ./pixelflasher { };
+  # };
 in
 {
   nur = inputs.nur.overlays.default;
@@ -52,7 +52,7 @@ in
   otelcol = otelcolOverlay;
   newrecruit-builder = newrecruitBuilderOverlay;
   newrecruit-editor = newrecruitEditorOverlay;
-  pixelflasher = pixelflasherOverlay;
+  # pixelflasher = pixelflasherOverlay;
 
   # The unstable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.unstable'
