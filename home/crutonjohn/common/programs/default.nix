@@ -89,6 +89,7 @@
       nixd
       nmap
       pixman
+      pixelflasher
       powertop
       psmisc
       qemu
