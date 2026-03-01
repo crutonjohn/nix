@@ -90,6 +90,7 @@
       nmap
       pixman
       pixelflasher
+      android-tools
       powertop
       psmisc
       qemu
