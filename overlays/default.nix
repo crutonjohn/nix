@@ -38,6 +38,9 @@ let
   teamspeak6Overlay = self: super: {
     teamspeak6-server = super.callPackage ./teamspeak6-server { };
   };
+  pixelflasherOverlay = self: super: {
+    pixelflasher = super.callPackage ./pixelflasher { };
+  };
 in
 {
   nur = inputs.nur.overlays.default;
@@ -53,6 +56,7 @@ in
   newrecruit-builder = newrecruitBuilderOverlay;
   newrecruit-editor = newrecruitEditorOverlay;
   teamspeak6-server = teamspeak6Overlay;
+  pixelflasher = pixelflasherOverlay;
 
   # The unstable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.unstable'
