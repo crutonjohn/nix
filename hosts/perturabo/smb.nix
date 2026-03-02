@@ -74,6 +74,17 @@
         "force user" = "root";
         "force group" = "users";
       };
+      "bewcloud" = {
+        "path" = "/mnt/olympia/bewcloud";
+        "valid users" = "crutonjohn talos";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "root";
+        "force group" = "users";
+      };
       "root" = {
         "path" = "/mnt/olympia";
         "valid users" = "crutonjohn";
