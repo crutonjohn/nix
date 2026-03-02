@@ -26,6 +26,7 @@
       ffmpeg
       gawk
       go
+      google-chrome
       htop
       jq
       jsonnet
