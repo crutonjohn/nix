@@ -6,6 +6,7 @@
     "kvm-amd"
     "nvidia"
   ];
+  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;
   hardware.graphics = {
