@@ -210,7 +210,7 @@
             hostname = "cawl";
             system = "x86_64-linux";
             hardwareModules = [
-              inputs.nixos-hardware.nixosModules.common-gpu-nvidia
+              # inputs.nixos-hardware.nixosModules.common-gpu-nvidia.ada-lovelace
               inputs.nixos-hardware.nixosModules.common-pc-ssd
             ];
             profileModules = [

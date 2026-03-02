@@ -9,6 +9,7 @@
       enableSSHSupport = true;
     };
     fish.enable = true;
+    zsh.enable = true;
     wireshark.enable = true;
   };
 

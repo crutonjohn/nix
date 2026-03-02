@@ -2,8 +2,6 @@
 
 {
   imports = [
-    inputs.nixos-hardware.nixosModules.common-gpu-nvidia
-    inputs.nixos-hardware.nixosModules.common-pc-ssd
     ../global
     ./desktop.nix
     ./fonts.nix

@@ -50,7 +50,10 @@
 
   security.sudo.extraRules = [
     {
-      users = [ "crutonjohn", "kat" ];
+      users = [
+        "crutonjohn"
+        "kat"
+      ];
       commands = [
         {
           command = "${pkgs.systemd}/bin/systemctl suspend";
