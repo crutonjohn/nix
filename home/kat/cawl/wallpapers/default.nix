@@ -5,7 +5,7 @@
     enable = true;
     settings = {
       preload = [
-        "/home/crutonjohn/.config/docked.jpg"
+        "/home/kat/.config/docked.jpg"
       ];
       wallpaper = [
         "DP-1,~/.config/docked.jpg"
