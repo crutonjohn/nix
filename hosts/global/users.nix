@@ -10,6 +10,7 @@
       shell = pkgs.fish;
       extraGroups = [
         "crutonjohn"
+        "users"
         "wheel"
         "networkmanager"
         "docker"
@@ -25,6 +26,23 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK1AE5OJ9NDmob6zeBlH02aBeExtVxMhrBjxo9hB2Pjw"
       ];
     };
+    kat = {
+      description = "Katlin John";
+      shell = pkgs.zsh;
+      extraGroups = [
+        "users"
+        "wheel"
+        "networkmanager"
+        "docker"
+        "dialout"
+        "wireshark"
+        "libvirtd"
+      ];
+      isNormalUser = true;
+      home = "/home/kat";
+      openssh.authorizedKeys.keys = [
+      ];
+    };
     root = {
       shell = pkgs.bashInteractive;
     };
@@ -32,7 +50,7 @@
 
   security.sudo.extraRules = [
     {
-      users = [ "crutonjohn" ];
+      users = [ "crutonjohn", "kat" ];
       commands = [
         {
           command = "${pkgs.systemd}/bin/systemctl suspend";

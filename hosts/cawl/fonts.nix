@@ -1,0 +1,33 @@
+{ pkgs, ... }:
+
+{
+
+  # Fonts
+  fonts = {
+    enableDefaultPackages = true;
+    fontconfig = {
+      enable = true;
+      allowBitmaps = true;
+    };
+    fontDir.enable = true;
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-color-emoji
+      open-sans
+      ubuntu-classic
+      iosevka
+      aileron
+      fira-code
+      fira-code-symbols
+      font-awesome_5
+      material-icons
+      material-symbols
+      pciutils
+      nerd-fonts._0xproto
+      nerd-fonts.droid-sans-mono
+    ];
+  };
+
+}

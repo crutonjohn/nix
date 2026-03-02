@@ -205,6 +205,22 @@
               }
             ];
           };
+          "cawl" = mkNixosConfig {
+            # Main gaming Desktop
+            hostname = "cawl";
+            system = "x86_64-linux";
+            hardwareModules = [
+              inputs.nixos-hardware.nixosModules.common-gpu-nvidia
+              inputs.nixos-hardware.nixosModules.common-pc-ssd
+            ];
+            profileModules = [
+              {
+                home-manager.users.crutonjohn = ./home/crutonjohn/cawl;
+                home-manager.backupFileExtension = "bix";
+                home-manager.users.kat = ./home/kat/cawl;
+              }
+            ];
+          };
 
           "servitor" = mkNixosConfig {
             # Local AI and Gaming Desktop
