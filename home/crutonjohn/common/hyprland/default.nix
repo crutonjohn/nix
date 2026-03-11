@@ -4,14 +4,12 @@
   imports = [
     ./cursor.nix
     ./dunst.nix
-    ./swaylock.nix
     ./wofi.nix
 
   ];
 
   home.packages = with pkgs; [
     appimage-run
-    at-spi2-atk
     bitwarden-desktop
     brightnessctl
     bewcloud-client
