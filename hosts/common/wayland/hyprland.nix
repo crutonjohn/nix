@@ -9,28 +9,11 @@
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
-  services = {
-    desktopManager.plasma6 = {
-      enable = true;
-    };
-  };
-
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [
-      sdl3
-      SDL2
-    ];
-  };
-
   environment = {
     systemPackages = with pkgs; [
-      at-spi2-atk
       inputs.hypr-contrib.packages.${pkgs.system}.grimblast
       inputs.hyprpicker.packages.${pkgs.system}.hyprpicker
       inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
-      libnotify
-      libinput
       wl-clipboard
       wlr-randr
       wlrctl
@@ -39,48 +22,17 @@
       wayland-utils
       egl-wayland
       wayland-protocols
-      pkgs.xorg.xeyes
-      glfw
       xwayland
       pkgs.qt6.qtwayland
       pkgs.qt5.qtwayland
-      nemo
-      networkmanagerapplet
-      wev
       wf-recorder
-      alsa-lib
-      alsa-utils
-      flac
-      pulsemixer
-      linux-firmware
-      sshpass
-      lxappearance
       imagemagick
       grim
-      toybox
-      rocmPackages.rocgdb
-      wireshark
       hyprcursor
-      xsettingsd
-      xorg.xrdb
-      python312
     ];
   };
 
-  services.xserver = {
-    xkb.options = "caps:escape";
-  };
-
-  console.keyMap = "us";
-
-  services = {
-    dbus.packages = [ pkgs.gcr ];
-    gvfs.enable = true;
-  };
-
   security.polkit.enable = true;
-  services.gnome.gnome-keyring.enable = true;
-  security.pam.services.hyprland.enableGnomeKeyring = true;
   security.pam.services.hyprlock = { };
 
 }

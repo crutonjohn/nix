@@ -5,9 +5,7 @@ let
   grep = pkgs.gnugrep;
   # 1. Declare the Flatpaks you *want* on your system
   desiredFlatpaks = [
-    "com.bambulab.BambuStudio"
     "com.github.tchx84.Flatseal"
-    "app.zen_browser.zen"
   ];
 in
 {

@@ -5,7 +5,6 @@
   imports = [ inputs.play-nix.nixosModules.play ];
 
   play = {
-    amd.enable = true; # AMD GPU optimization
     steam.enable = true; # Steam with Proton-CachyOS
     lutris.enable = true; # Lutris game manager
     gamemode.enable = true; # Performance optimization
@@ -57,6 +56,7 @@
     bottles
     # heroic
     teamspeak6-client
+    discord
     sdl3
     sdl3-ttf
     sdl3-image

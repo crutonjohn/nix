@@ -18,8 +18,4 @@
     #    internalInterfaces = [ "wg0" ];
   };
 
-  # tailscale daemon
-  services.tailscale = {
-    enable = true;
-  };
 }

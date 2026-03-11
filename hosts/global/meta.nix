@@ -40,6 +40,7 @@
   nix.settings.trusted-users = [
     "root"
     "crutonjohn"
+    "kat"
     "@wheel"
   ];
 

@@ -1,4 +1,11 @@
-{ ... }:
+{
+  pkgs,
+  inputs,
+  ...
+}:
+let
+  pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+in
 
 {
   boot.kernelModules = [
@@ -9,16 +16,16 @@
   hardware.enableAllFirmware = true;
   hardware.graphics = {
     enable = true;
-    #extraPackages = with pkgs; [  ];
+    package = pkgs-unstable.mesa;
+    enable32Bit = true;
+    package32 = pkgs-unstable.pkgsi686Linux.mesa;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      libva-vdpau-driver
+      libvdpau-va-gl
+    ];
   };
-  # hardware.amdgpu.amdvlk.enable = true;
-  hardware.amdgpu.opencl.enable = true;
   services.fwupd.enable = true;
-  services.libinput.touchpad = {
-    naturalScrolling = true;
-    tapping = false;
-    clickMethod = "clickfinger";
-  };
   # bluetooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
@@ -57,39 +64,9 @@
   systemd.sleep.extraConfig = ''
     HibernateDelaySec=180min
   '';
-
   programs.xss-lock.enable = true;
-
-  # Usbmuxd
   services.usbmuxd.enable = true;
-  # Fingerprints
-  services.fprintd.enable = true;
-  security.pam.services.login.fprintAuth = true;
-  security.pam.services.xscreensaver.fprintAuth = true;
-  # Pipewire
-  boot.kernelParams = [ "usbcore.autosuspend=-1" ];
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    jack.enable = true;
-    extraConfig.pipewire = {
-      "10-clock-rate" = {
-        "context.properties" = {
-          "default.clock.rate" = 44100;
-        };
-      };
-      "11-quantum-sync" = {
-        "context.properties" = {
-          "default.clock.min-quantum" = 1024;
-        };
-      };
-    };
-  };
 
-  services.ceph.client.enable = true;
 }
