@@ -4,7 +4,6 @@
   imports = [
     ./cursor.nix
     ./dunst.nix
-    ./swaylock.nix
     ./wofi.nix
 
   ];

@@ -1,0 +1,63 @@
+Monitor DP-1 (ID 0):
+	5120x1440@119.99900 at 0x0
+	description: Samsung Electric Company LC49G95T H1AK500000
+	make: Samsung Electric Company
+	model: LC49G95T
+	physical size (mm): 1190x340
+	serial: H1AK500000
+	active workspace: 1 (1)
+	special workspace: 0 ()
+	reserved: 0 44 0 0
+	scale: 1.00
+	transform: 0
+	focused: no
+	dpmsStatus: 1
+	vrr: false
+	solitary: 0
+	solitaryBlockedBy: windowed mode,missing candidate
+	activelyTearing: false
+	tearingBlockedBy: next frame is not torn,user settings,missing candidate
+	directScanoutTo: 0
+	directScanoutBlockedBy: user settings,screen record/screenshot,missing candidate
+	disabled: false
+	currentFormat: XRGB8888
+	mirrorOf: none
+	availableModes: 5120x1440@120.00Hz 3840x1080@119.97Hz 5120x1440@59.98Hz 3840x1080@59.97Hz 2560x1440@120.00Hz 2560x1440@59.95Hz 2560x1080@120.00Hz 2560x1080@119.88Hz 2560x1080@60.00Hz 2560x1080@60.00Hz 2560x1080@59.94Hz 1920x1080@120.00Hz 1920x1080@119.88Hz 1920x1080@60.00Hz 1920x1080@60.00Hz 1920x1080@59.94Hz 1680x1050@59.95Hz 1600x900@60.00Hz 1280x1024@75.03Hz 1280x1024@60.02Hz 1440x900@59.89Hz 1280x800@59.81Hz 1152x864@75.00Hz 1280x720@60.00Hz 1280x720@59.94Hz 1024x768@75.03Hz 1024x768@70.07Hz 1024x768@60.00Hz 832x624@74.55Hz 800x600@75.00Hz 800x600@72.19Hz 800x600@60.32Hz 800x600@56.25Hz 640x480@75.00Hz 640x480@72.81Hz 640x480@66.67Hz 640x480@60.00Hz 640x480@59.94Hz 720x400@70.08Hz 
+	colorManagementPreset: srgb
+	sdrBrightness: 1.00
+	sdrSaturation: 1.00
+	sdrMinLuminance: 0.20
+	sdrMaxLuminance: 80
+
+Monitor DP-2 (ID 1):
+	3840x2160@143.99899 at 709x1440
+	description: LG Electronics LG ULTRAGEAR 408NTEPA4044
+	make: LG Electronics
+	model: LG ULTRAGEAR
+	physical size (mm): 700x400
+	serial: 408NTEPA4044
+	active workspace: 2 (2)
+	special workspace: 0 ()
+	reserved: 0 44 0 0
+	scale: 1.00
+	transform: 0
+	focused: yes
+	dpmsStatus: 1
+	vrr: false
+	solitary: 0
+	solitaryBlockedBy: windowed mode,missing candidate
+	activelyTearing: false
+	tearingBlockedBy: next frame is not torn,user settings,missing candidate
+	directScanoutTo: 0
+	directScanoutBlockedBy: user settings,screen record/screenshot,missing candidate
+	disabled: false
+	currentFormat: XRGB8888
+	mirrorOf: none
+	availableModes: 3840x2160@144.00Hz 3840x2160@60.00Hz 3840x2160@94.98Hz 2560x1440@143.97Hz 1920x1080@143.98Hz 1920x1080@120.00Hz 1920x1080@119.88Hz 1920x1080@60.00Hz 1920x1080@60.00Hz 1920x1080@59.94Hz 1280x1024@75.03Hz 1280x720@60.00Hz 1280x720@59.94Hz 1024x768@60.00Hz 800x600@60.32Hz 720x480@60.00Hz 720x480@59.94Hz 640x480@60.00Hz 640x480@59.94Hz 640x480@59.94Hz 
+	colorManagementPreset: srgb
+	sdrBrightness: 1.00
+	sdrSaturation: 1.00
+	sdrMinLuminance: 0.20
+	sdrMaxLuminance: 80
+
+

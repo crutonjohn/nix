@@ -1,8 +1,8 @@
-{ ... }: {
+{ ... }:
+{
 
   imports = [
     ../common
-    ../common/hyprland
     ../common/gui
     ./wallpapers
     ./desktop.nix
@@ -15,7 +15,9 @@
   # Syncthing
   services.syncthing = {
     enable = false;
-    tray = { enable = true; };
+    tray = {
+      enable = false;
+    };
   };
 
 }
