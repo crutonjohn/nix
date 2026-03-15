@@ -279,17 +279,18 @@
         "SUPER,mouse:273,resizewindow"
       ];
 
-      exec = [ "kanshictl reload" ];
+      exec = [ ];
 
       exec-once = [
         "hyprpaper &"
         ''hyprctl hyprpaper wallpaper "DP-1,~/.config/docked.jpg"''
+        ''hyprctl hyprpaper wallpaper "DP-2,~/.config/docked.jpg"''
         "waybar --config ~/.config/waybar/config &"
         "nm-applet --indicator &"
         # auto toggle waybar on gaming workspace
-        "/etc/profiles/per-user/kat/bin/hyprland-gaming-auto-waybar-toggle &>/dev/null"
+        # "/etc/profiles/per-user/kat/bin/hyprland-gaming-auto-waybar-toggle &>/dev/null"
         # autostart programs #
-        "hyprland-gaming-init"
+        # "hyprland-gaming-init"
         ######################
       ];
 
