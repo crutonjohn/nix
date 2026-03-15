@@ -36,7 +36,8 @@
 
         ### GAMING ###
         # setting up gaming windows
-        "tag +game, initialClass:^(cs2|steam_app_.*)$"
+        "tag +game, initialClass:^(cs2|steam_app_.*|gamescope)$"
+        "tag +game, initialTitle:^(Arc Raiders)$"
         "noborder, tag:game"
 
         ### xwaylandvideobridge hider ###

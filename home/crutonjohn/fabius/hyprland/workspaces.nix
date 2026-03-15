@@ -3,8 +3,8 @@
   wayland.windowManager.hyprland = {
     settings = {
       workspace = [
-        "1, name:gaming, monitor:DP-2, persistent:true, decorate:false, shadow:false"
-        "2, monitor:DP-2"
+        "1, name:gaming, monitor:DP-2, persistent:true, decorate:false, shadow:false, rounding:false"
+        "2, monitor:DP-2, persistent:true"
         "3, monitor:DP-2"
         "4, monitor:DP-2"
         "5, monitor:DP-1"

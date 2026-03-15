@@ -31,11 +31,10 @@
       gesture = 3, horizontal, workspace
     '';
     settings = {
-      # disabled for kanshi
-      #monitor = [
-      #  "eDP-1, preferred, auto, 1.566667"
-      #  "DP-1, 5120x1440, auto, 1.25"
-      #];
+      monitor = [
+        "DP-2, 3840x2160@144.00, -2160,1280, 1.5, transform, 1"
+        "DP-1, 5120x1440@119.99900, 0x0, 1, addreserved, 0, 0, 1280, 1280"
+      ];
 
       input = {
         kb_layout = "us";

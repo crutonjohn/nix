@@ -10,6 +10,7 @@
     ./input.nix
     ./layout.nix
     ./misc.nix
+    ./monitor.nix
     ./plugins.nix
     ./raw.nix
     ./scripts.nix

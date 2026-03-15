@@ -8,16 +8,9 @@
     ./desktop.nix
     ./gaming.nix
     ./hyprland.nix
-    ./kanshi.nix
+    # disabled for desktop, monitors never change
+    # ./kanshi.nix
     ./waybar.nix
   ];
-
-  # Syncthing
-  services.syncthing = {
-    enable = false;
-    tray = {
-      enable = false;
-    };
-  };
 
 }

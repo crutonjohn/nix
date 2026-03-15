@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 {
 
   home.packages = [
@@ -26,9 +26,11 @@
   wayland.windowManager.hyprland = {
     settings = {
       exec-once = [
-
+        # auto toggle waybar on gaming workspace
+        # "/etc/profiles/per-user/${config.home.username}/bin/hyprland-gaming-auto-waybar-toggle &>/dev/null"
+        # autostart programs #
+        # "hyprland-gaming-init"
       ];
-
     };
   };
 }

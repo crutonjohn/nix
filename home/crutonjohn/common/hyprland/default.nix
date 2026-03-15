@@ -16,8 +16,6 @@
     bewcloud-client
     catimg
     catt
-    ceph
-    colmena
     comma
     discord
     dmenu

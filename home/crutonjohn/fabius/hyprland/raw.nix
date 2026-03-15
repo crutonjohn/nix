@@ -4,8 +4,8 @@
   wayland.windowManager.hyprland = {
     # needed due to https://github.com/hyprwm/Hyprland/discussions/4768
     extraConfig = ''
-      env = GDK_SCALE,2
-      env = XCURSOR_SIZE,32
+      env = GDK_SCALE,1
+      env = XCURSOR_SIZE,20
       env = SDL_VIDEODRIVER,wayland
       env = QT_QPA_PLATFORM,wayland
       env = CLUTTER_BACKEND,wayland

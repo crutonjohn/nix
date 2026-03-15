@@ -12,7 +12,6 @@
 
       exec-once = [
         "waybar --config ~/.config/waybar/config &"
-        "nm-applet --indicator &"
       ];
 
     };
