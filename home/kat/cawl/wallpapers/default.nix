@@ -1,14 +1,14 @@
 {
   # Wallpaper/Hyprpaper
-  home.file.".config/docked.jpg".source = ./docked;
+  home.file.".config/wallpaper.jpg".source = ./wallpaper.jpg;
   services.hyprpaper = {
     enable = true;
     settings = {
       preload = [
-        "/home/kat/.config/docked.jpg"
+        "/home/kat/.config/wallpaper.jpg"
       ];
       wallpaper = [
-        "DP-1,~/.config/docked.jpg"
+        "DP-1,~/.config/wallpaper.jpg"
       ];
     };
   };
