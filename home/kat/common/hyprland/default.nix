@@ -1,14 +1,6 @@
 { pkgs, inputs, ... }:
 {
 
-  imports = [
-    ./cursor.nix
-    ./dunst.nix
-    ./swaylock.nix
-    ./wofi.nix
-
-  ];
-
   home.packages = with pkgs; [
     appimage-run
     at-spi2-atk
@@ -61,7 +53,7 @@
     qemu
     rpi-imager
     signal-desktop
-    sonixd
+    feishin
     step-cli
     sway-contrib.grimshot
     swaybg
