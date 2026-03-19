@@ -58,7 +58,7 @@
     qemu
     rpi-imager
     signal-desktop
-    sonixd
+    feishin
     step-cli
     sway-contrib.grimshot
     swaybg

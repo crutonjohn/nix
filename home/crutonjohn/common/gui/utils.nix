@@ -24,7 +24,7 @@
     pulsemixer
     rpi-imager
     signal-desktop
-    sonixd
+    feishin
     virt-manager
     alacritty
     easyeffects

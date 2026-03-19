@@ -36,7 +36,7 @@
     pulsemixer
     rpi-imager
     signal-desktop
-    sonixd
+    feishin
     sway-contrib.grimshot
     swaybg
     virt-manager
