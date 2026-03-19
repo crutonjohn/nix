@@ -9,6 +9,5 @@
     ./utils.nix
     ./vscode.nix
     ./zed.nix
-    ./network-manager.nix
   ];
 }
