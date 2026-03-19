@@ -126,16 +126,6 @@
               padding-right: 8px;
               padding-left: 10px;
             }
-      #mpd.paused {
-              color: #414868;
-              font-style: italic;
-            }
-      #mpd.stopped {
-              background: transparent;
-            }
-      #mpd {
-              color: #c0caf5;
-            }
       #custom-cava-internal{
               font-family: "0xProto Nerd Font Mono" ;
             }
@@ -232,20 +222,6 @@
           "calendar" = {
             "today" = "<span color='#ff6699'><b><u>{}</u></b></span>";
           };
-        };
-        "mpd" = {
-          "max-length" = 25;
-          "format" = "<span foreground='#bb9af7' font='18'></span> {title}";
-          "format-paused" = " {title}";
-          "format-stopped" = "<span foreground='#bb9af7'></span>";
-          "format-disconnected" = "";
-          "on-click" = "mpc --quiet toggle";
-          "on-click-right" = "mpc update; mpc ls | mpc add";
-          "on-click-middle" = "kitty --class='ncmpcpp' ncmpcpp ";
-          "on-scroll-up" = "mpc --quiet prev";
-          "on-scroll-down" = "mpc --quiet next";
-          "smooth-scrolling-threshold" = 5;
-          "tooltip-format" = "{title} - {artist} ({elapsedTime:%M:%S}/{totalTime:%H:%M:%S})";
         };
         "network" = {
           "interval" = 1;
