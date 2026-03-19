@@ -168,6 +168,7 @@
         };
         "hyprland/workspaces" = {
           "format" = "{icon}";
+          "all-outputs" = true;
           "move-to-monitor" = true;
           "on-scroll-up" = "hyprctl dispatch workspace e+1";
           "on-scroll-down" = "hyprctl dispatch workspace e-1";
