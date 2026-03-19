@@ -10,8 +10,8 @@
   wayland.windowManager.hyprland = {
     settings = {
 
-      exec-once = [
-        "waybar --config ~/.config/waybar/config &"
+      exec = [
+        "pgrep waybar >/dev/null || waybar --config ~/.config/waybar/config &"
       ];
 
     };
@@ -136,7 +136,7 @@
       #tray {
               padding-right: 8px;
               padding-left: 10px;
-              color: rgb(60, 60, 90);
+              background-color: rgb(181, 232, 224);
             }
       #custom-cava-internal{
               font-family: "0xProto Nerd Font Mono" ;
@@ -221,8 +221,8 @@
             "󰂁"
             "󰂂"
           ];
-          "format-full" = "<span font='18'>{icon}</span> {capacity}%";
-          "format-charging" = "<span font='18'>󱐋</span> {capacity}%";
+          "format-full" = "<span font='18'>󰂄</span> {capacity}%";
+          "format-charging" = "<span font='18'>󰂅</span> {capacity}%";
           "tooltip" = true;
           "tooltip-format" = "{time}";
         };
@@ -237,9 +237,9 @@
         };
         "network" = {
           "interval" = 1;
-          "format-wifi" = "<span font='18'>󰌗</span> {essid}";
-          "format-ethernet" = "<span font='18'>󰌗</span> {ifname} ({ipaddr})";
-          "format-linked" = "<span font='18'>󰤩</span> {essid} (No IP)";
+          "format-wifi" = "<span font='18'>󰤨</span> {essid}";
+          "format-ethernet" = "<span font='18'></span> {ifname} ({ipaddr})";
+          "format-linked" = "<span font='18'>󰤫</span> {essid} (No IP)";
           "format-disconnected" = "<span font='18'>󰤮</span> Disconnected";
           "tooltip" = false;
           "on-click" = "";
@@ -252,7 +252,7 @@
           "hwmon-path" = "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon6/temp1_input";
           "critical-threshold" = 80;
           "tooltip" = false;
-          "format" = "<span font='17'></span> {temperatureC}°C";
+          "format" = "<span font='17'></span> {temperatureC}°C";
         };
         "memory" = {
           "interval" = 5;
@@ -264,7 +264,7 @@
         "custom/gpu" = {
           "exec" =
             "cat /sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/0000:02:00.0/0000:03:00.0/hwmon/hwmon0/device/gpu_busy_percent";
-          "format" = "<span font='17'>󰘚</span> {}%";
+          "format" = "<span font='17'></span> {}%";
           "return-type" = "";
           "interval" = 5;
         };
@@ -273,7 +273,7 @@
             "/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/0000:02:00.0/0000:03:00.0/hwmon/hwmon0/temp1_input";
           "critical-threshold" = 90;
           "tooltip" = false;
-          "format" = "<span font='17'></span> {temperatureC}°C";
+          "format" = "<span font='17'></span> {temperatureC}°C";
         };
         "custom/powermenu" = {
           "format" = "󰐥";
