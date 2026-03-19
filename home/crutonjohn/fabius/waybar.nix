@@ -136,7 +136,7 @@
       #tray {
               padding-right: 8px;
               padding-left: 10px;
-              color: rgb(60 60 90);
+              color: rgb(60, 60, 90);
             }
       #custom-cava-internal{
               font-family: "0xProto Nerd Font Mono" ;
