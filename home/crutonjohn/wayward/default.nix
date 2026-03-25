@@ -12,12 +12,4 @@
     ./waybar.nix
   ];
 
-  # Syncthing
-  services.syncthing = {
-    enable = false;
-    tray = {
-      enable = true;
-    };
-  };
-
 }

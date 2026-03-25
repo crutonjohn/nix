@@ -23,7 +23,7 @@
 
   services = {
     desktopManager.plasma6 = {
-      enable = true;
+      enable = false;
     };
   };
 

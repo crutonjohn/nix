@@ -1,5 +1,16 @@
 { ... }:
 {
+
+  wayland.windowManager.hyprland = {
+    settings = {
+
+      exec = [
+        "kanshictl reload"
+      ];
+
+    };
+  };
+
   services.kanshi = {
     enable = true;
     settings = [
