@@ -4,7 +4,7 @@
   imports = [
     ./gaming.nix
     ./network-manager.nix
-    ./programs.nix
+    ./packages.nix
     ./terminal.nix
     ./utils.nix
     ./vscode.nix

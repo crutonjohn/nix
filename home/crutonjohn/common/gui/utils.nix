@@ -1,35 +1,20 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
 
   home.packages = with pkgs; [
     appimage-run
-    at-spi2-atk
-    bitwarden-desktop
-    brightnessctl
-    bewcloud-client
-    catimg
+    dmenu
+    easyeffects
     font-manager
     galculator
-    gimp
     helvum
-    imagemagick
-    lychee-slicer
-    mqttui
-    neofetch
-    openscad
-    pamixer
+    networkmanager_dmenu
     pavucontrol
-    pixman
+    pixelflasher
     pog
     pulsemixer
     rpi-imager
-    signal-desktop
-    feishin
     virt-manager
-    alacritty
-    easyeffects
-    telegram-desktop
-    vlc
   ];
 
 }
