@@ -17,7 +17,7 @@
       primary = true;
       width = 3840;
       height = 2160;
-      refreshRate = 143.99899;
+      refreshRate = 239.99;
       hdr = false;
       vrr = false;
     }
@@ -104,8 +104,8 @@
   xdg.desktopEntries = {
     steam = lib.mkDefault {
       name = "Steam";
-      comment = "Steam Big Picture (Gamescope Session)";
-      exec = "${lib.getExe config.play.wrappers.steam-gamescope.wrappedPackage}";
+      comment = "Steam (Regular Client)";
+      exec = "${lib.getExe osConfig.programs.steam.package}";
       icon = "steam";
       type = "Application";
       terminal = false;
@@ -123,8 +123,8 @@
       };
       actions = {
         client = {
-          name = "Steam Client (No Gamescope)";
-          exec = "${lib.getExe osConfig.programs.steam.package}";
+          name = "Steam Big Picture (Gamescope Session)";
+          exec = "${lib.getExe config.play.wrappers.steam-gamescope.wrappedPackage}";
         };
         steamdeck = {
           name = "Steam Deck (Gamescope)";
