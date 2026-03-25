@@ -2,6 +2,7 @@
 {
 
   imports = [
+    ../common/hyprland/binds.nix
     ../common/hyprland/hypridle.nix
     ../common/hyprland/hyprlock.nix
     ../common/hyprland/wofi.nix
