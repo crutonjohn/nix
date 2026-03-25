@@ -48,7 +48,7 @@
             fix_mouse = true
             vkfix-app = cs2, 2560, 1440
       }
-      gesture = 3, horizontal, workspace
+      gesture = 3, vertical, workspace
     '';
   };
 }
