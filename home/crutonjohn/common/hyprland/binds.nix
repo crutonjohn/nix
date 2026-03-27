@@ -9,7 +9,7 @@
       bind = [
         # Launchers & System
         "SUPER,RETURN,exec,alacritty"
-        "SUPER,SPACE,exec,wofi -S drun"
+        "SUPER,SPACE,exec,wofi -S drun --allow-images"
         ''SUPER_SHIFT,Return,exec,alacritty --class="termfloat"''
         "SUPER_SHIFT,R,exec,hyprctl reload && pkill -l USR2 waybar"
         "SUPER_SHIFT,Escape,exit,"
@@ -96,8 +96,6 @@
         "SUPER,slash,workspace,previous"
 
         # App shortcuts
-        "SUPER,B,exec,floorp"
-        "SUPER SHIFT,X,exec,myswaylock"
         ",Print,exec,grimblast --notify --cursor copy screen ~/Pictures/$(date '+%Y-%m-%dT%H:%M:%S_no_watermark').png"
         "SHIFT,Print,exec,grimblast --notify copy area"
         "SUPER:,Super_L,exec,bash ~/.config/rofi/powermenu.sh"
