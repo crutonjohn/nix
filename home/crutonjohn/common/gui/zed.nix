@@ -13,6 +13,17 @@
       "tmux"
       "toml"
       "yaml"
+      "helm"
+      "kagimcp"
+      "jq"
+      "lua"
+      "fish"
+      "dockerfile"
+      "docker-compose"
+      "go-snippets"
+      "gosum"
+      "gotmpl"
+      "rose-pine-theme"
     ];
     extraPackages = [
       pkgs.nixd

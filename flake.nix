@@ -156,6 +156,9 @@
                   home-manager = {
                     useUserPackages = true;
                     useGlobalPkgs = true;
+                    sharedModules = [
+                      inputs.sops-nix.homeManagerModules.sops
+                    ];
                     extraSpecialArgs = { inherit inputs hostname system; };
                   };
                 }
