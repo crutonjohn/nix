@@ -15,8 +15,9 @@
       "yaml"
     ];
     extraPackages = [
-      pkgs.nil
+      pkgs.nixd
       pkgs.nixfmt
+      pkgs.nixfmt-tree
     ];
     userSettings = {
       "tab_size" = 2;
@@ -37,31 +38,26 @@
       "language_models" = {
         "ollama" = {
           "api_url" = "http://192.168.142.17:11434";
-          "low_speed_timeout_in_seconds" = 120;
           "available_models" = [
             {
-              "provider" = "ollama";
               "name" = "qwen2.5-coder:14b";
               "display_name" = "Qwen 2.5 Coder 14b";
               "max_tokens" = 33000;
               "keep_alive" = "10m";
             }
             {
-              "provider" = "ollama";
               "name" = "codegemma:7b";
               "display_name" = "Code Gemma 7b";
               "max_tokens" = 33000;
               "keep_alive" = "10m";
             }
             {
-              "provider" = "ollama";
               "name" = "qwen3.5:2b";
               "display_name" = "Qwen 2b";
               "max_tokens" = 33000;
               "keep_alive" = "10m";
             }
             {
-              "provider" = "ollama";
               "name" = "qwen3.5:9b";
               "display_name" = "Qwen 9b";
               "max_tokens" = 33000;
@@ -73,8 +69,8 @@
       "languages" = {
         "Nix" = {
           "language_servers" = [
-            "nil"
-            "!nixd"
+            "!nil"
+            "nixd"
           ];
           "tab_size" = 2;
           "formatter" = {
@@ -89,10 +85,29 @@
         };
       };
       "lsp" = {
-        "nil" = {
+        "nixd" = {
           "initialization_options" = {
+            "nixpkgs" = {
+              "expr" = "import <nixpkgs> { }";
+            };
             "formatting" = {
               "command" = [ "nixfmt" ];
+            };
+            "options" = {
+              "nixos" = {
+                "expr" = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.<name>.options";
+              };
+              "home-manager" = {
+                "expr" =
+                  "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.<name>.options.home-manager.users.type.getSubOptions []";
+              };
+              "play" = {
+                "expr" = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.<name>.options.play []";
+              };
+            };
+            "diagnostic" = {
+              "suppress" = [
+              ];
             };
           };
         };
@@ -103,7 +118,7 @@
         label = "Format Nix";
         command = "nix";
         args = [
-          "nixfmt"
+          "nixfmt-tree"
           "$ZED_WORKTREE_ROOT"
         ];
       }

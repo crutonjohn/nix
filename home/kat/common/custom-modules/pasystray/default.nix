@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 
@@ -17,12 +22,19 @@ with lib;
         PartOf = [ "graphical-session.target" ];
       };
 
-      Install = { WantedBy = [ "graphical-session.target" ]; };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
 
       Service = {
         Environment =
-          let toolPaths = makeBinPath [ pkgs.paprefs pkgs.pavucontrol ];
-          in [ "PATH=${toolPaths}" ];
+          let
+            toolPaths = makeBinPath [
+              pkgs.paprefs
+              pkgs.pavucontrol
+            ];
+          in
+          [ "PATH=${toolPaths}" ];
         ExecStart = "${pkgs.pasystray}/bin/pasystray";
       };
     };

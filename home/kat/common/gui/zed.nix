@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   programs.zed-editor = {
     enable = true;
     #package = pkgs.vscode;
@@ -42,12 +43,18 @@
       };
       "languages" = {
         "Nix" = {
-          "language_servers" = [ "nil" "!nixd" ];
+          "language_servers" = [
+            "nil"
+            "!nixd"
+          ];
           "tab_size" = 2;
           "formatter" = {
             "external" = {
               "command" = "nixfmt";
-              "arguments" = [ "--quiet" "--" ];
+              "arguments" = [
+                "--quiet"
+                "--"
+              ];
             };
           };
         };
@@ -55,11 +62,19 @@
       "lsp" = {
         "nil" = {
           "initialization_options" = {
-            "formatting" = { "command" = [ "nixfmt" ]; };
+            "formatting" = {
+              "command" = [ "nixfmt" ];
+            };
           };
         };
       };
     };
-    extensions = [ "nix" "latex" "make" "tmux" "toml" ];
+    extensions = [
+      "nix"
+      "latex"
+      "make"
+      "tmux"
+      "toml"
+    ];
   };
 }

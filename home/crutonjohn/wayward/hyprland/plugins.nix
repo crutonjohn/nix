@@ -4,7 +4,6 @@
   imports = [
   ];
 
-
   wayland.windowManager.hyprland = {
     plugins = [
       # https://github.com/KZDKM/Hyprspace

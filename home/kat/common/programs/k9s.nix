@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
 
   # programs.k9s.plugin = {
   #   toggle-helmrelease = {
@@ -8,7 +9,7 @@
   #     description = "Toggle to suspend or resume a HelmRelease";
   #     command = "${pkgs.bash}/bin/bash";
   #     background = false;
-  #     args = [ 
+  #     args = [
   #       "-c"
   #       ''
   #         suspended=$(kubectl --context $CONTEXT get helmreleases -n $NAMESPACE $NAME -o=custom-columns=TYPE:.spec.suspend | tail -1);
@@ -18,7 +19,7 @@
   #         --context $CONTEXT
   #         -n $NAMESPACE $NAME
   #         | less -K
-  #       ''   
+  #       ''
   #     ];
   #   };
   # };

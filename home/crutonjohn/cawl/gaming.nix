@@ -1,17 +1,27 @@
-{ config, osConfig, lib, pkgs, inputs, ... }: {
+{
+  config,
+  osConfig,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+{
 
   imports = [ inputs.play-nix.homeManagerModules.play ];
 
   # Configure monitors for automatic gamescope settings
-  monitors = [{
-    name = "DP-1";
-    primary = true;
-    width = 5120;
-    height = 1440;
-    refreshRate = 239.76;
-    hdr = false;
-    vrr = false;
-  }];
+  monitors = [
+    {
+      name = "DP-1";
+      primary = true;
+      width = 5120;
+      height = 1440;
+      refreshRate = 239.76;
+      hdr = false;
+      vrr = false;
+    }
+  ];
 
   play = {
 
@@ -31,7 +41,9 @@
       };
 
       # Optional: Override environment variables
-      environment = { CUSTOM_VAR = "value"; };
+      environment = {
+        CUSTOM_VAR = "value";
+      };
     };
 
     # Create application wrappers
@@ -63,16 +75,19 @@
 
       lutris-gamescope = {
         enable = true;
-        package =
-          osConfig.play.lutris.package; # play.nix provides readonly packages
+        package = osConfig.play.lutris.package; # play.nix provides readonly packages
 
         # Per-wrapper configuration
         useHDR = false; # Override: disable HDR for Lutris
         useWSI = null; # Override: ensure WSI is enabled
         useSystemd = null; # Use global defaultSystemd setting
 
-        extraOptions = { "force-windows-fullscreen" = true; };
-        environment = { LUTRIS_SKIP_INIT = 1; };
+        extraOptions = {
+          "force-windows-fullscreen" = true;
+        };
+        environment = {
+          LUTRIS_SKIP_INIT = 1;
+        };
       };
 
       heroic-gamescope = {
@@ -90,13 +105,15 @@
     steam = lib.mkDefault {
       name = "Steam";
       comment = "Steam Big Picture (Gamescope Session)";
-      exec =
-        "${lib.getExe config.play.wrappers.steam-gamescope.wrappedPackage}";
+      exec = "${lib.getExe config.play.wrappers.steam-gamescope.wrappedPackage}";
       icon = "steam";
       type = "Application";
       terminal = false;
       categories = [ "Game" ];
-      mimeType = [ "x-scheme-handler/steam" "x-scheme-handler/steamlink" ];
+      mimeType = [
+        "x-scheme-handler/steam"
+        "x-scheme-handler/steamlink"
+      ];
       settings = {
         StartupNotify = "true";
         StartupWMClass = "Steam";
@@ -111,17 +128,14 @@
         };
         steamdeck = {
           name = "Steam Deck (Gamescope)";
-          exec = "${
-              lib.getExe config.play.wrappers.steam-gamescope.wrappedPackage
-            } -steamdeck -steamos3";
+          exec = "${lib.getExe config.play.wrappers.steam-gamescope.wrappedPackage} -steamdeck -steamos3";
         };
       };
     };
 
     heroic = {
       name = "Heroic (Gamescope)";
-      exec =
-        "${lib.getExe config.play.wrappers.heroic-gamescope.wrappedPackage}";
+      exec = "${lib.getExe config.play.wrappers.heroic-gamescope.wrappedPackage}";
       icon = "com.heroicgameslauncher.hgl";
       type = "Application";
       categories = [ "Game" ];

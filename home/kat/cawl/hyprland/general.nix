@@ -4,7 +4,6 @@
   imports = [
   ];
 
-
   wayland.windowManager.hyprland = {
     settings = {
       general = {

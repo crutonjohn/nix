@@ -21,7 +21,7 @@
     };
     zzsteam = {
       name = "Steam With VGUI";
-      genericName = "Valve'Video Game Monopoly";
+      genericName = "Fake Steam";
       exec = "steam -vgui";
       terminal = false;
       categories = [ "Application" ];

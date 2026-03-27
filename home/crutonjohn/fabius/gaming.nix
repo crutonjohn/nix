@@ -121,16 +121,6 @@
         X-KDE-RunOnDiscreteGpu = "true";
         Keywords = "gaming;";
       };
-      actions = {
-        client = {
-          name = "Steam Big Picture (Gamescope Session)";
-          exec = "${lib.getExe config.play.wrappers.steam-gamescope.wrappedPackage}";
-        };
-        steamdeck = {
-          name = "Steam Deck (Gamescope)";
-          exec = "${lib.getExe config.play.wrappers.steam-gamescope.wrappedPackage} -steamdeck -steamos3";
-        };
-      };
     };
 
     heroic = {

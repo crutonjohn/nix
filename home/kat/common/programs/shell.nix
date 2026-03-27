@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
 
   programs.fzf = {
     enable = true;
@@ -9,7 +10,9 @@
     enable = true;
     enableFishIntegration = true;
     settings = {
-      log = { enabled = false; };
+      log = {
+        enabled = false;
+      };
       manager = {
         show_hidden = true;
         sort_by = "natural";
@@ -28,10 +31,14 @@
 
   programs.direnv = {
     enable = true;
-    nix-direnv = { enable = true; };
+    nix-direnv = {
+      enable = true;
+    };
   };
 
-  programs.eza = { enable = true; };
+  programs.eza = {
+    enable = true;
+  };
 
   programs.bat = {
     enable = true;
@@ -67,9 +74,11 @@
         "$character"
       ];
       scan_timeout = 10;
-      battery.display = [{
-        threshold = 15; # display battery information if charge is <= 15%
-      }];
+      battery.display = [
+        {
+          threshold = 15; # display battery information if charge is <= 15%
+        }
+      ];
       nix_shell = {
         symbol = "nix";
         format = "[<$symbol> ]($style)";
@@ -127,10 +136,15 @@
         ssh_only = true;
         ssh_symbol = "";
         format = "[$ssh_symbol](cyan bold) @ [$hostname](green bold) ";
-        detect_env_vars = [ "!TMUX" "SSH_CONNECTION" ];
+        detect_env_vars = [
+          "!TMUX"
+          "SSH_CONNECTION"
+        ];
         disabled = false;
       };
-      kubernetes = { disabled = false; };
+      kubernetes = {
+        disabled = false;
+      };
     };
   };
 
