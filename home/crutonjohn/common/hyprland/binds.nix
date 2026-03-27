@@ -9,7 +9,6 @@
       bind = [
         # Launchers & System
         "SUPER,RETURN,exec,alacritty"
-        "SUPER,SPACE,exec,wofi -S drun --allow-images"
         ''SUPER_SHIFT,Return,exec,alacritty --class="termfloat"''
         "SUPER_SHIFT,R,exec,hyprctl reload && pkill -l USR2 waybar"
         "SUPER_SHIFT,Escape,exit,"
