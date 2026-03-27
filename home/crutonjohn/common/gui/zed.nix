@@ -1,9 +1,23 @@
-{ ... }: {
+{ pkgs, ... }:
+{
   programs.zed-editor = {
     enable = true;
     #package = pkgs.vscode;
     # themes = { "Ayu Dark" };
+    enableMcpIntegration = true;
     installRemoteServer = true;
+    extensions = [
+      "nix"
+      "latex"
+      "make"
+      "tmux"
+      "toml"
+      "yaml"
+    ];
+    extraPackages = [
+      pkgs.nil
+      pkgs.nixfmt
+    ];
     userSettings = {
       "tab_size" = 2;
       "agent" = {
@@ -12,7 +26,9 @@
           "provider" = "ollama";
           "model" = "codegemma:7b";
         };
-        "version" = "2";
+      };
+      "telemetry" = {
+        "metrics" = false;
       };
       "theme" = "Ayu Dark";
       "ui_font_size" = 16;
@@ -26,14 +42,28 @@
             {
               "provider" = "ollama";
               "name" = "qwen2.5-coder:14b";
-              "display_name" = "Qwen Coder";
+              "display_name" = "Qwen 2.5 Coder 14b";
               "max_tokens" = 33000;
               "keep_alive" = "10m";
             }
             {
               "provider" = "ollama";
               "name" = "codegemma:7b";
-              "display_name" = "Code Gemma";
+              "display_name" = "Code Gemma 7b";
+              "max_tokens" = 33000;
+              "keep_alive" = "10m";
+            }
+            {
+              "provider" = "ollama";
+              "name" = "qwen3.5:2b";
+              "display_name" = "Qwen 2b";
+              "max_tokens" = 33000;
+              "keep_alive" = "10m";
+            }
+            {
+              "provider" = "ollama";
+              "name" = "qwen3.5:9b";
+              "display_name" = "Qwen 9b";
               "max_tokens" = 33000;
               "keep_alive" = "10m";
             }
@@ -42,12 +72,18 @@
       };
       "languages" = {
         "Nix" = {
-          "language_servers" = [ "nil" "!nixd" ];
+          "language_servers" = [
+            "nil"
+            "!nixd"
+          ];
           "tab_size" = 2;
           "formatter" = {
             "external" = {
               "command" = "nixfmt";
-              "arguments" = [ "--quiet" "--" ];
+              "arguments" = [
+                "--quiet"
+                "--"
+              ];
             };
           };
         };
@@ -55,11 +91,22 @@
       "lsp" = {
         "nil" = {
           "initialization_options" = {
-            "formatting" = { "command" = [ "nixfmt" ]; };
+            "formatting" = {
+              "command" = [ "nixfmt" ];
+            };
           };
         };
       };
     };
-    extensions = [ "nix" "latex" "make" "tmux" "toml" ];
+    userTasks = [
+      {
+        label = "Format Nix";
+        command = "nix";
+        args = [
+          "nixfmt"
+          "$ZED_WORKTREE_ROOT"
+        ];
+      }
+    ];
   };
 }
