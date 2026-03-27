@@ -11,11 +11,11 @@
   };
 
   wayland.windowManager.hyprland = {
-    exec-once = {
-      "wl-paste --type text --watch cliphist store"
-      "wl-paste --type image --watch cliphist store"
-    };
     settings = {
+      exec-once = [
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
+      ];
       bind = [
         "SUPER, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
       ];
