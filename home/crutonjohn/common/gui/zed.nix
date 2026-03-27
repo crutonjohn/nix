@@ -4,7 +4,7 @@
     enable = true;
     #package = pkgs.vscode;
     # themes = { "Ayu Dark" };
-    enableMcpIntegration = true;
+    # enableMcpIntegration = true;
     installRemoteServer = true;
     extensions = [
       "nix"
