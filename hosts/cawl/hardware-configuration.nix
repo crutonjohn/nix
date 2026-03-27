@@ -35,6 +35,10 @@
   fileSystems."/home/kat/idontcare" = {
     device = "/dev/disk/by-uuid/5fff62be-4084-4cde-b810-c7c58519d65f";
     fsType = "ext4";
+    options = [
+      "uid=kat"
+      "gid=users"
+    ];
   };
 
   fileSystems."/boot" = {
