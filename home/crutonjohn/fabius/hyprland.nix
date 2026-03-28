@@ -8,6 +8,7 @@
     ../common/hyprland/wofi.nix
     ../common/hyprland/cursor.nix
     ../common/hyprland/dunst.nix
+    ../common/hyprland/windowrules.nix
     ./hyprland
   ];
 
