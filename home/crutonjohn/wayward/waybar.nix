@@ -19,8 +19,8 @@
     };
     style = ''
       * {
-              font-family: Noto Sans Mono, Material Symbols Sharp;
-              font-size: 12pt;
+              font-family: "0xProto Nerd Font Propo";
+              font-size: 9pt;
               font-weight: bold;
               border-radius: 0px;
               transition-property: background-color;
@@ -46,12 +46,22 @@
               margin-left: 5px;
               margin-right: 5px;
               margin-top: 5px;
-              background-color: rgb(30, 30, 46);
+              background-color: transparent;
             }
       #workspaces {
               padding-left: 0px;
               padding-right: 4px;
             }
+
+      .modules-left,
+      .modules-center,
+      .modules-right {
+              background-color: rgb(30, 30, 46);
+              border-radius: 8px;
+              padding-left: 2px;
+              padding-right: 2px;
+      }
+
       #workspaces button {
               padding-top: 5px;
               padding-bottom: 5px;
@@ -76,20 +86,29 @@
               color: rgb(217, 224, 238);
             }
       #custom-launcher {
-              font-size: 20px;
-              padding-left: 8px;
+              font-size: 14px;
+              padding-left: 4px;
               padding-right: 6px;
               color: #7ebae4;
+              font-family: Hack Nerd Font;
             }
-      #mode, #clock, #memory, #temperature,#cpu,#mpd, #custom-wall, #temperature, #backlight, #pulseaudio, #network, #battery, #custom-powermenu, #custom-cava-internal {
-              padding-left: 10px;
-              padding-right: 10px;
+      #mode,
+      #clock,
+      #memory,
+      #temperature,
+      #cpu,
+      #mpd,
+      #custom-wall
+      #temperature,
+      #backlight,
+      #pulseaudio,
+      #network,
+      #battery,
+      #custom-powermenu,
+      #custom-cava-internal {
+              padding-left: 4px;
+              padding-right: 4px;
             }
-            /* #mode { */
-            /* 	margin-left: 10px; */
-            /* 	background-color: rgb(248, 189, 150); */
-            /*     color: rgb(26, 24, 38); */
-            /* } */
       #memory {
               color: rgb(181, 232, 224);
             }
@@ -98,7 +117,8 @@
             }
       #window {
               color: rgb(245, 224, 220);
-              padding-right: 20px;
+              padding-right: 4px;
+              padding-left: 4px;
             }
       #clock {
               color: rgb(217, 224, 238);
@@ -152,12 +172,10 @@
         "position" = "top";
         modules-left = [
           "custom/launcher"
-          "temperature"
-          "custom/wall"
-          "mpd"
+          "hyprland/window"
+          "mpris"
         ];
         modules-center = [
-          "hyprland/window"
           "clock"
         ];
         modules-right = [
@@ -165,21 +183,26 @@
           "backlight"
           "memory"
           "cpu"
+          "temperature"
           "network"
           "battery"
           "custom/powermenu"
           "tray"
         ];
         "custom/launcher" = {
-          "format" = " ";
+          "format" = "";
           "on-click" = "pkill wofi || wofi -S drun";
           "tooltip" = false;
         };
         "hyprland/window" = {
           "format" = "{}";
           "separate-outputs" = true;
+          "max-length" = 40;
+          "rewrite" = {
+            "(.*) — Zen Browser" = "$1";
+          };
         };
-        "wlr/workspaces" = {
+        "hyprland/workspaces" = {
           "format" = "{icon}";
           "on-click" = "activate";
           # "on-scroll-up" = "hyprctl dispatch workspace e+1";
@@ -189,23 +212,29 @@
           "device" = "intel_backlight";
           "on-scroll-up" = "light -A 5";
           "on-scroll-down" = "light -U 5";
-          "format" = "{icon} {percent}%";
+          "format" = "{icon}{percent}%";
           "format-icons" = [
-            ""
-            ""
-            ""
-            ""
+            "󱩎"
+            "󱩏"
+            "󱩐"
+            "󱩑"
+            "󱩒"
+            "󱩓"
+            "󱩔"
+            "󱩕"
+            "󱩖"
+            "󰛨"
           ];
         };
         "pulseaudio" = {
           "scroll-step" = 1;
-          "format" = "{icon} {volume}%";
-          "format-muted" = " Muted";
+          "format" = "{icon}{volume}%";
+          "format-muted" = "Muted";
           "format-icons" = {
             "default" = [
-              ""
-              ""
-              ""
+              ""
+              ""
+              ""
             ];
           };
           # "states" = {
@@ -214,80 +243,82 @@
           "on-click" = "pavucontrol -t 4";
           "tooltip" = false;
         };
+        "mpris" = {
+          "format" = "{player_icon}{status_icon} {dynamic}";
+          "dynamic-order" = [
+            "title"
+            "artist"
+          ];
+          "player-icons" = {
+            "subtui" = "";
+          };
+          "status-icons" = {
+            "playing" = "";
+            "paused" = "";
+            "stopped" = "";
+          };
+        };
         "battery" = {
           "interval" = 10;
           "states" = {
             "warning" = 20;
             "critical" = 10;
           };
-          "format" = "{icon} {capacity}%";
+          "format" = "{icon}{capacity}%";
           "full-at" = 90;
           "format-icons" = [
-            ""
-            ""
-            ""
-            ""
-            ""
-            ""
+            "󰁺"
+            "󰁻"
+            "󰁼"
+            "󰁽"
+            "󰁾"
+            "󰁿"
+            "󰂀"
+            "󰂁"
+            "󰂂"
           ];
-          "format-full" = "{icon} {capacity}%";
-          "format-charging" = " {capacity}%";
+          "format-full" = "󰁹{capacity}%";
+          "format-charging" = "󰂄{capacity}%";
           "tooltip" = true;
-          "tooltip-format" = "{time}";
+          "tooltip-format" = "{timeTo}";
         };
         "clock" = {
           "interval" = 1;
-          "format" = "{:%I:%M %p  %A %b %d}";
+          "format" = "{:%R %a%b%d}";
           "tooltip" = true;
           "tooltip-format" = "\n<tt>{calendar}</tt>";
         };
         "memory" = {
           "interval" = 1;
-          "format" = " {percentage}%";
+          "format" = "{percentage}%";
           "states" = {
             "warning" = 85;
           };
         };
         "cpu" = {
           "interval" = 1;
-          "format" = " {usage}%";
-        };
-        "mpd" = {
-          "max-length" = 25;
-          "format" = "<span foreground='#bb9af7'></span> {title}";
-          "format-paused" = " {title}";
-          "format-stopped" = "<span foreground='#bb9af7'></span>";
-          "format-disconnected" = "";
-          "on-click" = "mpc --quiet toggle";
-          "on-click-right" = "mpc update; mpc ls | mpc add";
-          "on-click-middle" = "kitty --class='ncmpcpp' ncmpcpp ";
-          "on-scroll-up" = "mpc --quiet prev";
-          "on-scroll-down" = "mpc --quiet next";
-          "smooth-scrolling-threshold" = 5;
-          "tooltip-format" = "{title} - {artist} ({elapsedTime:%M:%S}/{totalTime:%H:%M:%S})";
+          "format" = "{usage}%";
         };
         "network" = {
           "interval" = 1;
-          "format-wifi" = " {essid}";
-          "format-ethernet" = "  {ifname} ({ipaddr})";
-          "format-linked" = " {essid} (No IP)";
-          "format-disconnected" = " Disconnected";
+          "format-wifi" = "󰖩{essid}";
+          "format-ethernet" = "󰈀{ifname} ({ipaddr})";
+          "format-linked" = "󰤩{essid} (No IP)";
+          "format-disconnected" = "󰤮";
           "tooltip" = false;
         };
         "temperature" = {
-          # "hwmon-path"= "${env:HWMON_PATH}";
-          #"critical-threshold"= 80;
           "tooltip" = false;
-          "format" = " {temperatureC}°C";
+          "format" = "{temperatureC}°C";
         };
         "custom/powermenu" = {
-          "format" = "";
+          "format" = "󰐥";
           "on-click" = "pkill wofi || wofi-powermenu";
           "tooltip" = false;
         };
         "tray" = {
-          "icon-size" = 15;
-          "spacing" = 10;
+          "icon-size" = 11;
+          "spacing" = 6;
         };
       }
     ];
