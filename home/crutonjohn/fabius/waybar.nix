@@ -187,6 +187,19 @@
         border-radius: 8px;
       }
 
+      #mpris.paused {
+        color: #414868;
+        font-style: italic;
+      }
+
+      #mpris.stopped {
+        background: transparent;
+      }
+
+      #mpris {
+        color: #c0caf5;
+      }
+
       #custom-cava-internal{
         font-family: "0xProto Nerd Font Propo" ;
       }
