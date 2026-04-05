@@ -26,7 +26,7 @@
     # font-family: 0xProto Nerd Font Mono, Material Symbols Sharp;
     style = ''
       * {
-            font-family: "0xProto Nerd Font Mono";
+            font-family: "0xProto Nerd Font Propo";
             font-size: 12pt;
             font-weight: bold;
             border-radius: 0px;
@@ -53,8 +53,18 @@
               margin-left: 5px;
               margin-right: 5px;
               margin-top: 5px;
-              background-color: rgb(30, 30, 46);
+              background-color: transparent;
             }
+
+      .modules-left,
+      .modules-center,
+      .modules-right {
+              background-color: rgb(30, 30, 46);
+              border-radius: 8px;
+              padding-left: 2px;
+              padding-right: 2px;
+      }
+
       #workspaces {
               padding-left: 0px;
               padding-right: 4px;
@@ -88,15 +98,26 @@
               padding-right: 6px;
               color: #7ebae4;
             }
-      #mode, #clock, #memory, #cpu, #custom-gpu, #mpd, #custom-wall, #temperature.cpu, #temperature.gpu, #backlight, #pulseaudio, #network, #battery, #custom-powermenu, #custom-cava-internal {
-              padding-left: 10px;
-              padding-right: 10px;
+      #mode,
+      #clock,
+      #memory,
+      #temperature,
+      #cpu,
+      #mpd,
+      #custom-wall
+      #temperature,
+      #backlight,
+      #pulseaudio,
+      #network,
+      #battery,
+      #custom-powermenu,
+      #custom-cava-internal {
+              padding-left: 4px;
+              padding-right: 4px;
             }
       #cpu, #custom-gpu, #memory {
-              padding-bottom: 5px;
             }
       #temperature.cpu, #temperature.gpu {
-              padding-top: 5px;
             }
       #memory {
               color: rgb(181, 232, 224);
@@ -118,7 +139,7 @@
               color: rgb(217, 224, 238);
             }
       #network {
-              color: #ABE9B3;
+              color: rgb(171, 233, 179);
             }
 
       #network.disconnected {
@@ -139,7 +160,7 @@
               background-color: rgb(181, 232, 224);
             }
       #custom-cava-internal{
-              font-family: "0xProto Nerd Font Mono" ;
+              font-family: "0xProto Nerd Font Propo" ;
             }
     '';
     settings = [
@@ -150,32 +171,40 @@
         modules-left = [
           "custom/launcher"
           "hyprland/workspaces"
-          #"custom/wall"
+          "hyprland/window"
         ];
         modules-center = [
-          "hyprland/window"
           "clock"
         ];
         modules-right = [
-          "custom/gpu"
-          "temperature#gpu"
-          "memory"
+          "pulseaudio"
+
           "cpu"
           "temperature#cpu"
+
+          "memory"
+
+          "custom/gpu"
+          "temperature#gpu"
+
           "network"
+
           "battery"
-          "pulseaudio"
           "custom/powermenu"
           "tray"
         ];
         "custom/launcher" = {
-          "format" = "<span font='24'></span> ";
-          "on-click" = "pkill wofi || wofi -S drun";
+          "format" = "";
+          "on-click" = "pkill wofi || wofi -S drun --allow-images";
           "tooltip" = false;
         };
         "hyprland/window" = {
-          "format" = "{title}";
+          "format" = "{}";
           "separate-outputs" = true;
+          "max-length" = 40;
+          "rewrite" = {
+            "(.*) — Zen Browser" = "$1";
+          };
         };
         "hyprland/workspaces" = {
           "format" = "{icon}";
@@ -184,10 +213,25 @@
           "on-scroll-up" = "hyprctl dispatch workspace e+1";
           "on-scroll-down" = "hyprctl dispatch workspace e-1";
         };
+        "mpris" = {
+          "format" = "{player_icon}{status_icon} {dynamic}";
+          "dynamic-order" = [
+            "title"
+            "artist"
+          ];
+          "player-icons" = {
+            "subtui" = "";
+          };
+          "status-icons" = {
+            "playing" = "";
+            "paused" = "";
+            "stopped" = "";
+          };
+        };
         "pulseaudio" = {
           "scroll-step" = 1;
-          "format" = "<span font='18'>{icon}</span> {volume}%";
-          "format-muted" = "<span font='18'>󰝟</span> Muted";
+          "format" = "{icon}{volume}%";
+          "format-muted" = "Muted";
           "format-icons" = {
             "default" = [
               ""
@@ -207,10 +251,9 @@
             "warning" = 20;
             "critical" = 10;
           };
-          "format" = "<span font='18'>{icon}</span> {capacity}%";
+          "format" = "{icon}{capacity}%";
           "full-at" = 90;
           "format-icons" = [
-            "󰂎"
             "󰁺"
             "󰁻"
             "󰁼"
@@ -221,14 +264,14 @@
             "󰂁"
             "󰂂"
           ];
-          "format-full" = "<span font='18'>󰂄</span> {capacity}%";
-          "format-charging" = "<span font='18'>󰂅</span> {capacity}%";
+          "format-full" = "󰁹{capacity}%";
+          "format-charging" = "󰂄{capacity}%";
           "tooltip" = true;
-          "tooltip-format" = "{time}";
+          "tooltip-format" = "{timeTo}";
         };
         "clock" = {
           "interval" = 1;
-          "format" = "{:%H:%M  %A %b %d}";
+          "format" = "{:%R %a%b%d}";
           "tooltip" = true;
           "tooltip-format" = "\n<tt><small>{calendar}</small></tt>";
           "calendar" = {
@@ -237,26 +280,25 @@
         };
         "network" = {
           "interval" = 1;
-          "format-wifi" = "<span font='18'>󰤨</span> {essid}";
-          "format-ethernet" = "<span font='18'></span> {ifname} ({ipaddr})";
-          "format-linked" = "<span font='18'>󰤫</span> {essid} (No IP)";
-          "format-disconnected" = "<span font='18'>󰤮</span> Disconnected";
+          "format-wifi" = "󰖩{essid}";
+          "format-ethernet" = "󰈀{ifname} ({ipaddr})";
+          "format-linked" = "󰤩{essid} (No IP)";
+          "format-disconnected" = "󰤮";
           "tooltip" = false;
-          "on-click" = "";
         };
         "cpu" = {
           "interval" = 5;
-          "format" = "<span font='18'></span> {usage}%";
+          "format" = "{usage}%";
         };
         "temperature#cpu" = {
           "hwmon-path" = "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon6/temp1_input";
           "critical-threshold" = 80;
           "tooltip" = false;
-          "format" = "<span font='17'></span> {temperatureC}°C";
+          "format" = "{temperatureC}°C";
         };
         "memory" = {
-          "interval" = 5;
-          "format" = "<span font='18'></span> {percentage}%";
+          "interval" = 1;
+          "format" = "{percentage}%";
           "states" = {
             "warning" = 85;
           };
@@ -264,20 +306,20 @@
         "custom/gpu" = {
           "exec" =
             "cat /sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/0000:02:00.0/0000:03:00.0/hwmon/hwmon0/device/gpu_busy_percent";
-          "format" = "<span font='17'></span> {}%";
+          "format" = "{}%";
           "return-type" = "";
-          "interval" = 5;
+          "interval" = 2;
         };
         "temperature#gpu" = {
           "hwmon-path" =
             "/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/0000:02:00.0/0000:03:00.0/hwmon/hwmon0/temp1_input";
           "critical-threshold" = 90;
           "tooltip" = false;
-          "format" = "<span font='17'></span> {temperatureC}°C";
+          "format" = "{temperatureC}°C";
         };
         "custom/powermenu" = {
           "format" = "󰐥";
-          "on-click" = "pkill wofi-powermenu || wofi-powermenu";
+          "on-click" = "pkill wofi || wofi-powermenu";
           "tooltip" = false;
         };
         "tray" = {
