@@ -1593,6 +1593,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_11": {
+      "locked": {
+        "lastModified": 1768564909,
+        "narHash": "sha256-Kell/SpJYVkHWMvnhqJz/8DqQg2b6PguxVWOuadbHCc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "e4bae1bd10c9c57b2cf517953ab70060a828ee6f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1761313199,
@@ -1934,6 +1950,7 @@
         "play-nix": "play-nix",
         "rose-pine-hyprcursor": "rose-pine-hyprcursor",
         "sops-nix": "sops-nix",
+        "subtui": "subtui",
         "utils": "utils_2"
       }
     },
@@ -2040,6 +2057,25 @@
         "owner": "Mic92",
         "repo": "sops-nix",
         "rev": "8e873886bbfc32163fe027b8676c75637b7da114",
+        "type": "github"
+      }
+    },
+    "subtui": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_11"
+      },
+      "locked": {
+        "lastModified": 1774517751,
+        "narHash": "sha256-0qJalH7kGtuZvoi+aYtBskFSbx6Cue875dxFgiMhKb4=",
+        "owner": "MattiaPun",
+        "repo": "SubTUI",
+        "rev": "7e5dd680afc7caee9c73052d73afd3503b2190fb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MattiaPun",
+        "ref": "v2.13.1",
+        "repo": "SubTUI",
         "type": "github"
       }
     },

@@ -91,5 +91,6 @@
     };
   };
 
+  services.upower.enable = true;
   services.ceph.client.enable = true;
 }

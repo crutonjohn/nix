@@ -96,6 +96,8 @@
     compose2nix.url = "github:aksiksi/compose2nix/v0.3.1";
     compose2nix.inputs.nixpkgs.follows = "nixpkgs";
 
+    subtui.url = "github:MattiaPun/SubTUI/v2.13.1";
+
   };
 
   outputs =

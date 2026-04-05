@@ -1,4 +1,10 @@
-{ config, pkgs, inputs, lib, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 
 {
 
@@ -9,9 +15,9 @@
 
   environment = {
     systemPackages = with pkgs; [
-      inputs.hypr-contrib.packages.${pkgs.system}.grimblast
-      inputs.hyprpicker.packages.${pkgs.system}.hyprpicker
-      inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+      inputs.hypr-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
+      inputs.hyprpicker.packages.${pkgs.stdenv.hostPlatform.system}.hyprpicker
+      inputs.rose-pine-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default
       libnotify
       libinput
       wl-clipboard
@@ -51,7 +57,9 @@
     ];
   };
 
-  services.xserver = { xkb.options = "caps:escape"; };
+  services.xserver = {
+    xkb.options = "caps:escape";
+  };
 
   console.useXkbConfig = true;
 

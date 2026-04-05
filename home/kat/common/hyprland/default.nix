@@ -27,8 +27,8 @@
     hyprpaper
     imagemagick
     inputs.compose2nix.packages.x86_64-linux.default
-    inputs.hypr-contrib.packages.${pkgs.system}.grimblast
-    inputs.hyprpicker.packages.${pkgs.system}.hyprpicker
+    inputs.hypr-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
+    inputs.hyprpicker.packages.${pkgs.stdenv.hostPlatform.system}.hyprpicker
     jdk11
     kanshi
     lapce

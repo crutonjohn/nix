@@ -3,8 +3,8 @@
 
   home.packages = with pkgs; [
     hyprpaper
-    inputs.hypr-contrib.packages.${pkgs.system}.grimblast
-    inputs.hyprpicker.packages.${pkgs.system}.hyprpicker
+    inputs.hypr-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
+    inputs.hyprpicker.packages.${pkgs.stdenv.hostPlatform.system}.hyprpicker
     waybar
     wdisplays
     wev

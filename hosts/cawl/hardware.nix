@@ -126,4 +126,11 @@
     };
   };
 
+  hardware.openrazer = {
+    enable = true;
+    users = [
+      "kat"
+    ];
+  };
+
 }

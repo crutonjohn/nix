@@ -13,6 +13,9 @@
     ./vm-hook.nix
     ./loader.nix
     ./networking.nix
+    # disabled until https://github.com/networkupstools/nut/issues/3119 probably
+    # ./sops.nix
+    # ./ups.nix
     ./virtualization.nix
     ./vm-hook.nix
     ./gaming.nix

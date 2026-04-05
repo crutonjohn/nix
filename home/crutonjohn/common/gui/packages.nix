@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
 
   home.packages = with pkgs; [
@@ -12,6 +12,8 @@
     signal-desktop
     telegram-desktop
     vlc
+    mpv
+    inputs.subtui.packages.${pkgs.stdenv.hostPlatform.system}.subtui
   ];
 
 }
