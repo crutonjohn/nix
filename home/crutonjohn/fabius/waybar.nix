@@ -213,6 +213,7 @@
           "custom/launcher"
           "hyprland/workspaces"
           "hyprland/window"
+          "mpris"
         ];
         modules-center = [
           "clock"
