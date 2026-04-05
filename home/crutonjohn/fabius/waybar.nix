@@ -116,7 +116,7 @@
       #memory,
       #temperature,
       #cpu,
-      #mpd,
+      #mpris,
       #custom-wall
       #temperature,
       #backlight,
@@ -242,19 +242,22 @@
           "on-scroll-down" = "hyprctl dispatch workspace e-1";
         };
         "mpris" = {
-          "format" = "{player_icon}{status_icon} {dynamic}";
+          "format" = "{player_icon} {status_icon}";
+          "tooltip-format" = "Status::{status}\nSource::{player}\nTitle::{dynamic}";
           "dynamic-order" = [
             "title"
             "artist"
           ];
           "player-icons" = {
             "subtui" = "";
+            "firefox" = "";
           };
           "status-icons" = {
             "playing" = "";
             "paused" = "";
             "stopped" = "";
           };
+          # "ignored-players" = [ "firefox" ];
         };
         "pulseaudio" = {
           "scroll-step" = 1;
