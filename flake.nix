@@ -116,10 +116,10 @@
       ...
     }@inputs:
     let
-      forAllSystems = nixpkgs.lib.genAttrs [
-        "aarch64-linux"
-        "x86_64-linux"
-      ];
+      # forAllSystems = nixpkgs.lib.genAttrs [
+      #   "aarch64-linux"
+      #   "x86_64-linux"
+      # ];
 
       # expose overlays as flake outputs
       overlays = import ./overlays { inherit inputs; };
@@ -127,7 +127,9 @@
     in
     {
       # Use nixpkgs-fmt for 'nix fmt'
-      formatter = forAllSystems (system: nixpkgs.legacyPackages."${system}".nixpkgs-fmt);
+      # formatter = forAllSystems (
+      #   system: nixpkgs.legacyPackages."${stdenv.hostPlatform.system}".nixpkgs-fmt
+      # );
 
       # setup devshells against shell.nix
       # devShells = forAllSystems (pkgs: import ./shell.nix { inherit pkgs; });
