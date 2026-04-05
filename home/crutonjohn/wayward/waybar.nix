@@ -19,79 +19,93 @@
     };
     style = ''
       * {
-              font-family: "0xProto Nerd Font Propo";
-              font-size: 9pt;
-              font-weight: bold;
-              border-radius: 0px;
-              transition-property: background-color;
-              transition-duration: 0.5s;
-            }
+        font-family: "0xProto Nerd Font Propo";
+        font-size: 9pt;
+        font-weight: bold;
+        border-radius: 0px;
+        transition-property: background-color;
+        transition-duration: 0.5s;
+      }
+
+      tooltip {
+          background: rgba(30, 30, 46, 0.5);
+          border: 1px solid rgba(217, 224, 238, 0.5);
+          border-radius: 8px;
+      }
+
+      tooltip label {
+        color: rgb(217, 224, 238);
+      }
+
       @keyframes blink_red {
-              to {
-                background-color: rgb(242, 143, 173);
-                color: rgb(26, 24, 38);
-              }
-            }
+        to {
+          background-color: rgb(242, 143, 173);
+          color: rgb(26, 24, 38);
+        }
+      }
+
       .warning, .critical, .urgent {
-              animation-name: blink_red;
-              animation-duration: 1s;
-              animation-timing-function: linear;
-              animation-iteration-count: infinite;
-              animation-direction: alternate;
-            }
+        animation-name: blink_red;
+        animation-duration: 1s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+      }
+
       window#waybar {
-              background-color: transparent;
-            }
+        background-color: transparent;
+      }
+
       window > box {
-              margin-left: 5px;
-              margin-right: 5px;
-              margin-top: 5px;
-              background-color: transparent;
-            }
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-top: 5px;
+        background-color: transparent;
+      }
+
       #workspaces {
-              padding-left: 0px;
-              padding-right: 4px;
-            }
+        padding-left: 0px;
+        padding-right: 4px;
+      }
 
       .modules-left,
       .modules-center,
       .modules-right {
-              background-color: rgb(30, 30, 46);
-              border-radius: 8px;
-              padding-left: 2px;
-              padding-right: 2px;
+        background-color: rgb(30, 30, 46);
+        border-radius: 8px;
+        padding-left: 2px;
+        padding-right: 2px;
       }
 
       #workspaces button {
-              padding-top: 5px;
-              padding-bottom: 5px;
-              padding-left: 6px;
-              padding-right: 6px;
-            }
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 6px;
+        padding-right: 6px;
+      }
+
       #workspaces button.active {
-              background-color: rgb(181, 232, 224);
-              color: rgb(26, 24, 38);
-            }
+        background-color: rgb(181, 232, 224);
+        color: rgb(26, 24, 38);
+      }
+
       #workspaces button.urgent {
-              color: rgb(26, 24, 38);
-            }
+        color: rgb(26, 24, 38);
+      }
+
       #workspaces button:hover {
-              background-color: rgb(248, 189, 150);
-              color: rgb(26, 24, 38);
-            }
-            tooltip {
-              background: rgb(48, 45, 65);
-            }
-            tooltip label {
-              color: rgb(217, 224, 238);
-            }
+        background-color: rgb(248, 189, 150);
+        color: rgb(26, 24, 38);
+      }
+
       #custom-launcher {
-              font-size: 14px;
-              padding-left: 4px;
-              padding-right: 6px;
-              color: #7ebae4;
-              font-family: Hack Nerd Font;
-            }
+        font-size: 14px;
+        padding-left: 4px;
+        padding-right: 6px;
+        color: #7ebae4;
+        font-family: Hack Nerd Font;
+      }
+
       #mode,
       #clock,
       #memory,
@@ -106,65 +120,83 @@
       #battery,
       #custom-powermenu,
       #custom-cava-internal {
-              padding-left: 4px;
-              padding-right: 4px;
-            }
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+
       #memory {
-              color: rgb(181, 232, 224);
-            }
+        color: rgb(181, 232, 224);
+      }
+
       #cpu {
-              color: rgb(245, 194, 231);
-            }
+        color: rgb(245, 194, 231);
+      }
+
       #window {
-              color: rgb(245, 224, 220);
-              padding-right: 4px;
-              padding-left: 4px;
-            }
+        color: rgb(245, 224, 220);
+        padding-right: 4px;
+        padding-left: 4px;
+      }
+
       #clock {
-              color: rgb(217, 224, 238);
-            }
+        color: rgb(217, 224, 238);
+      }
+
       #temperature {
-              color: rgb(150, 205, 251);
-            }
+        color: rgb(150, 205, 251);
+      }
+
       #backlight {
-              color: rgb(248, 189, 150);
-            }
+        color: rgb(248, 189, 150);
+      }
+
       #pulseaudio {
-              color: rgb(245, 224, 220);
-            }
+        color: rgb(245, 224, 220);
+      }
+
       #network {
-              color: #ABE9B3;
-            }
+        color: #ABE9B3;
+      }
 
       #network.disconnected {
-              color: rgb(255, 255, 255);
-            }
+        color: rgb(255, 255, 255);
+      }
+
       #battery.charging, #battery.full, #battery.discharging {
-              color: rgb(250, 227, 176);
-            }
+        color: rgb(250, 227, 176);
+      }
+
       #battery.critical:not(.charging) {
-              color: rgb(242, 143, 173);
-            }
+        color: rgb(242, 143, 173);
+      }
+
       #custom-powermenu {
-              color: rgb(242, 143, 173);
-            }
+        color: rgb(242, 143, 173);
+      }
+
       #tray {
-              padding-right: 8px;
-              padding-left: 10px;
-            }
+        padding-right: 8px;
+        padding-left: 10px;
+        background-color: rgb(181, 232, 224);
+        border-radius: 8px;
+      }
+
       #mpris.paused {
-              color: #414868;
-              font-style: italic;
-            }
+        color: #414868;
+        font-style: italic;
+      }
+
       #mpris.stopped {
-              background: transparent;
-            }
+        background: transparent;
+      }
+
       #mpris {
-              color: #c0caf5;
-            }
+        color: #c0caf5;
+      }
+
       #custom-cava-internal{
-              font-family: "Hack Nerd Font" ;
-            }
+        font-family: "Hack Nerd Font" ;
+      }
     '';
     settings = [
       {
@@ -244,15 +276,15 @@
           "tooltip" = false;
         };
         "mpris" = {
-          "format" = "{player_icon}{status_icon}";
-          "tooltip-format" = "{dynamic}";
+          "format" = "{player_icon} {status_icon}";
+          "tooltip-format" = "Status::{status}\nSource::{player}\nTitle::{dynamic}";
           "dynamic-order" = [
             "title"
             "artist"
           ];
           "player-icons" = {
-            "SubTUI" = "";
-            "Zen Browser" = "";
+            "subtui" = "";
+            "firefox" = "";
           };
           "status-icons" = {
             "playing" = "";
