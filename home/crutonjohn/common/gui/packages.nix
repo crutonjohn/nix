@@ -12,6 +12,7 @@
     signal-desktop
     telegram-desktop
     vlc
+    playerctl
     mpv
     inputs.subtui.packages.${pkgs.stdenv.hostPlatform.system}.subtui
   ];

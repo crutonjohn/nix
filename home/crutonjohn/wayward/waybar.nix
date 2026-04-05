@@ -97,7 +97,7 @@
       #memory,
       #temperature,
       #cpu,
-      #mpd,
+      #mpris,
       #custom-wall
       #temperature,
       #backlight,
@@ -152,14 +152,14 @@
               padding-right: 8px;
               padding-left: 10px;
             }
-      #mpd.paused {
+      #mpris.paused {
               color: #414868;
               font-style: italic;
             }
-      #mpd.stopped {
+      #mpris.stopped {
               background: transparent;
             }
-      #mpd {
+      #mpris {
               color: #c0caf5;
             }
       #custom-cava-internal{
@@ -244,19 +244,22 @@
           "tooltip" = false;
         };
         "mpris" = {
-          "format" = "{player_icon}{status_icon} {dynamic}";
+          "format" = "{player_icon}{status_icon}";
+          "tooltip-format" = "{dynamic}";
           "dynamic-order" = [
             "title"
             "artist"
           ];
           "player-icons" = {
-            "subtui" = "";
+            "SubTUI" = "";
+            "Zen Browser" = "";
           };
           "status-icons" = {
             "playing" = "";
             "paused" = "";
             "stopped" = "";
           };
+          # "ignored-players" = [ "firefox" ];
         };
         "battery" = {
           "interval" = 10;
