@@ -40,6 +40,17 @@
     ];
   };
 
+  # x2 1tb LVM
+  fileSystems."/nixtra" = {
+    device = "/dev/disk/by-label/NIXTRA";
+    fsType = "ext4";
+    # options = [
+    #   # "uid=kat"
+    #   # "gid=users"
+    #   # "mode=775"
+    # ];
+  };
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
