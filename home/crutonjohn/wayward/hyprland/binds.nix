@@ -6,6 +6,11 @@
 
   wayland.windowManager.hyprland = {
     settings = {
+      bind = [
+        ",XF86MonBrightnessUp,exec,brightnessctl -d intel_backlight s +5%"
+        ",XF86MonBrightnessDown,exec,brightnessctl -d intel_backlight s 5%-"
+      ];
+
       binds = {
         workspace_back_and_forth = true;
         allow_workspace_cycles = true;
