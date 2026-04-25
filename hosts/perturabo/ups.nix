@@ -31,7 +31,7 @@
     ups."garage" = {
       port = "auto";
       driver = "usbhid-ups";
-      description = "Cyber Power System, Inc. CP1500 AVR UPS";
+      description = "Cyber Power System, Inc. PR1500LCDRT2U UPS";
       directives = [
         # "Restore power on AC" BIOS option needs power to be cut a few seconds to work;
         # this is achieved by the offdelay and ondelay directives.
@@ -96,6 +96,16 @@
     user = "nutmon";
     nutUser = "nut-exporter";
     passwordPath = config.power.ups.users."nut-exporter".passwordFile;
+    nutVariables = [
+      "battery.charge"
+      "battery.runtime"
+      "battery.voltage"
+      "battery.voltage.nominal"
+      "input.voltage"
+      "input.voltage.nominal"
+      "ups.load"
+      "ups.status"
+    ];
   };
 
 }
