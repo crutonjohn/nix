@@ -15,6 +15,7 @@
     playerctl
     mpv
     inputs.subtui.packages.${pkgs.stdenv.hostPlatform.system}.subtui
+    x32edit
   ];
 
 }
