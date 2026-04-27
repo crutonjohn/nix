@@ -67,7 +67,7 @@
       environment = {
         PORT = "3919";
         CONFIG_PATH = "/etc/garage.toml";
-        AUTH_USER_PASS = "crutonjohn:$2y$10$nYauB7zjBZePTdUNEAEBteNJr6Me0WkytoLT77N3tdhcIEDcAXER.";
+        AUTH_USER_PASS = "crutonjohn:$2y$10$5LY0GGqRKwipadYzM8LdbeXTy9aMpiqsIb1CPDLbBxcU/2pIOYvoq";
         API_BASE_URL = "http://192.168.130.4:3903";
         S3_ENDPOINT_URL = "http://127.0.0.1:3900";
       };
