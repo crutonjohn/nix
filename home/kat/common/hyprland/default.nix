@@ -42,7 +42,7 @@
     networkmanager_dmenu
     nfs-utils
     nmap
-    openscad
+    # openscad
     pamixer
     pavucontrol
     pixman
