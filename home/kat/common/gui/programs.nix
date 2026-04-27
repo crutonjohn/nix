@@ -30,7 +30,7 @@
     networkmanager_dmenu
     newrecruit-builder
     #newrecruit-editor
-    openscad
+    # openscad
     pamixer
     pavucontrol
     pixman

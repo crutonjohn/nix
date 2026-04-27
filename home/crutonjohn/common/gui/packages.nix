@@ -8,7 +8,7 @@
     gimp
     hexchat
     lychee-slicer
-    openscad
+    # openscad
     signal-desktop
     telegram-desktop
     vlc
