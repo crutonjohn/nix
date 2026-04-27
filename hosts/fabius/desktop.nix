@@ -48,7 +48,7 @@
       glfw
       xwayland
       pkgs.qt6.qtwayland
-      pkgs.qt5.qtwayland
+      # pkgs.qt5.qtwayland
       networkmanagerapplet
       wev
       wf-recorder

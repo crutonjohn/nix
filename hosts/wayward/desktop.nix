@@ -46,7 +46,7 @@
       glfw
       xwayland
       pkgs.qt6.qtwayland
-      pkgs.qt5.qtwayland
+      #pkgs.qt5.qtwayland
       nemo
       networkmanagerapplet
       wev
