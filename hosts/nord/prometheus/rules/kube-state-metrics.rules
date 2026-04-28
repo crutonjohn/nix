@@ -175,15 +175,6 @@ groups:
         summary: Kubernetes pod crash looping
         description: "Pod {{ $labels.pod }} is crash looping"
 
-    - alert: KubernetesReplicassetMismatch
-      expr: 'kube_replicaset_spec_replicas{replicaset!~"(rook-ceph-exporter-.*)"} != kube_replicaset_status_ready_replicas'
-      for: 10m
-      labels:
-        severity: warning
-      annotations:
-        summary: Kubernetes ReplicasSet mismatch
-        description: "Deployment {{ $labels.namespace}}/{{ $labels.replicaset }} Replicas mismatch"
-
     - alert: KubernetesDeploymentReplicasMismatch
       expr: 'kube_deployment_spec_replicas != kube_deployment_status_replicas_available'
       for: 10m

@@ -9,7 +9,7 @@ groups:
     annotations:
       summary: Restic Backup Job {{ $labels.obj_name }} out of sync
   - alert: VolSyncComponentAbsent
-    expr: absent(up{job="k8s_pods",app_kubernetes_io_name="volsync"})
+    expr: absent(up{app_kubernetes_io_name="volsync"})
     for: 15m
     labels:
       severity: critical

@@ -14,7 +14,7 @@ groups:
         description: "A Prometheus job {{ $labels.job }} has disappeared"
 
     - alert: PrometheusTargetMissing
-      expr: 'up == 0'
+      expr: 'up{app_kubernetes_io_part_of!="cilium"} == 0'
       for: 5m
       labels:
         severity: critical

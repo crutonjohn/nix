@@ -10,7 +10,7 @@ groups:
       description: 'This is an alert meant to ensure that the entire alerting pipeline is functional. This alert is always firing, therefore it should always be firing in Alertmanager and always fire against a receiver. There are integrations with various notification mechanisms that send a notification when this alert is not firing. For example the "DeadMansSnitch" integration in PagerDuty.'
       summary: Ensure entire alerting pipeline is functional
   - alert: InstanceDown
-    expr: max_over_time(up[5m]) == 0
+    expr: max_over_time(up{app_kubernetes_io_part_of!="cilium"}[5m]) == 0
     for: 5m
     labels:
       severity: critical
@@ -161,7 +161,7 @@ groups:
       summary: Host conntrack limit on {{ $labels.instance }}
       description: "The number of conntrack is approaching limit"
   - alert: HostPhysicalComponentTooHot
-    expr: ((node_hwmon_temp_celsius * ignoring(label) group_left(instance, job, node, sensor) node_hwmon_sensor_label{label!="tctl"} > 75)) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
+    expr: ((node_hwmon_temp_celsius * ignoring(label) group_left(instance, job, node, sensor) node_hwmon_sensor_label{label!="tctl",chip!="platform_nct6775_2592"} > 75)) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
     for: 10m
     labels:
       severity: warning
@@ -169,7 +169,7 @@ groups:
       summary: Host physical component too hot {{ $labels.instance }}
       description: "Physical hardware component too hot"
   - alert: HostPhysicalComponentTooHot
-    expr: ((node_hwmon_temp_celsius * ignoring(label) group_left(instance, job, node, sensor) node_hwmon_sensor_label{label!="tctl"} > 75)) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
+    expr: ((node_hwmon_temp_celsius * ignoring(label) group_left(instance, job, node, sensor) node_hwmon_sensor_label{label!="tctl",chip!="platform_nct6775_2592"} > 75)) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
     for: 20m
     labels:
       severity: critical
