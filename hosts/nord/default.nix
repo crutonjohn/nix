@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
 
   imports = [
@@ -15,6 +15,11 @@
     ./tailscale.nix
     ./teamspeak.nix
   ];
+
+  # CopyFail
+  boot.kernelPackages = lib.mkIf (lib.versionOlder pkgs.linux.version "6.18.22") (
+    lib.mkDefault pkgs.linuxPackages_6_18
+  );
 
   boot.loader.grub.enable = true;
   networking.hostName = "nixos-us-ord"; # Define your hostname.
