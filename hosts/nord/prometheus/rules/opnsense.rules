@@ -1,0 +1,24 @@
+groups:
+- name: opnsense rules
+  rules:
+  - alert: OpnsenseGatewayDown
+    expr: sum by (name,address) (opnsense_gateways_status != 1)
+    for: 3m
+    labels:
+      severity: warning
+    annotations:
+      summary: Opnsense Gateway {{ $labels.name }} marked down
+      grafana: https://grafana.heyjohn.family/goto/cfl5ym7hzmfpcb?orgId=1
+  - alert: OpnsenseGatewayGloFiberDown
+    expr: |
+      (
+        opnsense_gateways_status{default_gateway="true",name="WAN_DHCP"}
+          or
+        clamp_max(absent(opnsense_gateways_status{default_gateway="true",name="WAN_DHCP"}),0)
+      ) < 1
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: GloFiber gateway is no longer the default gateway
+      grafana: https://grafana.heyjohn.family/goto/cfl5ym7hzmfpcb?orgId=1
