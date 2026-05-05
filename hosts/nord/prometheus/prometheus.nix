@@ -164,8 +164,35 @@
             targets = [ "perturabo.heyjohn.family:9134" ];
             labels = {
               datacenter = "lyh";
-              instance = "perturabo.heyjohn.family";
             };
+          }
+        ];
+        relabel_configs = [
+          {
+            source_labels = [ "__address__" ];
+            regex = "(.*):(.*)";
+            replacement = "$1";
+            target_label = "instance";
+          }
+        ];
+      }
+      {
+        job_name = "smartctl_exporter";
+        metrics_path = "/metrics";
+        static_configs = [
+          {
+            targets = [ "perturabo.heyjohn.family:9633" ];
+            labels = {
+              datacenter = "lyh";
+            };
+          }
+        ];
+        relabel_configs = [
+          {
+            source_labels = [ "__address__" ];
+            regex = "(.*):(.*)";
+            replacement = "$1";
+            target_label = "instance";
           }
         ];
       }
