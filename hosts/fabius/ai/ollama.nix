@@ -16,12 +16,9 @@
     };
     # Optional: preload models, see https://ollama.com/library
     loadModels = [
-      "qwen3.5:9b"
-      "qwen3.5:2b"
-      "gemma3:4b"
+      "hf.co/mradermacher/deepseek-moe-16b-base-GGUF:Q6_K"
       "hf.co/bartowski/burtenshaw_GemmaCoder3-12B-GGUF:Q4_K_M"
-      "qwen2.5-coder:7b"
-      "codegemma:7b"
+      "hf.co/bartowski/DeepSeek-Coder-V2-Lite-Instruct-GGUF:Q6_K"
     ];
     acceleration = "rocm";
     host = "0.0.0.0";
