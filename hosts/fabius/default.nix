@@ -5,6 +5,7 @@
     inputs.nixos-hardware.nixosModules.common-gpu-amd
     inputs.nixos-hardware.nixosModules.common-pc-ssd
     ../global
+    ./ai
     ./desktop.nix
     ./fonts.nix
     ./greeter.nix
