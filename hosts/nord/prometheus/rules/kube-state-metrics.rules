@@ -251,7 +251,7 @@ groups:
       expr: 'kube_job_spec_completions - kube_job_status_succeeded > 0'
       for: 12h
       labels:
-        severity: critical
+        severity: warning
       annotations:
         summary: Kubernetes job slow completion
         description: "Kubernetes Job {{ $labels.namespace }}/{{ $labels.job_name }} did not complete in time"
