@@ -1,4 +1,15 @@
-{ ... }:
+{ pkgs, ... }:
+
+let
+  net-watchdoggy = pkgs.writeShellScriptBin "net-watchdoggy" ''
+    if ip addr show eno1 | grep -q "192.168.130.4"; then
+        exit 0
+    else
+        echo "No IP address assigned on interface eno1, restarting NetworkManager..."
+        systemctl restart NetworkManager.service
+    fi
+  '';
+in
 
 {
 
@@ -46,5 +57,16 @@
       -----END CERTIFICATE-----
     ''
   ];
+
+  environment.systemPackages = [
+    net-watchdoggy
+  ];
+
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "*/5 * * * *      root    net-watchdoggy"
+    ];
+  };
 
 }
