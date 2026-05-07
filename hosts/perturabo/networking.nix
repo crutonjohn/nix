@@ -4,8 +4,9 @@ let
   net-watchdoggy = pkgs.writeShellScriptBin "net-watchdoggy" ''
     if ip addr show eno1 | grep -q "192.168.130.4"; then
         exit 0
+        "eno1 still has IP address, skipping NetworkManager reload"
     else
-        echo "No IP address assigned on interface eno1, restarting NetworkManager..."
+        echo "No IP address assigned on interface eno1, restarting NetworkManager"
         systemctl restart NetworkManager.service
     fi
   '';
@@ -62,11 +63,23 @@ in
     net-watchdoggy
   ];
 
-  services.cron = {
-    enable = true;
-    systemCronJobs = [
-      "*/5 * * * *      root    net-watchdoggy"
-    ];
+  systemd.timers."net-watchdoggy" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "* */5 * * *";
+      Unit = "net-watchdoggy.service";
+    };
+  };
+
+  systemd.services."net-watchdoggy" = {
+    script = ''
+      set -eu
+      net-watchdoggy
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+    };
   };
 
 }
