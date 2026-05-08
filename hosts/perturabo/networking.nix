@@ -66,7 +66,7 @@ in
   systemd.timers."net-watchdoggy" = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
-      OnCalendar = "* */5 * * *";
+      OnCalendar = "*-*-* *:0/5";
       Unit = "net-watchdoggy.service";
     };
   };
