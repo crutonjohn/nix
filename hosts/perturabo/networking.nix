@@ -2,7 +2,7 @@
 
 let
   net-watchdoggy = pkgs.writeShellScriptBin "net-watchdoggy" ''
-    if ip addr show eno1 | grep -q "192.168.130.4"; then
+    if /run/current-system/sw/bin/ip addr show eno1 | /run/current-system/sw/bin/grep -q "192.168.130.4"; then
         exit 0
         "eno1 still has IP address, skipping NetworkManager reload"
     else
