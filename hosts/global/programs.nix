@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
 
@@ -11,6 +11,12 @@
     fish.enable = true;
     zsh.enable = true;
     wireshark.enable = true;
+  };
+
+  environment = {
+    systemPackages = with pkgs; [
+      nix-index
+    ];
   };
 
 }
