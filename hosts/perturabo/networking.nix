@@ -73,8 +73,7 @@ in
 
   systemd.services."net-watchdoggy" = {
     script = ''
-      set -eu
-      net-watchdoggy
+      /run/current-system/sw/bin/net-watchdoggy
     '';
     serviceConfig = {
       Type = "oneshot";
