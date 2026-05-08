@@ -3,8 +3,8 @@
 let
   net-watchdoggy = pkgs.writeShellScriptBin "net-watchdoggy" ''
     if /run/current-system/sw/bin/ip addr show eno1 | /run/current-system/sw/bin/grep -q "192.168.130.4"; then
-        exit 0
-        echo "eno1 still has IP address, skipping NetworkManager reload"
+      echo "eno1 still has IP address, skipping NetworkManager reload"
+      exit 0
     else
         echo "No IP address assigned on interface eno1, restarting NetworkManager"
         systemctl restart NetworkManager.service
