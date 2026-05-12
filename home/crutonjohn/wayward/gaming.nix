@@ -10,7 +10,7 @@
 
   programs = {
     lutris = {
-      enable = false;
+      enable = true;
       protonPackages = [ pkgs.proton-ge-bin ];
     };
   };
