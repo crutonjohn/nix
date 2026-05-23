@@ -49,6 +49,10 @@
       xwayland
       pkgs.qt6.qtwayland
       # pkgs.qt5.qtwayland
+      nautilus
+      nautilus-open-any-terminal
+      nautilus-open-in-blackbox
+      nautilus-python
       networkmanagerapplet
       wev
       wf-recorder
