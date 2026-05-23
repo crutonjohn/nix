@@ -95,6 +95,7 @@
         "directory mask" = "0755";
         "force user" = "root";
         "force group" = "users";
+        "dos filetimes" = "no";
       };
       "root" = {
         "path" = "/mnt/olympia";

@@ -10,6 +10,7 @@
       /mnt/apollo/games/ark *(rw,sync,no_subtree_check)
       /mnt/apollo/games/ark/backups *(rw,sync,no_subtree_check)
       /mnt/olympia/videos/games/crutonjohn *(rw,sync,no_subtree_check)
+      /mnt/olympia/immich 192.168.130.1/24(rw,sync,no_subtree_check)
     '';
   };
 
