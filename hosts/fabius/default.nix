@@ -14,6 +14,7 @@
     ./vm-hook.nix
     ./loader.nix
     ./networking.nix
+    ./prometheus.nix
     # disabled until https://github.com/networkupstools/nut/issues/3119 probably
     # ./sops.nix
     # ./ups.nix

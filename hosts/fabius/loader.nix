@@ -19,20 +19,24 @@
     "nvidia"
   ];
 
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+
   # CopyFail
-  boot.kernelPackages = lib.mkIf (lib.versionOlder pkgs.linux.version "6.18.22") (
-    lib.mkDefault pkgs.linuxPackages_6_18
-  );
+  # boot.kernelPackages = lib.mkIf (lib.versionOlder pkgs.linux.version "6.18.22") (
+  #   lib.mkDefault pkgs.linuxPackages_6_18
+  # );
 
   # for pinning kernel version
-  #  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_5_19.override {
-  #    argsOverride = rec {
-  #      src = pkgs.fetchurl {
-  #            url = "mirror://kernel/linux/kernel/v5.x/linux-${version}.tar.xz";
-  #            sha256 = "Ts24tZxvbyWNicvyLu3iEOClXAnbiEmI/nBu/i/o8Ug=";
-  #      };
-  #      version = "5.19.13";
-  #      modDirVersion = "5.19.13";
-  #      };
-  #  });
+  boot.kernelPackages = pkgs.linuxPackagesFor (
+    pkgs.linux_latest.override {
+      argsOverride = rec {
+        src = pkgs.fetchurl {
+          url = "mirror://kernel/linux/kernel/v7.x/linux-${version}.tar.xz";
+          sha256 = "CUl362LCDj0ZOf6BqSlYofmH8zlEblMvqGljsoBOMtw=";
+        };
+        version = "7.0.10";
+        modDirVersion = "7.0.10";
+      };
+    }
+  );
 }
