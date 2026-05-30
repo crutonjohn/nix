@@ -17,6 +17,7 @@
         "dialout"
         "wireshark"
         "libvirtd"
+        "uinput"
       ];
       isNormalUser = true;
       home = "/home/crutonjohn";
@@ -37,6 +38,7 @@
         "dialout"
         "wireshark"
         "libvirtd"
+        "uinput"
       ];
       isNormalUser = true;
       home = "/home/kat";

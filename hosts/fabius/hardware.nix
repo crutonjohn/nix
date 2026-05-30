@@ -59,7 +59,8 @@
   '';
 
   programs.xss-lock.enable = true;
-
+  # enable uinput kernel mod and group
+  hardware.uinput.enable = true;
   # Usbmuxd
   services.usbmuxd.enable = true;
   # Fingerprints
