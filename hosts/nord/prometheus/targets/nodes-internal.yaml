@@ -20,3 +20,8 @@
   labels:
     datacenter: lyh
     service: nut
+- targets:
+    - "buck-desktop.heyjohn.family:9100"
+  labels:
+    datacenter: lyh
+    service: desktop
