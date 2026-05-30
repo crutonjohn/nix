@@ -68,22 +68,24 @@
     autoStart = true;
     openFirewall = true;
     capSysAdmin = true;
-    apps = [
-      {
-        name = "Steam Big Picture";
-        detached = [
-          "sudo -u crutonjohn setsid steam steam://open/bigpicture"
-        ];
-        prep-cmd = [
-          {
-            do = "";
-            undo = "sudo -u venya setsid steam steam://close/bigpicture";
-          }
-        ];
-        # exclude-global-prep-cmd = "false";
-        # auto-detach = "true";
-      }
-    ];
+    applications = {
+      apps = [
+        {
+          name = "Steam Big Picture";
+          detached = [
+            "sudo -u crutonjohn setsid steam steam://open/bigpicture"
+          ];
+          prep-cmd = [
+            {
+              do = "";
+              undo = "sudo -u venya setsid steam steam://close/bigpicture";
+            }
+          ];
+          # exclude-global-prep-cmd = "false";
+          # auto-detach = "true";
+        }
+      ];
+    };
   };
 
 }
