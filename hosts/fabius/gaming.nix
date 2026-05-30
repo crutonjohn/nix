@@ -77,8 +77,17 @@
           ];
           prep-cmd = [
             {
-              do = "";
-              undo = "sudo -u venya setsid steam steam://close/bigpicture";
+              do = ''
+                sh -c "hyprctl keyword monitor HEADLESS-2,$${SUNSHINE_CLIENT_WIDTH}x$${SUNSHINE_CLIENT_HEIGHT}@$${SUNSHINE_CLIENT_FPS},auto,1 &&
+                hyprctl keyword monitor DP-1,disable &&
+                hyprctl keyword monitor DP-2,disable &&
+                sudo -u crutonjohn setsid steam steam://close/bigpicture"
+              '';
+              undo = ''
+                sh -c "sudo -u crutonjohn setsid steam steam://close/bigpicture &&
+                hyprctl keyword monitor HEADLESS-2,disable &&
+                hyprctl reload"
+              '';
             }
           ];
           # exclude-global-prep-cmd = "false";

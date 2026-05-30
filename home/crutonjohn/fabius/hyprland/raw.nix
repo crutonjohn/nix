@@ -14,6 +14,8 @@
       env = XDG_SESSION_TYPE,wayland
       env = XDG_CURRENT_DESKTOP,Hyprland
 
+      exec-once = hyprctl output create headless
+
       xwayland {
           force_zero_scaling   = true
           use_nearest_neighbor = true
