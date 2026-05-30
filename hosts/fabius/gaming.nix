@@ -63,6 +63,7 @@
   ];
 
   services.sunshine = {
+    package = pkgs.unstable.sunshine;
     enable = true;
     autoStart = true;
     openFirewall = true;
