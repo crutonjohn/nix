@@ -46,10 +46,6 @@
     };
   };
 
-  # idea: use a fake virtualhost listening on public ip to get the cert
-  ## and make sure the fake virtualhost has the real domain, but
-  ## they share the same useACMEHost directive.
-
   services.prometheus.alertmanager = {
     enable = true;
     listenAddress = "127.0.0.1";

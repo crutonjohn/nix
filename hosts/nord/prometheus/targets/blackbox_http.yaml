@@ -9,12 +9,23 @@
     - https://music.heyjohn.family
   labels:
     datacenter: lyh
-    service: speedtest
+    environment: production
+    service: music
 - targets:
     - https://ui.garage.heyjohn.family
   labels:
     datacenter: lyh
     service: nas
+- targets:
+    - https://alerts.heyjohn.family
+  labels:
+    datacenter: lyh
+    service: alertmanager
+- targets:
+    - https://grafana.heyjohn.family
+  labels:
+    datacenter: lyh
+    service: grafana
 - targets:
     - https://baremetalblog.com
   labels:
