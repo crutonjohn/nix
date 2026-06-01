@@ -73,7 +73,7 @@
         {
           name = "Steam Big Picture";
           detached = [
-            "sudo -u crutonjohn setsid steam steam://open/bigpicture"
+            # "sudo -u crutonjohn setsid steam steam://open/bigpicture"
           ];
           prep-cmd = [
             {
@@ -81,7 +81,7 @@
                 sh -c "hyprctl keyword monitor HEADLESS-2,$${SUNSHINE_CLIENT_WIDTH}x$${SUNSHINE_CLIENT_HEIGHT}@$${SUNSHINE_CLIENT_FPS},auto,1 &&
                 hyprctl keyword monitor DP-1,disable &&
                 hyprctl keyword monitor DP-2,disable &&
-                sudo -u crutonjohn setsid steam steam://close/bigpicture"
+                sudo -u crutonjohn setsid steam steam://open/bigpicture"
               '';
               undo = ''
                 sh -c "sudo -u crutonjohn setsid steam steam://close/bigpicture &&
