@@ -29,6 +29,8 @@
       pkgs.nixd
       pkgs.nixfmt
       pkgs.nixfmt-tree
+      pkgs.luaformatter
+      pkgs.lua-language-server
     ];
     userSettings = {
       "tab_size" = 2;
@@ -78,6 +80,19 @@
         };
       };
       "languages" = {
+        "Lua" = {
+          "language_servers" = [
+            "lua-language-server"
+          ];
+          "tab_size" = 2;
+          "formatter" = {
+            "external" = {
+              "command" = "lua-format";
+              "arguments" = [
+              ];
+            };
+          };
+        };
         "Nix" = {
           "language_servers" = [
             "!nil"
@@ -96,6 +111,15 @@
         };
       };
       "lsp" = {
+        # "lua-language-server" = {
+        #   "initialization_options" = {
+        #     "nixpkgs" = {
+        #       "expr" = "import <nixpkgs> { }";
+        #     };
+        #     "formatting" = {
+        #       "command" = [ "lua-format" ];
+        #     };
+        # };
         "nixd" = {
           "initialization_options" = {
             "nixpkgs" = {
