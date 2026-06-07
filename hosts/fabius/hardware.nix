@@ -20,6 +20,8 @@
   };
   # Fan Curve/Overclocker
   services.lact.enable = true;
+  # Another Fan Curve/Cooler Tool
+  programs.coolercontrol.enable = true;
 
   services.fwupd.enable = true;
 
