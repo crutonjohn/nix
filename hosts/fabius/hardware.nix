@@ -7,18 +7,28 @@
   ];
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;
+
+  # Graphics
   hardware.graphics = {
     enable = true;
     #extraPackages = with pkgs; [  ];
   };
-  # hardware.amdgpu.amdvlk.enable = true;
-  hardware.amdgpu.opencl.enable = true;
+  hardware.amdgpu = {
+    opencl.enable = true;
+    overdrive.enable = true;
+    overdrive.ppfeaturemask = true;
+  };
+  # Fan Curve/Overclocker
+  services.lact.enable = true;
+
   services.fwupd.enable = true;
+
   services.libinput.touchpad = {
     naturalScrolling = true;
     tapping = false;
     clickMethod = "clickfinger";
   };
+
   # bluetooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
