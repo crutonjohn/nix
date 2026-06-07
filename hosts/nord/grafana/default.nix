@@ -26,7 +26,7 @@
     useACMEHost = "grafana.heyjohn.family";
     forceSSL = true;
     listenAddresses = [
-      "100.64.0.11"
+      "100.64.0.8"
     ];
   };
 

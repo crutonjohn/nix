@@ -14,7 +14,7 @@
           recommendedProxySettings = true;
         };
       };
-      listenAddresses = [ "100.64.0.11" ];
+      listenAddresses = [ "100.64.0.8" ];
     };
   };
 
@@ -68,7 +68,7 @@
 
   services.prometheus = {
     enable = true;
-    listenAddress = "100.64.0.11";
+    listenAddress = "100.64.0.8";
     port = 9090;
     enableReload = true;
     retentionTime = "30d";
@@ -360,7 +360,7 @@
         metrics_path = "/metrics";
         static_configs = [
           {
-            targets = [ "100.64.0.11:3100" ];
+            targets = [ "100.64.0.8:3100" ];
             labels = {
               datacenter = "ord";
               instance = "loki.heyjohn.family";
