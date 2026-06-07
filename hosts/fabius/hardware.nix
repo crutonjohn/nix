@@ -16,7 +16,7 @@
   hardware.amdgpu = {
     opencl.enable = true;
     overdrive.enable = true;
-    overdrive.ppfeaturemask = "0xffffffff";
+    overdrive.ppfeaturemask = "0xfffd7fff";
   };
   # Fan Curve/Overclocker
   services.lact.enable = true;
