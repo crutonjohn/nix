@@ -337,12 +337,13 @@
         };
         "temperature#cpu" = {
           "hwmon-path" = "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon5/temp1_input";
+          "interval" = 5;
           "critical-threshold" = 80;
           "tooltip" = false;
           "format" = "{temperatureC}°C";
         };
         "memory" = {
-          "interval" = 1;
+          "interval" = 5;
           "format" = "{percentage}%";
           "states" = {
             "warning" = 85;
@@ -353,11 +354,12 @@
             "cat /sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/0000:02:00.0/0000:03:00.0/hwmon/hwmon0/device/gpu_busy_percent";
           "format" = "{}%";
           "return-type" = "";
-          "interval" = 2;
+          "interval" = 5;
         };
         "temperature#gpu" = {
           "hwmon-path" =
             "/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/0000:02:00.0/0000:03:00.0/hwmon/hwmon0/temp1_input";
+          "interval" = 5;
           "critical-threshold" = 90;
           "tooltip" = false;
           "format" = "{temperatureC}°C";
