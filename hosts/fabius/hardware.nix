@@ -104,6 +104,17 @@
     };
   };
 
+  services.udev.extraRules = ''
+    # Keychron Keychron M3 8K
+    SUBSYSTEM=="usb", ATTR{idVendor}=="3434", ATTR{idProduct}=="d050", MODE="0666"
+
+    # Keychron Link
+    SUBSYSTEM=="usb", ATTR{idVendor}=="3434", ATTR{idProduct}=="d030", MODE="0666"
+
+    # Keychron Keychron Q3 Max
+    SUBSYSTEM=="usb", ATTR{idVendor}=="3434", ATTR{idProduct}=="0830", MODE="0666"
+  '';
+
   services.upower.enable = true;
   services.ceph.client.enable = true;
 }
