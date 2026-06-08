@@ -105,14 +105,20 @@
   };
 
   services.udev.extraRules = ''
-    # Keychron Keychron M3 8K
-    SUBSYSTEM=="usb", ATTR{idVendor}=="3434", ATTR{idProduct}=="d050", MODE="0666"
+    # Keychron Devices (for use with web configuration)
+    # Stolen from https://www.reddit.com/r/Keychron/comments/1e5um1u/a_linux_user_psa/
+    # M3 8K
+    #SUBSYSTEM=="usb", ATTR{idVendor}=="3434", ATTR{idProduct}=="d050", MODE="0666"
+    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="d050", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
 
-    # Keychron Link
-    SUBSYSTEM=="usb", ATTR{idVendor}=="3434", ATTR{idProduct}=="d030", MODE="0666"
+    # Link
+    #SUBSYSTEM=="usb", ATTR{idVendor}=="3434", ATTR{idProduct}=="d030", MODE="0666"
+    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="d030", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
 
-    # Keychron Keychron Q3 Max
-    SUBSYSTEM=="usb", ATTR{idVendor}=="3434", ATTR{idProduct}=="0830", MODE="0666"
+    # Q3 Max
+    #SUBSYSTEM=="usb", ATTR{idVendor}=="3434", ATTR{idProduct}=="0830", MODE="0666"
+    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="0830", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
+
   '';
 
   services.upower.enable = true;
