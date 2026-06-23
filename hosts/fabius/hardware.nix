@@ -110,6 +110,8 @@
     # M3 8K
     #SUBSYSTEM=="usb", ATTR{idVendor}=="3434", ATTR{idProduct}=="d050", MODE="0666"
     KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="d050", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
+    # Wireless M3 8K
+    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="d028", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
 
     # Link
     #SUBSYSTEM=="usb", ATTR{idVendor}=="3434", ATTR{idProduct}=="d030", MODE="0666"
