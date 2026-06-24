@@ -1,4 +1,3 @@
-# https://gitlab.com/nicky.tope/nixos-config/-/blob/main/user/desktop/hyprland/lua/hyprland.lua?ref_type=heads
 {
   pkgs,
   config,
@@ -24,12 +23,14 @@
   # reads hyprland.lua natively. The system-level NixOS Hyprland module still
   # handles the session/UWSM/portal bits.
   wayland.windowManager.hyprland.enable = false;
+  wayland.windowManager.hyprland.systemd.enable = false;
 
-  # Live-edit symlink: edits to lua/*.lua under ~/code/nixos-config (and the
+  # Live-edit symlink: edits to lua/*.lua under
+  # ~/Documents/nix/home/<username>/common/hyprland/lua/hyprland.lua (and the
   # per-host overrides under ~/code/infra) take effect immediately via
   # Hyprland's autoreload. No nixos-rebuild needed for keybinds or rules.
   xdg.configFile."hypr/hyprland.lua".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/code/nixos-config/user/desktop/hyprland/lua/hyprland.lua";
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Documents/nix/home/shared/hyprland/lua/hyprland.nix";
 
   # UWSM env injection — sources home-manager's session vars (including
   # home.sessionPath additions like ~/.local/bin) into the Hyprland session
@@ -38,5 +39,4 @@
   # etc.). Per https://wiki.hypr.land/Nix/Hyprland-on-Home-Manager/#nixos-uwsm.
   xdg.configFile."uwsm/env".source =
     "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
-
 }

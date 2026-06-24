@@ -1,26 +1,3 @@
-local function try_require(name)
-    if package.searchpath(name, package.path) then require(name) end
-end
-
-require("binds")
-require("decoration")
-require("devices")
-require("env")
-require("startup")
-require("rules")
-require("windowrules")
-
-try_require("")
-
--- Run on every reload
-hl.exec_cmd(
-    "pgrep waybar >/dev/null || waybar --config ~/.config/waybar/config &")
-hl.exec_cmd("kanshictl reload")
-
------------------------
----- LOOK AND FEEL ----
------------------------
-
 hl.config({
     general = {
         border_size = 2,

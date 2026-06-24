@@ -2,6 +2,7 @@
 {
 
   imports = [
+    ./lua
     ./cursor.nix
     ./dunst.nix
     ./hypridle.nix
@@ -10,10 +11,10 @@
 
   ];
 
-  wayland.windowManager.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-  };
+  # wayland.windowManager.hyprland = {
+  #   enable = false;
+  #   package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+  # };
 
   programs = {
     fish.loginShellInit = ''

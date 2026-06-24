@@ -1,0 +1,6 @@
+require("binds")
+require("config")
+require("decoration")
+require("devices")
+require("env")
+require("windowrules")
