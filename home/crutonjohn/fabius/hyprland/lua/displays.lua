@@ -12,4 +12,4 @@ hl.monitor({
     scale = 1.5
 })
 
-hl.monitor({output = "HEADLESS-2", disabled = true})
+hl.monitor({output = "HDMI-A-1", disabled = true})

@@ -1,15 +1,6 @@
 { ... }:
 
 {
-  wayland.windowManager.hyprland = {
-    settings = {
-
-      exec = [
-        "pgrep waybar >/dev/null || waybar --config ~/.config/waybar/config &"
-      ];
-
-    };
-  };
 
   programs.waybar = {
     enable = true;

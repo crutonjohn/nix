@@ -62,6 +62,22 @@
     sdl3-image
   ];
 
+  hardware.display = {
+    edid.enable = true;
+    edid.packages = [
+      (pkgs.runCommand "edid-custom" {} ''
+        mkdir -p "$out/lib/firmware/edid"
+        base64 -d > "$out/lib/firmware/edid/custom1.bin" <<'EOF'
+        AP///////wBMLUBwAA4AAQEeAQOApV14Cqgzq1BFpScNSEi974BxT4HAgQCBgJUAqcCzANHACOgA
+        MPJwWoCwWIoAUB10AAAeb8IAoKCgVVAwIDUAUB10AAAaAAAA/QAYeA//dwAKICAgICAgAAAA/ABT
+        QU1TVU5HCiAgICAgAW4CA2fwXWEQHwQTBRQgISJdXl9gZWZiZD9AdXba28LDxMbHLAkHBxUHUFcH
+        AGdUAIMBAADiAE/jBcMBbgMMAEAAmDwoAIABAgMEbdhdxAF4gFkCAADBNAvjBg0B5Q8B4PAf5QGL
+        hJABb8IAoKCgVVAwIDUAUB10AAAaAAAAAAAAZw==
+        EOF
+      '')
+    ];
+    outputs.HDMI-A-1.edid = "edid/custom1.bin"
+  };
   services.sunshine = {
     package = pkgs.unstable.sunshine;
     enable = true;
@@ -78,18 +94,14 @@
           prep-cmd = [
             {
               do = ''
-                sh -c "hyprctl keyword monitor HEADLESS-2,$${SUNSHINE_CLIENT_WIDTH}x$${SUNSHINE_CLIENT_HEIGHT}@$${SUNSHINE_CLIENT_FPS},auto,1 &&
-                hyprctl keyword monitor DP-1,disable &&
-                hyprctl keyword monitor DP-2,disable &&
-                sudo -u crutonjohn setsid steam steam://open/bigpicture"
+                sh -c "sudo -u crutonjohn /home/crutonjohn/.local/bin/sunshine-start"
               '';
               undo = ''
-                sh -c "sudo -u crutonjohn setsid steam steam://close/bigpicture &&
-                hyprctl keyword monitor HEADLESS-2,disable &&
-                hyprctl reload"
+                sh -c "sudo -u crutonjohn /home/crutonjohn/.local/bin/sunshine-stop"
               '';
             }
           ];
+          output = "HDMI-1";
           # exclude-global-prep-cmd = "false";
           # auto-detach = "true";
         }

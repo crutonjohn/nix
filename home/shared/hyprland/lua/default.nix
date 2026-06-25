@@ -6,7 +6,7 @@
 }:
 {
   imports = [
-    ./scripts.nix
+    # ./scripts.nix
   ];
 
   # LSP stubs for Hyprland's Lua API at a stable user path. The hyprland
@@ -27,10 +27,11 @@
 
   # Live-edit symlink: edits to lua/*.lua under
   # ~/Documents/nix/home/<username>/common/hyprland/lua/hyprland.lua (and the
-  # per-host overrides under ~/code/infra) take effect immediately via
-  # Hyprland's autoreload. No nixos-rebuild needed for keybinds or rules.
+  # per-host overrides under ~/Documents/nix/home/<username>/<host>/hyprland/lua/)
+  # take effect immediately via Hyprland's autoreload.
+  # No nixos-rebuild needed for keybinds or rules.
   xdg.configFile."hypr/hyprland.lua".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Documents/nix/home/shared/hyprland/lua/hyprland.nix";
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Documents/nix/home/shared/hyprland/lua/hyprland.lua";
 
   # UWSM env injection — sources home-manager's session vars (including
   # home.sessionPath additions like ~/.local/bin) into the Hyprland session

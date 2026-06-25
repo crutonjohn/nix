@@ -4,19 +4,15 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot = {
     enable = true;
-    # used to find UEFI bootable Windows Parts
-    #edk2-uefi-shell.enable = true;
-    # windows = {
-    #   "11" = {
-    #     title = "Windows 11 Shitty OS Edition";
-    #     efiDeviceHandle = "HD2b";
-    #   };
-    # };
   };
   boot.loader.efi.efiSysMountPoint = "/boot";
   boot.blacklistedKernelModules = [
     "nouveau"
     "nvidia"
+  ];
+
+  boot.kernelParams = [
+    "drm.edid_firmware=HDMI-A-1:edid/yourfile video=HDMI-A-1:e"
   ];
 
   # boot.kernelPackages = pkgs.linuxPackages_latest;

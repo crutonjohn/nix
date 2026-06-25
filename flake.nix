@@ -12,7 +12,7 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-hugopin.url = "github:nixos/nixpkgs/29dcf702b10d258b9bcd56bd38667c329614e128";
 
@@ -31,14 +31,14 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     # Hyprland related stuff
-    hyprland.url = "github:hyprwm/Hyprland/v0.52.2";
+    hyprland.url = "github:hyprwm/Hyprland/v0.55.4";
     hypr-contrib = {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprpicker.url = "github:hyprwm/hyprpicker";
     hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins/v0.52.0";
+      url = "github:hyprwm/hyprland-plugins/v0.55.0";
       inputs.hyprland.follows = "hyprland";
     };
     rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
@@ -71,7 +71,7 @@
     # home-manager - Manage user configuration with nix
     # https://github.com/nix-community/home-manager
     home = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
