@@ -7,7 +7,7 @@
     easyeffects
     font-manager
     galculator
-    helvum
+    crosspipe
     networkmanager_dmenu
     pavucontrol
     pixelflasher

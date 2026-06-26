@@ -1,3 +1,5 @@
+hl.gesture({fingers = 3, direction = "vertical", action = "workspace"})
+
 hl.config({
     general = {
         border_size = 2,
@@ -50,9 +52,9 @@ hl.config({
     input = {
         touchpad = {
             clickfinger_behavior = true,
+            tap_to_click = false,
             disable_while_typing = true,
-            natural_scroll = true,
-            ["tap-to-click"] = false
+            natural_scroll = true
         },
         float_switch_override_focus = 2,
         follow_mouse = 1,
@@ -67,8 +69,9 @@ hl.config({
     misc = {
         always_follow_on_dnd = true,
         animate_manual_resizes = false,
-        disable_autoreload = true,
+        disable_autoreload = false,
         disable_hyprland_logo = true,
+        disable_splash_rendering = true,
         enable_swallow = true,
         focus_on_activate = true,
         layers_hog_keyboard_focus = true,

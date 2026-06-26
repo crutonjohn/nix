@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   boot.kernelModules = [
@@ -22,6 +22,12 @@
   services.lact.enable = true;
   # Another Fan Curve/Cooler Tool
   programs.coolercontrol.enable = true;
+  # Install liquidctl to control AIO
+  environment = {
+    systemPackages = with pkgs; [
+      liquidctl
+    ];
+  };
 
   services.fwupd.enable = true;
 
@@ -66,9 +72,9 @@
     IdleActionSec = "2min";
     HandlePowerKey = "suspend-then-hibernate";
   };
-  systemd.sleep.extraConfig = ''
-    HibernateDelaySec=180min
-  '';
+  systemd.sleep.settings.Sleep = {
+    HibernateDelaySec = "18min";
+  };
 
   programs.xss-lock.enable = true;
   # enable uinput kernel mod and group

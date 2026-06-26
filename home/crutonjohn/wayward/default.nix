@@ -2,6 +2,7 @@
 {
 
   imports = [
+    ../../shared
     ../common
     ../common/gui
     ./wallpapers

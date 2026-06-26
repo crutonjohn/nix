@@ -33,6 +33,8 @@
   xdg.configFile."hypr/hyprland.lua".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Documents/nix/home/shared/hyprland/lua/hyprland.lua";
 
+  xdg.configFile."hypr/autoexec.lua".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Documents/nix/home/shared/hyprland/lua/autoexec.lua";
   # UWSM env injection — sources home-manager's session vars (including
   # home.sessionPath additions like ~/.local/bin) into the Hyprland session
   # via UWSM. Without this, Hyprland-spawned processes can't find

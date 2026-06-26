@@ -53,7 +53,7 @@
       wireshark
       hyprcursor
       xsettingsd
-      xorg.xrdb
+      xrdb
     ];
   };
 

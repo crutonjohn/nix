@@ -22,7 +22,7 @@
     gimp
     gnome-network-displays
     godot_4
-    helvum
+    crosspipe
     hexchat
     hyprpaper
     imagemagick
@@ -37,7 +37,6 @@
     libnotify
     lychee-slicer
     mqttui
-    neofetch
     networkmanager
     networkmanager_dmenu
     nfs-utils

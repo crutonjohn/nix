@@ -15,7 +15,7 @@
     gimp
     gnome-network-displays
     godot_4
-    helvum
+    crosspipe
     hexchat
     hyprpaper
     imagemagick
@@ -25,7 +25,6 @@
     kanshi
     lychee-slicer
     mqttui
-    neofetch
     networkmanager
     networkmanager_dmenu
     newrecruit-builder

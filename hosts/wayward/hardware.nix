@@ -56,9 +56,9 @@ in
     IdleActionSec = "2min";
     HandlePowerKey = "suspend-then-hibernate";
   };
-  systemd.sleep.extraConfig = ''
-    HibernateDelaySec=18min
-  '';
+  systemd.sleep.settings.Sleep = {
+    HibernateDelaySec = "18min";
+  };
 
   programs.xss-lock.enable = true;
 

@@ -67,7 +67,7 @@
       wireshark
       hyprcursor
       xsettingsd
-      xorg.xrdb
+      xrdb
       amdgpu_top
       python312
       kdePackages.kdenlive

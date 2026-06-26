@@ -48,7 +48,6 @@
       minikube
       mlocate
       mqttui
-      neofetch
       networkmanager
       nfs-utils
       nix-index

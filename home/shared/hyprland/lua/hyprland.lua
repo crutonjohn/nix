@@ -19,11 +19,15 @@ local COMMON = HOME .. "/Documents/nix/home/" .. USER .. "/common/hyprland/lua"
 local DEVICE = HOME .. "/Documents/nix/home/" .. USER .. "/" ..
                    (read_hostname() or "unknown") .. "/hyprland/lua"
 
+local pkgcommon = COMMON .. "/?.lua"
+local pkgdevice = DEVICE .. "/?.lua"
+
 -- Also look in ~/.config/hypr so home-manager-written Lua snippets (e.g. the
 -- webapps window-rules generator) are require()able by name.
 local XDG = os.getenv("XDG_CONFIG_HOME") or (HOME .. "/.config")
 
-package.path = package.path .. ";" .. XDG .. "/hypr" .. "/?.lua"
+package.path = package.path .. ";" .. XDG .. "/hypr" .. "/?.lua" .. ";" ..
+                   COMMON .. "/?.lua" .. ";" .. DEVICE .. "/?.lua"
 
 -- Helper: require a module only if its source file actually exists, so hosts
 -- without per-host overrides don't trigger a "module not found" notification.
@@ -32,18 +36,16 @@ local function try_require(name)
     if package.searchpath(name, package.path) then require(name) end
 end
 
--- load common lua files if they exist
-local function common_require(name)
-    if package.searchpath(name, COMMON .. "/?.lua") then require(name) end
+local function common(name)
+    if package.searchpath(name, pkgcommon) then require(name) end
 end
 
--- load device/host specific lua files if they exist
-local function device_require(name)
-    if package.searchpath(name, DEVICE .. "/?.lua") then require(name) end
+local function device(name)
+    if package.searchpath(name, pkgdevice) then require(name) end
 end
 
-common_require("init")
-device_require("init")
+common("init")
+device("init")
 
 -- Nix-generated rules (webapps, etc). Optional file dropped by home-manager.
 try_require("webapps")
@@ -55,6 +57,6 @@ try_require("webapps")
 local b = require("binds")
 try_require("devices")
 try_require("device-keybinds")
-b.register()
+-- b.register()
 
 require("autoexec")

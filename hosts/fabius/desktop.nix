@@ -45,7 +45,7 @@
       wayland-utils
       egl-wayland
       wayland-protocols
-      pkgs.xorg.xeyes
+      pkgs.xeyes
       glfw
       xwayland
       pkgs.qt6.qtwayland
@@ -71,7 +71,7 @@
       wireshark
       hyprcursor
       xsettingsd
-      xorg.xrdb
+      xrdb
       amdgpu_top
       python312
       kdePackages.kdenlive

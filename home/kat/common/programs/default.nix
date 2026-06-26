@@ -82,7 +82,6 @@
       libgcc
       libinput
       libnotify
-      neofetch
       networkmanager
       nfs-utils
       # nil -- installed via flake

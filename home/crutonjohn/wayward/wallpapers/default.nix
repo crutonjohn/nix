@@ -15,15 +15,4 @@
       ];
     };
   };
-  wayland.windowManager.hyprland = {
-    settings = {
-
-      exec-once = [
-        "hyprpaper &"
-        ''hyprctl hyprpaper wallpaper "eDP-1,~/.config/mobile.jpg"''
-        ''hyprctl hyprpaper wallpaper "DP-2,~/.config/docked.jpg"''
-      ];
-
-    };
-  };
 }

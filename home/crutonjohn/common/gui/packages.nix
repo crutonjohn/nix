@@ -3,7 +3,7 @@
 
   home.packages = with pkgs; [
     bewcloud-client
-    bitwarden-desktop
+    bitwarden-gui
     feishin
     gimp
     hexchat

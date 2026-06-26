@@ -42,7 +42,7 @@
       wayland-utils
       egl-wayland
       wayland-protocols
-      pkgs.xorg.xeyes
+      pkgs.xeyes
       glfw
       xwayland
       pkgs.qt6.qtwayland
@@ -68,7 +68,7 @@
       wireshark
       hyprcursor
       xsettingsd
-      xorg.xrdb
+      xrdb
       androidenv.androidPkgs.platform-tools
     ];
   };

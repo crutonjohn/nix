@@ -166,28 +166,29 @@ hl.bind(M .. " + SHIFT + G", hl.dsp.exec_cmd(
             'hyprctl --batch "keyword general:gaps_out 5;keyword general:gaps_in 3"'))
 
 -- Focus movement
-hl.bind(M .. " + left", hl.dsp.focus({"left"}))
-hl.bind(M .. " + right", hl.dsp.focus({"right"}))
-hl.bind(M .. " + up", hl.dsp.focus({"up"}))
-hl.bind(M .. " + down", hl.dsp.focus({"down"}))
+hl.bind(M .. " + left", hl.dsp.focus({ direction = "left"}))
+hl.bind(M .. " + right", hl.dsp.focus({ direction = "right"}))
+hl.bind(M .. " + up", hl.dsp.focus({ direction = "up"}))
+hl.bind(M .. " + down", hl.dsp.focus({ direction = "down"}))
 
 -- Workspaces 0–9 + named
-for i = 0, 9 do
-    hl.bind(M .. " + " .. i, hl.dsp.workspace.move({tostring(i)}))
-    hl.bind(M .. " + SHIFT + " .. i,
-            hl.dsp.window.move({workspace = i, follow = false}))
-    hl.bind(M .. " + CTRL + " .. i,
-            hl.dsp.window.move({workspace = i, follow = true}))
+for i = 1, 10 do
+    local key = i % 10
+    hl.bind(M .. " + " .. key, hl.dsp.focus({ workspace = i}))
+    hl.bind(M .. " + SHIFT + " .. key,
+            hl.dsp.window.move({workspace = key, follow = false}))
+    hl.bind(M .. " + CTRL + " .. key,
+            hl.dsp.window.move({workspace = key, follow = true}))
 end
 
 -- Relative workspaces
-hl.bind(M .. " + period", hl.dsp.workspace.move("e+1"))
-hl.bind(M .. " + comma", hl.dsp.workspace.move("e-1"))
-hl.bind(M .. " + slash", hl.dsp.workspace.move("previous"))
+hl.bind(M .. " + period", hl.dsp.focus({ workspace = "e+1"}))
+hl.bind(M .. " + comma", hl.dsp.focus({ workspace = "e-1"}))
+hl.bind(M .. " + slash", hl.dsp.focus({ workspace = "previous"}))
 
 -- Relative move to workspace
-hl.bind(M .. " + CTRL + left", hl.dsp.window.move("e-1"))
-hl.bind(M .. " + CTRL + right", hl.dsp.window.move("e+1"))
+--hl.bind(M .. " + CTRL + left", hl.dsp.window.move({ workspace = "e-1",))
+--hl.bind(M .. " + CTRL + right", hl.dsp.window.move("e+1"))
 
 -- Special workspace (scratchpad)
 hl.bind(M .. " + minus",
@@ -195,10 +196,10 @@ hl.bind(M .. " + minus",
 hl.bind(M .. " + equal", hl.dsp.workspace.toggle_special())
 
 -- Move windows hl.dsp.window.swap({direction = d})
-hl.bind(M .. " + SHIFT + left", hl.dsp.window.move("left"))
-hl.bind(M .. " + SHIFT + right", hl.dsp.window.move("right"))
-hl.bind(M .. " + SHIFT + up", hl.dsp.window.move("up"))
-hl.bind(M .. " + SHIFT + down", hl.dsp.window.move("down"))
+hl.bind(M .. " + SHIFT + left", hl.dsp.window.move({direction = "left"}))
+hl.bind(M .. " + SHIFT + right", hl.dsp.window.move({direction = "right"}))
+hl.bind(M .. " + SHIFT + up", hl.dsp.window.move({direction = "up"}))
+hl.bind(M .. " + SHIFT + down", hl.dsp.window.move({direction = "down"}))
 
 -- Scroll workspaces with mouse wheel
 hl.bind(M .. " + mouse_down", hl.dsp.focus({workspace = "e-1"}))
