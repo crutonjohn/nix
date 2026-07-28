@@ -1,3 +1,5 @@
 require("autoexec")
 require("displays")
 require("env")
+require("workspaces")
+require("startup")

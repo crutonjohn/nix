@@ -5,13 +5,16 @@
   services.hyprpaper = {
     enable = true;
     settings = {
+      splash = false;
+      wallpaper = [
+        {
+          monitor = "eDP-1";
+          path = "/home/crutonjohn/.config/mobile.jpg";
+        }
+      ];
       preload = [
         "/home/crutonjohn/.config/mobile.jpg"
         "/home/crutonjohn/.config/docked.jpg"
-      ];
-      wallpaper = [
-        "eDP-1,~/.config/mobile.jpg"
-        "DP-1,~/.config/docked.jpg"
       ];
     };
   };

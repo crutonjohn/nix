@@ -5,6 +5,9 @@ let
   lycheeOverlay = self: super: {
     lychee-slicer = super.callPackage ./lychee-slicer { };
   };
+  chituboxOverlay = self: super: {
+    chitubox = super.callPackage ./chitubox { };
+  };
   pogOverlay = self: super: {
     pog = super.callPackage ./pog { };
   };
@@ -42,6 +45,7 @@ in
 {
   nur = inputs.nur.overlays.default;
   lychee-slicer = lycheeOverlay;
+  chitubox = chituboxOverlay;
   pog = pogOverlay;
   bewcloud-client = bewcloudClientOverlay;
   anytype = anytypeOverlay;

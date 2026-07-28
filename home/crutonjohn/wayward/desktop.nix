@@ -12,6 +12,16 @@
         "Printing"
       ];
     };
+    chitubox = {
+      name = "Chitubox Slicer";
+      genericName = "3D Printing Slicer";
+      exec = "chitubox %U";
+      terminal = false;
+      categories = [
+        "Application"
+        "Printing"
+      ];
+    };
     pog = {
       name = "Pog Configurator";
       genericName = "KMK Keyboard Configuration GUI";

@@ -8,6 +8,7 @@
     gimp
     hexchat
     lychee-slicer
+    # chitubox
     # openscad
     signal-desktop
     telegram-desktop

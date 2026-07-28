@@ -5,8 +5,8 @@
   programs.waybar = {
     enable = true;
     systemd = {
-      enable = false;
-      targets = [ "graphical-session.target" ];
+      enable = true;
+      targets = [ "hyprpaper.service" ];
     };
     style = ''
       * {

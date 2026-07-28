@@ -36,16 +36,27 @@ local function try_require(name)
     if package.searchpath(name, package.path) then require(name) end
 end
 
+-- load common configs
 local function common(name)
-    if package.searchpath(name, pkgcommon) then require(name) end
+    if package.searchpath(name, pkgcommon) then
+        print("modules: loading common" .. name)
+        require(name)
+        print("modules: finish loading common" .. name)
+    end
 end
 
+-- load hostname specific configs
 local function device(name)
-    if package.searchpath(name, pkgdevice) then require(name) end
+    if package.searchpath(name, pkgdevice) then
+        print("modules: loading" .. name)
+        require(name)
+        print("modules: finish loading" .. name)
+    end
 end
 
-common("init")
-device("init")
+print("modules: initialize")
+common("common")
+device(read_hostname())
 
 -- Nix-generated rules (webapps, etc). Optional file dropped by home-manager.
 try_require("webapps")
@@ -60,3 +71,4 @@ try_require("device-keybinds")
 -- b.register()
 
 require("autoexec")
+print("modules: finalized")
