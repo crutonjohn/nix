@@ -18,6 +18,9 @@
     overdrive.enable = true;
     overdrive.ppfeaturemask = "0xfffd7fff";
   };
+  # controllers?
+  hardware.steam-hardware.enable = true;
+  hardware.xone.enable = true;
   # Fan Curve/Overclocker
   services.lact.enable = true;
   # Another Fan Curve/Cooler Tool
