@@ -69,7 +69,6 @@
       brightnessctl
       catimg
       catt
-      ceph
       colmena
       comma
       docker

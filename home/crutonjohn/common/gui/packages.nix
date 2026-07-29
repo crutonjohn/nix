@@ -2,16 +2,15 @@
 {
 
   home.packages = with pkgs; [
-    bewcloud-client
     bitwarden-gui
-    feishin
-    gimp
+    # feishin
+    # gimp
     hexchat
-    lychee-slicer
+    # lychee-slicer
     # chitubox
     # openscad
-    signal-desktop
-    telegram-desktop
+    # signal-desktop
+    # telegram-desktop
     vlc
     playerctl
     mpv

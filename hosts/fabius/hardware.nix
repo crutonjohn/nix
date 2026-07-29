@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   boot.kernelModules = [
@@ -24,11 +24,11 @@
   # Fan Curve/Overclocker
   services.lact.enable = true;
   # Another Fan Curve/Cooler Tool
-  programs.coolercontrol.enable = true;
+  # programs.coolercontrol.enable = true;
   # Install liquidctl to control AIO
   environment = {
     systemPackages = with pkgs; [
-      liquidctl
+      # liquidctl
     ];
   };
 
@@ -92,6 +92,16 @@
   boot.kernelParams = [ "usbcore.autosuspend=-1" ];
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
+
+  nixpkgs.overlays = [
+    # OpenBLAS checks are slow here and can fail when the test suite mis-detects CPU.
+    (final: prev: {
+      openblas = prev.openblas.overrideAttrs (_: {
+        doCheck = false;
+      });
+    })
+  ];
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;

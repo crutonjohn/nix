@@ -6,12 +6,11 @@
 }:
 
 {
-
   programs.waybar = {
     enable = true;
     systemd = {
       enable = false;
-      target = "graphical-session.target";
+      targets = [ "hyprpaper.service" ];
     };
     # font-family: 0xProto Nerd Font Mono, Material Symbols Sharp;
     style = ''

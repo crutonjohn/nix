@@ -11,7 +11,7 @@
       cachix
       catimg
       catt
-      ceph
+      # ceph
       comma
       containerd
       cz-cli
@@ -82,7 +82,6 @@
       watchexec
       wget
       whois
-      zeal
       zlib
     ];
   };

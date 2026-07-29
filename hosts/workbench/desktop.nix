@@ -50,7 +50,7 @@
       grim
       toybox
       rocmPackages.rocgdb
-      wireshark
+      # wireshark
       hyprcursor
       xsettingsd
       xrdb

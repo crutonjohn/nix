@@ -20,7 +20,7 @@
       "hf.co/bartowski/burtenshaw_GemmaCoder3-12B-GGUF:Q4_K_M"
       "hf.co/bartowski/DeepSeek-Coder-V2-Lite-Instruct-GGUF:Q6_K"
     ];
-    acceleration = "rocm";
+    # acceleration = "rocm";
     host = "0.0.0.0";
     port = 11434;
   };

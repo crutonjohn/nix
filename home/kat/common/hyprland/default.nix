@@ -4,12 +4,10 @@
   home.packages = with pkgs; [
     appimage-run
     at-spi2-atk
-    bitwarden-desktop
     brightnessctl
-    bewcloud-client
+    # bewcloud-client
     catimg
     catt
-    ceph
     colmena
     comma
     discord
@@ -19,7 +17,7 @@
     font-manager
     galculator
     gettext
-    gimp
+    # gimp
     gnome-network-displays
     godot_4
     crosspipe
@@ -35,7 +33,7 @@
     libgcc
     libinput
     libnotify
-    lychee-slicer
+    # lychee-slicer
     mqttui
     networkmanager
     networkmanager_dmenu
@@ -45,7 +43,7 @@
     pamixer
     pavucontrol
     pixman
-    pog
+    # pog
     powertop
     psmisc
     pulsemixer
@@ -65,7 +63,7 @@
     waybar
     wdisplays
     wev
-    wineWowPackages.waylandFull
+    wineWow64Packages.waylandFull
     zeal
     zlib
   ];

@@ -10,7 +10,7 @@
     };
     fish.enable = true;
     zsh.enable = true;
-    wireshark.enable = true;
+    # wireshark.enable = true;
   };
 
   environment = {

@@ -5,14 +5,14 @@
     # anytype
     appimage-run
     at-spi2-atk
-    bitwarden-desktop
+    bitwarden-gui
     brightnessctl
-    bewcloud-client
+    # bewcloud-client
     discord
     dmenu
     font-manager
     galculator
-    gimp
+    # gimp
     gnome-network-displays
     godot_4
     crosspipe
@@ -23,17 +23,17 @@
     inputs.hypr-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
     inputs.hyprpicker.packages.${pkgs.stdenv.hostPlatform.system}.hyprpicker
     kanshi
-    lychee-slicer
+    # lychee-slicer
     mqttui
     networkmanager
     networkmanager_dmenu
-    newrecruit-builder
+    # newrecruit-builder
     #newrecruit-editor
     # openscad
     pamixer
     pavucontrol
     pixman
-    pog
+    # pog
     pulsemixer
     rpi-imager
     signal-desktop
@@ -43,7 +43,7 @@
     virt-manager
     waybar
     wdisplays
-    wineWowPackages.waylandFull
+    wineWow64Packages.waylandFull
     alacritty
     easyeffects
     telegram-desktop

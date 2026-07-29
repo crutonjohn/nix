@@ -10,8 +10,8 @@
     crosspipe
     networkmanager_dmenu
     pavucontrol
-    pixelflasher
-    pog
+    # pixelflasher
+    # pog
     pulsemixer
     rpi-imager
     virt-manager

@@ -27,7 +27,7 @@
 
     # Enable gamescope wrapper
     gamescoperun = {
-      enable = true;
+      enable = false;
 
       # Global defaults for all wrappers (can be overridden per-wrapper)
       defaultHDR = false; # Global HDR setting (overrides monitor HDR if needed)
@@ -51,7 +51,7 @@
       # If you wish to override the "steam" command/bin, remove "-gamescope"
       # Overriding the executables makes it so already existing .desktop launchers use the new wrapper
       steam-gamescope = {
-        enable = true;
+        enable = false;
         # Note: Special case for steam, this is the pkg you should use
         # Also as of 07/23, steam does not open in normal "desktop mode" with gamescope
         # You can however exit big picture mode once already open to access the normal ui
@@ -74,7 +74,7 @@
       };
 
       lutris-gamescope = {
-        enable = true;
+        enable = false;
         package = osConfig.play.lutris.package; # play.nix provides readonly packages
 
         # Per-wrapper configuration
@@ -91,7 +91,7 @@
       };
 
       heroic-gamescope = {
-        enable = true;
+        enable = false;
         package = pkgs.heroic;
 
         # Use all global defaults by omitting override options
@@ -102,33 +102,33 @@
 
   # Recommendation: Override desktop entries to use gamescope wrappers
   xdg.desktopEntries = {
-    steam = lib.mkDefault {
-      name = "Steam";
-      comment = "Steam (Regular Client)";
-      exec = "${lib.getExe osConfig.programs.steam.package}";
-      icon = "steam";
-      type = "Application";
-      terminal = false;
-      categories = [ "Game" ];
-      mimeType = [
-        "x-scheme-handler/steam"
-        "x-scheme-handler/steamlink"
-      ];
-      settings = {
-        StartupNotify = "true";
-        StartupWMClass = "Steam";
-        PrefersNonDefaultGPU = "true";
-        X-KDE-RunOnDiscreteGpu = "true";
-        Keywords = "gaming;";
-      };
-    };
+    #   steam = lib.mkDefault {
+    #     name = "Steam";
+    #     comment = "Steam (Regular Client)";
+    #     exec = "${lib.getExe osConfig.programs.steam.package}";
+    #     icon = "steam";
+    #     type = "Application";
+    #     terminal = false;
+    #     categories = [ "Game" ];
+    #     mimeType = [
+    #       "x-scheme-handler/steam"
+    #       "x-scheme-handler/steamlink"
+    #     ];
+    #     settings = {
+    #       StartupNotify = "true";
+    #       StartupWMClass = "Steam";
+    #       PrefersNonDefaultGPU = "true";
+    #       X-KDE-RunOnDiscreteGpu = "true";
+    #       Keywords = "gaming;";
+    #     };
+    #   };
 
-    heroic = {
-      name = "Heroic (Gamescope)";
-      exec = "${lib.getExe config.play.wrappers.heroic-gamescope.wrappedPackage}";
-      icon = "com.heroicgameslauncher.hgl";
-      type = "Application";
-      categories = [ "Game" ];
-    };
+    #   heroic = {
+    #     name = "Heroic (Gamescope)";
+    #     exec = "${lib.getExe config.play.wrappers.heroic-gamescope.wrappedPackage}";
+    #     icon = "com.heroicgameslauncher.hgl";
+    #     type = "Application";
+    #     categories = [ "Game" ];
+    #   };
   };
 }

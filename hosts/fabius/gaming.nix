@@ -1,35 +1,35 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
 
-  imports = [ inputs.play-nix.nixosModules.play ];
+  # imports = [ inputs.play-nix.nixosModules.play ];
 
-  play = {
-    amd.enable = true; # AMD GPU optimization
-    steam.enable = true; # Steam with Proton-CachyOS
-    lutris.enable = true; # Lutris game manager
-    gamemode.enable = true; # Performance optimization
-    ananicy.enable = true; # Process scheduling
-  };
+  # play = {
+  #   # amd.enable = true; # AMD GPU optimization
+  #   # steam.enable = true; # Steam with Proton-CachyOS
+  #   # lutris.enable = true; # Lutris game manager
+  #   # gamemode.enable = true; # Performance optimization
+  #   # ananicy.enable = true; # Process scheduling
+  # };
 
   programs = {
-    # steam = {
-    #   enable = true;
-    #   remotePlay.openFirewall = true;
-    #   dedicatedServer.openFirewall = true;
-    #   localNetworkGameTransfers.openFirewall = true;
-    #   gamescopeSession.enable = true;
-    #   extraCompatPackages = with pkgs; [ proton-ge-bin ];
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
+      gamescopeSession.enable = true;
+      extraCompatPackages = with pkgs; [ proton-ge-bin ];
 
-    # };
-    # gamescope = {
-    #   enable = true;
-    #   capSysNice = false;
-    # };
-    # gamemode = {
-    #   enable = true;
-    #   enableRenice = true;
-    # };
+    };
+    gamescope = {
+      enable = true;
+      capSysNice = false;
+    };
+    gamemode = {
+      enable = true;
+      enableRenice = true;
+    };
 
     obs-studio = {
       enable = true;
@@ -49,12 +49,12 @@
 
   environment.systemPackages = with pkgs; [
     mangohud
-    # protonup-qt
+    protonup-qt
     # (lutris.override {
     #   extraLibraries = pkgs: [ ];
     #   extraPkgs = pkgs: [ ];
     # })
-    bottles
+    # bottles
     # heroic
     teamspeak6-client
     sdl3
@@ -65,7 +65,7 @@
   hardware.display = {
     edid.enable = true;
     edid.packages = [
-      (pkgs.runCommand "edid-custom" {} ''
+      (pkgs.runCommand "edid-custom" { } ''
         mkdir -p "$out/lib/firmware/edid"
         base64 -d > "$out/lib/firmware/edid/custom1.bin" <<'EOF'
         AP///////wBMLUBwAA4AAQEeAQOApV14Cqgzq1BFpScNSEi974BxT4HAgQCBgJUAqcCzANHACOgA
@@ -76,7 +76,7 @@
         EOF
       '')
     ];
-    outputs.HDMI-A-1.edid = "edid/custom1.bin"
+    outputs.HDMI-A-1.edid = "edid/custom1.bin";
   };
   services.sunshine = {
     package = pkgs.unstable.sunshine;

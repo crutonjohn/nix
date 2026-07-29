@@ -15,7 +15,7 @@
         "networkmanager"
         "docker"
         "dialout"
-        "wireshark"
+        # "wireshark"
         "libvirtd"
         "uinput"
       ];
@@ -36,7 +36,7 @@
         "networkmanager"
         "docker"
         "dialout"
-        "wireshark"
+        # "wireshark"
         "libvirtd"
         "uinput"
       ];

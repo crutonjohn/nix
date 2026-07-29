@@ -2,21 +2,12 @@
 let
   inherit (inputs.nixpkgs) lib;
 
-  lycheeOverlay = self: super: {
-    lychee-slicer = super.callPackage ./lychee-slicer { };
-  };
-  chituboxOverlay = self: super: {
-    chitubox = super.callPackage ./chitubox { };
-  };
-  pogOverlay = self: super: {
-    pog = super.callPackage ./pog { };
-  };
-  bewcloudClientOverlay = self: super: {
-    bewcloud-client = super.callPackage ./bewcloud { };
-  };
-  anytypeOverlay = self: super: {
-    anytype = super.callPackage ./anytype { };
-  };
+  # lycheeOverlay = self: super: {
+  #   lychee-slicer = super.callPackage ./lychee-slicer { };
+  # };
+  # pogOverlay = self: super: {
+  #   pog = super.callPackage ./pog { };
+  # };
   #  bambuStudioOverlay = self: super: {
   #    bambu-studio-local = super.callPackage ./bambu-studio { };
   #  };
@@ -32,30 +23,27 @@ let
   otelcolOverlay = self: super: {
     otelcol = super.callPackage ./otelcol { };
   };
-  newrecruitBuilderOverlay = self: super: {
-    newrecruit-builder = super.callPackage ./newrecruit/builder.nix { };
-  };
-  newrecruitEditorOverlay = self: super: {
-    newrecruit-editor = super.callPackage ./newrecruit/editor.nix { };
-  };
+  # newrecruitBuilderOverlay = self: super: {
+  #   newrecruit-builder = super.callPackage ./newrecruit/builder.nix { };
+  # };
+  # newrecruitEditorOverlay = self: super: {
+  #   newrecruit-editor = super.callPackage ./newrecruit/editor.nix { };
+  # };
   # pixelflasherOverlay = self: super: {
   #   pixelflasher = super.callPackage ./pixelflasher { };
   # };
 in
 {
   nur = inputs.nur.overlays.default;
-  lychee-slicer = lycheeOverlay;
-  chitubox = chituboxOverlay;
-  pog = pogOverlay;
-  bewcloud-client = bewcloudClientOverlay;
-  anytype = anytypeOverlay;
+  # lychee-slicer = lycheeOverlay;
+  # pog = pogOverlay;
   #  bambu-studio-local = bambuStudioOverlay;
   omada-exporter = omadaExporterOverlay;
   bitwarden-gui = bitwardenOverlay;
   baremetalblog = baremetalblogOverlay;
   otelcol = otelcolOverlay;
-  newrecruit-builder = newrecruitBuilderOverlay;
-  newrecruit-editor = newrecruitEditorOverlay;
+  # newrecruit-builder = newrecruitBuilderOverlay;
+  # newrecruit-editor = newrecruitEditorOverlay;
   # pixelflasher = pixelflasherOverlay;
 
   # The unstable nixpkgs set (declared in the flake inputs) will

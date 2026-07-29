@@ -12,7 +12,8 @@
   ];
 
   boot.kernelParams = [
-    "drm.edid_firmware=HDMI-A-1:edid/yourfile video=HDMI-A-1:e"
+    "drm.edid_firmware=HDMI-A-1:edid/yourfile"
+    "video=HDMI-A-1:e"
   ];
 
   # boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -23,16 +24,16 @@
   # );
 
   # for pinning kernel version
-  boot.kernelPackages = pkgs.linuxPackagesFor (
-    pkgs.linux_latest.override {
-      argsOverride = rec {
-        src = pkgs.fetchurl {
-          url = "mirror://kernel/linux/kernel/v7.x/linux-${version}.tar.xz";
-          sha256 = "CUl362LCDj0ZOf6BqSlYofmH8zlEblMvqGljsoBOMtw=";
-        };
-        version = "7.0.10";
-        modDirVersion = "7.0.10";
-      };
-    }
-  );
+  # boot.kernelPackages = pkgs.linuxPackagesFor (
+  #   pkgs.linux_latest.override {
+  #     argsOverride = rec {
+  #       src = pkgs.fetchurl {
+  #         url = "mirror://kernel/linux/kernel/v7.x/linux-${version}.tar.xz";
+  #         sha256 = "CUl362LCDj0ZOf6BqSlYofmH8zlEblMvqGljsoBOMtw=";
+  #       };
+  #       version = "7.1.5";
+  #       modDirVersion = "7.1.5";
+  #     };
+  #   }
+  # );
 }

@@ -1,9 +1,18 @@
-{ lib, stdenv, pkgs, appimageTools, gsettings-desktop-schemas, gtk3, fetchurl, ...}:
+{
+  lib,
+  stdenv,
+  pkgs,
+  appimageTools,
+  gsettings-desktop-schemas,
+  gtk3,
+  fetchurl,
+  ...
+}:
 let
-  version = "2025.1.4";
+  version = "2026.7.0";
   appImage = fetchurl {
     url = "https://github.com/bitwarden/clients/releases/download/desktop-v${version}/Bitwarden-${version}-x86_64.AppImage";
-    sha256 = "sha256-m2yinlULzBZLfg4nNB3ee0QFS4vZ0dtfhofvziADsfc=";
+    sha256 = "sha256-35Vu4Kv3XBIv86aLgV91UUoo6zlu+L6/XG1xsA/6kIo=";
   };
 in
 appimageTools.wrapType2 {
@@ -17,11 +26,16 @@ appimageTools.wrapType2 {
     export XDG_DATA_DIRS="${gsettings-desktop-schemas}/share/gsettings-schemas/${gsettings-desktop-schemas.name}:${gtk3}/share/gsettings-schemas/${gtk3.name}:$XDG_DATA_DIRS"
   '';
 
-  extraPkgs = pkgs: (appimageTools.defaultFhsEnvArgs.multiPkgs pkgs) ++ (with pkgs; [
-    # fixes "unexpected error"
-    gsettings-desktop-schemas glib gtk3
+  extraPkgs =
+    pkgs:
+    (appimageTools.defaultFhsEnvArgs.multiPkgs pkgs)
+    ++ (with pkgs; [
+      # fixes "unexpected error"
+      gsettings-desktop-schemas
+      glib
+      gtk3
 
-    # needed for icons
-    adwaita-icon-theme
-  ]);
+      # needed for icons
+      adwaita-icon-theme
+    ]);
 }

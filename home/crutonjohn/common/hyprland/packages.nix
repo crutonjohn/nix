@@ -8,7 +8,7 @@
     waybar
     wdisplays
     wev
-    wineWowPackages.waylandFull
+    wineWow64Packages.waylandFull
   ];
 
 }

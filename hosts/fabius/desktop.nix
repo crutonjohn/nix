@@ -18,7 +18,7 @@
 
   services = {
     desktopManager.plasma6 = {
-      enable = true;
+      enable = false;
     };
   };
 
@@ -68,7 +68,7 @@
       grim
       toybox
       rocmPackages.rocgdb
-      wireshark
+      # wireshark
       hyprcursor
       xsettingsd
       xrdb

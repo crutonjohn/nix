@@ -5,7 +5,7 @@
     inputs.nixos-hardware.nixosModules.common-gpu-amd
     inputs.nixos-hardware.nixosModules.common-pc-ssd
     ../global
-    ./ai
+    # ./ai
     ./desktop.nix
     ./fonts.nix
     ./greeter.nix
@@ -23,6 +23,9 @@
     ./gaming.nix
     ./flatpak.nix
   ];
+
+  # https://github.com/NixOS/nixpkgs/issues/499166
+  documentation.doc.enable = false;
 
   time.timeZone = "America/New_York";
 
