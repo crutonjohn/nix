@@ -5,7 +5,7 @@
 
   # Containers
   virtualisation.oci-containers.containers."netbootxyz" = {
-    image = "ghcr.io/netbootxyz/netbootxyz:0.7.6-nbxyz10@sha256:e95b81cebf3af6f7223666289ff3841c607b83914a6c13a9c05fd6b7524ab190";
+    image = "ghcr.io/netbootxyz/netbootxyz:0.7.6-nbxyz23@sha256:39bb40c85d1f6e500b3df1871460f88609215735c224b234b9e6e4e849faf92b";
     environment = {
       "MENU_VERSION" = "2.0.89";
       "NGINX_PORT" = "80";
